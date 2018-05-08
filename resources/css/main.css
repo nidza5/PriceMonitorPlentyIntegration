@@ -50,7 +50,6 @@ html, body { height: 100%; width: 100%; margin: 0; }
     padding: 0px 12px;
     border: 1px solid #ccc;
     width: 80%;
-    border-left: none;
     height:100%;
 }
 
