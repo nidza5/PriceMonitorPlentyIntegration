@@ -1,0 +1,8 @@
+{
+	"name":"PriceMonitorPlentyIntegration",
+	"description":"Integration plugin plentymarkets with price monitor",
+	"namespace":"PriceMonitorPlentyIntegration",
+	"author":"Smartwave",
+	"type":"template",
+	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider"
+}

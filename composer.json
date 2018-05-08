@@ -1,0 +1,11 @@
+{
+    "name": "prestapricemonitor",
+    "description": "PrestaPriceMonitor PrestaShop plugin",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "PrestaPriceMonitor\\PrestaShop\\Classes\\": "classes"
+        }
+    }
+}
