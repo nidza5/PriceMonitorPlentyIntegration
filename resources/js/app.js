@@ -15,6 +15,8 @@ function showTabContentContent(evt, cityName) {
 
 $(document).ready(function() {
       
+    console.log("document ready");
+
     // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click(); 
 });
