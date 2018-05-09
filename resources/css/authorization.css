@@ -1370,9 +1370,6 @@ form .form-row :focus {
     border-style: inset;
 }
 
-form .form-row button:focus {
-    background: #f77c16  url("../../../../adminhtml/default/default/images/btn_over_bg.gif") repeat-x 0 0;
-}
 
 .pricemonitor-last-export, .pricemonitor-last-import {
     margin-top: 5px;
