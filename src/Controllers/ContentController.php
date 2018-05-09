@@ -27,31 +27,30 @@
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request)  
-     {
-        $credentials = $request->all();
+    //  public function login(Request $request)  
+    //  {
+    //     $credentials = $request->all();
         
-        if(empty($credentials['email']) || empty($credentials['password'])) {
-            // to do return some message for user
-                $response = [
-                   'StatusCode' => '500',
-                   'message' => 'Email and password are incorect!'
-                ];
+    //     if(empty($credentials['email']) || empty($credentials['password'])) {
+    //         // to do return some message for user
+    //             $response = [
+    //                'StatusCode' => '500',
+    //                'message' => 'Email and password are incorect!'
+    //             ];
 
-                return json_encode($response);
-        }
+    //             return json_encode($response);
+    //     }
 
-        $proxy = Proxy::createFor($credentials['email'],$credentials['password']);
+    //     $proxy = Proxy::createFor($credentials['email'],$credentials['password']);
         
-        try {
+    //     try {
 
-           $contracts = $proxy->getContracts();
+    //        $contracts = $proxy->getContracts();
             
-            return json_encode($contracts);
+    //         return json_encode($contracts);
 
-        } catch(Exception $ex) {
-           $error = $ex -> getMessages();
-           return json_encode($error);
-        }
-     }
+    //     } catch(Exception $ex) {
+    //       // To do - handle exception
+    //     }
+    //  }
  }
