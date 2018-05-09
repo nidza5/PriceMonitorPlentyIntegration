@@ -49,7 +49,7 @@
             $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
             $contracts = $proxy->getContracts();
 
-        } catch(Exception $ex) {
+        } catch(\Exception $ex) {
 
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
