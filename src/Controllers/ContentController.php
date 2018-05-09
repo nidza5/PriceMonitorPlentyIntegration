@@ -2,7 +2,6 @@
  
  namespace PriceMonitorPlentyIntegration\Controllers;
  
- use Exception;
  use Plenty\Plugin\Controller;
  use Plenty\Plugin\Http\Request;
  use Plenty\Plugin\Templates\Twig;
