@@ -42,15 +42,9 @@
         }
 
         $proxy = Proxy::createFor($credentials['email'],$credentials['password']);
-        
-        try {
-
-           $contracts = $proxy->getContracts();
+       
+        $contracts = $proxy->getContracts();
             
-            return json_encode($contracts);
-
-        } catch (Exception $e) {
-          
-        }
+         return json_encode($contracts);     
      }
  }
