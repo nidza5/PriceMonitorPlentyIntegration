@@ -9,11 +9,11 @@
 
 .pricemonitor-main-content {
     margin-top:1%;
-    margin-left:1%;
+    margin-left:2%;
     border : 1px solid #ccc;
     height: 100%;
     width: 95%;
-    padding-bottom : 10%;
+    padding-bottom : 15%;
 }
 #titlePriceMonitor {
     color: blue;
