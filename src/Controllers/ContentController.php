@@ -31,7 +31,7 @@
      {
         $credentials = $request->all();
 
-        echo $credentials;
+        echo json_encode($credentials);
         
         if(empty($credentials['email']) || empty($credentials['password'])) {
             // to do return some message for user
