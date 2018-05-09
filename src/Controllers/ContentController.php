@@ -30,6 +30,8 @@
      public function login(Request $request,Twig $twig)  
      {
         $credentials = $request->all();
+
+        var_dump($credentials);
         
         if(empty($credentials['email']) || empty($credentials['password'])) {
             // to do return some message for user
