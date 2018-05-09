@@ -49,8 +49,8 @@
             
             return json_encode($contracts);
 
-        } catch(Exception $ex) {
-          // To do - handle exception
+        } catch (Exception $e) {
+          
         }
      }
  }
