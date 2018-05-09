@@ -44,10 +44,15 @@
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
-        $proxy = Proxy::createFor($credentials['email'],$credentials['password']);
-       
-        $contracts = $proxy->getContracts();
+        try {
             
+            $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
+            $contracts = $proxy->getContracts();
+
+        } catch(Exception $ex) {
+
+            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
+        }
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
  }
