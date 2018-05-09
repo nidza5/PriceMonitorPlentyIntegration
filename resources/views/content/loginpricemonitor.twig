@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log on price monitor</title>
+ 
+    <!-- Link main CSS file and additional fonts -->
+    <link href="{{ plugin_path('PriceMonitorPlentyIntegration') }}/css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+ 
+    <!-- Integrate jQuery -->
+    <script src="{{ plugin_path('PriceMonitorPlentyIntegration') }}/js/jquery-3.3.1.min.js"></script>
+</head>
+ 
+<body>
+<div class="pricemonitor-main-content" xmlns="http://www.w3.org/1999/html">
+    <div class="pricemonitor-auth">
+        <form id="pricemonitor-auth-form" name="authForm"  method="post">
+            Price Monitor
+            <section class="visible">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="form-row">
+                        <label for="pricemonitor-auth-email">
+                            Email : </label>
+                        <div class="input-wrapper">
+                            <input id="pricemonitor-auth-email" type="email" name="userEmail" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="pricemonitor-auth-password">
+                            Password :
+                        <div class="input-wrapper">
+                            <input id="pricemonitor-auth-password" type="password" name="userPassword" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <a class="btn-link inline" href="#" target="_blank">
+                            Registration Url
+                        </a>
+                        <button type="submit" class="input-button pull-right" name="do">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+  
+<script src="{{ plugin_path('PriceMonitorPlentyIntegration') }}/js/app.js"></script>
+</body>
+</html>
