@@ -31,7 +31,7 @@
      {
         $credentials = $request->all();
 
-        var_dump($credentials);
+        echo $credentials;
         
         if(empty($credentials['email']) || empty($credentials['password'])) {
             // to do return some message for user
