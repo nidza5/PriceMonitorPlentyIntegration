@@ -1,0 +1,22 @@
+section .form-row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+section .form-row label {
+    width: 200px;
+}
+
+section .form-row .input-wrapper {
+    width: 100%;
+}
+
+section .form-row .input-wrapper input,
+section .form-row .input-wrapper input:-webkit-autofill {
+    width: 100%;
+}
