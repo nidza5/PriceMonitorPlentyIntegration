@@ -27,7 +27,7 @@
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request)  
+     public function login(Request $request,Twig $twig)  
      {
         $credentials = $request->all();
         
