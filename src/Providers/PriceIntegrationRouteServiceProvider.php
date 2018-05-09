@@ -18,6 +18,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
     {
         $router->get('integrationhome', 'PriceMonitorPlentyIntegration\Controllers\ContentController@home');
         $router->get('loginPriceMonitor', 'PriceMonitorPlentyIntegration\Controllers\ContentController@loginPriceMonitor');
+        $router->post('login', 'PriceMonitorPlentyIntegration\Controllers\ContentController@login');
     }
  
 }

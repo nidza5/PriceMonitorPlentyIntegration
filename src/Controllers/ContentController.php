@@ -35,16 +35,17 @@
             // to do return some message for user
                 $response = [
                    'StatusCode' => '500',
-                   'message' => 'Email and password are incorect!'
+                   'message' => 'Email and password are empty!'
                 ];
 
-                return json_encode($response);
+                    echo "Empty email and password!";
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
         $proxy = Proxy::createFor($credentials['email'],$credentials['password']);
        
         $contracts = $proxy->getContracts();
             
-         return json_encode($contracts);     
+        return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
  }
