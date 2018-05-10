@@ -45,16 +45,17 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
-        // try {
+        try {
 
             $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
             $contracts = $proxy->getContracts();
 
-        // } catch(\Exception $ex) {
+        } catch(\Exception $ex) {
 
-        //     echo "u exception catch-u";
-        //     return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
-        // }
+            echo "u exception kodu";
+
+            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
+        }
 
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
