@@ -4,5 +4,6 @@
 	"namespace":"PriceMonitorPlentyIntegration",
 	"author":"Smartwave",
 	"type":"template",
+	"require" : ["Patagona"],
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider"
 }

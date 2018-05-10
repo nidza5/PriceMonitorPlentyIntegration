@@ -9,7 +9,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
  use Patagona\Pricemonitor\Core\Infrastructure\Logger;
- 
+
  /**
   * Class ContentController
   * @package PriceMonitorPlentyIntegration\Controllers
