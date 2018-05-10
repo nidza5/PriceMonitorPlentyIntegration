@@ -1,7 +1,10 @@
 <?php
+
+namespace PriceMonitorPlentyIntegration\Controllers;
  
- namespace PriceMonitorPlentyIntegration\Controllers;
- 
+ define('__ROOT__', dirname(dirname(__FILE__))); 
+ require_once(__ROOT__.'/resources/lib/pricemonitor-core/src/Infrastructure/Proxy.php'); 
+
  use Plenty\Plugin\Controller;
  use Plenty\Plugin\Http\Request;
  use Plenty\Plugin\Templates\Twig;
@@ -54,7 +57,7 @@
             echo "u exception catch-u";
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
-        
+
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
  }
