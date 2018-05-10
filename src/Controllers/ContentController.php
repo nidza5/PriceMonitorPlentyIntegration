@@ -7,7 +7,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Http\Request;
  use Plenty\Plugin\Templates\Twig;
  use Plenty\Plugin\Log\Loggable;
- use PriceMonitorPlentyIntegration\Patagona\Pricemonitor\Core;
+ use PriceMonitorPlentyIntegration\Patagona\Pricemonitor\Core\Proxy;
  use Patagona\Pricemonitor\Core\Infrastructure\Logger;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 
