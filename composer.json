@@ -1,11 +1,11 @@
 {
-    "name": "prestapricemonitor",
-    "description": "PrestaPriceMonitor PrestaShop plugin",
+    "name": "pricemonitorplentyintegration",
+    "description": "plenty integration plugin with pricemonitor",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "PrestaPriceMonitor\\PrestaShop\\Classes\\": "classes"
+            "Patagona\\Pricemonitor\\Core\\": "resources\\lib\\pricemonitor-core\\src"
         }
     }
 }
