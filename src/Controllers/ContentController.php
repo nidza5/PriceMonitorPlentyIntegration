@@ -40,7 +40,7 @@
                    'message' => 'Email and password are empty!'
                 ];
 
-                    echo "Empty email and password!";
+                echo "Empty email and password!";
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
@@ -51,8 +51,10 @@
 
         } catch(\Exception $ex) {
 
+            echo "u exception catch-u";
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
+        
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
  }
