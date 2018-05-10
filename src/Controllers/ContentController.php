@@ -2,8 +2,6 @@
 
 namespace PriceMonitorPlentyIntegration\Controllers;
  
- define('__ROOT__', dirname(dirname(__FILE__))); 
- require_once(__ROOT__.'/resources/lib/pricemonitor-core/src/Infrastructure/Proxy.php'); 
 
  use Plenty\Plugin\Controller;
  use Plenty\Plugin\Http\Request;
