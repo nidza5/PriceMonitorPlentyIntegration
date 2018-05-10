@@ -1,6 +1,6 @@
 <?php
 
-namespace Patagona\Pricemonitor\Core\Infrastructure;
+namespace PriceMonitorPlentyIntegration\Patagona\Pricemonitor\Core\Infrastructure;
 
 use Patagona\Pricemonitor\Core\Sync\Callbacks\CallbackDTO;
 
