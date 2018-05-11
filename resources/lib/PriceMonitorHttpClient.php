@@ -5,7 +5,7 @@ require_once __DIR__ . '/HttpResponse.php';
 use GuzzleHttp\ClientInterface;
 use Patagona\Pricemonitor\Core\Interfaces\HttpClient;
 use Patagona\Pricemonitor\Core\Interfaces\HttpResponse;
-
+use PriceMonitorPlentyIntegration\HttpResponse as ResponsePlenty;
 
 class PriceMonitorHttpClient implements HttpClient
 {
@@ -49,7 +49,7 @@ class PriceMonitorHttpClient implements HttpClient
         );
 
        // $response = $this->client->send($request);
-        return new HttpResponse($request->getStatusCode(), $request->getHeaders(), strval($request->getBody()));
+        return new ResponsePlenty($request->getStatusCode(), $request->getHeaders(), strval($request->getBody()));
     }
 
     /**

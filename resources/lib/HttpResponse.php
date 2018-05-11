@@ -1,5 +1,7 @@
 <?php
 
+namespace PriceMonitorPlentyIntegration\HttpResponse;
+
 use Patagona\Pricemonitor\Core\Interfaces\HttpResponse as HttpResponseInterface;
 
 
