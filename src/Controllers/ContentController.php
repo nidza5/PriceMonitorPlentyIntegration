@@ -48,17 +48,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         try {
 
-            $packagistResult =
-			$libCall->call(
-				'PriceMonitorPlentyIntegration::Proxy',
-				['email' => $credentials['email'], 'password' => $credentials['password']]
-			);
+            $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
+            //$contracts = $proxy->getContracts();
 
-            echo json_encode($packagistResult);
-            // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
-             // $contracts = $packagistResult->getContracts();
-
-             $contracts = "";
 
         } catch(\Exception $ex) {
 
