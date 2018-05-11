@@ -75,7 +75,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-            echo "proslo";
+            echo json_encode($contracts);
 
         } catch(\Exception $ex) {
 
