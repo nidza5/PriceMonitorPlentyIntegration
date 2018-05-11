@@ -5,7 +5,8 @@
 	"author":"Smartwave",
 	"type":"template",
 	"dependencies":{
-      "patagona/pricemonitor-core":"dev-master"
+	  "patagona/pricemonitor-core":"dev-master",
+	  "guzzlehttp/guzzle": "6.2.*"
     },
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider"
 }

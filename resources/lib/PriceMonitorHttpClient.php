@@ -5,11 +5,18 @@ use Patagona\Pricemonitor\Core\Interfaces\HttpResponse;
 
 class PriceMonitorHttpClient implements HttpClient
 {
-    const REQUEST_TYPE_SYNC = 'sync';
-    const REQUEST_TYPE_ASYNC = 'async';
 
-    private $history = [];
-    private $responses = [];
+    /**
+     * @var client
+     * 
+     */
+
+     private $client;
+
+     public function __construct()
+     {
+        $this->client = new \GuzzleHttp\Client();
+     }
 
     /**
      * Sends HTTP request to specified URL with using given request method, headers and body
@@ -27,24 +34,18 @@ class PriceMonitorHttpClient implements HttpClient
      */
     public function request($method, $url, array $headers = [], $body = '')
     {
-        $this->history[] = [
-            'type' => self::REQUEST_TYPE_SYNC,
-            'method' => $method,
-            'url' => $url,
-            'headers' => $headers,
-            'body' => $body,
-        ];
+        $request = $this->client->createRequest(
+            $method,
+            $url,
+            [
+                'exceptions' => false,
+                'headers' => $headers,
+                'body' => $body,
+            ]
+        );
 
-        if (empty($this->responses)) {
-            throw new \Exception('Internet connection problem test message');
-        }
-
-        $response = array_shift($this->responses);
-        if ($response instanceof \Exception) {
-            throw $response;
-        }
-
-        return $response;
+        $response = $this->client->send($request);
+        return new HttpResponse($response->getStatusCode(), $response->getHeaders(), strval($response->getBody()));
     }
 
     /**
@@ -61,55 +62,19 @@ class PriceMonitorHttpClient implements HttpClient
      */
     public function requestAsync($method, $url, array $headers = [], $body = '')
     {
-        $this->history[] = [
-            'type' => self::REQUEST_TYPE_ASYNC,
-            'method' => $method,
-            'url' => $url,
-            'headers' => $headers,
-            'body' => $body,
-        ];
-    }
+        $request = $this->client->createRequest(
+            $method,
+            $url,
+            [
+                'future' => true, // Make async guzzle request
+                'exceptions' => false,
+                'headers' => $headers,
+                'body' => $body,
+            ]
+        );
 
-    /**
-     * @return array History of all requests made with TestHttpClient
-     */
-    public function getHistory()
-    {
-        return $this->history;
+        $this->client->send($request);
     }
-
-    /**
-     * Get the last received request.
-     *
-     * @return array
-     */
-    public function getLastRequest()
-    {
-        $lastRequest = end($this->history);
-        reset($this->history);
-
-        return $lastRequest;
-    }
-
-    /**
-     * Appends mock responses to be used as a response for called requests
-     *
-     * @param array $responses List of response instances
-     */
-    public function appendMockResponses(array $responses)
-    {
-        $this->responses = array_merge($this->responses, $responses);
-    }
-
-    /**
-     * Sets mock responses to be used as a response for called requests
-     *
-     * @param array $responses List of response instances
-     */
-    public function setMockResponses(array $responses)
-    {
-        $this->responses = $responses;
-    }
-}
+   }
 
 ?>
