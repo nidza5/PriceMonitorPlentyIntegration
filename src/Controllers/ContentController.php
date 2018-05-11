@@ -54,7 +54,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 				['email' => $credentials['email'], 'password' => $credentials['password']]
 			);
 
-            echo $packagistResult;
+            echo json_encode($packagistResult);
             // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
              // $contracts = $packagistResult->getContracts();
 
