@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\ClientInterface;
 use Patagona\Pricemonitor\Core\Interfaces\HttpClient;
 use Patagona\Pricemonitor\Core\Interfaces\HttpResponse;
 
