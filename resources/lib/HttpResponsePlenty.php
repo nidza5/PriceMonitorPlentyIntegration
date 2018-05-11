@@ -5,7 +5,7 @@ namespace PriceMonitorPlentyIntegration\HttpResponse;
 use Patagona\Pricemonitor\Core\Interfaces\HttpResponse as HttpResponseInterface;
 
 
-class HttpResponse implements HttpResponseInterface
+class HttpResponsePlenty implements HttpResponseInterface
 {
     /** @var int */
     protected $status;
