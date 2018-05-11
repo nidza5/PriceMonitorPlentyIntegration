@@ -51,7 +51,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $packagistResult =
 			$libCall->call(
 				'PriceMonitorPlentyIntegration::Proxy',
-				null
+				['email' => $credentials['email'], 'password' => $credentials['password']]
 			);
 
             echo json_encode($packagistResult);
