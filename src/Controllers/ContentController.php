@@ -75,6 +75,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
+            echo "proslo";
+
         } catch(\Exception $ex) {
 
             echo "u exception kodu";
