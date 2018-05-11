@@ -26,7 +26,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         /**
          *
-         * @var WalleeSdkService
+         * @var PriceMonitorSdkService
          */
         private $sdkService;
 
@@ -35,7 +35,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, WalleeSdkService $sdkService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
