@@ -4,5 +4,8 @@
 	"namespace":"PriceMonitorPlentyIntegration",
 	"author":"Smartwave",
 	"type":"template",
+	"dependencies":{
+      "patagona/pricemonitor-core":"dev-master"
+    },
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider"
 }
