@@ -29,7 +29,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall)  
      {
         $credentials = $request->all();
 
@@ -48,8 +48,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         try {
 
-            $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
-            $contracts = $proxy->getContracts();
+            $packagistResult =
+			$libCall->call(
+				'PriceMonitorPlentyIntegration::pricemonitor-core::src::Infrastucture::Proxy::createFor',
+				['email' => $credentials['email'], 'password' => $credentials['password']]
+			);
+
+            // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
+            // $contracts = $proxy->getContracts();
+
+            echo "PROSLO JE!";
 
         } catch(\Exception $ex) {
 
