@@ -7,8 +7,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Http\Request;
  use Plenty\Plugin\Templates\Twig;
  use Plenty\Plugin\Log\Loggable;
- use \Patagona\Pricemonitor\Core\Infrastructure\Proxy;
- use \Patagona\Pricemonitor\Core\Infrastructure\Logger;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 
  /**
@@ -18,7 +16,30 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  class ContentController extends Controller
  {
      use Loggable;
- 
+
+        /**
+         *
+         * @var ConfigRepository
+         */
+        private $config;
+
+        /**
+         *
+         * @var WalleeSdkService
+         */
+        private $sdkService;
+
+    /**
+     * PaymentController constructor.
+     * @param ConfigRepository $config
+     * @param PriceMonitorSdkService $sdkService
+     */
+    public function __construct(ConfigRepository $config, WalleeSdkService $sdkService)
+    {
+        $this->config = $config;
+        $this->sdkService = $sdkService;
+    }
+    
      public function home(Twig $twig) : string
      {
          return $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null);
@@ -48,9 +69,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         try {
 
-            $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
-            //$contracts = $proxy->getContracts();
-
+            $contracts = $this->sdkService->call("getLoginAndContracts", [
+                'email' => $credentials['email'],
+                'password' => $credentials['password']
+            ]);
 
         } catch(\Exception $ex) {
 
@@ -59,6 +81,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
-        return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);     
+        return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $contracts);     
      }
  }
