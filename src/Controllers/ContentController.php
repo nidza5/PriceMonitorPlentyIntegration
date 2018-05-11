@@ -56,9 +56,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             echo "PROSLO JE!";
             // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
-              $contracts = $packagistResult->getContracts();
+             // $contracts = $packagistResult->getContracts();
 
-           
+             $contracts = "";
 
         } catch(\Exception $ex) {
 
