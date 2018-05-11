@@ -50,7 +50,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $packagistResult =
 			$libCall->call(
-				'PriceMonitorPlentyIntegration::pricemonitor-core::src::Infrastucture::Proxy::createFor',
+				'PriceMonitorPlentyIntegration::pricemonitor-core::src::Infrastucture::Proxy',
 				null
 			);
 
