@@ -54,10 +54,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 				['email' => $credentials['email'], 'password' => $credentials['password']]
 			);
 
-            // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
-            // $contracts = $proxy->getContracts();
-
             echo "PROSLO JE!";
+            // $proxy = Proxy::createFor($credentials['email'],$credentials['password']);        
+              $contracts = $libCall->getContracts();
+
+           
 
         } catch(\Exception $ex) {
 
