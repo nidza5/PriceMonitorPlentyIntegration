@@ -35,7 +35,7 @@ class PriceMonitorHttpClient implements HttpClient
      */
     public function request($method, $url, array $headers = [], $body = '')
     {
-        $request = $this->client->createRequest(
+        $request = $this->client->request(
             $method,
             $url,
             [
