@@ -2,12 +2,13 @@
 
 namespace PriceMonitorPlentyIntegration\Controllers;
  
-
  use Plenty\Plugin\Controller;
+ use Plenty\Plugin\ConfigRepository;
  use Plenty\Plugin\Http\Request;
  use Plenty\Plugin\Templates\Twig;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
+ use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
 
  /**
   * Class ContentController
