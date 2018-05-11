@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/HttpResponse.php';
+require_once __DIR__ . '/HttpResponsePlenty.php';
 
 use GuzzleHttp\ClientInterface;
 use Patagona\Pricemonitor\Core\Interfaces\HttpClient;
