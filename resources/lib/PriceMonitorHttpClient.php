@@ -1,8 +1,11 @@
 <?php
 
+require_once __DIR__ . '/HttpResponse.php';
+
 use GuzzleHttp\ClientInterface;
 use Patagona\Pricemonitor\Core\Interfaces\HttpClient;
 use Patagona\Pricemonitor\Core\Interfaces\HttpResponse;
+
 
 class PriceMonitorHttpClient implements HttpClient
 {
