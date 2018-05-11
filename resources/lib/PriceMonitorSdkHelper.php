@@ -1,5 +1,7 @@
 <?php
  
+ require_once __DIR__ . '/PriceMonitorHttpClient.php';
+
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
  use Patagona\Pricemonitor\Core\Infrastructure\Logger;
