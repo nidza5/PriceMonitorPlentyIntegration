@@ -45,8 +45,8 @@ class PriceMonitorHttpClient implements HttpClient
             ]
         );
 
-        $response = $this->client->send($request);
-        return new HttpResponse($response->getStatusCode(), $response->getHeaders(), strval($response->getBody()));
+       // $response = $this->client->send($request);
+        return new HttpResponse($request->getStatusCode(), $request->getHeaders(), strval($request->getBody()));
     }
 
     /**
