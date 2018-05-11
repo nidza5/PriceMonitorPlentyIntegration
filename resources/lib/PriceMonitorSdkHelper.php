@@ -5,7 +5,6 @@
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
  use Patagona\Pricemonitor\Core\Infrastructure\Logger;
- use PriceMonitorPlentyIntegration\PriceMonitorHttpClient;
 
  class PriceMonitorSdkHelper
  {
