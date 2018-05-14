@@ -62,8 +62,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                    'Message' => 'Email and password are empty!'
                 ];
 
-                echo "Empty email and password!";
-                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
+                $templateError= array("errorReponse" => $errorReponse);                
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $templateError);
         }
 
         try {
@@ -78,7 +78,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
                 $errorReponse = $reponseContracts;
-                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
+
+                $templateError= array("errorReponse" => $errorReponse);
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $templateError);
 
             } 
            // echo json_encode($contracts);
