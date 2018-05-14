@@ -23,12 +23,11 @@
 
         } catch(\Exception $ex)
         {
-            // $response = [
-            //     'StatusCode' => '500',
-            //     'message' => 'Unouthorized access!'
-            //  ];
+            $response = [
+                'Code' => $ex->getCode(),
+                'message' => $ex->getMessage()
+             ];
 
-            $response = $ex->getMessage();
             return $response;
         }
     }
