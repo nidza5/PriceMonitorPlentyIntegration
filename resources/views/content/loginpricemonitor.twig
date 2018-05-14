@@ -42,10 +42,7 @@
 
     {% if errorReponse is not null  %}
             <div class="alert alert-danger" role="alert">
-                {% for item in errorReponse %}
-                     {{ item.Message }}, 
-                     {{ item.Code }}
-                {% endfor %}
+                {{ errorReponse }}
             </div>
     {% endif %}
 
