@@ -83,8 +83,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                         'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
                     ];
 
-                    echo json_encode($errorReponse);
-                
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
             } 
