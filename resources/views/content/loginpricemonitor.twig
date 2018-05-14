@@ -39,10 +39,10 @@
             </div>
         </form>
     </div>
-    
-    {% if ($errorReponse is defined) and ($errorReponse is not null)  %}
+
+    {% if ( errorReponse is defined) and (errorReponse is not null)  %}
             <div class="alert alert-danger" role="alert">
-                {% for item in $errorReponse %}
+                {% for item in errorReponse %}
                      {{ item.Message }}, 
                      {{ item.Code }}
                 {% endfor %}
