@@ -23,8 +23,12 @@
 
         } catch(\Exception $ex)
         {
-            echo "Exception u sdkHelperu!";
-            echo $ex->getMessage();
+            $response = [
+                'StatusCode' => '500',
+                'message' => 'Unouthorized access!'
+             ];
+
+             return $response;
         }
     }
  }
