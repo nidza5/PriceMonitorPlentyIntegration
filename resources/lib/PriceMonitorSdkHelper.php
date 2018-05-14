@@ -22,6 +22,7 @@
 
         } catch(\Exception $ex)
         {
+            echo "Exception u sdkHelperu!";
             echo $ex->getMessage();
         }
     }
