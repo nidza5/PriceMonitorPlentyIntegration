@@ -56,14 +56,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $credentials = $request->all();
 
         if(empty($credentials['email']) || empty($credentials['password'])) {
-            // to do return some message for user
+           
                 $errorReponse = [
                    'Code' => '500',
-                   'Message' => 'Email and password are empty!'
+                   'Message' => 'Email and password fields are required!'
                 ];
 
-                $templateError= array("errorReponse" => $errorReponse);                
-                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $templateError);
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
         try {
@@ -86,7 +85,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
             } 
-           // echo json_encode($contracts);
 
         } catch(\Exception $ex) {
 
@@ -95,9 +93,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'Message' => $ex->getMessage()
             ];
 
-            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
+            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration',  $reponseContracts);     
+       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $reponseContracts);     
      }
  }
