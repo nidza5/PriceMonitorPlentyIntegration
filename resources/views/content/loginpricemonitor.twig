@@ -19,6 +19,13 @@
 <div class="pricemonitor-main-content" xmlns="http://www.w3.org/1999/html">
     <span id="titlePriceMonitor">Price Monitor</span>
     <hr id="headerLine">
+
+     {% if errorReponse is not null  %}
+            <div class="alert alert-danger" role="alert">
+                {{ errorReponse.Message }}
+            </div>
+     {% endif %}
+
     <div class="pricemonitor-auth">
         <form method="POST" action="/login">
             <div class="form-group row">
@@ -39,14 +46,6 @@
             </div>
         </form>
     </div>
-
-    {% if errorReponse is not null  %}
-            <div class="alert alert-danger" role="alert">
-                {{ errorReponse.Message }}
-            </div>
-    {% endif %}
-
-
 </div>
   
 <script src="{{ plugin_path('PriceMonitorPlentyIntegration') }}/js/login.js"></script>
