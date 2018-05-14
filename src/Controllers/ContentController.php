@@ -75,10 +75,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
-                $errorReponse = "";
+                $errorReponse = null;
 
                 if($reponseContracts->Code == 401)
-                    $errorReponse = "Invalid credentials. Failed to login to Pricemonitor account.";
+                    $errorReponse = [
+                        'Code' => $reponseContracts['Code'],
+                        'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
+                    ];
                 
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
