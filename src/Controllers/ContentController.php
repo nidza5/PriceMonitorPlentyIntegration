@@ -74,7 +74,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             ]);
                 
 
-            if($reponseContracts != null && $is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
+            if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
                 $errorReponse = $reponseContracts;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
