@@ -25,7 +25,7 @@
         {
             $response = [
                 'Code' => $ex->getCode(),
-                'message' => $ex->getMessage()
+                'Message' => $ex->getMessage()
              ];
 
             return $response;

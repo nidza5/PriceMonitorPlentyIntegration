@@ -55,35 +55,43 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      {
         $credentials = $request->all();
 
-        echo json_encode($credentials);
-        
         if(empty($credentials['email']) || empty($credentials['password'])) {
             // to do return some message for user
-                $response = [
-                   'StatusCode' => '500',
-                   'message' => 'Email and password are empty!'
+                $errorReponse = [
+                   'Code' => '500',
+                   'Message' => 'Email and password are empty!'
                 ];
 
                 echo "Empty email and password!";
-                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
         }
 
         try {
 
-            $contracts = $this->sdkService->call("getLoginAndContracts", [
+            $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
             ]);
+                
 
-            echo json_encode($contracts);
+            if($reponseContracts != null && $is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
+            {
+                $errorReponse = $reponseContracts;
+                return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
+
+            } 
+           // echo json_encode($contracts);
 
         } catch(\Exception $ex) {
 
-            echo "u exception kodu";
+            $errorReponse = [
+                'Code' => $ex->getCode(),
+                'Message' => $ex->getMessage()
+            ];
 
-            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
+            return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $errorReponse);
         }
 
-       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration',  $contracts);     
+       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration',  $reponseContracts);     
      }
  }
