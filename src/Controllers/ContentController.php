@@ -75,6 +75,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
+            echo $contracts->error;
+
             echo json_encode($contracts);
 
         } catch(\Exception $ex) {
