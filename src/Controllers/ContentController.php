@@ -84,6 +84,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $response);
         }
 
-        $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration',  $contracts);     
+       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration',  $contracts);     
      }
  }
