@@ -77,7 +77,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             {
                 $errorReponse = null;
 
-                if($reponseContracts->Code == 401)
+                if($reponseContracts['Code'] == 401)
                     $errorReponse = [
                         'Code' => $reponseContracts['Code'],
                         'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
