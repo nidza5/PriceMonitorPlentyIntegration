@@ -9,15 +9,21 @@
  class PriceMonitorSdkHelper
  {
     public static function loginInPriceMonitor($email,$password)
-    {
-        new ServiceRegister();
+   { 
+        try {
+            new ServiceRegister();
 
-        $client = new PriceMonitorHttpClient();
-        ServiceRegister::registerHttpClient($client);
+            $client = new PriceMonitorHttpClient();
+            ServiceRegister::registerHttpClient($client);
 
-        $proxy = Proxy::createFor($email,$password);      
-        $contracts = $proxy->getContracts();
-        return $contracts;
+            $proxy = Proxy::createFor($email,$password);      
+            $contracts = $proxy->getContracts();
+            return $contracts;
+
+        } catch(\Exception $ex)
+        {
+            echo $ex->getMessage();
+        }
     }
  }
 
