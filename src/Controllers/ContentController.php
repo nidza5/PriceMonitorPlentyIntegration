@@ -72,14 +72,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
             ]);
-                
-            echo json_encode($reponseContracts);
 
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
                 $errorReponse = $reponseContracts;
 
                 $templateError= array("errorReponse" => $errorReponse);
+
+                echo json_encode($templateError);
+
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', $templateError);
 
             } 
