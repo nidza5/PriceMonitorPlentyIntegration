@@ -18,7 +18,7 @@
 
             $proxy = Proxy::createFor($email,$password);      
             $contracts = $proxy->getContracts();
-            echo "isped contracts";
+            throw new \Exception(json_encode($contracts));
             return $contracts;
 
         } catch(\Exception $ex)
