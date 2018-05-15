@@ -74,7 +74,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-                foreach($contract as $id => $name)
+                foreach($reponseContracts as $id => $name)
                 {
                     echo $id;
                     echo $name;
