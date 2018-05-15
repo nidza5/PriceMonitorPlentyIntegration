@@ -31,14 +31,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
-        /**
-         * 
-         * @var configService
-         */
-
-        private $configService;
-
-
+       
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
@@ -48,7 +41,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
-        $this->configService = ServiceRegister::getConfigService();
     }
     
      public function home(Twig $twig) : string
@@ -106,7 +98,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-        $this->configService>setCredentials($credentials['email'],$credentials['password']);
+        // set price monitor credentials
+        $reponseContracts = $this->sdkService->call("setUpPriceMonitorCredentials", [
+            'email' => $credentials['email'],
+            'password' => $credentials['password']
+        ]);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $reponseContracts);     
      }

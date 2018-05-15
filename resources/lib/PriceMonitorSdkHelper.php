@@ -31,6 +31,11 @@
             return $response;
         }
     }
+
+    public static function setUpCredentials($email,$password)
+    {
+        ServiceRegister::getConfigService()->setCredentials($email, $password);
+    }
  }
 
 ?>
