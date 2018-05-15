@@ -106,7 +106,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
 
-        echo json_encode($reponseContracts);
 
         $templateData = array("contracts" => $reponseContracts);
 

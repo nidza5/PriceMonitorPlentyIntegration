@@ -18,13 +18,11 @@
 
             $proxy = Proxy::createFor($email,$password);      
             $contracts = $proxy->getContracts();
-            throw new \Exception(json_encode($contracts));
+            
             return $contracts;
 
         } catch(\Exception $ex)
         {
-
-            throw new \Exception("puklo u loginu");
 
             $response = [
                 'Code' => $ex->getCode(),
