@@ -1,15 +1,29 @@
 <?php
 
 use Patagona\Pricemonitor\Core\Interfaces\ConfigService;
+use Plenty\Plugin\ConfigRepository;
 
 class ConfigurationService implements ConfigService
 {
+
+    /**
+     *
+     * @var ConfigRepository
+     */
+    private $config;
+
+
+    public function __construct(ConfigRepository $config)
+    {
+         $this->config = $config;
+    }
+
     public function getCredentials()
     {
-        // return [
-        //     'email' => $this->get('email'),
-        //     'password' => $this->get('password')
-        // ];
+        return [
+            'email' => $this->get('email'),
+            'password' => $this->get('password')
+        ];
     }
 
     /**
@@ -20,10 +34,9 @@ class ConfigurationService implements ConfigService
      */
     public function setCredentials($email, $password)
     {
-        // $this->set(Patagona_Pricemonitor_Helper_Data::XML_PATH_CONFIG_EMAIL, $email);
-        // $this->set(Patagona_Pricemonitor_Helper_Data::XML_PATH_CONFIG_PASSWORD, $password);
+          $this->set('email',$email);
+          $this->set('password',$password);
     }
-
 
     /**
      * Get value from config for given key
@@ -34,9 +47,8 @@ class ConfigurationService implements ConfigService
      */
     public function get($key)
     {
-        // $config = $this->configRepository->findOneBy(['configKey' => $key]);
-
-        // return !empty($config) ? $config->getConfigValue() : '';
+        $config = $this->config->get($key);
+        return $config;
     }
 
     /**
@@ -47,17 +59,7 @@ class ConfigurationService implements ConfigService
      */
     public function set($key, $value)
     {
-        // $config = $this->configRepository->findOneBy(['configKey' => $key]);
-
-        // if (empty($config)) {
-        //     $config = new Config();
-        //     $config->setConfigKey($key);
-        // }
-
-        // $config->setConfigValue($value);
-
-        // $this->entityManager->persist($config);
-        // $this->entityManager->flush();
+        $this->config->set($key,$value);
     }
 }
 

@@ -9,6 +9,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
+ use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
 
  /**
   * Class ContentController
@@ -30,6 +31,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
+        /**
+         * 
+         * @var configService
+         */
+
+        private $configService;
+
+
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
@@ -39,6 +48,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
+        $this->configService = ServiceRegister::getConfigService();
     }
     
      public function home(Twig $twig) : string
@@ -95,6 +105,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
+
+        $this->configService>setCredentials($credentials['email'],$credentials['password']);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $reponseContracts);     
      }
