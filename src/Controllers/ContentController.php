@@ -106,7 +106,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo json_encode($reponseContracts);
 
-        $templateData = array("contracts" => $responseContracts);
+        $templateData = array("contracts" => $reponseContracts);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
