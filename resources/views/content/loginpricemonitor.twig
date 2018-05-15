@@ -26,6 +26,14 @@
             </div>
      {% endif %}
 
+    {% if contracts is not null %}
+        <ul>
+            {% for contract in contracts %}
+                <li> {{contract.name}} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="pricemonitor-auth">
         <form method="POST" action="/login">
             <div class="form-group row">

@@ -99,11 +99,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         }
 
         // set price monitor credentials
-        $reponseContracts = $this->sdkService->call("setUpPriceMonitorCredentials", [
+         $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password']
         ]);
 
-       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $reponseContracts);     
+        echo json_encode($reponseContracts);
+
+        $templateData = array("contracts" => $responseContracts);
+
+       return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
  }
