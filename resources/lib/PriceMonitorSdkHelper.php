@@ -23,6 +23,9 @@
 
         } catch(\Exception $ex)
         {
+
+            throw new \Exception("puklo u loginu");
+
             $response = [
                 'Code' => $ex->getCode(),
                 'Message' => $ex->getMessage()
