@@ -74,7 +74,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-            echo json_encode($reponseContracts);
+                foreach($contract as $id => $name)
+                {
+                    echo $id;
+                    echo $name;
+                }
 
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
