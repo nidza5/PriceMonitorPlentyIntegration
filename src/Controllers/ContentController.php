@@ -97,8 +97,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             }  
             //if contracts get successfully save them to DB
-            else if($responseContract != null) 
-                $this->contractRepo->saveContracts($responseContract);            
+            else if($reponseContracts != null) 
+                $this->contractRepo->saveContracts($reponseContracts);            
 
         } catch(\Exception $ex) {
 

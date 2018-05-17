@@ -16,16 +16,16 @@ class ContractRepository implements ContractRepositoryContract
      */
     public function saveContracts(array $data)
     {
-        foreach ($data as $contractPricemonitorId => $contractName) {
+        // foreach ($data as $contractPricemonitorId => $contractName) {
             
-            $contract = new Contract(
-                null,
-                $contractPricemonitorId,
-                $contractName
-            );
+        //     $contract = new Contract(
+        //         null,
+        //         $contractPricemonitorId,
+        //         $contractName
+        //     );
 
-            $this->saveContract($contract);
-        }
+        //     $this->saveContract($contract);
+        // }
     }
 
     public function saveContract(Contract $contractObject)

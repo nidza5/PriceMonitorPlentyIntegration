@@ -1,0 +1,10 @@
+{   
+    "namespace": "PriceMonitor",
+    "menuEntries": [
+        {
+        "label": "Price Monitor",
+        "menu": "start",
+        "urlKey": "https://dzonivasiljevic.plentymarkets-cloud01.com/loginPriceMonitor"
+        }
+    ]
+}
