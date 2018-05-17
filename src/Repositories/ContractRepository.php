@@ -49,8 +49,8 @@ class ContractRepository implements ContractRepositoryContract
                 }
             }
 
-            $contract->customerGroupId = $contractObject->customerGroupId;
-            $contract->shopImportPriceId = $contractObject->shopImportPriceId;
+            $contract->salesPriceImportInId = $contractObject->salesPriceImportInId;
+            $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
     
             $database->save($contract);
 
