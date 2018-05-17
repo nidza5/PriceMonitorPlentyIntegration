@@ -32,27 +32,27 @@ class ContractRepository implements ContractRepositoryContract
     {
         try {
 
-            $database = pluginApp(DataBase::class);
+            // $database = pluginApp(DataBase::class);
  
-            $contract = pluginApp(Contract::class);
+            // $contract = pluginApp(Contract::class);
     
-            $contractId = $contractObject->id;
+            // $contractId = $contractObject->id;
     
-            if($contractId != 0)
-            {        
-                $originalContract = $this->getContractById($contractId);
+            // if($contractId != 0)
+            // {        
+            //     $originalContract = $this->getContractById($contractId);
                 
-                if($originalContract->id)
-                {   
-                    $contract->priceMonitorId = $contractObject->priceMonitorId;
-                    $contract->name = $contractObject->name;
-                }
-            }
+            //     if($originalContract->id)
+            //     {   
+            //         $contract->priceMonitorId = $contractObject->priceMonitorId;
+            //         $contract->name = $contractObject->name;
+            //     }
+            // }
 
-            $contract->customerGroupId = $contractObject->customerGroupId;
-            $contract->shopImportPriceId = $contractObject->shopImportPriceId;
+            // $contract->customerGroupId = $contractObject->customerGroupId;
+            // $contract->shopImportPriceId = $contractObject->shopImportPriceId;
     
-            $database->save($contract);
+            // $database->save($contract);
 
         } catch(\Exception $ex){
             // To Do Logg exceptions
