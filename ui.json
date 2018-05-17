@@ -1,12 +1,12 @@
 {
-    "defaultEntryPoint": "index.html",
+    "defaultEntryPoint": "index.twig",
     "namespace": "PriceMonitorPlentyIntegration",
     "menuEntries": [
         {
         "label": "Price Monitor",
         "menu": "start",
         "urlKey": "price-monitor",
-        "entryPoint": "index.html"
+        "entryPoint": "index.twig"
         }
     ]
 }
