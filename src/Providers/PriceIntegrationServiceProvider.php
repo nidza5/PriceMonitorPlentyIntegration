@@ -20,4 +20,16 @@ use Plenty\Log\Exceptions\ReferenceTypeException;
      {
          $this->getApplication()->register(PriceIntegrationRouteServiceProvider::class);
      }
+
+     public function boot(ReferenceContainer $referenceContainer)
+    {
+        // Register reference types for logs.
+        try
+        {
+            $referenceContainer->add([ 'ContractId' => 'ContractId' ]);
+        }
+        catch(ReferenceTypeException $ex)
+        {
+        }
+    }
  }

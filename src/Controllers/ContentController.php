@@ -10,6 +10,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
+ use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
 
  /**
   * Class ContentController
@@ -31,16 +32,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
+
+        /**
+         *
+         * @var ContractRepositoryContract
+         */
+        private $contractRepo;
        
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,ContractRepositoryContract $contractRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
+        $this->contractRepo  = $contractRepo;
     }
     
      public function home(Twig $twig) : string
@@ -74,12 +82,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-                foreach($reponseContracts as $id => $name)
-                {
-                    echo $id;
-                    echo $name;
-                }
-
+            //Handling errors when ocuurs in getLoggingAndContracts
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
                 $errorReponse = null;
@@ -92,7 +95,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
-            } 
+            }  
+            //if contracts get successfully save them to DB
+            else if($responseContract != null) 
+                $this->contractRepo->saveContracts($responseContract);            
 
         } catch(\Exception $ex) {
 

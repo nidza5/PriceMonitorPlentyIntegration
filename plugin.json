@@ -8,5 +8,6 @@
 	  "patagona/pricemonitor-core":"dev-master",
 	  "guzzlehttp/guzzle": "6.2.*"
     },
-	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider"
+	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
+	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable"]
 }
