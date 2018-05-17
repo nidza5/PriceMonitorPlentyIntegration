@@ -96,7 +96,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             }  
 
-            echo json_encode($reponseContracts);
+            
             //if contracts get successfully save them to DB
             // else if($reponseContracts != null) 
             //     $this->contractRepo->saveContracts($reponseContracts);            

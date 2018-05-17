@@ -24,15 +24,6 @@
 
 <div id="Dashboard" class="tabcontentprestaprice">
 
-  {% if contracts is not null %}
-        <ul>
-            {% for contract in contracts %}
-                <li> {{contract.name}} </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-
    <h1 class="title">Welcome to the Pricemonitor</h1><br>
         <span class="text">The Pricemonitor helps you to increase sales by <b>optimizing your selling prices</b> and by providing important market insights</span><br><br>
         <img class="pricemonitor-dashboardimg" src="{{ plugin_path("PriceMonitorPlentyIntegration") }}/images/dashboard.png"><br><br>        
