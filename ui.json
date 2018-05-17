@@ -1,10 +1,12 @@
 {   
+    "defaultEntryPoint": "https://dzonivasiljevic.plentymarkets-cloud01.com/loginPriceMonitor",
     "namespace": "PriceMonitor",
     "menuEntries": [
         {
         "label": "Price Monitor",
         "menu": "start",
-        "urlKey": "https://dzonivasiljevic.plentymarkets-cloud01.com/loginPriceMonitor"
+        "urlKey": "priceMonitor",
+        "entryPoint": "https://dzonivasiljevic.plentymarkets-cloud01.com/loginPriceMonitor"
         }
     ]
 }
