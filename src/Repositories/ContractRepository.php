@@ -47,6 +47,8 @@ class ContractRepository implements ContractRepositoryContract
             {
                  $contract =  $this->getContractByPriceMonitorId($contractObject->priceMonitorId);
 
+                 echo json_encode($contract);
+
                 if($contract != null  && isset($contract->id))
                     $contractId = $contract->id;
             } 
