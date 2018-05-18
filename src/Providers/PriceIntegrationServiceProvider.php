@@ -5,6 +5,8 @@ namespace PriceMonitorPlentyIntegration\Providers;
 use Plenty\Plugin\ServiceProvider;
 use Plenty\Log\Services\ReferenceContainer;
 use Plenty\Log\Exceptions\ReferenceTypeException;
+use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 
 /**
  * Class PriceIntegrationServiceProvider
@@ -19,6 +21,7 @@ use Plenty\Log\Exceptions\ReferenceTypeException;
      public function register()
      {
          $this->getApplication()->register(PriceIntegrationRouteServiceProvider::class);
+         $this->getApplication()->bind(ContractRepositoryContract::class, ContractRepository::class);
      }
 
      public function boot(ReferenceContainer $referenceContainer)
