@@ -36,12 +36,21 @@ interface ContractRepositoryContract
     public function getContracts(): array;
 
  
-/**
+     /**
      *  Contract list
      *
-     * @return Contracts[]
+     * @return Contract
      */
-    public function getContractById($id): array;
+    public function getContractById($id):Contract;
     
+
+     /**
+     *  Contract list
+     *
+     * @return Contracts[
+     */
+    public function getContractByPriceMonitorId($priceMonitorId):Contract;
+    
+
 
 }
