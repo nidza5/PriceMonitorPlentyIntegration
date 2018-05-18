@@ -98,7 +98,7 @@ class ContractRepository implements ContractRepositoryContract
      {
        
  
-        if($priceMonitorId == 0 || $priceMonitorId == null || $priceMonitorId = "")
+        if($priceMonitorId == 0 || $priceMonitorId == null || $priceMonitorId == "")
             return pluginApp(Contract::class);
 
             echo "Price Monitor Id " . $priceMonitorId;
