@@ -47,7 +47,7 @@ class ContractRepository implements ContractRepositoryContract
             {
                  $contract =  $this->getContractByPriceMonitorId($contractObject->priceMonitorId);
 
-                 echo json_encode($contract);
+                //  echo json_encode($contract);
 
                 if($contract != null  && isset($contract->id))
                     $contractId = $contract->id;
@@ -96,11 +96,15 @@ class ContractRepository implements ContractRepositoryContract
      */
      public function getContractByPriceMonitorId($priceMonitorId):Contract
      {
+        echo "Price Monitor Id " . $priceMonitorId;
+ 
         if($priceMonitorId == 0 || $priceMonitorId == null || $priceMonitorId = "")
             return pluginApp(Contract::class);
 
         $database = pluginApp(DataBase::class);
         $contractObject = $database->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
+
+        echo json_encode($contractObject);
 
         if($contractObject == null)
           return pluginApp(Contract::class);
