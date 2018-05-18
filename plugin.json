@@ -9,6 +9,5 @@
 	  "guzzlehttp/guzzle": "6.2.*"
     },
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
-	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
-		"PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTable"]
+	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable"]
 }
