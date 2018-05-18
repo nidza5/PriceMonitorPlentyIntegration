@@ -97,7 +97,7 @@ class ContractRepository implements ContractRepositoryContract
         if($priceMonitorId == 0 || $priceMonitorId == null || $priceMonitorId == "")
             return pluginApp(Contract::class);
 
-             echo "Price Monitor Id " . $priceMonitorId;
+            //  echo "Price Monitor Id " . $priceMonitorId;
 
         $databaseContract = pluginApp(DataBase::class);
         $contractOriginal = $databaseContract->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
