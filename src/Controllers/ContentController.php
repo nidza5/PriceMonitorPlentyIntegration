@@ -98,8 +98,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             
           // if contracts get successfully save them to DB
-            else if($reponseContracts != null) 
-              $contractRepo->saveContracts($reponseContracts);   
+            // else if($reponseContracts != null) 
+            //   $contractRepo->saveContracts($reponseContracts);   
             
              $contractRepo->deleteAllContracts();
 
