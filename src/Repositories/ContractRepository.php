@@ -40,14 +40,14 @@ class ContractRepository implements ContractRepositoryContract
             $idOfContract = 0;
             $contractId = 0;
 
-            if(property_exists($contractObject,'id') && isset($contractObject->id))
+            if(isset($contractObject->id))
                  $contractId = $contractObject->id;
     
             if($contractId == 0)
             {
                  $contract =  $this->getContractByPriceMonitorId($contractObject->priceMonitorId);
 
-                if($contract != null && property_exists($contract,'id') && isset($contract->id))
+                if($contract != null  && isset($contract->id))
                     $contractId = $contract->id;
             } 
 
@@ -59,10 +59,10 @@ class ContractRepository implements ContractRepositoryContract
             $contract->priceMonitorId = $contractObject->priceMonitorId;
             $contract->name = $contractObject->name;
 
-            if(property_exists($contractObject,'salesPriceImportInId') && isset($contractObject->salesPriceImportInId))
+            if(isset($contractObject->salesPriceImportInId))
                 $contract->salesPriceImportInId = $contractObject->salesPriceImportInId;
 
-             if(property_exists($contractObject,'isInsertSalesPrice') && isset($contractObject->isInsertSalesPrice))
+             if(isset($contractObject->isInsertSalesPrice))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
     
             $database->save($contract);
