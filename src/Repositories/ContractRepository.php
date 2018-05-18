@@ -102,7 +102,7 @@ class ContractRepository implements ContractRepositoryContract
             return pluginApp(Contract::class);
 
         $databaseContract = pluginApp(DataBase::class);
-        $contractOriginal = $database->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
+        $contractOriginal = $databaseContract->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
 
         echo json_encode($contractOriginal);
 
