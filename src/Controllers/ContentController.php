@@ -101,9 +101,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             else if($reponseContracts != null) 
               $contractRepo->saveContracts($reponseContracts);   
             
-            // $contractRepo->deleteAllContracts();
+             $contractRepo->deleteAllContracts();
 
-            echo  json_encode($contractRepo->getContracts()); 
+            // echo  json_encode($contractRepo->getContracts()); 
 
 
         } catch(\Exception $ex) {
