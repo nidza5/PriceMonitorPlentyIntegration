@@ -11,6 +11,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 
  /**
   * Class ContentController
@@ -44,10 +45,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService, ContractRepositoryContract $contractRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
+        $this->contractRepo = $contractRepo;
     }
     
      public function home(Twig $twig) : string
@@ -97,9 +99,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             }  
 
             
-            //if contracts get successfully save them to DB
-            // else if($reponseContracts != null) 
-            //     $this->contractRepo->saveContracts($reponseContracts);            
+           // if contracts get successfully save them to DB
+            else if($reponseContracts != null) 
+                $this->contractRepo->saveContracts($reponseContracts);            
 
         } catch(\Exception $ex) {
 
