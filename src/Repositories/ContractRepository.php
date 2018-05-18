@@ -120,4 +120,16 @@ class ContractRepository implements ContractRepositoryContract
         
         return $contractsList;
     }
+
+    public function deleteAllContracts()
+    {
+        $database = pluginApp(DataBase::class);
+ 
+        $contractsList = $database->query(Contract::class)->get();
+ 
+        foreach($contractsList as $con)
+        {
+            $database->delete($con);
+        }
+    }
 }

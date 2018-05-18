@@ -50,6 +50,8 @@ interface ContractRepositoryContract
      * @return Contracts[
      */
     public function getContractByPriceMonitorId($priceMonitorId):Contract;
+
+    public function deleteAllContracts();
     
 
 
