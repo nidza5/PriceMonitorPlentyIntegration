@@ -75,11 +75,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-            foreach ($reponseContracts as $contractPricemonitorId => $contractName) {
+            // foreach ($reponseContracts as $contractPricemonitorId => $contractName) {
             
-                echo $contractPricemonitorId;
-                echo $contractName;
-            }
+            //     echo $contractPricemonitorId;
+            //     echo $contractName;
+            // }
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
@@ -101,7 +101,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             else if($reponseContracts != null) 
               $contractRepo->saveContracts($reponseContracts);   
             
-            
+            // $contractRepo->deleteAllContracts();
 
             echo  json_encode($contractRepo->getContracts()); 
 
