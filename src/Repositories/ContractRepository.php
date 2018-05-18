@@ -43,7 +43,7 @@ class ContractRepository implements ContractRepositoryContract
             if(isset($contractObject->id))
                  $contractId = $contractObject->id;
 
-                echo json_encode($contractObject);
+                echo contractId;
 
     
             if($contractId == 0)
