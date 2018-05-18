@@ -98,12 +98,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             
           // if contracts get successfully save them to DB
-            // else if($reponseContracts != null) 
-            //   $contractRepo->saveContracts($reponseContracts);   
+            else if($reponseContracts != null) 
+              $contractRepo->saveContracts($reponseContracts);   
             
-             $contractRepo->deleteAllContracts();
+            //  $contractRepo->deleteAllContracts();
 
-            // echo  json_encode($contractRepo->getContracts()); 
+            echo  json_encode($contractRepo->getContracts()); 
 
 
         } catch(\Exception $ex) {
