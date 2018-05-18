@@ -20,7 +20,7 @@ class ContractRepository implements ContractRepositoryContract
             
             $contract = pluginApp(Contract::class);
             $contract->priceMonitorId = $contractPricemonitorId;
-            $contract->contractName = $contractName;
+            $contract->name = $contractName;
 
             $this->saveContract($contract);
         }
