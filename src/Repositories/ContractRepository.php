@@ -99,6 +99,10 @@ class ContractRepository implements ContractRepositoryContract
 
         $database = pluginApp(DataBase::class);
         $contractObject = $database->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
+
+        if($contractObject == null)
+          return pluginApp(Contract::class);
+
         return $contractObject[0];
 
      }
