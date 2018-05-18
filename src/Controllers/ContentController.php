@@ -75,6 +75,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
+            echo  json_encode($reponseContracts); 
+
             //Handling errors when ocuurs in getLoggingAndContracts
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
             {
@@ -92,8 +94,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             
            // if contracts get successfully save them to DB
-            else if($reponseContracts != null) 
-              $contractRepo->saveContracts($reponseContracts);            
+            // else if($reponseContracts != null) 
+            //   $contractRepo->saveContracts($reponseContracts);            
 
             echo  json_encode($contractRepo->getContracts()); 
 
