@@ -18,7 +18,7 @@ class ContractRepository implements ContractRepositoryContract
     {
         foreach ($data as $contractPricemonitorId => $contractName) {
             
-            $contract = pluginApp(Contract::class);
+            // $contract = pluginApp(Contract::class);
             $contract->priceMonitorId = $contractPricemonitorId;
             $contract->name = $contractName;
 
