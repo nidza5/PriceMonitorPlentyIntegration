@@ -37,13 +37,10 @@ class ContractRepository implements ContractRepositoryContract
  
             $contract = pluginApp(Contract::class);
 
-            $idOfContract = 0;
-            $contractId = 0;
+        
+            $contractId = $contractObject->id;
 
-            if(isset($contractObject->id))
-                 $contractId = $contractObject->id;
-
-                echo $contractId;
+            echo $contractId;
 
     
             if($contractId == 0)
