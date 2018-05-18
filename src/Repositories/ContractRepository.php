@@ -80,7 +80,7 @@ class ContractRepository implements ContractRepositoryContract
     public function getContractById($id): Contract
     {
         if($id == 0 || $id == null)
-            return;
+           return pluginApp(Contract::class);
 
         $database = pluginApp(DataBase::class);
         $contractObject = $database->query(Contract::class)->where('id', '=', $id)->get();
@@ -95,7 +95,7 @@ class ContractRepository implements ContractRepositoryContract
      public function getContractByPriceMonitorId($priceMonitorId):Contract
      {
         if($priceMonitorId == 0 || $priceMonitorId == null)
-            return null;
+            return pluginApp(Contract::class);
 
         $database = pluginApp(DataBase::class);
         $contractObject = $database->query(Contract::class)->where('priceMonitorId', '=', $priceMonitorId)->get();
