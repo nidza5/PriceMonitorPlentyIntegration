@@ -33,23 +33,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
-
-        /**
-         *
-         * @var ContractRepositoryContract
-         */
-        private $contractRepo;
-       
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService, ContractRepositoryContract $contractRepo)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
-        $this->contractRepo = $contractRepo;
     }
     
      public function home(Twig $twig) : string
@@ -62,7 +54,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo)  
      {
         $credentials = $request->all();
 
@@ -101,7 +93,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
            // if contracts get successfully save them to DB
             else if($reponseContracts != null) 
-                $this->contractRepo->saveContracts($reponseContracts);            
+              $contractRepo->saveContracts($reponseContracts);            
 
         } catch(\Exception $ex) {
 
