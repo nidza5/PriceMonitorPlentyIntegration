@@ -39,8 +39,13 @@ $(document).ready(function() {
 function expandCollapseMenu(el) {
 
  var $el = $(el);
+ $el.css("display","block");
+ $el.addClass("active");
  var liExpand = $el.next('ul');
 
  liExpand.toggle();
+
+
+ 
 
 }
