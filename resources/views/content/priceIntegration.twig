@@ -20,8 +20,11 @@
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard')" id="defaultOpen">Global Dashboard</button>
         <button class="tablinksprestaprice accordion" onclick="expandCollapseMenu(this)">Contracts</button>
         <ul class="ulAccordation" style="display:none;"> 
-            <li>  <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)">Contract 1</button></li>
-            <li> <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)">Contract 2</button></li>
+            {% if contracts is not null %}
+                {% for contract in contracts %}
+                    <li>  <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)">{contract.name}</button></li>
+                {% endfor %}
+            {% endif %}           
         </ul>
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'MyAccount')">My account</button>
     </div>
