@@ -21,8 +21,8 @@
         <button class="tablinksprestaprice accordion" onclick="expandCollapseMenu(this)">Contracts</button>
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
-                {% for contract in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)"> {{contract.contract_name}}</button></li>
+                {% for contractPricemonitorId,contractName in contracts %}
+                    <li>  <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)"> {{contractName}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
