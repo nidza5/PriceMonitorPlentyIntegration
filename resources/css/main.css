@@ -64,3 +64,13 @@ html, body { height: 100%; width: 100%; margin: 0; }
 .ulAccordation {
    list-style-type: none;
 }
+
+.ulAccordation li {
+    border: 1px solid  #ccc;
+    margin-left: -30%;
+
+}
+.secondLevelButton {
+    font-size: small;
+    text-align: center;
+}
