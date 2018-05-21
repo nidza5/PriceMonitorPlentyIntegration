@@ -42,8 +42,8 @@ function expandCollapseMenu(el) {
  $el.css("display","block");
  var tabLinks = $(".tablinksprestaprice");
 
-  for( i = 0;i < tablinks.length; i++ ) {
-        tablinks[i].removeClass("active");
+  for( i = 0;i < tabLinks.length; i++ ) {
+        tabLinks[i].removeClass("active");
   }
 
  $el.addClass("active");
