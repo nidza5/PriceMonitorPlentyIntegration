@@ -40,11 +40,7 @@ function expandCollapseMenu(el) {
 
  var $el = $(el);
  $el.css("display","block");
- var tabLinks = $(".tablinksprestaprice");
-
-  for( i = 0;i < tabLinks.length; i++ ) {
-        tabLinks[i].removeClass("active");
-  }
+ $(".tablinksprestaprice").removeClass("active");
 
  $el.addClass("active");
  var liExpand = $el.next('ul');
