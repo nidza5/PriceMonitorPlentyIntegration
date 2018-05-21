@@ -22,7 +22,7 @@
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
                 {% for contractPricemonitorId,contractName in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" onclick="showTabContentContent(event, 'Contracts')"> {{contractName}}</button></li>
+                    <li>  <button class="tablinksprestaprice secondLevelButton" onclick="expandCollapseMenu(this)"> {{contractName}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
