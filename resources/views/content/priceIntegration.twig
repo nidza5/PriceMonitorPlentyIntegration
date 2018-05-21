@@ -18,8 +18,8 @@
    <div class="priceMonitorPrestaMain">
    <div class="tabprestaprice">
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard')" id="defaultOpen">Global Dashboard</button>
-        <button class="tablinksprestaprice accordion" onclick="showTabContentContent(event, 'Contracts')">Contracts</button>
-        <ul>
+        <button class="tablinksprestaprice accordion" onclick="expandCollapseMenu(this)">Contracts</button>
+        <ul class="ulAccordation" style="display:none;"> 
             <li>Contact 1 </li>
             <li>Contact 2 </li>
         </ul>
