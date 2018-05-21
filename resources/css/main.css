@@ -74,3 +74,10 @@ html, body { height: 100%; width: 100%; margin: 0; }
     font-size: small !important;
     text-align: center !important;
 }
+
+
+#tabs li a:hover {
+    cursor: pointer;
+}
+
+
