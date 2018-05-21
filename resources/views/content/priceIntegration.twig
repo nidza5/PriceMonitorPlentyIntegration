@@ -46,28 +46,48 @@
 
     <div id="Contracts" class="tabcontentprestaprice">
         <div class="pricemonitor-main-content" xmlns="http://www.w3.org/1999/html">
-    <div class="pricemonitor-contract-main">
-        <div class="spinner">
-            <div class="spinner-loader"></div>
-        </div>
-        <div class="pricemonitor-header-warning" id="pricemonitor-expiry-header-warning">
-            <span class="icon">&nbsp;</span>
-        </div>
-        <div class="pricemonitor-header-error" id="pricemonitor-expiry-header-error">
-            <span class="icon">&nbsp;</span>
-        </div>
+            <div class="pricemonitor-contract-main">
+                <div class="spinner">
+                    <div class="spinner-loader"></div>
+                </div>
+                <div class="pricemonitor-header-warning" id="pricemonitor-expiry-header-warning">
+                    <span class="icon">&nbsp;</span>
+                </div>
+                 <div class="pricemonitor-header-error" id="pricemonitor-expiry-header-error">
+                    <span class="icon">&nbsp;</span>
+                </div>
+                <div class="tab">
+                    <button class="tablinks" onclick="showTabContent(event, 'ContractInfo')">Contract info</button>
+                    <button class="tablinks" onclick="showTabContent(event, 'ItemSelection')">Item selection</button>
+                    <button class="tablinks" onclick="showTabContent(event, 'AttributesMapping')" >Attributes mapping</button>
+                    <button class="tablinks" onclick="showTabContent(event, 'ItemExport')">Item export </button>
+                    <button class="tablinks" onclick="showTabContent(event, 'PriceSelection')">Price selection </button>
+                    <button class="tablinks" onclick="showTabContent(event, 'PriceImport')">Price import </button>
+                </div>
+                <div id="ContractInfo" class="tabcontent">
+                    <h3>ContractInfo</h3>
+                    <p>ContractInfo content form</p>
+                </div>
 
-    <div class="tab">
-        <button class="tablinks">Contract info</button>
-        <button class="tablinks">Item selection</button>
-        <button class="tablinks">Attributes mapping</button>
-        <button class="tablinks">Item export </button>
-        <button class="tablinks">Price selection </button>
-        <button class="tablinks">Price import </button>
-    </div>
+                <div id="ItemSelection" class="tabcontent">
+                    <h3>ItemSelection</h3>
+                    <p>ItemSelection content form</p> 
+                </div>
 
-    </div>
-</div> 
+                <div id="AttributesMapping" class="tabcontent">
+                    <h3>AttributesMapping</h3>
+                    <p>TAttributesMapping content form</p>
+                </div>
+                <div id="PriceSelection" class="tabcontent">
+                    <h3>PriceSelection</h3>
+                    <p>PriceSelection content form</p>
+                </div>
+                <div id="PriceImport" class="tabcontent">
+                    <h3>PriceImport</h3>
+                    <p>PriceImport content form</p>
+                </div>
+             </div>
+         </div> 
     </div>
 
     <div id="MyAccount" class="tabcontentprestaprice">  
