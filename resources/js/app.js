@@ -39,7 +39,7 @@ $(document).ready(function() {
 function expandCollapseMenu(el) {
 
  var $el = $(el);
- var liExpand = $el.find(".ulAccordation");
+ var liExpand = $el.next('ul');
 
  liExpand.toggle();
 
