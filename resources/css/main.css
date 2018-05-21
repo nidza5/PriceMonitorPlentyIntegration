@@ -81,3 +81,123 @@ html, body { height: 100%; width: 100%; margin: 0; }
 }
 
 
+.pricemonitor-contract-main section {
+    display: none;
+    padding: 20px 0;
+    position: relative;
+}
+
+.pricemonitor-contract-main section.visible {
+    display: block;
+}
+
+.pricemonitor-contract-main section .form-row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.pricemonitor-contract-main section .form-row label {
+    display: block;
+    width: 35%;
+    padding-right: 10px;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper {
+    position: relative;
+    display: block;
+    width: 65%;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third {
+    display: flex;
+    flex-direction: row;
+    width: 65%;
+    max-width: 300px;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper {
+    padding-right: 10px;
+    position: relative;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper:last-child {
+    padding-right: 0;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper input,
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper select {
+    width: 100%;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper ul.pricemonitor-filterable-list {
+    min-width: 250px;
+    width: auto;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper input,
+.pricemonitor-contract-main section .form-row .input-wrapper select {
+    width: 90%;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper input.small-input {
+    width: 50%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper {
+    padding-right: 10px;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper select,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper select{
+    width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression{
+    width: 35px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 14px;
+    flex: 0 55px;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+}
+.pricemonitor-contract-main section#pricemonitor-product-selection .form-row .input-wrapper,
+.pricemonitor-contract-main section#pricemonitor-price-selection .form-row .input-wrapper {
+    max-width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression {
+    line-height: 11px;
+    padding-top: 4px;
+}
+
+.pricemonitor-main-content * {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.pricemonitor-main-content fieldset {
+    position: relative;
+    padding: 25px 15px;
+}
+
+.pricemonitor-main-content fieldset h2 {
+    margin: 0;
+    position: absolute;
+    left: 20px;
+    top: -10px;
+    background: white;
+    padding: 0 5px;
+    font-size: 14px;
+}
