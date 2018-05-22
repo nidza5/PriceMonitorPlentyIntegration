@@ -66,9 +66,7 @@
                 </div>
                 <div id="ContractInfo" class="tabcontent">
                     <h3>Contract Info</h3>
-                     {% block TabContent %}
-                        <!-- content tab here -->
-                     {% endblock %}
+                    {% include "{{ plugin_path('PriceMonitorPlentyIntegration') }}/views//content/contractInfo.twig"  %}
                 </div>
 1
                 <div id="ItemSelection" class="tabcontent">
