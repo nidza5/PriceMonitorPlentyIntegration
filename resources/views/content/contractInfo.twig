@@ -1,0 +1,112 @@
+{% extends "TopItems::PageDesign" %}
+
+{% block TabContent  %}
+
+<section class="pricemonitor-contract-info pricemonitor-page" id="pricemonitor-contract-info">
+    <form name="pricemonitorContractInfo" novalidate onsubmit="return false;">
+       
+            <div class="col-md-8 first-row">
+                <fieldset>
+                    <div class="form-row">
+                        <label for="pricemonitor-contract-name">Neko ime</label>
+                        <div class="input-wrapper">
+                            <input id="pricemonitor-contract-name"
+                                    type="text"
+                                    name="contractName"
+                                    class="pricemonitor-form-field"
+                                    readonly
+                                    disabled />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="pricemonitor-contract-id">ID:</label>
+                        <div class="input-wrapper">
+                            <input id="pricemonitor-contract-id"
+                                   type="text"
+                                   name="contractId"
+                                   class="pricemonitor-form-field"
+                                   readonly
+                                   disabled />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="pricemonitor-contract-website">
+                            Website:
+                        </label>
+                        <div class="input-wrapper">
+                            <select id="pricemonitor-contract-website"
+                                    class="pricemonitor-form-field"
+                                    name="contractWebsite">
+                            </select>
+                            <div class="popover-wrapper">
+                                <div class="popover-button">?</div>
+                                <div class="popover">
+                                    <div class="popover-text">
+                                        Defines website where product prices should be imported. If option
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="pricemonitor-contract-price">
+                            Price type to import:
+                        </label>
+                        <div class="input-wrapper">
+                            <select id="pricemonitor-contract-price"
+                                    class="pricemonitor-form-field"
+                                    name="contractPrice">
+                            </select>
+                            <div class="popover-wrapper">
+                                <div class="popover-button">?</div>
+                                <div class="popover">
+                                    <div class="popover-text">
+                                        Defines whether price will be imported as price or group price.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="pricemonitor-contract-store">
+                           Product export attribute values:
+                        </label>
+                        <div class="input-wrapper">
+                            <select id="pricemonitor-contract-store"
+                                    class="pricemonitor-form-field"
+                                    name="contractStore">
+                            </select>
+                            <div class="popover-wrapper">
+                                <div class="popover-button">?</div>
+                                <div class="popover">
+                                    <div class="popover-text">
+                                        Defines which store view will be used for product export
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-4 first-row">
+                <fieldset>
+                    <div id="pricemonitor-last-sync">
+                        <div class="pricemonitor-no-sync-data">
+                            There are no synchronization data
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-row">
+                    <button type="submit" class="input-button" id="pricemonitor-contract-info-submit" name="do">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+</section>
+
+{% endblock %}

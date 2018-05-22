@@ -65,10 +65,12 @@
                     <button class="tablinks" onclick="showTabContent(event, 'PriceImport')">Price import </button>
                 </div>
                 <div id="ContractInfo" class="tabcontent">
-                    <h3>ContractInfo</h3>
-                    <p>ContractInfo content form</p>
+                    <h3>Contract Info</h3>
+                     {% block TabContent %}
+                        <!-- content tab here -->
+                     {% endblock %}
                 </div>
-
+1
                 <div id="ItemSelection" class="tabcontent">
                     <h3>ItemSelection</h3>
                     <p>ItemSelection content form</p> 
