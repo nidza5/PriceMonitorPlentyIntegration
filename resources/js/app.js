@@ -11,8 +11,10 @@ function showTabContentContent(evt, nameTab) {
     document.getElementById(nameTab).style.display = "block";
     evt.currentTarget.className += " active";
 
-    if(nameTab == "Contracts")
+    if(nameTab == "Contracts") {
         $("#tabContractInfo").click();
+        $("#tabContractInfo").addClass("active");
+    }
 }
 
 
