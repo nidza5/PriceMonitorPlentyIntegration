@@ -131,9 +131,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);
 
 
-          $salesPrices = $this->$salesPriceRepository->all();
+          $pricesSell = $this->$salesPriceRepository->all();
         
-          echo json_encode($salesPrices);
+          echo json_encode($pricesSell);
 
         $templateData = array("contracts" => $reponseContracts);
 
