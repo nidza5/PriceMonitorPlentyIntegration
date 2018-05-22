@@ -12,6 +12,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
+ use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
 
  /**
   * Class ContentController
@@ -33,15 +34,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
+        /**
+         *
+         * @var SalesPriceRepository
+         */
+        private $salesPriceRepository;
+
+
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
+        $this->salesPriceRepository = $salesPriceRepository;
     }
     
      public function home(Twig $twig) : string
@@ -121,6 +130,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
 
+
+          $salesPrices = $this->$salesPriceRepository->all();
+        
+          echo json_encode($salesPrices);
 
         $templateData = array("contracts" => $reponseContracts);
 
