@@ -130,9 +130,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
 
-          $originalsPricesSales = $this->$salesPriceRepository->all();
+          $nnn = $this->$salesPriceRepository->all();
         
-          echo json_encode($originalsPricesSales);
+          echo json_encode($nnn);
 
         $templateData = array("contracts" => $reponseContracts);
 
