@@ -7,7 +7,12 @@ html, body { height: 100%; width: 100%; margin: 0; }
 .pricemonitor-dashboardimg {
     max-width: 100%;
     width: 100%;
-    height: 55%;    
+    /* height: 55%;     */
+}
+
+#Dashboard {
+
+    height: initial;
 }
 
 .tabprestaprice {
