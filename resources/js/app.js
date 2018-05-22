@@ -12,7 +12,7 @@ function showTabContentContent(evt, nameTab) {
     evt.currentTarget.className += " active";
 
     if(nameTab == "Contracts")
-        showTabContent(event, 'ContractInfo');
+        showTabContent(evt, 'ContractInfo');
 }
 
 
