@@ -127,3 +127,12 @@ html, body { height: 100%; width: 100%; margin: 0; }
 .priceMonitorPrestaMain {
     height: 100%;
 }
+
+#sectionContractInfo {
+    margin-top:5%;
+}
+
+#groupSubmitContractInfo {
+    margin-top:15%;
+
+}
