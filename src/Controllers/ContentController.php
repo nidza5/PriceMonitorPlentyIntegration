@@ -130,6 +130,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
 
+            echo "do sales prices";
+
           $salesPrices = $this->salesPriceRepository->all();
         
           echo json_encode($salesPrices);
