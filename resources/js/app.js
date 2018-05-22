@@ -1,4 +1,4 @@
-function showTabContentContent(evt, cityName) {
+function showTabContentContent(evt, nameTab) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentprestaprice");
     for (i = 0; i < tabcontent.length; i++) {
@@ -8,8 +8,11 @@ function showTabContentContent(evt, cityName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(nameTab).style.display = "block";
     evt.currentTarget.className += " active";
+
+    if(nameTab == "Contracts")
+        showTabContent(event, 'ContractInfo');
 }
 
 
