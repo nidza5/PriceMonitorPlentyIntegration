@@ -23,7 +23,7 @@
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
                 {% for contractPricemonitorId,contractName in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" data-contractId = {{contractPricemonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contractName}}</button></li>
+                    <li>  <button class="tablinksprestaprice secondLevelButton" data-contractId = {{contractPricemonitorId}} data-contractName= {{contractName}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contractName}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
