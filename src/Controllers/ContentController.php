@@ -150,19 +150,25 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
              $resultSalesPrices = $salesPrices->getResult();
 
+             $priceNames = array();
              foreach($resultSalesPrices as $prices)
              {
-                echo json_encode($prices['names']);
+                $priceNames[] = $prices['names'];
+                // echo json_encode($prices['names']);
              }
 
-             $filteredPrice = array_filter($resultSalesPrices, function ($onlyEngPrices) {
-                return filterSalesPriceArray($onlyEngPrices); 
+             echo json_encode($priceNames);
 
-             });
 
-             echo "Filtered price";
+            //  $filteredPrice = array_filter($resultSalesPrices, function ($onlyEngPrices) {
 
-             echo json_encode($filteredPrice);
+            //     return $onlyEngPrices['lang'] ==  "en";
+
+            //  });
+
+            //  echo "Filtered price";
+
+            //  echo json_encode($filteredPrice);
 
             // echo json_encode($resultSalesPrices);
 
@@ -170,12 +176,5 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
-
-     function filterSalesPriceArray($prices) {
-
-        echo json_encode($prices);
-        return $prices['lang'] ===  "en";
-     }
-
 
  }
