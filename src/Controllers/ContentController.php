@@ -150,6 +150,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
              foreach($salesPrices->entries as $prices)
              {
+                echo "u foreachu";
+
                 echo $prices->names;
              }
 
