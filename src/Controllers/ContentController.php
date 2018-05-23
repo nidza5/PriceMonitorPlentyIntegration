@@ -155,11 +155,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              {
                  $filteredPrice = array_filter($prices['names'], function ($onlyEngPrices) {
 
-                    return $onlyEngPrices['lang'] ==  "en";
+                    echo json_encode($onlyEngPrices);
+
+                   // return $onlyEngPrices['lang'] ==  "en";
     
                  });
 
-                 echo json_encode($filteredPrice);
+                //  echo json_encode($filteredPrice);
              }
 
 
