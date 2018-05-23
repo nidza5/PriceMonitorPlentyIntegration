@@ -130,9 +130,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'email' => $credentials['email'],
             'password' => $credentials['password']
         ]);
-
-            echo "do sales prices";
-            
+ 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
             $authHelper = pluginApp(AuthHelper::class);
@@ -146,24 +144,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 }
             );
 
-            // $salesPrices = $this->salesPriceRepository->all();
-        
              $resultSalesPrices = $salesPrices->getResult();
 
-             $salesPricesNames = array();
+             $salesPricesNames = null;
              
              foreach($resultSalesPrices as $prices)
              {  
                  foreach($prices['names'] as $key => $namePrice)
                  {
-                    //echo $namePrice['lang'];
-
                     if($namePrice['lang'] != "en")
                         unset($prices['names'][$key]);
                  }                  
 
                  echo json_encode($prices['names']);
+                 $salesPricesNames = $prices['names'];
+
              }
+
+             echo "final sale prices names";
+
+             echo json_encode($salesPricesNames);
+
 
         $templateData = array("contracts" => $reponseContracts);
 
