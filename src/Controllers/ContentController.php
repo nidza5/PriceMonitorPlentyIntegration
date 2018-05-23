@@ -156,7 +156,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              }
 
              $filteredPrice = array_filter($resultSalesPrices, function ($onlyEngPrices) {
-                return $onlyEngPrices['lang'] === "en"; 
+                return filterSalesPriceArray($onlyEngPrices); 
 
              });
 
@@ -170,4 +170,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
+
+     function filterSalesPriceArray($prices) {
+
+        echo json_encode($prices);
+        return $prices['lang'] ===  "en";
+     }
+
+
  }
