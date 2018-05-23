@@ -155,6 +155,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 echo json_encode($prices['names']);
              }
 
+             $filteredPrice = array_filter($resultSalesPrices, function ($onlyEngPrices) {
+                return $onlyEngPrices['lang'] === "en"; 
+
+             });
+
+             echo "Filtered price";
+
+             echo json_encode($filteredPrice);
+
             // echo json_encode($resultSalesPrices);
 
         $templateData = array("contracts" => $reponseContracts);
