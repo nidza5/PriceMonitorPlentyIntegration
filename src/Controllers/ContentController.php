@@ -157,7 +157,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  foreach($prices['names'] as $namePrice)
                  {
                     if($namePrice['lang'] != "en")
-                        unset($prices['names']);
+                        unset($prices['names'][$namePrice]);
                  }                  
 
                  echo json_encode($prices['names']);
