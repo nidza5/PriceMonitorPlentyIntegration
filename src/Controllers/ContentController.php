@@ -162,10 +162,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                         unset($prices['names'][$key]);
                  }                  
 
-                 echo json_encode($prices['names']);
+                 $salesPricesNames  = $prices['names'];
              }
 
-
+             echo json_encode($salesPricesNames);
 
         $templateData = array("contracts" => $reponseContracts);
 
