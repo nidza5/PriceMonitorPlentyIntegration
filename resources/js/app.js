@@ -23,7 +23,7 @@ function assignDataToContract(el) {
     $el = $(el);
 
     var contractId = $el.attr("data-contractId");
-    var contractName = $el.val();
+    var contractName = $el.text();
 
     $("#contractId").val(contractId);
     $("#contractName").val(contractName);
