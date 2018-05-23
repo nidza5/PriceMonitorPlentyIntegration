@@ -150,25 +150,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
              $resultSalesPrices = $salesPrices->getResult();
 
-             $priceNames = array();
+             
              foreach($resultSalesPrices as $prices)
              {
-                $priceNames[] = $prices['names'];
-                // echo json_encode($prices['names']);
+                 $filteredPrice = array_filter($prices['names'], function ($onlyEngPrices) {
+
+                    return $onlyEngPrices['lang'] ==  "en";
+    
+                 });
+
+                 echo json_encode($filteredPrice);
              }
 
-             echo json_encode($priceNames);
-
-
-             $filteredPrice = array_filter($priceNames, function ($onlyEngPrices) {
-
-                return $onlyEngPrices['lang'] ==  "en";
-
-             });
-
-             echo "Filtered price";
-
-             echo json_encode($filteredPrice);
 
 
         $templateData = array("contracts" => $reponseContracts);
