@@ -146,7 +146,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
              $resultSalesPrices = $salesPrices->getResult();
 
-             $salesPricesNames = null;
+             $salesPricesNames = array();
              
              foreach($resultSalesPrices as $prices)
              {  
@@ -154,12 +154,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  {
                     if($namePrice['lang'] != "en")
                         unset($prices['names'][$key]);
+
+                        $salesPricesNames[] = $prices['names'][$key];
                  }                  
 
-                 echo json_encode($prices['names']);
-                 $salesPricesNames = $prices['names'];
-
-             }
+                 //echo json_encode($prices['names']);
+              }
 
              echo "final sale prices names";
 
