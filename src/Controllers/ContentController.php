@@ -148,11 +148,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             // $salesPrices = $this->salesPriceRepository->all();
         
-             foreach($salesPrices->entries as $prices)
+            
+             foreach($salesPrices as $prices)
              {
                 echo "u foreachu";
 
-                echo $prices->names;
+                echo json_encode($prices);
              }
 
             echo json_encode($salesPrices);
