@@ -86,8 +86,8 @@
                                     <div class="col-sm-4">
                                         <select class="form-control" id="salesPrice" style="margin-left:-27%">
                                             {% if salesPrices is not null %}
-                                                {% for salesPricesId,salesPricesName in salesPrices %}
-                                                        <option value={{salesPricesId}}>{{salesPricesName}}</option>
+                                                {% for salePrice in salesPrices %}
+                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
                                                 {% endfor %}
                                             {% endif %}           
                                         </select>                                                                           
