@@ -1,4 +1,4 @@
-function showTabContentContent(evt, nameTab) {
+function showTabContentContent(evt, nameTab,el) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentprestaprice");
     for (i = 0; i < tabcontent.length; i++) {
@@ -14,9 +14,13 @@ function showTabContentContent(evt, nameTab) {
     if(nameTab == "Contracts") {
         $("#tabContractInfo").click();
         $("#tabContractInfo").addClass("active");
+        assignDataToContract(el);        
     }
+}
 
-    $el = $(evt);
+function assignDataToContract(el) {
+
+    $el = $(el);
 
     var contractId = $el.attr("data-contractId");
 
@@ -25,7 +29,6 @@ function showTabContentContent(evt, nameTab) {
     $("#contractId").val(contractId);
 
 }
-
 
 $(document).ready(function() {
       

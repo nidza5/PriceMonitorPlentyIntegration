@@ -18,16 +18,16 @@
 <body>
    <div class="priceMonitorPrestaMain">
    <div class="tabprestaprice">
-        <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard')" id="defaultOpen">Global Dashboard</button>
+        <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard',this)" id="defaultOpen">Global Dashboard</button>
         <button class="tablinksprestaprice accordion" onclick="expandCollapseMenu(this)">Contracts</button>
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
                 {% for contractPricemonitorId,contractName in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" data-contractId = {{contractPricemonitorId}} onclick="showTabContentContent(event, 'Contracts')"> {{contractName}}</button></li>
+                    <li>  <button class="tablinksprestaprice secondLevelButton" data-contractId = {{contractPricemonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contractName}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
-        <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'MyAccount')">My account</button>
+        <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'MyAccount',this)">My account</button>
     </div>
 
 <div id="Dashboard" class="tabcontentprestaprice">
