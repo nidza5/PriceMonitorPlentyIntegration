@@ -139,11 +139,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $salesPrices = null;
 
-            $columnSalesPrice = array("names");
-            
             $salesPrices = $authHelper->processUnguarded(
                 function () use ($salesPricesRepo, $salesPrices) {
-                    //unguarded
+                    $columnSalesPrice = array("names");
+
                     return $salesPricesRepo->all($columnSalesPrice);
                 }
             );
