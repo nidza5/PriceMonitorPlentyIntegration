@@ -140,7 +140,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $salesPrices = null;
             
             $salesPrices = $authHelper->processUnguarded(
-                function () use ($salesPricesRepo, $address) {
+                function () use ($salesPricesRepo, $salesPrices) {
                     //unguarded
                     return $salesPricesRepo->all();
                 }
