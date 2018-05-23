@@ -141,15 +141,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $salesPrices = $authHelper->processUnguarded(
                 function () use ($salesPricesRepo, $salesPrices) {
-                    $columnSalesPrice = array("names");
-
-                    return $salesPricesRepo->all($columnSalesPrice);
+                
+                    return $salesPricesRepo->all();
                 }
             );
 
             // $salesPrices = $this->salesPriceRepository->all();
         
-             echo json_encode($salesPrices);
+             foreach($salesPrices->entries as $prices)
+             {
+                echo $prices->names;
+             }
+
+           //  echo json_encode($salesPrices.entries);
 
         $templateData = array("contracts" => $reponseContracts);
 
