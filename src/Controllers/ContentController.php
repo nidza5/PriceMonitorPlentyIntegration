@@ -154,12 +154,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              
              foreach($resultSalesPrices as $prices)
              {  
-                 foreach($prices['names'] as $namePrice)
+                 foreach($prices['names'] as $key => $namePrice)
                  {
                     echo $namePrice['lang'];
 
                     if($namePrice['lang'] != "en")
-                        unset($prices['names'][$namePrice]);
+                        unset($prices['names'][$key]);
                  }                  
 
                 // echo json_encode($prices['names']);
