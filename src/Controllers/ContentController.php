@@ -84,12 +84,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
             ]);
-
-            // foreach ($reponseContracts as $contractPricemonitorId => $contractName) {
-            
-            //     echo $contractPricemonitorId;
-            //     echo $contractName;
-            // }
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
@@ -146,7 +140,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
              $resultSalesPrices = $salesPrices->getResult();
 
-             $salesPricesNames = array();
+             $salesPricesEnglish = array();
              
              foreach($resultSalesPrices as $prices)
              {  
@@ -156,18 +150,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                         unset($prices['names'][$key]);
 
                        if($prices['names'][$key] != null) 
-                            $salesPricesNames[] = $prices['names'][$key];
+                            $salesPricesEnglish[] = $prices['names'][$key];
                  }                  
-
-                 //echo json_encode($prices['names']);
               }
 
-             echo "final sale prices names";
-
-             echo json_encode($salesPricesNames);
-
-
-        $templateData = array("contracts" => $reponseContracts);
+        $templateData = array("contracts" => $reponseContracts,
+                            "salesPrices" => $salesPricesEnglish);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }

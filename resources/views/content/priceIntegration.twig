@@ -85,13 +85,18 @@
                                     <label for="salesPrice" class="col-sm-3 col-form-label">Sales price to import in:</label>
                                     <div class="col-sm-4">
                                         <select class="form-control" id="salesPrice" style="margin-left:-27%">
+                                            {% if salesPrices is not null %}
+                                                {% for salesPricesId,salesPricesName in salesPrices %}
+                                                        <option value={{salesPricesId}}>{{salesPricesName}}</option>
+                                                {% endfor %}
+                                            {% endif %}           
                                         </select>                                                                           
                                     </div>                               
                                     <label for="salesPriceVariation" class="col-sm-3 col-form-label" style="margin-left:-5%">Insert sales price in variation:</label>
                                     <div class="col-sm-3" style="margin-left:-4%">
                                         <select class="form-control" id="salesPriceVariation">
-                                        <option value="true">Yes<option>
-                                        <option value="false" selected>No<option>
+                                            <option value="true">Yes<option>
+                                            <option value="false" selected>No<option>
                                         </select>        
                                     </div>                               
                             </div>
