@@ -13,6 +13,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
  use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
+ use Plenty\Modules\Authorization\Services\AuthHelper;
 
  /**
   * Class ContentController
@@ -132,7 +133,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             echo "do sales prices";
             
-            $salesPrices = $this->salesPriceRepository->all();
+            $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
+
+            $authHelper = pluginApp(AuthHelper::class);
+
+            $salesPrices = null;
+            
+            $salesPrices = $authHelper->processUnguarded(
+                function () use ($salesPricesRepo, $address) {
+                    //unguarded
+                    return $salesPricesRepo->all();
+                }
+            );
+
+            // $salesPrices = $this->salesPriceRepository->all();
         
              echo json_encode($salesPrices);
 
