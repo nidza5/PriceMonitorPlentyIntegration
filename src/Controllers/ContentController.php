@@ -155,7 +155,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 echo json_encode($prices['names']);
              }
 
-             echo json_encode($resultSalesPrices);
+            // echo json_encode($resultSalesPrices);
 
         $templateData = array("contracts" => $reponseContracts);
 
