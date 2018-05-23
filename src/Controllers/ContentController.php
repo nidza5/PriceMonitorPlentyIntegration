@@ -14,7 +14,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
  use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
  use Plenty\Modules\Authorization\Services\AuthHelper;
-
+ use Plenty\Repositories\Models;
  /**
   * Class ContentController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -156,7 +156,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 echo json_encode($prices);
              }
 
-            echo json_encode($salesPrices);
+            echo json_encode($salesPrices->getResult());
 
         $templateData = array("contracts" => $reponseContracts);
 
