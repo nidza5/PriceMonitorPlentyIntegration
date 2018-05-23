@@ -15,6 +15,15 @@ function showTabContentContent(evt, nameTab) {
         $("#tabContractInfo").click();
         $("#tabContractInfo").addClass("active");
     }
+
+    $el = $(evt);
+
+    var contractId = $el.attr("data-contractId");
+
+    console.log("ContractId " + contractId);
+
+    $("#contractId").val(contractId);
+
 }
 
 
