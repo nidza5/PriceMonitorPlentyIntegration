@@ -131,19 +131,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);
 
             echo "do sales prices";
-
-            try {
-                $salesPrices = $this->salesPriceRepository->all();
+            
+            $salesPrices = $this->salesPriceRepository->all();
         
-                echo json_encode($salesPrices);
-
-            } catch(\Exception $ex)
-            {
-               echo  $ex->getMessage();
-
-            }
-
-          
+             echo json_encode($salesPrices);
 
         $templateData = array("contracts" => $reponseContracts);
 
