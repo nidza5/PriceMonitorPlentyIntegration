@@ -160,4 +160,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
 
+     /**
+      * @param Request                    $request
+      * @param ContractRepositoryContract $contractRepo
+      * @return string
+      */
+      public function updateContractInfo(Request $request, ContractRepositoryContract $contractRepo): string
+      {
+          $updateContractInfo = $contractRepo->updateContract($request->all());
+          return json_encode($updateContractInfo);
+      }
  }

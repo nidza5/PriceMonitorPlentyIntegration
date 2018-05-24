@@ -69,4 +69,41 @@ function showTabContent(evt, tabName) {
         if(evt.currentTarget != null)
             evt.currentTarget.className += " active";
     }
+
+
+    function updateContractInfo() {
+
+        var priceMonitorId = $("#contractId").val();
+        var salesPriceImportIn = $("#salesPrice").val();
+        var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
+
+        var data = {
+            'priceMonitorId': priceMonitorId,
+            'salesPriceImportInId': salesPriceImportIn,
+            'isInsertSalesPrice' : isInsertSalesPrice
+
+        };
+
+        $.ajax({
+            type: "PUT",
+            url: "/updateContractInfo",
+            data: data,
+            success: function(data)
+            {
+                var data = jQuery.parseJSON( data );
+                if(data != null)
+                {
+                   alert("Uspesno sacuvano");
+                }
+                else
+                {
+                    alert("ERROR");
+                }
+            },
+            error: function(data)
+            {
+                alert("ERROR");
+            }
+        });
+    }
 }

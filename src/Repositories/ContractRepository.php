@@ -69,6 +69,30 @@ class ContractRepository implements ContractRepositoryContract
             // To Do Logg exceptions
         }
     }
+
+   /**
+     * Update contract information
+     *
+     * @param array $data
+     * @return Contract
+     */
+
+    public function updateContract(array $data):Contract
+    {
+        $database = pluginApp(DataBase::class);
+
+        $contract = pluginApp(Contract::class);
+
+        $contract->id = $data['id'];
+        $contract->priceMonitorId = $data['priceMonitorId'];
+        $contract->name = $data['contractName'];
+        $contract->salesPriceImportInId = $data['salesPriceImportInId'];
+        $contract->isInsertSalesPrice = $data['isInsertSalesPrice'];
+
+       $this->saveContract($contract);
+
+       return $contract;
+    }
  
     /**
      * Get contract by id
