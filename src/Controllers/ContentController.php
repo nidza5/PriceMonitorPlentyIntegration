@@ -107,7 +107,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
             // $contractRepo->deleteAllContracts();
 
-            // echo  json_encode($contractRepo->getContracts()); 
+             echo  json_encode($contractRepo->getContracts()); 
 
         } catch(\Exception $ex) {
 
