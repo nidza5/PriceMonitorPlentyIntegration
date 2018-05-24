@@ -165,7 +165,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       * @param ContractRepositoryContract $contractRepo
       * @return string
       */
-      public function updateContractInfo(Request $request, ContractRepositoryContract $contractRepo): string
+      public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
 
         echo "u metodi update cpntract info";
@@ -177,6 +177,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          echo json_encode($updateContractInfo);
         //   echo json_encode($updateContractInfo);
 
-         return json_encode($updateContractInfo);
+        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
       }
  }
