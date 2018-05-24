@@ -78,6 +78,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
+        $contractRepo->deleteAllContracts();
+
         try {
 
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
@@ -99,10 +101,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
             }  
-
-
-            $contractRepo->deleteAllContracts();
-
             
           // if contracts get successfully save them to DB
             else if($reponseContracts != null) 
