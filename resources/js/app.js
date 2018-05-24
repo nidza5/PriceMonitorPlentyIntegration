@@ -78,10 +78,6 @@ function showTabContent(evt, tabName) {
         var salesPriceImportIn = $("#salesPrice").val();
         var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
 
-        console.log("proiceMonitorId  " + priceMonitorId);
-        console.log("salesPriceImportIn  " + salesPriceImportIn);
-        console.log("isInsertSalesPrice  " + isInsertSalesPrice);
-
         var data = {
             'priceMonitorId': priceMonitorId,
             'salesPriceImportInId': salesPriceImportIn,
@@ -100,7 +96,7 @@ function showTabContent(evt, tabName) {
                 var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
-                   alert("Uspesno sacuvano");
+                   console.log("Uspesno sacuvano");
                 }
                 else
                 {
