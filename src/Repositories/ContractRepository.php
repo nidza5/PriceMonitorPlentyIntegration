@@ -83,7 +83,7 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract = pluginApp(Contract::class);
 
-        $contract->id = $data['id'];
+        $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
         $contract->name = $data['contractName'];
         $contract->salesPriceImportInId = (int)$data['salesPriceImportInId'];
