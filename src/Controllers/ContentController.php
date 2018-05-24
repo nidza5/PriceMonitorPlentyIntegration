@@ -170,6 +170,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo "u metodi update cpntract info";
 
+        echo "\r\n";
+
+        echo json_encode($request->all());
+
          $updateContractInfo = $contractRepo->updateContract($request->all());
 
          echo "zavrsio update contract";
