@@ -170,10 +170,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo json_encode($request->all());
 
-         // $updateContractInfo = $contractRepo->updateContract($request->all());
+         $updateContractInfo = $contractRepo->updateContract($request->all());
 
-          //echo json_encode($updateContractInfo);
+        //   echo json_encode($updateContractInfo);
 
-         // return json_encode($updateContractInfo);
+         return json_encode($updateContractInfo);
       }
  }
