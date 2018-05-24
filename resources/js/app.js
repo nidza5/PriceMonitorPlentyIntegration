@@ -79,6 +79,7 @@ function showTabContent(evt, tabName) {
         var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
 
         var data = {
+            'id' : 0
             'priceMonitorId': priceMonitorId,
             'salesPriceImportInId': salesPriceImportIn,
             'isInsertSalesPrice' : isInsertSalesPrice
