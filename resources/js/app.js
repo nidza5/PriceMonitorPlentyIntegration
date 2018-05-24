@@ -96,6 +96,9 @@ function showTabContent(evt, tabName) {
             data: data,
             success: function(data)
             {
+                console.log("data");
+                console.log(data);
+
                 var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
