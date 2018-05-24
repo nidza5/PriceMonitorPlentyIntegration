@@ -30,12 +30,6 @@ class ContractRepository implements ContractRepositoryContract
     {
         try {
 
-            echo "contract nikola";
-
-            echo "\r\n";
-
-            echo json_encode($contractObject);
-
             if($contractObject == null)
                 return;
 
@@ -54,9 +48,6 @@ class ContractRepository implements ContractRepositoryContract
             } 
 
             $contract = $this->getContractById($contractId);
-
-            // if($contract == null)
-            //    $contract = pluginApp(Contract::class);
 
             $contract->priceMonitorId = $contractObject->priceMonitorId;
             $contract->name = $contractObject->name;
@@ -90,11 +81,9 @@ class ContractRepository implements ContractRepositoryContract
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
         $contract->salesPriceImportInId = (int)$data['salesPriceImportInId'];
-       // $contract->isInsertSalesPrice = $data['isInsertSalesPrice'];
+        $contract->isInsertSalesPrice = $data['isInsertSalesPrice'] === 'true'? true : false;
 
-        // echo json_encode($data);
-
-       $this->saveContract($contract);
+        $this->saveContract($contract);
 
        return $contract;
     }
