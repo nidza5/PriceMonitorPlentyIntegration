@@ -87,7 +87,7 @@ function showTabContent(evt, tabName) {
         $.ajax({
             type: "POST",
             url: "/updateContractInfo",
-            data: JSON.stringify(data),
+            data: data,
             success: function(data)
             {
                 console.log("data");
