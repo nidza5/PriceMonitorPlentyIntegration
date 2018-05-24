@@ -168,11 +168,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
          $updateContractInfo = $contractRepo->updateContract($request->all());
-
-         echo "zavrsio update contract";
-
-         echo json_encode($updateContractInfo);
+        
         //   echo json_encode($updateContractInfo);
+
+
+         echo "get contracts";
+
+         echo  json_encode($contractRepo->getContracts()); 
+
 
         return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
       }
