@@ -67,7 +67,7 @@ class ContractRepository implements ContractRepositoryContract
              if(isset($contractObject->isInsertSalesPrice))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
     
-                echo "contract";
+                echo "contract nikola";
 
                 echo "\r\n";
 
