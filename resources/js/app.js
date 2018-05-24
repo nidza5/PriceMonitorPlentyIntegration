@@ -93,15 +93,15 @@ function showTabContent(evt, tabName) {
                 console.log("data");
                 console.log(data);
 
-                var data = jQuery.parseJSON( data );
-                if(data != null)
-                {
-                   console.log("Uspesno sacuvano");
-                }
-                else
-                {
-                    alert("ERROR");
-                }
+                // var data = jQuery.parseJSON( data );
+                // if(data != null)
+                // {
+                //    console.log("Uspesno sacuvano");
+                // }
+                // else
+                // {
+                //     alert("ERROR");
+                // }
             },
             error: function(data)
             {
