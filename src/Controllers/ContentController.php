@@ -100,12 +100,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             }  
 
+
+            $contractRepo->deleteAllContracts();
+
             
           // if contracts get successfully save them to DB
             else if($reponseContracts != null) 
               $contractRepo->saveContracts($reponseContracts);   
             
-            // $contractRepo->deleteAllContracts();
+           
 
              echo  json_encode($contractRepo->getContracts()); 
 
