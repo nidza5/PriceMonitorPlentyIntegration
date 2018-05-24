@@ -89,6 +89,10 @@ class ContractRepository implements ContractRepositoryContract
         $contract->salesPriceImportInId = $data['salesPriceImportInId'];
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'];
 
+        echo "Contracts";
+
+        echo json_encode($contract);
+
        $this->saveContract($contract);
 
        return $contract;
