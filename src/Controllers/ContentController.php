@@ -175,7 +175,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          echo "get contracts";
 
-         echo  json_encode($contractRepo->getContracts()); 
+         echo  json_encode($updateContractInfo); 
 
 
         return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
