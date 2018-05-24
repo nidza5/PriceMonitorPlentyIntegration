@@ -1,3 +1,23 @@
+
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": true,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+
 function showTabContentContent(evt, nameTab,el) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentprestaprice");
@@ -98,6 +118,8 @@ function showTabContent(evt, tabName) {
                 if(data != null)
                 {
                    console.log("Uspesno sacuvano");
+
+                   toastr["success"]("Data are successfully saved!", "Saccessfully saved!");
                 }
                 else
                 {
