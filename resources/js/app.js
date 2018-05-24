@@ -69,9 +69,10 @@ function showTabContent(evt, tabName) {
         if(evt.currentTarget != null)
             evt.currentTarget.className += " active";
     }
+}
 
 
-    function updateContractInfo() {
+ function updateContractInfo() {
 
         var priceMonitorId = $("#contractId").val();
         var salesPriceImportIn = $("#salesPrice").val();
@@ -106,4 +107,3 @@ function showTabContent(evt, tabName) {
             }
         });
     }
-}
