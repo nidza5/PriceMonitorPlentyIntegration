@@ -85,7 +85,7 @@ function showTabContent(evt, tabName) {
         };
 
         $.ajax({
-            type: "PUT",
+            type: "POST",
             url: "/updateContractInfo",
             data: data,
             success: function(data)
