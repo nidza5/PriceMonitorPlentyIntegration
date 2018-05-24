@@ -78,7 +78,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-        $contractRepo->deleteAllContracts();
+        // $contractRepo->deleteAllContracts();
 
         try {
 
