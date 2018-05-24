@@ -85,7 +85,6 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
-        $contract->name = $data['contractName'];
         $contract->salesPriceImportInId = (int)$data['salesPriceImportInId'];
        // $contract->isInsertSalesPrice = $data['isInsertSalesPrice'];
 
