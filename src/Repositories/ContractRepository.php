@@ -30,6 +30,12 @@ class ContractRepository implements ContractRepositoryContract
     {
         try {
 
+            echo "contract nikola";
+
+            echo "\r\n";
+
+            echo json_encode($contractObject);
+
             if($contractObject == null)
                 return;
 
@@ -42,12 +48,6 @@ class ContractRepository implements ContractRepositoryContract
             if($contractId == 0)
             {
                  $contract =  $this->getContractByPriceMonitorId($contractObject->priceMonitorId);
-
-                //  echo "contract";
-
-                //  echo "\r\n";
-
-                //   echo json_encode($contract);
 
                 if($contract != null  && isset($contract->id))
                     $contractId = $contract->id;
@@ -67,12 +67,6 @@ class ContractRepository implements ContractRepositoryContract
              if(isset($contractObject->isInsertSalesPrice))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
     
-                echo "contract nikola";
-
-                echo "\r\n";
-
-                echo json_encode($contract);
-
             $database->save($contract);
 
         } catch(\Exception $ex){
