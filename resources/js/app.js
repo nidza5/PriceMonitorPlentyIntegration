@@ -105,7 +105,7 @@ function showTabContent(evt, tabName) {
             },
             error: function(data)
             {
-                alert("ERROR");
+                console.log(data);
             }
         });
     }
