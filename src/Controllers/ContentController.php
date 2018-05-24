@@ -168,10 +168,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, ContractRepositoryContract $contractRepo): string
       {
 
-        echo json_encode($request->all());
+        echo "u metodi update cpntract info";
 
          $updateContractInfo = $contractRepo->updateContract($request->all());
 
+         echo "zavrsio update contract";
+
+         echo json_encode($updateContractInfo);
         //   echo json_encode($updateContractInfo);
 
          return json_encode($updateContractInfo);
