@@ -168,7 +168,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, ContractRepositoryContract $contractRepo): string
       {
 
-          $updateContractInfo = $contractRepo->updateContract($request->all());
+        echo json_encode($request->all());
+
+         // $updateContractInfo = $contractRepo->updateContract($request->all());
 
           echo json_encode($updateContractInfo);
 
