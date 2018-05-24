@@ -169,15 +169,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
          $updateContractInfo = $contractRepo->updateContract($request->all());
-        
-        //   echo json_encode($updateContractInfo);
+
+         return json_encode($updateContractInfo); 
 
 
-         echo "get contracts";
-
-         echo  json_encode($updateContractInfo); 
-
-
-        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
+       // return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
       }
  }
