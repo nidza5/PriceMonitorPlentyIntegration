@@ -78,7 +78,6 @@ function showTabContent(evt, tabName) {
         var salesPriceImportIn = $("#salesPrice").val();
         var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
 
-
         console.log("proiceMonitorId  " + priceMonitorId);
         console.log("salesPriceImportIn  " + salesPriceImportIn);
         console.log("isInsertSalesPrice  " + isInsertSalesPrice);
@@ -87,7 +86,6 @@ function showTabContent(evt, tabName) {
             'priceMonitorId': priceMonitorId,
             'salesPriceImportInId': salesPriceImportIn,
             'isInsertSalesPrice' : isInsertSalesPrice
-
         };
 
         $.ajax({
