@@ -52,7 +52,7 @@ class ContractRepository implements ContractRepositoryContract
             $contract->priceMonitorId = $contractObject->priceMonitorId;
             $contract->name = $contractObject->name;
 
-            if( (isset($contractObject->salesPriceImportInId)) && ($contractObject->salesPriceImportInId != 0) && ($contractObject->salesPriceImportInId != "0")) 
+            if( (isset($contractObject->salesPriceImportInId)) && (!empty($contractObject->salesPriceImportInId))) 
                 $contract->salesPriceImportInId = $contractObject->salesPriceImportInId;
 
              if( (isset($contractObject->isInsertSalesPrice)) && ($contractObject->isInsertSalesPrice != false))
