@@ -7,9 +7,9 @@ use Plenty\Modules\Plugin\DataBase\Contracts\Migrate;
 use Plenty\Plugin\Log\Loggable;
  
 /**
- * Class UpdateContractTable
+ * Class UpdateContractsTable
  */
-class UpdateContractTable
+class UpdateContractsTable
 {
     use Loggable;
  
@@ -19,8 +19,6 @@ class UpdateContractTable
     public function run(Migrate $migrate)
     {
         $migrate->updateTable(Contract::class);
- 
-        $this->getLogger("UpdateContractTable_run")->debug('PriceMonitorPlentyIntegration::migration.successMessage', ['tableName' => 'Contract']);
- 
+  
     }
 }
