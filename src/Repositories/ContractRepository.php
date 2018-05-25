@@ -61,10 +61,12 @@ class ContractRepository implements ContractRepositoryContract
              if( (isset($contractObject->isInsertSalesPrice)) && ($contractObject->isInsertSalesPrice != false))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
 
-                echo "sales price import in id";
-                echo json_encode($contract->salesPriceImportInId);
+                
 
             $database->save($contract);
+
+            echo "sales price import in id";
+                echo json_encode($contract->salesPriceImportInId);
 
         } catch(\Exception $ex){
 
