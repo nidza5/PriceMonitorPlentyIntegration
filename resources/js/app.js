@@ -127,7 +127,7 @@ function showTabContent(evt, tabName) {
 
  function updateContractInfo() {
 
-        var idContract = $("idContract").val();
+        var idContract = $("#idContract").val();
         var priceMonitorId = $("#contractId").val();
         var salesPriceImportIn = $("#salesPrice").val();
         var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
@@ -146,9 +146,12 @@ function showTabContent(evt, tabName) {
             success: function(data)
             {
                 console.log("data");
-                    console.log(data);
+                console.log(data);
 
-               // var data = jQuery.parseJSON( data );
+                if(data == null) 
+                   return;
+                
+                var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
                    setDataContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport);
