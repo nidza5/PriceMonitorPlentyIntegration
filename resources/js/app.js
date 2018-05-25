@@ -44,9 +44,20 @@ function assignDataToContract(el) {
 
     var contractId = $el.attr("data-contractId");
     var contractName = $el.text();
+    var salesPricesImportIn = $el.attr("data-salesPrice");
+    var insertSalesPriceVar = $el.attr("data-insertPrices");
+
+    var insertPricesValue = insertSalesPriceVar == "1" ? "true" : "false";
+
+    var insertSalesPriceValue = "";
+
+    if(insertSalesPriceVar != null && insertSalesPriceVar != "")
+        insertSalesPriceValue = insertSalesPriceVar.split(',');
 
     $("#contractId").val(contractId);
     $("#contractName").val(contractName);
+    $("salesPriceVariationSelect").val(insertPricesValue);
+    $("#salesPrice").val(insertSalesPriceValue).change();
 }
 
 $(document).ready(function() {
