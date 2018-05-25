@@ -106,7 +106,7 @@ function showTabContent(evt, tabName) {
         var data = {
             'id' : 0,
             'priceMonitorId': priceMonitorId,
-            'salesPriceImportInId': salesPriceImportIn,
+            'salesPriceImportInId': JSON.stringify(salesPriceImportIn),
             'isInsertSalesPrice' : isInsertSalesPrice
         };
 
