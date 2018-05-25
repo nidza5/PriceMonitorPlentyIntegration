@@ -67,6 +67,9 @@ class ContractRepository implements ContractRepositoryContract
             $database->save($contract);
 
         } catch(\Exception $ex){
+
+            echo $ex->getMessage();
+
             // To Do Logg exceptions
         }
     }
