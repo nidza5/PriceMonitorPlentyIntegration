@@ -166,12 +166,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       */
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
+
+        echo "request data";
+        echo  json_encode($request->all());
+
          $updateContractInfo = $contractRepo->updateContract($request->all());
-
-
-         echo "Sacuvani contracti";
-         echo  json_encode($contractRepo->getContracts());
-
 
          return json_encode($updateContractInfo); 
 
