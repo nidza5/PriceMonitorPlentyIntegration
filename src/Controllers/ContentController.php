@@ -80,8 +80,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          // $contractRepo->deleteAllContracts();
 
-         
-
         try {
 
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
@@ -108,7 +106,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             else if($reponseContracts != null) 
               $contractRepo->saveContracts($reponseContracts);   
             
-              echo  json_encode($contractRepo->getContracts()); 
+            $originalContracts = $contractRepo->getContracts(); 
 
         } catch(\Exception $ex) {
 
@@ -155,7 +153,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  }                  
               }
 
-        $templateData = array("contracts" => $reponseContracts,
+        $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     

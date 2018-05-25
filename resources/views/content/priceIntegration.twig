@@ -28,8 +28,8 @@
         <button class="tablinksprestaprice accordion" onclick="expandCollapseMenu(this)">Contracts</button>
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
-                {% for contractPricemonitorId,contractName in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" data-contractId = {{contractPricemonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contractName}}</button></li>
+                {% for contract in contracts %}
+                    <li>  <button class="tablinksprestaprice secondLevelButton" data-salesPrice = {{contract.salesPricesImport}} data-insertPrices={{contract.isInsertSalesPrice}}  data-contractId = {{contract.priceMonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contract.name}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
