@@ -80,7 +80,7 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
-       // $contract->salesPriceImportInId = (int)$data['salesPriceImportInId'];
+        $contract->salesPriceImportInId = $data['salesPriceImportInId'];
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'] === 'true'? true : false;
 
         $this->saveContract($contract);
