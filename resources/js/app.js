@@ -51,8 +51,8 @@ function assignDataToContract(el) {
 
     var insertSalesPriceValue = "";
 
-    if(insertSalesPriceVar != null && insertSalesPriceVar != "")
-        insertSalesPriceValue = insertSalesPriceVar.split(',');
+    if(salesPricesImportIn != null && salesPricesImportIn != "")
+        insertSalesPriceValue = salesPricesImportIn.split(',');
 
     $("#contractId").val(contractId);
     $("#contractName").val(contractName);
