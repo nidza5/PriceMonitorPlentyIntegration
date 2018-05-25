@@ -64,7 +64,7 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
     $("#idContract").val(idContract);
     $("#contractId").val(contractId);
     $("#contractName").val(contractName);
-    $("salesPriceVariationSelect").val(insertPricesValue);
+    $("#salesPriceVariationSelect").val(insertPricesValue);
     $("#salesPrice").val(insertSalesPriceValue).change();
 }
 
