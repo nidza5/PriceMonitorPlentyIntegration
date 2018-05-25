@@ -168,9 +168,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
          $updateContractInfo = $contractRepo->updateContract($request->all());
 
+
+         echo "Sacuvani contracti";
+         echo  json_encode($contractRepo->getContracts());
+
+
          return json_encode($updateContractInfo); 
 
-
+         
        // return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
       }
  }
