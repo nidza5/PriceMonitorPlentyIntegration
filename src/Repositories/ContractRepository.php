@@ -53,8 +53,11 @@ class ContractRepository implements ContractRepositoryContract
             $contract->name = $contractObject->name;
 
             if(!empty($contractObject->salesPriceImportInId))
+            {
+                echo "uslo ovde";
                 $contract->salesPriceImportInId = $contractObject->salesPriceImportInId;
-
+            }
+                
              if( (isset($contractObject->isInsertSalesPrice)) && ($contractObject->isInsertSalesPrice != false))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
 
