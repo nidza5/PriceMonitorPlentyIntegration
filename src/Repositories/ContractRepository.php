@@ -52,10 +52,10 @@ class ContractRepository implements ContractRepositoryContract
             $contract->priceMonitorId = $contractObject->priceMonitorId;
             $contract->name = $contractObject->name;
 
-            if(!empty($contractObject->salesPriceImportInId))
+            if(!empty($contractObject->salesPricesImport))
             {
                 echo "uslo ovde";
-                $contract->salesPriceImportInId = $contractObject->salesPriceImportInId;
+                $contract->salesPricesImport = $contractObject->salesPricesImport;
             }
                 
              if( (isset($contractObject->isInsertSalesPrice)) && ($contractObject->isInsertSalesPrice != false))
@@ -66,7 +66,7 @@ class ContractRepository implements ContractRepositoryContract
             $database->save($contract);
 
             echo "sales price import in id";
-                echo json_encode($contract->salesPriceImportInId);
+                echo json_encode($contract->salesPricesImport);
 
         } catch(\Exception $ex){
 
@@ -89,11 +89,11 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract = pluginApp(Contract::class);
 
-        $priceImportInId = explode(',', $data['salesPriceImportInId']);
+        $priceImportInId = explode(',', $data['salesPricesImport']);
 
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
-        $contract->salesPriceImportInId = $priceImportInId;
+        $contract->salesPricesImport = $priceImportInId;
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'] === 'true'? true : false;
 
         $this->saveContract($contract);

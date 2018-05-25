@@ -10,5 +10,5 @@
     },
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
 	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
-	"PriceMonitorPlentyIntegration\\Migrations\\UpdateContractsTable" ]
+	"PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTableAddNewProperty" ]
 }
