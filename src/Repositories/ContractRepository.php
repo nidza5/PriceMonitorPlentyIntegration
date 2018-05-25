@@ -78,9 +78,9 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract = pluginApp(Contract::class);
 
-        $priceImportInId = $data['salesPriceImportInId'];
+        $priceImportInId = explode(',', $data['salesPriceImportInId']);
 
-        echo "decode array";
+        echo "priceImportInId";
         echo $priceImportInId
 
         $contract->id = (int)$data['id'];
