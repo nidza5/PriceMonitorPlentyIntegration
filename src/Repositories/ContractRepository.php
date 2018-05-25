@@ -55,7 +55,7 @@ class ContractRepository implements ContractRepositoryContract
             if(!empty($contractObject->salesPricesImport))
                 $contract->salesPricesImport = $contractObject->salesPricesImport;
                
-             if( (isset($contractObject->isInsertSalesPrice)) && ($contractObject->isInsertSalesPrice != false))
+             if(isset($contractObject->isInsertSalesPrice))
                 $contract->isInsertSalesPrice = $contractObject->isInsertSalesPrice;
 
             $database->save($contract);
