@@ -52,7 +52,11 @@ function assignDataToContract(el) {
 $(document).ready(function() {
      
     console.log("document ready");
-     $('.js-example-basic-multiple').select2();
+     $('.js-example-basic-multiple').select2({
+        placeholder: "Select sales prices",
+        allowClear: true,
+        width: '100%'
+     });
 
     // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click(); 
