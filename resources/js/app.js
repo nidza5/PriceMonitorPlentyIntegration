@@ -145,11 +145,12 @@ function showTabContent(evt, tabName) {
             data: data,
             success: function(data)
             {
-                var data = jQuery.parseJSON( data );
+                console.log("data");
+                    console.log(data);
+
+               // var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
-                   console.log("data");
-                    console.log(data);
                    setDataContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport);
                    updateDataAttributeContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport)
 
