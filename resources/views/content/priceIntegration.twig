@@ -29,7 +29,7 @@
         <ul class="ulAccordation" style="display:none;"> 
             {% if contracts is not null %}
                 {% for contract in contracts %}
-                    <li>  <button class="tablinksprestaprice secondLevelButton" data-salesPrice = {{contract.salesPricesImport|join(',')}} data-insertPrices={{contract.isInsertSalesPrice}}  data-contractId = {{contract.priceMonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contract.name}}</button></li>
+                    <li>  <button class="tablinksprestaprice secondLevelButton" data-Id={{contract.id}} data-salesPrice = {{contract.salesPricesImport|join(',')}} data-insertPrices={{contract.isInsertSalesPrice}}  data-contractId = {{contract.priceMonitorId}} onclick="showTabContentContent(event, 'Contracts',this)"> {{contract.name}}</button></li>
                 {% endfor %}
             {% endif %}           
         </ul>
@@ -74,6 +74,8 @@
                 <div id="ContractInfo" class="tabcontent">
                     <section id="sectionContractInfo">
                         <form>
+
+                           <input type="hidden" class="form-control" id="idContract">
                             <div class="form-group row">
                                 <label for="contractName" class="col-sm-2 col-form-label">Contract name:</label>
                                 <div class="col-sm-4">

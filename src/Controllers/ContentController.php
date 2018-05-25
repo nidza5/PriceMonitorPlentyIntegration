@@ -169,7 +169,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
          $updateContractInfo = $contractRepo->updateContract($request->all());
+        
+         $contractInfo = null;
 
-         return json_encode($updateContractInfo); 
+         if(($updateContractInfo != null) && ($updateContractInfo->id != 0) && ($updateContractInfo->id != null))
+            $contractInfo = $contractRepo->getContractById($updateContractInfo->id);
+
+         return json_encode($contractInfo); 
       }
  }

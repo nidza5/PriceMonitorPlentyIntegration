@@ -42,6 +42,7 @@ function assignDataToContract(el) {
 
     $el = $(el);
 
+    var idContract = $el.attr("data-Id");
     var contractId = $el.attr("data-contractId");
     var contractName = $el.text();
     var salesPricesImportIn = $el.attr("data-salesPrice");
@@ -54,10 +55,27 @@ function assignDataToContract(el) {
     if(salesPricesImportIn != null && salesPricesImportIn != "")
         insertSalesPriceValue = salesPricesImportIn.split(',');
 
+    setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue);
+}
+
+
+function setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue) {
+
+    $("#idContract").val(idContract);
     $("#contractId").val(contractId);
     $("#contractName").val(contractName);
     $("salesPriceVariationSelect").val(insertPricesValue);
     $("#salesPrice").val(insertSalesPriceValue).change();
+}
+
+function updateDataAttributeContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue)
+{
+    var $el = $(".secondLevelButton[data-Id=" + idContract + "]");
+ 
+    $el.attr("data-contractId",contractId);
+    $el.attr("data-salesPrice",insertSalesPriceValue);
+    $el.attr("data-insertPrices",insertPricesValue);
+
 }
 
 $(document).ready(function() {
@@ -75,15 +93,14 @@ $(document).ready(function() {
 
 function expandCollapseMenu(el) {
 
- var $el = $(el);
- $el.css("display","block");
- $(".tablinksprestaprice").removeClass("active");
+    var $el = $(el);
+    $el.css("display","block");
+    $(".tablinksprestaprice").removeClass("active");
 
- $el.addClass("active");
- var liExpand = $el.next('ul');
+    $el.addClass("active");
+    var liExpand = $el.next('ul');
 
- liExpand.toggle();
-
+    liExpand.toggle();
 }
 
 function showTabContent(evt, tabName) {
@@ -110,12 +127,13 @@ function showTabContent(evt, tabName) {
 
  function updateContractInfo() {
 
+        var idContract = $("idContract").val();
         var priceMonitorId = $("#contractId").val();
         var salesPriceImportIn = $("#salesPrice").val();
         var isInsertSalesPrice = $("#salesPriceVariationSelect").val();
 
         var data = {
-            'id' : 0,
+            'id' : idContract,
             'priceMonitorId': priceMonitorId,
             'salesPricesImport': salesPriceImportIn.join(),
             'isInsertSalesPrice' : isInsertSalesPrice
@@ -127,15 +145,15 @@ function showTabContent(evt, tabName) {
             data: data,
             success: function(data)
             {
-                console.log("data");
-                console.log(data);
-
                 var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
-                   console.log("Uspesno sacuvano");
+                   console.log("data");
+                    console.log(data);
+                   setDataContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport);
+                   updateDataAttributeContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport)
 
-                   toastr["success"]("Data are successfully saved!", "Saccessfully saved!");
+                   toastr["success"]("Data are successfully saved!", "Successfully saved!");
                 }
                 else
                 {
