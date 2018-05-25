@@ -50,8 +50,9 @@ function assignDataToContract(el) {
 }
 
 $(document).ready(function() {
-      
+     
     console.log("document ready");
+     $('.js-example-basic-multiple').select2();
 
     // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click(); 
