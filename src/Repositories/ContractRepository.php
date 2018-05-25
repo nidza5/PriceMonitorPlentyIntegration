@@ -80,9 +80,6 @@ class ContractRepository implements ContractRepositoryContract
 
         $priceImportInId = explode(',', $data['salesPriceImportInId']);
 
-        echo "priceImportInId";
-        echo json_encode($priceImportInId);
-
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
         $contract->salesPriceImportInId = $priceImportInId;

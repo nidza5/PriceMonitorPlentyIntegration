@@ -78,7 +78,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-        //  $contractRepo->deleteAllContracts();
+          $contractRepo->deleteAllContracts();
 
         try {
 
@@ -166,15 +166,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       */
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
-
-        // echo "request data";
-        // echo  json_encode($request->all());
-
          $updateContractInfo = $contractRepo->updateContract($request->all());
 
          return json_encode($updateContractInfo); 
-
-         
-       // return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null); 
       }
  }
