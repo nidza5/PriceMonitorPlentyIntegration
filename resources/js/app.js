@@ -62,9 +62,14 @@ function assignDataToContract(el) {
 function setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue) {
 
     $("#idContract").val(idContract);
+    
     $("#contractId").val(contractId);
-    $("#contractName").val(contractName);
+
+    if(contractName != null && contractName != "")
+        $("#contractName").val(contractName);
+    
     $("#salesPriceVariationSelect").val(insertPricesValue);
+    
     $("#salesPrice").val(insertSalesPriceValue).change();
 }
 
