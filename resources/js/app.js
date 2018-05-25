@@ -159,7 +159,9 @@ function showTabContent(evt, tabName) {
                 var data = jQuery.parseJSON( data );
                 if(data != null)
                 {
-                   setDataContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport);
+                  var insertPricesValue = data.isInsertSalesPrice == "1" ? "true" : "false";
+
+                   setDataContractInfo(data.id,data.priceMonitorId,data.name,insertPricesValue,data.salesPricesImport);
                    updateDataAttributeContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport)
 
                    toastr["success"]("Data are successfully saved!", "Successfully saved!");
