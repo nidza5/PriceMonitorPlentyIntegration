@@ -167,8 +167,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
 
-        echo "request data";
-        echo  json_encode($request->all());
+        // echo "request data";
+        // echo  json_encode($request->all());
 
          $updateContractInfo = $contractRepo->updateContract($request->all());
 

@@ -78,9 +78,15 @@ class ContractRepository implements ContractRepositoryContract
 
         $contract = pluginApp(Contract::class);
 
+
+        $priceImportInId = json_decode($data['salesPriceImportInId']);
+
+        echo "decode array";
+        echo $priceImportInId;
+
         $contract->id = (int)$data['id'];
         $contract->priceMonitorId = $data['priceMonitorId'];
-        $contract->salesPriceImportInId = $data['salesPriceImportInId'];
+        $contract->salesPriceImportInId = $priceImportInId;
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'] === 'true'? true : false;
 
         $this->saveContract($contract);
