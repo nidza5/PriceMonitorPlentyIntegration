@@ -80,7 +80,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          // $contractRepo->deleteAllContracts();
 
-         echo  json_encode($contractRepo->getContracts()); 
+         
 
         try {
 
@@ -108,7 +108,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             else if($reponseContracts != null) 
               $contractRepo->saveContracts($reponseContracts);   
             
-            
+              echo  json_encode($contractRepo->getContracts()); 
 
         } catch(\Exception $ex) {
 
