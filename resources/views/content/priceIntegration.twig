@@ -90,10 +90,12 @@
                             <div class="form-group row">                               
                                     <label for="salesPrice" class="col-sm-3 col-form-label">Sales price to import in:</label>
                                     <div class="col-sm-4" style="margin-left:-8% !important">
-                                        <select class="js-example-basic-multiple" name="states[]" id="states" multiple="multiple">
-                                            <option value="AL">Alabama</option>
-                                            <option value="Serbia">Serbia</option>
-                                            <option value="WY">Wyoming</option>
+                                        <select class="js-example-basic-multiple" name="salesPrice[]" id="salesPrice" multiple="multiple">
+                                            {% if salesPrices is not null %}
+                                                {% for salePrice in salesPrices %}
+                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                {% endfor %}
+                                            {% endif %}
                                         </select>
                                         {# <select class="form-control" id="salesPrice" style="margin-left:-27%">
                                             {% if salesPrices is not null %}
