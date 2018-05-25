@@ -10,7 +10,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\Model;
  * @property int     $id
  * @property string  $priceMonitorId
  * @property string  $name
- * @property int     $salesPriceImportInId
+ * @property array     $salesPriceImportInId
  * @property bool     $isInsertSalesPrice
  */
 class Contract extends Model
@@ -22,7 +22,7 @@ class Contract extends Model
      */
     public $priceMonitorId    = "";
     public $name              = "";
-    public $salesPriceImportInId   = 0;
+    public $salesPriceImportInId   = [];
     public $isInsertSalesPrice = false;
 
 
