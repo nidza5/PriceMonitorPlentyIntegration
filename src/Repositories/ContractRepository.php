@@ -89,7 +89,11 @@ class ContractRepository implements ContractRepositoryContract
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'];
 
         echo "ispis";
-        echo $data['isInsertSalesPrice'];
+
+        if($data['isInsertSalesPrice'] == true)
+            echo "true";
+        else   
+            echo "false";
 
         $this->saveContract($contract);
 
