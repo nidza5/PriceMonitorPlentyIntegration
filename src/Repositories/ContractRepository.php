@@ -88,6 +88,9 @@ class ContractRepository implements ContractRepositoryContract
         $contract->salesPricesImport = $priceImportInId;
         $contract->isInsertSalesPrice = $data['isInsertSalesPrice'] === 'true'? true : false;
 
+        echo "novo";
+        echo $data['isInsertSalesPrice'];
+
         $this->saveContract($contract);
 
        return $contract;
