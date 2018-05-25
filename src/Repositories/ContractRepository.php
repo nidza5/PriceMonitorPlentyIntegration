@@ -90,7 +90,7 @@ class ContractRepository implements ContractRepositoryContract
 
         echo "ispis";
 
-        if($data['isInsertSalesPrice'] == true)
+        if($data['isInsertSalesPrice'] == "true")
             echo "true";
         else   
             echo "false";
