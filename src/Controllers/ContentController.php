@@ -139,10 +139,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           //  echo json_encode($stores);
 
-            $marketsCredentials = $credentialsRepository->all();
+            $marketsCredentials = null;
+
+            $authHelperCredentials = pluginApp(AuthHelper::class);
+
+            $marketsCredentials = $authHelperCredentials->processUnguarded(
+                function () use ($credentialsRepository, $marketsCredentials) {
+                
+                    return $credentialsRepository->all();
+                }
+            );
 
             echo json_encode($marketsCredentials);
-
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
