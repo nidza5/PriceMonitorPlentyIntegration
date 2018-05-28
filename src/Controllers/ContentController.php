@@ -45,7 +45,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         /**
          *
-         * @var SalesPriceRepository
+         * @var WebstoreRepositoryContract
          */
          private $webStoreRepositoryContract;
 
@@ -55,12 +55,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,WebstoreRepositoryContract $webStoreRepositoryContract)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
-        $this->salesPriceRepository = $salesPriceRepository;
-        $this->webStoreRepositoryContract = $webStoreRepositoryContract;
+        $this->salesPriceRepository = $salesPriceRepository;        
     }
     
      public function home(Twig $twig) : string
@@ -73,7 +72,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo,WebstoreRepositoryContract $webStoreRepositoryContract)  
      {
         $credentials = $request->all();
 
