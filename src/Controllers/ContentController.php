@@ -191,7 +191,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters($priceMonitorId,Twig $twig) :string 
       {
-          echo json_encode($priceMonitorId);
+          echo "Price monitor Id   ";
+          echo $priceMonitorId;
 
           return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null);  
 
