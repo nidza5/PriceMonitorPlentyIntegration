@@ -181,11 +181,11 @@ function showTabContent(evt, tabName) {
 
     function getFilter() {
 
-        var priceMonitorId = $("#contractId").val();
+        var id = $("#contractId").val();
      
         $.ajax({
             type: "GET",
-            url: "/getFilters/"  + priceMonitorId,
+            url: "/getFilters/"  + id,
             success: function(data)
             {
                 console.log("data");
