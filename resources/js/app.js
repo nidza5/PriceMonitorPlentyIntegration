@@ -181,22 +181,18 @@ function showTabContent(evt, tabName) {
 
     function getFilter() {
 
-      var dataOption = {
-          'priceMonitorId' : $("#contractId").val()
-      };
-
+        var priceMonitorId = $("#contractId").val();
+     
         $.ajax({
             type: "GET",
-            url: "/getFilters",
-            data: dataOption,
+            url: "/getFilters/"  + priceMonitorId,
             success: function(data)
             {
                 console.log("data");
                 console.log(data);
 
                 if(data == null) 
-                    return;
-                
+                    return;                
             },
             error: function(xhr)
             {
