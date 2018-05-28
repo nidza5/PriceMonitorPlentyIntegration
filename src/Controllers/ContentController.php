@@ -134,8 +134,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
  
-            $columnsForStores = array("webstoreId","name");
-            $stores = $webStoreRepositoryContract->loadAll($columnsForStores);
+            $stores = $webStoreRepositoryContract->loadAll();
 
             echo json_encode($stores);
 
