@@ -187,7 +187,7 @@ function showTabContent(evt, tabName) {
 
         $.ajax({
             type: "GET",
-            url: "/getFilters/" ,
+            url: "/getFilters" ,
             data: dataOption,
             success: function(data)
             {
