@@ -16,6 +16,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
  use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+ use Plenty\Modules\Market\Credentials\Contracts\CredentialsRepositoryContract;
 
  /**
   * Class ContentController
@@ -72,7 +73,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo,WebstoreRepositoryContract $webStoreRepositoryContract)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo,WebstoreRepositoryContract $webStoreRepositoryContract,CredentialsRepositoryContract $credentialsRepository)  
      {
         $credentials = $request->all();
 
@@ -137,6 +138,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $stores = $webStoreRepositoryContract->loadAll();
 
           //  echo json_encode($stores);
+
+            $marketsCredentials = $credentialsRepository->all();
+
+            echo json_encode($marketsCredentials);
+
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
