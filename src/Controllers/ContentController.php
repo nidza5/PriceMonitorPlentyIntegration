@@ -189,11 +189,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          return json_encode($contractInfo); 
       }
 
-      public function getFilters(Request $request) :string 
+      public function getFilters(int $priceMonitorId) :string 
       {
-          $requestData = $request->all();
-
-          echo json_encode($requestData);
+          echo $priceMonitorId;
 
       }
  }
