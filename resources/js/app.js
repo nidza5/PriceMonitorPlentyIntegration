@@ -182,7 +182,7 @@ function showTabContent(evt, tabName) {
     function getFilter() {
 
       var dataOption = {
-          "priceMonitorId" : $("#contractId").val()
+          'priceMonitorId' : $("#contractId").val()
       };
 
         $.ajax({
