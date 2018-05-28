@@ -134,5 +134,8 @@ html, body { height: 100%; width: 100%; margin: 0; }
 
 #groupSubmitContractInfo {
     margin-top:15%;
+}
 
+#sectionItemSelection {
+    margin-top:5%;
 }
