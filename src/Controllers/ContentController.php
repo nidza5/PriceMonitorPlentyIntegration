@@ -136,7 +136,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  
             $stores = $webStoreRepositoryContract->loadAll();
 
-            echo json_encode($stores);
+          //  echo json_encode($stores);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
@@ -168,7 +168,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
               }
 
         $templateData = array("contracts" => $originalContracts,
-                            "salesPrices" => $salesPricesEnglish);
+                            "salesPrices" => $salesPricesEnglish,
+                            "clientStores" => $stores);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }

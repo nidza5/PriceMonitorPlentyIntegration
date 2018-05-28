@@ -99,13 +99,6 @@
                                                 {% endfor %}
                                             {% endif %}
                                         </select>
-                                        {# <select class="form-control" id="salesPrice" style="margin-left:-27%">
-                                            {% if salesPrices is not null %}
-                                                {% for salePrice in salesPrices %}
-                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
-                                                {% endfor %}
-                                            {% endif %}           
-                                        </select>  #}
                                     </div> 
 
                                     <label for="salesPriceVariationSelect" class="col-sm-3 col-form-label">Insert sales price in variation:</label>
@@ -137,8 +130,11 @@
                                     <label for="store" class="col-sm-2 col-form-label">Client (store):</label>
                                     <div class="col-sm-4">
                                         <select class="form-control" id="store">
-                                            <option value='true'>Yes</option>
-                                            <option value='false'>No</option>                                           
+                                             {% if clientStores is not null %}
+                                                {% for store in clientStores %}
+                                                        <option value={{store.storeIdentifier}}>{{store.name}}</option>
+                                                {% endfor %}
+                                            {% endif %}                                           
                                         </select>        
                                     </div>                               
                             </div>
