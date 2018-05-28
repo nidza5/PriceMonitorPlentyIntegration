@@ -194,7 +194,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           echo "Price monitor Id   ";
           echo $priceMonitorId;
 
-          return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null);  
+          return  $priceMonitorId;  
 
       }
  }
