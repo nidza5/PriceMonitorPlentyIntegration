@@ -177,3 +177,30 @@ function showTabContent(evt, tabName) {
             }
         });
     }
+
+
+    function getFilter() {
+
+      var dataOption = {
+          "priceMonitorId" : $("#contractId").val()
+      };
+
+        $.ajax({
+            type: "GET",
+            url: "/getFilters",
+            data: dataOption,
+            success: function(data)
+            {
+                console.log("data");
+                console.log(data);
+
+                if(data == null) 
+                    return;
+                
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+    }

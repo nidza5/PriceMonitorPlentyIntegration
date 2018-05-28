@@ -188,4 +188,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          return json_encode($contractInfo); 
       }
+
+      public function getFilters(Request $request) :string 
+      {
+          $requestData = $request->all();
+
+          echo json_encode($requestData);
+
+      }
  }
