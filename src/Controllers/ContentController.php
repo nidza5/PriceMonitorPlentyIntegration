@@ -194,7 +194,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           echo "Price monitor Id   ";
           echo $priceMonitorId;
 
-          return  $priceMonitorId;  
+          return json_encode($priceMonitorId) ;  
 
       }
  }
