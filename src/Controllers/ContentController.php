@@ -189,9 +189,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          return json_encode($contractInfo); 
       }
 
-      public function getFilters(int $id,Twig $twig) :string 
+      public function getFilters(Request $request,Twig $twig) :string 
       {
-          echo $id;
+          echo json_encode($request->all());
 
           return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', null);  
 

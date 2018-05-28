@@ -20,7 +20,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
         $router->get('loginPriceMonitor', 'PriceMonitorPlentyIntegration\Controllers\ContentController@loginPriceMonitor');
         $router->post('login', 'PriceMonitorPlentyIntegration\Controllers\ContentController@login');
         $router->post('updateContractInfo', 'PriceMonitorPlentyIntegration\Controllers\ContentController@updateContractInfo');
-        $router->get('getFilters/{id}', 'PriceMonitorPlentyIntegration\Controllers\ContentController@getFilters')->where('id', '\d+');
+        $router->post('getFilters', 'PriceMonitorPlentyIntegration\Controllers\ContentController@getFilters');
     }
  
 }
