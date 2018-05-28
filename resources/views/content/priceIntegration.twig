@@ -119,26 +119,7 @@
                 <div id="ItemSelection" class="tabcontent">
                     <section id="sectionItemSelection">
                         <form>
-                             <div class="form-group row">                               
-                                    <label for="markets" class="col-sm-1 col-form-label">Markets:</label>
-                                    <div class="col-sm-4">
-                                        <select class="form-control" id="markets">
-                                            <option value='true'>Yes</option>
-                                            <option value='false'>No</option>                                           
-                                        </select>        
-                                    </div>
-                                    <label for="store" class="col-sm-2 col-form-label">Client (store):</label>
-                                    <div class="col-sm-4">
-                                        <select class="form-control" id="store">
-                                             {% if clientStores is not null %}
-                                             <option value="-1">All</option>
-                                                {% for store in clientStores %}
-                                                        <option value={{store.storeIdentifier}}>{{store.name}}</option>
-                                                {% endfor %}
-                                            {% endif %}                                           
-                                        </select>        
-                                    </div>                               
-                            </div>
+                             
                             <div class="form-group" id="groupSubmitItemSelection">
                                 <button type="submit" class="btn btn-primary float-right" onclick="#">Save</button>
                             </div>                            

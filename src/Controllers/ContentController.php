@@ -73,7 +73,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo,WebstoreRepositoryContract $webStoreRepositoryContract,CredentialsRepositoryContract $credentialsRepository)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo)  
      {
         $credentials = $request->all();
 
@@ -135,22 +135,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
  
-            $stores = $webStoreRepositoryContract->loadAll();
-
           //  echo json_encode($stores);
-
-            $marketsCredentials = null;
-
-            $authHelperCredentials = pluginApp(AuthHelper::class);
-
-            $marketsCredentials = $authHelperCredentials->processUnguarded(
-                function () use ($credentialsRepository, $marketsCredentials) {
-                
-                    return $credentialsRepository->all();
-                }
-            );
-
-            echo json_encode($marketsCredentials);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
@@ -182,8 +167,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
               }
 
         $templateData = array("contracts" => $originalContracts,
-                            "salesPrices" => $salesPricesEnglish,
-                            "clientStores" => $stores);
+                            "salesPrices" => $salesPricesEnglish);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
