@@ -15,6 +15,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
+ use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
+
  /**
   * Class ContentController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -41,17 +43,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $salesPriceRepository;
 
+        /**
+         *
+         * @var SalesPriceRepository
+         */
+         private $webStoreRepositoryContract;
+
 
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,WebstoreRepositoryContract $webStoreRepositoryContract)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;
+        $this->webStoreRepositoryContract = $webStoreRepositoryContract;
     }
     
      public function home(Twig $twig) : string
@@ -108,7 +117,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
             $originalContracts = $contractRepo->getContracts(); 
 
-            echo json_encode($originalContracts);
+           // echo json_encode($originalContracts);
 
         } catch(\Exception $ex) {
 
@@ -126,6 +135,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password']
         ]);
  
+            $stores = $webStoreRepositoryContract->loadAll();
+
+            echo json_encode($stores);
+
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
             $authHelper = pluginApp(AuthHelper::class);
