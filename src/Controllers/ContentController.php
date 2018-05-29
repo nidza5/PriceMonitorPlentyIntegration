@@ -191,10 +191,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters($priceMonitorId) :string 
       {
-          echo "Price monitor Id   ";
-          echo $priceMonitorId;
-
-          return json_encode($priceMonitorId) ;  
-
+          return json_encode($priceMonitorId);  
       }
  }
