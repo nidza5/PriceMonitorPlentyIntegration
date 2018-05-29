@@ -1,6 +1,7 @@
 <?php
  
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
+ require_once __DIR__ . '/FilterStorage.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
@@ -45,6 +46,8 @@
 
     public static function getFilter($filterType, $pricemonitorId)
     {
+        ServiceRegister::registerFilterStorage(new FilterStorage());
+
         $result = array('type' => $filterType, 'filters' => array());
         $filterRepository = new FilterRepository();
         $filter = $filterRepository->getFilter($pricemonitorId, $filterType);

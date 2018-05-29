@@ -5,7 +5,7 @@ use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
-class FilterService implements FilterStorage
+class FilterStorage implements FilterStorage
 {
     /**
     *
