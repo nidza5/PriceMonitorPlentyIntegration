@@ -103,7 +103,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             echo json_encode($reponseContracts);
             
             //Handling errors when ocuurs in getLoggingAndContracts
-            if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
+            if(($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message'])) || ($reponseContracts['error'] && $reponseContracts['error_msg']))
             {
                 $errorReponse = null;
 
