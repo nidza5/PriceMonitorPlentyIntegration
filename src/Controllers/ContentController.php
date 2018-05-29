@@ -96,6 +96,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
             ]);
+
+
+            echo "response contracts    ";
+
+            echo json_encode($reponseContracts);
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message']))
