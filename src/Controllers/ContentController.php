@@ -17,6 +17,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Repositories\Models;
  use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
  use Plenty\Modules\Market\Credentials\Contracts\CredentialsRepositoryContract;
+ use PriceMonitorPlentyIntegration\Constants\FilterType;
 
  /**
   * Class ContentController
@@ -198,8 +199,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             if($requestData != null)
                 $priceMonitorId = $requestData['priceMonitorId'];
 
-          return $priceMonitorId;  
+            $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+                'filterType' => FilterType::EXPORT_PRODUCTS,
+                'priceMonitorId' => $priceMonitorId
+            ]);
 
-        // return "OK";
+          return json_encode($filters);  
       }
  }
