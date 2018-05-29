@@ -181,9 +181,9 @@ function showTabContent(evt, tabName) {
 
     function getFilter() {
 
-      var dataOption = {
-          'priceMonitorId' : $("#contractId").val()
-      };
+    //   var dataOption = {
+    //       'priceMonitorId' : $("#contractId").val()
+    //   };
 
         $.ajax({
             type: "GET",
