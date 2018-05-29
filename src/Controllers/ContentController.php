@@ -191,8 +191,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters(Request $request) :string 
       {
-       //   return json_encode($request->all());  
+          return json_encode($request->all());  
 
-         return "OK";
+        // return "OK";
       }
  }
