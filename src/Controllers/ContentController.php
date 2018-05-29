@@ -191,7 +191,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters(Request $request) :string 
       {
-          return json_encode($request->all());  
+            $requestData = $request->all();
+
+            $priceMonitorId = 0;
+
+            if($requestData != null)
+                $priceMonitorId = $requestData['priceMonitorId'];
+
+          return $priceMonitorId;  
 
         // return "OK";
       }
