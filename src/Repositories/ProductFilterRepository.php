@@ -4,7 +4,7 @@ namespace PriceMonitorPlentyIntegration\Repositories;
  
 use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
-use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
+use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Models\ProductFilter;
  
 class ProductFilterRepository implements ProductFilterRepositoryContract
