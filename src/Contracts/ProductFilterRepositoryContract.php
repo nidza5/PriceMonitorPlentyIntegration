@@ -14,9 +14,10 @@ interface ProductFilterRepositoryContract
      * Get product filter by contractId
      *
      * @param int $contractId
+     * @param string $type
      * @return ProductFilter
      */
-    public function getFilterByContractId($contractId) : ProductFilter;
+    public function getFilterByContractIdAndType($contractId,$type) : ProductFilter;
 
     /**
      * Save product filter

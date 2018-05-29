@@ -19,17 +19,17 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
      }
 
       /**
-     * Get filter by contractId
+     * Get filter by contractId 
      *
      * @return ProductFilter
      */
-     public function getFilterByContractId($contractId) 
+     public function getFilterByContractIdAndType($contractId,$type) 
      {
         if($contractId == 0 || $contractId == null)
             return null;
 
         $database = pluginApp(DataBase::class);
-        $productFilter = $database->query(ProductFilter::class)->where('contractId', '=', $contractId)->get();
+        $productFilter = $database->query(ProductFilter::class)->where('contractId', '=', $contractId)->where('type', '=', $type)->get();
         return $productFilter[0];
 
      }

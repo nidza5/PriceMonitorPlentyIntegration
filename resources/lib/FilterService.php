@@ -2,9 +2,22 @@
 
 use Patagona\Pricemonitor\Core\Interfaces\FilterStorage;
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
+use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
 class FilterService implements FilterStorage
 {
+    /**
+    *
+    * @var ProductFilterRepository
+    */
+    private $productFilterRepository;
+
+
+    public function __construct(ProductFilterRepositoryContract $productFilterRepository)
+    {
+        $this->productFilterRepository = $productFilterRepository;
+    }
 
     /**
      * Saves serialized filter.
@@ -17,19 +30,7 @@ class FilterService implements FilterStorage
      */
      public function saveFilter($contractId, $type, $filter)
      {
-         /** @var Patagona_Pricemonitor_Model_ProductFilter $productFilter */
-        //  $productFilter = $this->getFilterModel($contractId, $type);
- 
-        //  $productFilter->setPricemonitorContractId($contractId);
-        //  $productFilter->setType($type);
-        //  $productFilter->setSerializedFilter($filter);
- 
-        //  try {
-        //      $productFilter->save();
-        //  } catch (Exception $e) {
-        //      Logger::logError($e->getMessage());
-        //      Mage::throwException($e->getMessage());
-        //  }
+         
      }
  
      /**
@@ -42,29 +43,9 @@ class FilterService implements FilterStorage
       */
      public function getFilter($contractId, $type)
      {
-         /** @var Patagona_Pricemonitor_Model_ProductFilter $filterModel */
-        //  $filterModel = $this->getFilterModel($contractId, $type);
- 
-        //  return $filterModel->getSerializedFilter();
-     }
- 
-     /**
-      * Get filter by Pricemonitor contract ID and type.
-      *
-      * @param string $contractId
-      * @param string $type
-      *
-      * @return Patagona_Pricemonitor_Model_ProductFilter
-      */
-     protected function getFilterModel($contractId, $type)
-     {
-        //  /** @var Patagona_Pricemonitor_Model_Resource_ProductFilter_Collection $productFilterCollection */
-        //  $productFilterCollection = Mage::getModel('pricemonitor/productFilter')->getCollection();
-        //  $productFilterCollection->addFieldToFilter('pricemonitor_contract_id', $contractId);
-        //  $productFilterCollection->addFieldToFilter('type', $type);
-        //  /** @var Patagona_Pricemonitor_Model_ProductFilter $productFilter */
-        //  $productFilter = $productFilterCollection->setPageSize(1)->getLastItem();
-        //  return $productFilter;
+         $filter = $this->$productFilterRepository->getFilterByContractIdAndType($contractId,$type);
+
+         return ($filter !== null) ? $filter->serializedFilter : null;
      }
 }
 
