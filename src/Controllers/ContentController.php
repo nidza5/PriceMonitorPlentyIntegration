@@ -102,6 +102,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             {
                 $errorReponse = null;
 
+                echo "uslo ovde";
+
                 if($reponseContracts['Code'] == 401)
                     $errorReponse = [
                         'Code' => $reponseContracts['Code'],
