@@ -11,7 +11,6 @@
  use Patagona\Pricemonitor\Core\Sync\Filter\Group;
  use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryType;
  use Patagona\Pricemonitor\Core\Sync\Filter\Expression;
- use PriceMonitorPlentyIntegration\lib\FilterStorage;
 
  class PriceMonitorSdkHelper
  {
