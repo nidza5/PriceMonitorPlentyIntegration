@@ -1,6 +1,5 @@
 <?php
 
-
 use Patagona\Pricemonitor\Core\Interfaces\FilterStorage as FilterStorageInterface;
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
@@ -8,18 +7,6 @@ use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
 class FilterStorage implements FilterStorageInterface
 {
-    /**
-    *
-    * @var ProductFilterRepository
-    */
-    private $productFilterRepository;
-
-
-    public function __construct(ProductFilterRepositoryContract $productFilterRepository)
-    {
-        $this->productFilterRepository = $productFilterRepository;
-    }
-
     /**
      * Saves serialized filter.
      *
@@ -44,7 +31,9 @@ class FilterStorage implements FilterStorageInterface
       */
      public function getFilter($contractId, $type)
      {
-         $filter = $this->$productFilterRepository->getFilterByContractIdAndType($contractId,$type);
+        $filterRepository = new ProductFilterRepository();
+
+         $filter = $filterRepository->getFilterByContractIdAndType($contractId,$type);
 
          return ($filter !== null) ? $filter->serializedFilter : null;
      }

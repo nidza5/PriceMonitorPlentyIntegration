@@ -47,7 +47,7 @@
 
     public static function getFilter($filterType, $pricemonitorId)
     {
-        ServiceRegister::registerFilterStorage(new FilterStorage(new ProductFilterRepository()));
+        ServiceRegister::registerFilterStorage(new FilterStorage());
 
         $result = array('type' => $filterType, 'filters' => array());
         $filterRepository = new FilterRepository();
