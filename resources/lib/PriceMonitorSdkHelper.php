@@ -44,42 +44,42 @@
         ServiceRegister::getConfigService()->setCredentials($email, $password);
     }
 
-    // public static function getFilter($filterType, $pricemonitorId)
-    // {
-    //     ServiceRegister::registerFilterStorage(new FilterStorage());
+    public static function getFilter($filterType, $pricemonitorId)
+    {
+        ServiceRegister::registerFilterStorage(new FilterStorage());
 
-    //     $result = array('type' => $filterType, 'filters' => array());
-    //     $filterRepository = new FilterRepository();
-    //     $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+        $result = array('type' => $filterType, 'filters' => array());
+        $filterRepository = new FilterRepository();
+        $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
-    //     if ($filter === null) {
-    //         return $result;
-    //     }
+        if ($filter === null) {
+            return $result;
+        }
 
-    //     /** @var Group $group */
-    //     foreach ($filter->getExpressions() as $group) {
-    //         $current = array(
-    //             'name' => $group->getName(),
-    //             'groupOperator' => $group->getOperator(),
-    //             'expressions' => array()
-    //         );
+        /** @var Group $group */
+        foreach ($filter->getExpressions() as $group) {
+            $current = array(
+                'name' => $group->getName(),
+                'groupOperator' => $group->getOperator(),
+                'expressions' => array()
+            );
 
-    //         /** @var Expression $expression */
-    //         foreach ($group->getExpressions() as $expression) {
-    //             $current['operator'] = $expression->getOperator();
-    //             $current['expressions'][] = array(
-    //                 'code' => $expression->getField(),
-    //                 'condition' => $expression->getCondition(),
-    //                 'type' => $expression->getValueType(),
-    //                 'value' => $expression->getValues(),
-    //             );
-    //         }
+            /** @var Expression $expression */
+            foreach ($group->getExpressions() as $expression) {
+                $current['operator'] = $expression->getOperator();
+                $current['expressions'][] = array(
+                    'code' => $expression->getField(),
+                    'condition' => $expression->getCondition(),
+                    'type' => $expression->getValueType(),
+                    'value' => $expression->getValues(),
+                );
+            }
 
-    //         $result['filters'][] = $current;
-    //     }
+            $result['filters'][] = $current;
+        }
 
-    //     return $result;
-    // }
+        return $result;
+    }
  }
 
 ?>
