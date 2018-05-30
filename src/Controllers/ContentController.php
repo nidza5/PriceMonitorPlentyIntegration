@@ -208,6 +208,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
                 $filter = $productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
+                echo json_encode($filter );
+
                 $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                     'filterType' => FilterType::EXPORT_PRODUCTS,
                     'priceMonitorId' => $priceMonitorId,
