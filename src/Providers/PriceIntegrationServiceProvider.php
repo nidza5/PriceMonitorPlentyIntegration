@@ -7,6 +7,8 @@ use Plenty\Log\Services\ReferenceContainer;
 use Plenty\Log\Exceptions\ReferenceTypeException;
 use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
+use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
 /**
  * Class PriceIntegrationServiceProvider
