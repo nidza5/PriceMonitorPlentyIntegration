@@ -30,7 +30,7 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
 
         $database = pluginApp(DataBase::class);
         $productFilter = $database->query(ProductFilter::class)->where('contractId', '=', $contractId)->where('type', '=', $type)->get();
-        return $productFilter === null ? pluginApp(ProductFilter::class) : $productFilter[0];
+        return $productFilter[0] === null ? pluginApp(ProductFilter::class) : $productFilter[0];
 
      }
 }
