@@ -47,8 +47,7 @@ class PriceMonitorHttpClient implements HttpClient
             ]
         );
 
-        echo "request";
-        echo json_encode($request);
+        throw new \Exception(json_encode($request));
 
        // $response = $this->client->send($request);
         return new HttpResponsePlenty($request->getStatusCode(), $request->getHeaders(), strval($request->getBody()));
