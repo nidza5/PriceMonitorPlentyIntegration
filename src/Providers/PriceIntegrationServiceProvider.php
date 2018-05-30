@@ -22,6 +22,7 @@ use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
      {
          $this->getApplication()->register(PriceIntegrationRouteServiceProvider::class);
          $this->getApplication()->bind(ContractRepositoryContract::class, ContractRepository::class);
+         $this->getApplication()->bind(ProductFilterRepositoryContract::class, ProductFilterRepository::class);
      }
 
      public function boot(ReferenceContainer $referenceContainer)
