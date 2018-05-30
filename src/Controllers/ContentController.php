@@ -215,16 +215,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
                 $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
-                echo json_encode($filter );
+                $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+                    'filterType' => FilterType::EXPORT_PRODUCTS,
+                    'priceMonitorId' => $priceMonitorId,
+                    'productFilterRepo' => $filter
+                ]);    
 
-                // $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-                //     'filterType' => FilterType::EXPORT_PRODUCTS,
-                //     'priceMonitorId' => $priceMonitorId,
-                //     'productFilterRepo' => $filter
-                // ]);    
+          return json_encode($filters);  
 
-          //return json_encode($filters);  
-
-          return "OK";
+          //return "OK";
       }
  }
