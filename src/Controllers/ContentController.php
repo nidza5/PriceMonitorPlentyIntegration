@@ -203,19 +203,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $priceMonitorId = 0;
 
-            if($requestData != null)
-                $priceMonitorId = $requestData['priceMonitorId'];
+        //     if($requestData != null)
+        //         $priceMonitorId = $requestData['priceMonitorId'];
 
-                $filter = $productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
+        //         $filter = $productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
-                echo json_encode($filter );
+        //         echo json_encode($filter );
 
-                $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-                    'filterType' => FilterType::EXPORT_PRODUCTS,
-                    'priceMonitorId' => $priceMonitorId,
-                    'productFilterRepo' => $filter
-                ]);    
+        //         $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+        //             'filterType' => FilterType::EXPORT_PRODUCTS,
+        //             'priceMonitorId' => $priceMonitorId,
+        //             'productFilterRepo' => $filter
+        //         ]);    
 
-          return json_encode($filters);  
+        //   return json_encode($filters);  
+
+        return "OK";
       }
  }
