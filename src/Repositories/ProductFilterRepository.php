@@ -26,7 +26,7 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
      public function getFilterByContractIdAndType($contractId,$type) : ProductFilter
      {
         if($contractId == 0 || $contractId == null)
-            return null;
+            return pluginApp(ProductFilter::class);
 
         $database = pluginApp(DataBase::class);
         $productFilter = $database->query(ProductFilter::class)->where('contractId', '=', $contractId)->where('type', '=', $type)->get();
