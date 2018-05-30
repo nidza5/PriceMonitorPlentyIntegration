@@ -23,7 +23,7 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
      *
      * @return ProductFilter
      */
-     public function getFilterByContractIdAndType($contractId,$type) 
+     public function getFilterByContractIdAndType($contractId,$type) : ProductFilter
      {
         if($contractId == 0 || $contractId == null)
             return null;
