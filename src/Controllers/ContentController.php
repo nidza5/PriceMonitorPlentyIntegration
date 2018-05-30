@@ -53,17 +53,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
          private $webStoreRepositoryContract;
 
+         /**
+         *
+         * @var ProductFilterRepository
+         */
+        private $productFilterRepo;
+
 
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;        
+        $this->productFilterRepo = $productFilterRepo;        
     }
     
      public function home(Twig $twig) : string
@@ -197,7 +204,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          return json_encode($contractInfo); 
       }
 
-      public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
+      public function getFilters(Request $request) :string 
       {
             $requestData = $request->all();
 
