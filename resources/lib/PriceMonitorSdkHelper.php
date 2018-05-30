@@ -48,39 +48,49 @@
 
     public static function getFilter($filterType, $pricemonitorId, $filterRepo)
     {
-        ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
 
-        $result = array('type' => $filterType, 'filters' => array());
-        $filterRepository = new FilterRepository();
-        $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+        try{
 
-        if ($filter === null) {
-            return $result;
+                ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
+
+                $result = array('type' => $filterType, 'filters' => array());
+                $filterRepository = new FilterRepository();
+                $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+
+                if ($filter === null) {
+                    return $result;
+                }
+
+                /** @var Group $group */
+                foreach ($filter->getExpressions() as $group) {
+                    $current = array(
+                        'name' => $group->getName(),
+                        'groupOperator' => $group->getOperator(),
+                        'expressions' => array()
+                    );
+
+                    /** @var Expression $expression */
+                    foreach ($group->getExpressions() as $expression) {
+                        $current['operator'] = $expression->getOperator();
+                        $current['expressions'][] = array(
+                            'code' => $expression->getField(),
+                            'condition' => $expression->getCondition(),
+                            'type' => $expression->getValueType(),
+                            'value' => $expression->getValues(),
+                        );
+                    }
+
+                    $result['filters'][] = $current;
+                }
+
+                return $result;
+
+        } catch(\Exception $ex)
+        {
+            return $ex->getMessage();
         }
 
-        /** @var Group $group */
-        foreach ($filter->getExpressions() as $group) {
-            $current = array(
-                'name' => $group->getName(),
-                'groupOperator' => $group->getOperator(),
-                'expressions' => array()
-            );
-
-            /** @var Expression $expression */
-            foreach ($group->getExpressions() as $expression) {
-                $current['operator'] = $expression->getOperator();
-                $current['expressions'][] = array(
-                    'code' => $expression->getField(),
-                    'condition' => $expression->getCondition(),
-                    'type' => $expression->getValueType(),
-                    'value' => $expression->getValues(),
-                );
-            }
-
-            $result['filters'][] = $current;
-        }
-
-        return $result;
+        
     }
  }
 

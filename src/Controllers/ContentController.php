@@ -207,15 +207,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 $priceMonitorId = $requestData['priceMonitorId'];
 
             try {
-                
+
                 $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                     'filterType' => FilterType::EXPORT_PRODUCTS,
                     'priceMonitorId' => $priceMonitorId,
                     'productFilterRepo' => $productFilterRepo
                 ]);    
 
+                echo json_encode($filters);
+
             } catch(\Exception $ex)
             {
+                echo "Exception";
                 echo  $ex->getMessage();
 
             }
