@@ -212,6 +212,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'productFilterRepo' => $productFilterRepo
             ]);
 
+            echo json_encode($filters);
+
           return json_encode($filters);  
       }
  }
