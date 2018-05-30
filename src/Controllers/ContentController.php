@@ -206,7 +206,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             if($requestData != null)
                 $priceMonitorId = $requestData['priceMonitorId'];
 
-                $filter = $productFilterRepo->getFilterByContractIdAndType($contractId,$type);
+                $filter = $productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
                 $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                     'filterType' => FilterType::EXPORT_PRODUCTS,
