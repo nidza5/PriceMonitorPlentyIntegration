@@ -200,7 +200,7 @@ function showTabContent(evt, tabName) {
                 var dataResponse = jQuery.parseJSON( data );
 
                 console.log("data response");
-                console.log(dataResponse);
+                console.log(dataResponse.filters);
                 
             },
             error: function(xhr)
