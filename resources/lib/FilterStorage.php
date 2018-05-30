@@ -13,7 +13,7 @@ class FilterStorage implements FilterStorageInterface
     */
     private $productFilter;
 
-    public function __construct( ProductFilterRepository $productFilter)
+    public function __construct($productFilter)
     {
         $this->productFilter = $productFilter;
     }
@@ -42,7 +42,7 @@ class FilterStorage implements FilterStorageInterface
       */
      public function getFilter($contractId, $type)
      {
-         return ($this->productFilter !== null) ? $this->productFilter->serializedFilter : null;
+         return ($this->productFilter !== null) ? $this->productFilter['serializedFilter'] : null;
      }
 }
 
