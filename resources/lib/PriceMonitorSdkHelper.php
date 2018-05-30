@@ -11,6 +11,7 @@
  use Patagona\Pricemonitor\Core\Sync\Filter\Group;
  use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryType;
  use Patagona\Pricemonitor\Core\Sync\Filter\Expression;
+ use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
  class PriceMonitorSdkHelper
  {
@@ -46,7 +47,7 @@
 
     public static function getFilter($filterType, $pricemonitorId)
     {
-        ServiceRegister::registerFilterStorage(new FilterStorage());
+        ServiceRegister::registerFilterStorage(new FilterStorage(new ProductFilterRepository()));
 
         $result = array('type' => $filterType, 'filters' => array());
         $filterRepository = new FilterRepository();
