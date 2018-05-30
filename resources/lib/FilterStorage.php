@@ -8,6 +8,17 @@ use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 class FilterStorage implements FilterStorageInterface
 {
     /**
+    *
+    * @var ProductFilterRepository
+    */
+    private $productFilterRepository;
+
+    public function __construct(ProductFilterRepositoryContract $productFilterRepository)
+    {
+        $this->productFilterRepository = $productFilterRepository;
+    }
+
+    /**
      * Saves serialized filter.
      *
      * @param string $contractId Pricemonitor contract ID.
@@ -31,9 +42,7 @@ class FilterStorage implements FilterStorageInterface
       */
      public function getFilter($contractId, $type)
      {
-        $filterRepository = new ProductFilterRepository();
-
-         $filter = $filterRepository->getFilterByContractIdAndType($contractId,$type);
+         $filter = $this->$productFilterRepository->getFilterByContractIdAndType($contractId,$type);
 
          return ($filter !== null) ? $filter->serializedFilter : null;
      }

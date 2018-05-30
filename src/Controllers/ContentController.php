@@ -18,6 +18,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
  use Plenty\Modules\Market\Credentials\Contracts\CredentialsRepositoryContract;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
+ use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
  /**
   * Class ContentController
@@ -195,7 +197,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          return json_encode($contractInfo); 
       }
 
-      public function getFilters(Request $request) :string 
+      public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
       {
             $requestData = $request->all();
 
@@ -206,7 +208,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                 'filterType' => FilterType::EXPORT_PRODUCTS,
-                'priceMonitorId' => $priceMonitorId
+                'priceMonitorId' => $priceMonitorId,
+                'productFilterRepo' => $productFilterRepo
             ]);
 
           return json_encode($filters);  
