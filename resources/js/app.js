@@ -196,6 +196,11 @@ function showTabContent(evt, tabName) {
 
                 if(data == null) 
                     return;
+
+                var dataResponse = jQuery.parseJSON( data );
+
+                console.log("data response");
+                console.log(dataResponse);
                 
             },
             error: function(xhr)
@@ -203,4 +208,13 @@ function showTabContent(evt, tabName) {
                 console.log(xhr);
             }
         });
+    }
+
+
+
+    function createFiltersForm(responseData) {
+
+
+
+
     }
