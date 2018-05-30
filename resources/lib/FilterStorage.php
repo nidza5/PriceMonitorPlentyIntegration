@@ -1,13 +1,12 @@
 <?php
 
-namespace PriceMonitorPlentyIntegration\lib;
 
-use Patagona\Pricemonitor\Core\Interfaces\FilterStorage;
+use Patagona\Pricemonitor\Core\Interfaces\FilterStorage as FilterStorageInterface;
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
-class FilterStorage implements FilterStorage
+class FilterStorage implements FilterStorageInterface
 {
     /**
     *
