@@ -13,7 +13,7 @@ class FilterStorage implements FilterStorageInterface
     */
     private $productFilter;
 
-    public function __construct($productFilter)
+    public function __construct( ProductFilterRepository $productFilter)
     {
         $this->productFilter = $productFilter;
     }
