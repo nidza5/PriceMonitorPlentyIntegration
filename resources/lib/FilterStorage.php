@@ -1,5 +1,7 @@
 <?php
 
+namespace PriceMonitorPlentyIntegration\lib;
+
 use Patagona\Pricemonitor\Core\Interfaces\FilterStorage;
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
