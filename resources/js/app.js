@@ -447,7 +447,7 @@ function showTabContent(evt, tabName) {
             );
         }
 
-        return '<div class="filterable-dropdown-wrapper input-wrapper">' +
+        return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
             '<input type="text" ' +
             'class="pricemonitor-filterable-dropdown ' +
             (savedAttribute && savedAttribute.hasOwnProperty('label') ?
@@ -473,7 +473,7 @@ function showTabContent(evt, tabName) {
             dropdownInnerHtml +
             '</ul>' +
             '</div>' +
-            '<div class="input-wrapper">' +
+            '<div class="input-wrapper col-sm-3">' +
             '<select class="' +  (savedAttribute ? "pricemonitor-form-field" : "" ) + '" ' +
             'name="' +
             parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
@@ -483,7 +483,7 @@ function showTabContent(evt, tabName) {
             createConditionOptionsForExpressionsAttributeType(expression) +
             '</select>' +
             '</div>' +
-            '<div class="input-wrapper">' +
+            '<div class="input-wrapper col-sm-3">' +
             createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
             '</div>'
     }
