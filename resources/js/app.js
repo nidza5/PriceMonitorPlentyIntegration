@@ -666,3 +666,10 @@ function showTabContent(evt, tabName) {
 
         return selectInnerHtml;
     }
+
+    function isNumericOrDateAttribute(expression)
+    {
+        return expression['type'].indexOf('integer') >= 0 ||
+            expression['type'].indexOf('DateTime') >= 0 ||
+            expression['type'].indexOf('double') >= 0;
+    }
