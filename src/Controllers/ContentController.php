@@ -20,6 +20,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
  use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+ use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
 
  /**
   * Class ContentController
@@ -59,18 +60,25 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $productFilterRepo;
 
+           /**
+         *
+         * @var AttributeRepositoryContract
+         */
+        private $attributeRepository;
+
 
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,AttributeRepositoryContract $attributeRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;        
-        $this->productFilterRepo = $productFilterRepo;        
+        $this->productFilterRepo = $productFilterRepo;   
+        $this->attributeRepository = $attributeRepository;     
     }
     
      public function home(Twig $twig) : string
@@ -150,6 +158,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);
  
           //  echo json_encode($stores);
+
+          $attributes = $this->salesPriceRepository->all();
+
+          echo json_encode($attributes);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
