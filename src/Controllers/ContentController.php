@@ -131,7 +131,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
             $originalContracts = $contractRepo->getContracts(); 
 
-            echo json_encode($originalContracts);
+            // echo json_encode($originalContracts);
 
         } catch(\Exception $ex) {
 
