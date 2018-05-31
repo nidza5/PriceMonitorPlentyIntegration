@@ -142,7 +142,7 @@ html, body { height: 100%; width: 100%; margin: 0; }
 
 /******    */
 
-
+/* 
 .pricemonitor-hidden {
     display: none;
 }
@@ -466,4 +466,4 @@ section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-drop
 }
 section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-dropdown-wrapper input {
     width: 100%;
-}
+} */
