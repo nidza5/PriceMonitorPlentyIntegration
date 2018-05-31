@@ -208,7 +208,7 @@ function showTabContent(evt, tabName) {
     var dropdownInnerHtml = "";
     var addedAttributeDropdownsFieldNameValues = []; 
     var template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
-    var parentTemplateId = document.getElementById("pricemonitor-product-selection");
+    var parentTemplateId = "pricemonitor-product-selection";
     var attributesCache = {};
     var specificSystemAttributes = {};
     var  addedDateFieldID = null;
