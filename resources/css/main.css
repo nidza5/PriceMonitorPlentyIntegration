@@ -139,3 +139,331 @@ html, body { height: 100%; width: 100%; margin: 0; }
 #sectionItemSelection {
     margin-top:5%;
 }
+
+/******    */
+
+
+.pricemonitor-hidden {
+    display: none;
+}
+.pricemonitor-filter-groups-wrapper .pricemonitor-price-selection-single-group-wrapper:first-child > .form-row select,
+.pricemonitor-filter-groups-wrapper .pricemonitor-product-selection-single-group-wrapper:first-child > .form-row select,
+.pricemonitor-filter-groups-wrapper .form-row:first-child + .pricemonitor-price-selection-single-group-wrapper > .form-row select,
+.pricemonitor-filter-groups-wrapper .form-row:first-child + .pricemonitor-product-selection-single-group-wrapper > .form-row select {
+    pointer-events: none;
+    visibility: hidden;
+    padding: 0;
+    margin: 0;
+    width: 0;
+    height: 0;
+    border: none;
+    position: absolute;
+}
+
+
+
+form .form-row :focus {
+    border: 1px solid #f77c16;
+}
+
+#attributes-mapping-custom-tags .form-row .filterable-dropdown-wrapper {
+    margin: 0 10px;
+    position: relative;
+}
+
+.filterable-dropdown-wrapper,
+.filterable-dropdown-wrapper input {
+    font-size: 12px;
+}
+
+section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-dropdown-wrapper input {
+    width: 100%;
+}
+
+#pricemonitor-product-selection-submit,
+#pricemonitor-price-selection-submit {
+    margin-left: 5px;
+}
+.pricemonitor-product-selection-single-group,
+.pricemonitor-price-selection-single-group {
+    margin-bottom: 10px;
+}
+.pricemonitor-product-selection-single-group h3,
+.pricemonitor-price-selection-single-group h3 {
+    padding: 5px 8px;
+    font-size: 1em;
+    line-height: 18px;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    background: rgba(235, 94, 0, 0.2);
+}
+.pricemonitor-product-selection-single-group,
+.pricemonitor-price-selection-single-group {
+    border: 1px solid #eb5e00;
+    border-radius: 5px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-bottom: 7px;
+}
+.pricemonitor-product-selection-single-group .form-row,
+.pricemonitor-price-selection-single-group .form-row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.pricemonitor-product-selection-single-group .pricemonitor-product-selectionremove-group,
+.pricemonitor-price-selection-single-group .pricemonitor-price-selectionremove-group{
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #253033;
+}
+.pricemonitor-product-selection-single-group .form-row:nth-child(2),
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) {
+    justify-content: flex-end;
+    padding: 5px 15px;
+}
+.pricemonitor-product-selection-single-group .form-row:nth-child(2) label,
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) label,
+.pricemonitor-product-selection-single-group .form-row:nth-child(2) select,
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) select{
+    width: auto;
+    display: inline-block;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper {
+    padding-right: 10px;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper select,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper select{
+    width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression{
+    width: 35px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 14px;
+    flex: 0 55px;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+}
+.pricemonitor-contract-main section#pricemonitor-product-selection .form-row .input-wrapper,
+.pricemonitor-contract-main section#pricemonitor-price-selection .form-row .input-wrapper {
+    max-width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression {
+    line-height: 11px;
+    padding-top: 4px;
+}
+
+#pricemonitor-product-selection-filters-preview {
+    min-height: 340px;
+}
+#pricemonitor-product-selection-filters-preview fieldset {
+    min-height: 345px;
+}
+#pricemonitor-product-selection-filters-preview table {
+    table-layout: fixed;
+}
+#pricemonitor-product-selection-filters-preview table tbody td,
+#pricemonitor-product-selection-filters-preview table tbody td span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pricemonitor-filter-groups-wrapper > .form-row:last-child {
+    justify-content: flex-end;
+    margin-left: -15px;
+    margin-right: 0;
+}
+
+.pricemonitor-product-selection-single-group,
+.pricemonitor-price-selection-single-group {
+    margin-bottom: 10px;
+}
+.pricemonitor-product-selection-single-group h3,
+.pricemonitor-price-selection-single-group h3 {
+    padding: 5px 8px;
+    font-size: 1em;
+    line-height: 18px;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    background: rgba(235, 94, 0, 0.2);
+}
+.pricemonitor-product-selection-single-group,
+.pricemonitor-price-selection-single-group {
+    border: 1px solid #eb5e00;
+    border-radius: 5px;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-bottom: 7px;
+}
+.pricemonitor-product-selection-single-group .form-row,
+.pricemonitor-price-selection-single-group .form-row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.pricemonitor-product-selection-single-group .pricemonitor-product-selectionremove-group,
+.pricemonitor-price-selection-single-group .pricemonitor-price-selectionremove-group{
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #253033;
+}
+.pricemonitor-product-selection-single-group .form-row:nth-child(2),
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) {
+    justify-content: flex-end;
+    padding: 5px 15px;
+}
+.pricemonitor-product-selection-single-group .form-row:nth-child(2) label,
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) label,
+.pricemonitor-product-selection-single-group .form-row:nth-child(2) select,
+.pricemonitor-price-selection-single-group .form-row:nth-child(2) select{
+    width: auto;
+    display: inline-block;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper {
+    padding-right: 10px;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper select,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper select{
+    width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-remove-expression,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression{
+    width: 35px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 14px;
+    flex: 0 55px;
+    box-sizing: border-box;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pricemonitor-contract-main section#pricemonitor-product-selection .form-row .input-wrapper,
+.pricemonitor-contract-main section#pricemonitor-price-selection .form-row .input-wrapper {
+    max-width: 100%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .pricemonitor-product-selection-add-expression,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .pricemonitor-price-selection-add-expression {
+    line-height: 11px;
+    padding-top: 4px;
+}
+
+.pricemonitor-product-selection-single-group .pricemonitor-product-selectionremove-group,
+.pricemonitor-price-selection-single-group .pricemonitor-price-selectionremove-group{
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #253033;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper {
+    position: relative;
+    display: block;
+    width: 65%;
+    white-space: nowrap;
+    max-width: 300px;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper {
+    padding-right: 10px;
+    position: relative;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper:last-child {
+    padding-right: 0;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper input,
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper select {
+    width: 100%;
+}
+
+.input-wrapper input,
+.input-wrapper select,
+.form-row input,
+.form-row select {
+    border: 1px solid #a9a9a9;
+    height: 20px;
+    line-height: 20px;
+    color: #2f2f2f;
+}
+
+.input-wrapper input,
+.form-row input {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.input-wrapper input:disabled,
+.input-wrapper select:disabled,
+.input-wrapper input[readonly],
+.input-wrapper select[readonly] {
+    opacity: 0.6;
+    background: #ffffff;
+}
+
+.pricemonitor-contract-main section .form-row .multiple-third .input-wrapper ul.pricemonitor-filterable-list {
+    min-width: 250px;
+    width: auto;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper input,
+.pricemonitor-contract-main section .form-row .input-wrapper select {
+    width: 90%;
+}
+
+.pricemonitor-contract-main section .form-row .input-wrapper input.small-input {
+    width: 50%;
+}
+
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper {
+    padding-right: 10px;
+}
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper input,
+.pricemonitor-contract-main .pricemonitor-product-selection-single-group .form-row .input-wrapper select,
+.pricemonitor-contract-main .pricemonitor-price-selection-single-group .form-row .input-wrapper select{
+    width: 100%;
+}
+.pricemonitor-contract-main section#pricemonitor-product-selection .form-row .input-wrapper,
+.pricemonitor-contract-main section#pricemonitor-price-selection .form-row .input-wrapper {
+    max-width: 100%;
+}
+section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-dropdown-wrapper input {
+    width: 100%;
+}
