@@ -448,44 +448,44 @@ function showTabContent(evt, tabName) {
         }
 
         return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
-            '<input type="text" ' +
-            'class="pricemonitor-filterable-dropdown ' +
-            (savedAttribute && savedAttribute.hasOwnProperty('label') ?
-                "pricemonitor-form-field" : "") + '" ' +
-            'name="' + expressionFormFieldValue + '" ' +
-            'id="' + expressionFormFieldValue + '" ' +
-            'autocomplete="off" ' +
-            'value="' +
-            (savedAttribute && savedAttribute.hasOwnProperty('label') ? savedAttribute['label'] : "")
-            + '" ' +
-            (savedAttribute ? "readonly disabled" : "") + ' ' +
-            'required' +
-            '/>' +
-            '<input type="hidden" ' +
-            'class="' + (savedAttribute && savedAttribute.hasOwnProperty('code') ?
-                "pricemonitor-form-field" : "") + '" ' +
-            'name="' + expressionFormFieldName + '" ' +
-            'id="' + expressionFormFieldName + '" ' +
-            'value="' + (savedAttribute ? savedAttribute['code'] : "") + '" ' +
-            'required' +
-            '/>' +
-            '<ul class="pricemonitor-filterable-list ' + parentTemplateId + '-all-attributes">' +
-            dropdownInnerHtml +
-            '</ul>' +
-            '</div>' +
-            '<div class="input-wrapper col-sm-3">' +
-            '<select class="' +  (savedAttribute ? "pricemonitor-form-field" : "" ) + '" ' +
-            'name="' +
-            parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
-            ' required ' +
-            (savedAttribute ? ' disabled' : '') +
-            '>' +
-            createConditionOptionsForExpressionsAttributeType(expression) +
-            '</select>' +
-            '</div>' +
-            '<div class="input-wrapper col-sm-3">' +
-            createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
-            '</div>'
+                    '<input type="text" ' +
+                        'class="pricemonitor-filterable-dropdown form-control ' +
+                        (savedAttribute && savedAttribute.hasOwnProperty('label') ?
+                        "pricemonitor-form-field" : "") + '" ' +
+                        'name="' + expressionFormFieldValue + '" ' +
+                        'id="' + expressionFormFieldValue + '" ' +
+                        'autocomplete="off" ' +
+                        'value="' +
+                        (savedAttribute && savedAttribute.hasOwnProperty('label') ? savedAttribute['label'] : "")
+                        + '" ' +
+                        (savedAttribute ? "readonly disabled" : "") + ' ' +
+                        'required' +
+                    '/>' +
+                    '<input type="hidden" ' +
+                        'class="' + (savedAttribute && savedAttribute.hasOwnProperty('code') ?
+                        "pricemonitor-form-field" : "") + '" ' +
+                        'name="' + expressionFormFieldName + '" ' +
+                        'id="' + expressionFormFieldName + '" ' +
+                        'value="' + (savedAttribute ? savedAttribute['code'] : "") + '" ' +
+                        'required' +
+                    '/>' +
+                    '<ul class="pricemonitor-filterable-list ' + parentTemplateId + '-all-attributes">' +
+                        dropdownInnerHtml +
+                    '</ul>' +
+                '</div>' +
+                '<div class="input-wrapper col-sm-3">' +
+                    '<select class="' +  (savedAttribute ? "pricemonitor-form-field" : "" ) + ' form-control" ' +
+                        'name="' +
+                         parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
+                         ' required ' +
+                         (savedAttribute ? ' disabled' : '') +
+                     '>' +
+                        createConditionOptionsForExpressionsAttributeType(expression) +
+                    '</select>' +
+                '</div>' +
+                '<div class="input-wrapper col-sm-3">' +
+                    createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
+                '</div>'
     }
 
       /**
@@ -625,7 +625,7 @@ function showTabContent(evt, tabName) {
 
         return '<input name="' + valueFieldName +'" ' +
             'id="' + valueFieldName + '" '+
-            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + '" ' +
+            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control" ' +
             'value="' + (expression.value[0] ? expression.value[0] : '')  +'" ' +
             'type="' + type + '"' +
             ' autocomplete="off" ' +
