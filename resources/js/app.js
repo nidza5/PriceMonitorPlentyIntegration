@@ -709,7 +709,8 @@ function showTabContent(evt, tabName) {
 
         var newExpression = {
                 'code': expressionAttrCode,
-                'type': attributesCache[expressionAttrCode]['type'],
+                // 'type': attributesCache[expressionAttrCode]['type'],
+                'type': 'text',
                 'value': expressionValue,
                 'condition': expressionCondition
             },
