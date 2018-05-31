@@ -212,6 +212,7 @@ function showTabContent(evt, tabName) {
     var attributesCache = {};
     var specificSystemAttributes = {};
     var  addedDateFieldID = null;
+    var formName = "pricemonitorProductSelection";
 
 
     function createFiltersForm(responseData) {
@@ -273,8 +274,8 @@ function showTabContent(evt, tabName) {
         // After the template is rendered append event handlers.
         initializeAllFilterableDropdowns();
 
-        // After form is rendered append callbacks on all needed buttons.
-        // appendCallbacksOnAddExpressionButtons();
+       // After form is rendered append callbacks on all needed buttons.
+        appendCallbacksOnAddExpressionButtons();
         // appendCallbacksOnRemoveExpressionButtons();
         // appendCallbacksOnAddGroupButtons();
         // appendCallbacksOnRemoveGroupButtons();
@@ -672,4 +673,144 @@ function showTabContent(evt, tabName) {
         return expression['type'].indexOf('integer') >= 0 ||
             expression['type'].indexOf('DateTime') >= 0 ||
             expression['type'].indexOf('double') >= 0;
+    }
+
+    function appendCallbacksOnAddExpressionButtons()
+    {
+        var allAddButtons = document[formName].getElementsByClassName(
+            parentTemplateId + '-add-expression'
+        );
+
+        for (var i = 0; i < allAddButtons.length; i++) {
+            allAddButtons[i].addEventListener('click', addNewExpression);
+        }
+    }
+
+    function addNewExpression(event)
+    {
+        var groupAndExpressionIndex = getGroupAndExpressionIndex(event.target.id),
+            groupIndex = groupAndExpressionIndex['groupIndex'],
+            expressionIndex = groupAndExpressionIndex['expressionIndex'],
+            expressionAttrCodeFieldName =
+                parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex,
+            expressionAttrValueFieldName =
+                parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
+            expressionValueFieldName =
+                parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
+            expressionConditionFieldName =
+                parentTemplateId + 'ExpressionCondition_' +groupIndex+ '-' +expressionIndex,
+            expressionAttrCode = document[formName][expressionAttrCodeFieldName].value,
+            expressionValue = [document[formName][expressionValueFieldName].value],
+            expressionCondition = document[formName][expressionConditionFieldName ].value;
+
+        // if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition)) {
+        //     return;
+        // }
+
+        var newExpression = {
+                'code': expressionAttrCode,
+                'type': attributesCache[expressionAttrCode]['type'],
+                'value': expressionValue,
+                'condition': expressionCondition
+            },
+            filterRow = event.target.parentNode,
+            removeButtonId =
+                parentTemplateId + 'RemoveExpression_' + groupIndex + '-' + expressionIndex;
+
+        filterRow.innerHTML = createSavedExpressionRowHTML(
+            newExpression,
+            groupIndex,
+            expressionIndex,
+            removeButtonId
+        );
+
+        appendAddNewExpressionRowOnFilterRow(filterRow.parentNode, groupIndex, expressionIndex);
+        initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex);
+        document.getElementById(removeButtonId).addEventListener('click', removeExpression);
+
+        function isValidForm()
+        {
+            removeValidationErrors();
+
+            if (!expressionAttrCode || expressionAttrCode === '') {
+                document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+                return false;
+            }
+
+            if (!expressionCondition || expressionCondition === '') {
+                document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
+                return false;
+            }
+
+            if (expressionValue.length === 0 ||
+                !isValidValueForExpressionAttrType(expressionAttrCode, expressionValue)
+            ) {
+                document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+                return false;
+            }
+
+            return true;
+        }
+
+        function removeValidationErrors()
+        {
+            document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
+            document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
+            document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
+        }
+    }
+
+    function getGroupAndExpressionIndex(fieldIdentifier)
+    {
+        var nameParts = fieldIdentifier.split('_'),
+            expressionAndGroupIndex = nameParts[nameParts.length - 1].split('-');
+
+        return {
+            'groupIndex': parseInt(expressionAndGroupIndex[0]),
+            'expressionIndex': expressionAndGroupIndex[1] ? parseInt(expressionAndGroupIndex[1]) : null
+        }
+    }
+
+    function createSavedExpressionRowHTML(expression, groupIndex, expressionIndex, removeButtonId)
+    {
+        return createFilterRow(expression, groupIndex, expressionIndex) +
+            '<button class="' + parentTemplateId + '-remove-expression" ' +
+            'id="' + removeButtonId + '">' +
+            '-' +
+            '</button>';
+    }
+
+    function appendAddNewExpressionRowOnFilterRow(filterRowParent, groupIndex, expressionIndex)
+    {
+        var addNewExpressionRow = document.createElement('div'),
+            emptyExpression = {
+                'code': '',
+                'type': 'string',
+                'value': [],
+                'condition': 'equal'
+            },
+            addNewExpressionBtnId = parentTemplateId + 'AddExpression_' + groupIndex + '-' +
+                (expressionIndex + 1);
+
+        addNewExpressionRow.classList.add('form-row');
+        addNewExpressionRow.innerHTML =
+            createFilterRow(emptyExpression, groupIndex, (expressionIndex + 1)) +
+            '<button class="' + parentTemplateId +'-add-expression" ' +
+            'id="' + addNewExpressionBtnId + '">' +
+            '+' +
+            '</button>';
+
+        filterRowParent.appendChild(addNewExpressionRow);
+        document.getElementById(addNewExpressionBtnId).addEventListener('click', addNewExpression);
+    }
+
+    function initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex)
+    {
+        var dropdownFieldName =
+            parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + (expressionIndex + 1);
+
+        Pricemonitor['filterableDropDown']['initDropdown'](
+            '',
+            document[formName][dropdownFieldName]
+        );
     }
