@@ -159,7 +159,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  
           //  echo json_encode($stores);
 
-          $attributes = $this->salesPriceRepository->all();
+          $attributesRepo = pluginApp(AttributeRepositoryContract::class);
+
+          $authHelperAttr = pluginApp(AuthHelper::class);
+
+          $attributes = null;
+
+          $attributes = $authHelperAttr->processUnguarded(
+            function () use ($attributesRepo, $attributes) {
+            
+                return $attributesRepo->all();
+            }
+        );
 
           echo json_encode($attributes);
 
