@@ -94,6 +94,9 @@ $(document).ready(function() {
 
     // Get the element with id="defaultOpen" and click on it
       document.getElementById("defaultOpen").click(); 
+
+      document.getElementById("tabItemSelection").addEventListener("click", getFilter);
+      
   });
 
 function expandCollapseMenu(el) {
