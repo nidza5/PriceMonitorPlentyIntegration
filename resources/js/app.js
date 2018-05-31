@@ -863,7 +863,7 @@ function showTabContent(evt, tabName) {
 
         var formRow = document.createElement('div');
         formRow.classList.add('form-row');
-        formRow.innerHTML = '<button class="' + parentTemplateId + 'add-new-group-button" ' +
+        formRow.innerHTML = '<button class="' + parentTemplateId + 'add-new-group-button btn btn-info" ' +
                                 'id="' + parentTemplateId +'addNewGroup_' + allGroups.length + '">' +
                                 'Add group' +
                             '</button>';
