@@ -210,6 +210,8 @@ function showTabContent(evt, tabName) {
     var template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
     var parentTemplateId = document.getElementById("pricemonitor-product-selection");
     var attributesCache = {};
+    var specificSystemAttributes = {};
+    var  addedDateFieldID = null;
 
 
     function createFiltersForm(responseData) {
@@ -480,4 +482,187 @@ function showTabContent(evt, tabName) {
             '<div class="input-wrapper">' +
             createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
             '</div>'
+    }
+
+      /**
+         * Creates conditions options for expression attribute type as string representing HTML.
+         *
+         * @param expression
+         * @returns {string}
+         */
+        function createConditionOptionsForExpressionsAttributeType(expression)
+        {
+
+            var options = getOptionsForExpressionType(expression),
+                optionsHtml = '',
+                conditionTranslationCodes = getConditionCodeTranslationMap();
+
+            for (var i = 0; i < options.length; i++) {
+                optionsHtml +=
+                    '<option value="' + options[i] + '" ' +
+                            (expression.condition === options[i] ? 'selected ' : '' ) +
+                            'class="' + parentTemplateId + '-condition-option">' +
+                            conditionTranslationCodes[options[i]] +
+                    '</option>'
+            }
+
+            return optionsHtml;
+        }
+
+    function getOptionsForExpressionType(expression)
+    {
+        if (specificSystemAttributes.hasOwnProperty(expression['code'])) {
+            // If attribute is specific, and has expressions set in configuration then logic for getting
+            // conditions will not be executed and conditions from configuration will be returned.
+            return specificSystemAttributes[expression['code']]['conditions'];
+        }
+
+        // By default options fo text field are loaded.
+        var options = ['equal', 'not_equal', 'contains', 'contains_not'];
+
+        if (hasPredefinedValues(expression)) {
+            options = ['equal', 'not_equal'];
+        } else if (isNumericOrDateAttribute(expression)) {
+            options = [
+                'equal',
+                'not_equal',
+                'greater_than',
+                'less_than',
+                'greater_or_equal',
+                'less_or_equal'
+            ];
+        } else if (expression['type'].indexOf('boolean') >= 0) {
+            options = ['equal', 'not_equal'];
+        }
+
+        return options;
+    }
+
+    function hasPredefinedValues(expression)
+    {
+        return (attributesCache.hasOwnProperty(expression['code']) &&
+            attributesCache[expression['code']].hasOwnProperty('options') &&
+            attributesCache[expression['code']]['options'].length > 0) ||
+            expression['type'].indexOf('[]') >= 0;
+    }
+
+    function getConditionCodeTranslationMap()
+    {
+        return {
+            'equal': 'Equal',
+            'not_equal': 'Not equal',
+            'greater_than': 'Greater than',
+            'less_than': 'Less than',
+            'greater_or_equal': 'Greater or equal',
+            'less_or_equal': 'Less or equal',
+            'contains': 'Contains',
+            'contains_not': 'Contains not'
+        };
+    }
+
+/**
+     * Creates value field for selected attribute type.
+     *
+     * @param expression
+     * @param groupIndex
+     * @param expressionIndex
+     *
+     * @returns string  Created value field as HTML
+     */
+    function createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex)
+    {
+        // Added date field should be reset when creating values field.
+        addedDateFieldID = null;
+
+        var valueFieldName =
+                parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
+            possibleFieldValues = getPossibleFieldValues(expression);
+
+        if (!hasPredefinedValues(expression)) {
+            return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
+        }
+
+        return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+    }
+
+    function getPossibleFieldValues(expression)
+    {
+        var possibleFieldValues = [],
+            attributeCode = expression['code'];
+
+        if (expression['type'] === 'boolean') {
+            possibleFieldValues = [
+                {'label': 'Yes', 'value': 1},
+                {'label': 'No', 'value': 0}
+            ];
+        } else if (attributesCache.hasOwnProperty(attributeCode) &&
+            attributesCache[attributeCode].hasOwnProperty('options')) {
+            possibleFieldValues = attributesCache[attributeCode]['options'];
+        }
+
+        return possibleFieldValues;
+    }
+
+    function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
+    {
+        var type = 'text';
+
+        if (expression['type'] === 'integer' || expression['type'] === 'double') {
+            type = 'number';
+        } else if (expression['type'] === 'DateTime') {
+            if (expression.value.length === 0) {
+                // Only for new filter rows date control should be loaded. When filter is already saved
+                // input with date is all that is needed because date is not editable.
+                addedDateFieldID = valueFieldName;
+            } else {
+                expression.value = [createDateForView(expression.value[0])];
+            }
+        }
+
+        return '<input name="' + valueFieldName +'" ' +
+            'id="' + valueFieldName + '" '+
+            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + '" ' +
+            'value="' + (expression.value[0] ? expression.value[0] : '')  +'" ' +
+            'type="' + type + '"' +
+            ' autocomplete="off" ' +
+            (expression.type === "double" ? 'step="0.1" ' : '') +
+            (expression.value.length > 0 ? " readonly disabled" : "") + '>';
+    }
+
+    function createDateForView(dateISOString)
+    {
+        var dateParts = dateISOString.split('-');
+
+        if (dateParts.length === 3) {
+            var day = dateParts[2],
+                month = dateParts[1],
+                year = dateParts[0];
+
+            return day + '/' + month + '/' + year;
+        }
+
+        return dateISOString;
+    }
+
+    function createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues)
+    {
+        var selectInnerHtml = '';
+
+        selectInnerHtml += '<select ' +
+            'name="' + valueFieldName + '" ' +
+            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + '" ' +
+            (expression.value.length > 0 ? " disabled" : "") + '>';
+
+        for (var i = 0; i < possibleFieldValues.length; i++) {
+            selectInnerHtml +=
+                '<option value="' + possibleFieldValues[i].value + '"' +
+                (expression.value.indexOf(String(possibleFieldValues[i].value)) >= 0 ? ' selected' : '') +
+                '>' +
+                possibleFieldValues[i].label +
+                '</option>';
+        }
+
+        selectInnerHtml += '</select>';
+
+        return selectInnerHtml;
     }
