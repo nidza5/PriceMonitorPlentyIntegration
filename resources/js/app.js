@@ -778,9 +778,9 @@ function showTabContent(evt, tabName) {
     function createSavedExpressionRowHTML(expression, groupIndex, expressionIndex, removeButtonId)
     {
         return createFilterRow(expression, groupIndex, expressionIndex) +
-            '<button class="' + parentTemplateId + '-remove-expression" ' +
+            '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
             'id="' + removeButtonId + '">' +
-            '-' +
+            'x' +
             '</button>';
     }
 
