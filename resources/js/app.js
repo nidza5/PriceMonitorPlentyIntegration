@@ -313,7 +313,7 @@ function showTabContent(evt, tabName) {
     function generateAddGroupButton()
     {
         return '<div class="form-row">' +
-            '<button class="' + parentTemplateId + 'add-new-group-button" ' +
+            '<button class="' + parentTemplateId + 'add-new-group-button btn btn-info" ' +
             'id="' + parentTemplateId +'addNewGroup_' + allGroups.length + '">' +
                'Add group' +
             '</button>' +
@@ -356,7 +356,7 @@ function showTabContent(evt, tabName) {
      function generateGroupFormRowWithoutSavedValues(groupOperatorDisabled, groupIndex)
         {
             return '<div class="form-row">' +
-                '<select class="' + (groupOperatorDisabled ? "pricemonitor-form-field" : "") + ' form-control " ' +
+                '<select style="margin-bottom:2%;" class="' + (groupOperatorDisabled ? "pricemonitor-form-field" : "") + ' form-control col-sm-3" ' +
                 (groupOperatorDisabled ? 'disabled ' : '') +
                 'name="' + parentTemplateId + 'GroupOperator_' + groupIndex + '" ' +
                 ' required/>' +
