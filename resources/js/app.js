@@ -1,4 +1,5 @@
 
+var Pricemonitor = Pricemonitor || {};
 toastr.options = {
   "closeButton": true,
   "debug": false,
@@ -16,7 +17,6 @@ toastr.options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 }
-
 
 function showTabContentContent(evt, nameTab,el) {
     var i, tabcontent, tablinks;
@@ -276,7 +276,7 @@ function showTabContent(evt, tabName) {
 
        // After form is rendered append callbacks on all needed buttons.
         appendCallbacksOnAddExpressionButtons();
-        // appendCallbacksOnRemoveExpressionButtons();
+        appendCallbacksOnRemoveExpressionButtons();
         // appendCallbacksOnAddGroupButtons();
         // appendCallbacksOnRemoveGroupButtons();
 
@@ -815,3 +815,22 @@ function showTabContent(evt, tabName) {
         //     document[formName][dropdownFieldName]
         // );
     }
+
+    function appendCallbacksOnRemoveExpressionButtons()
+    {
+        var allRemoveButtons = document[formName].getElementsByClassName(
+            parentTemplateId + '-remove-expression'
+        );
+
+        for (var i = 0; i < allRemoveButtons.length; i++) {
+            var removeButton = allRemoveButtons[i];
+            removeButton.addEventListener('click', removeExpression);
+        }
+    }
+
+    function removeExpression(event)
+    {
+        var filterRowForRemove = event.target.parentNode;
+        filterRowForRemove.parentNode.removeChild(filterRowForRemove);
+    }
+
