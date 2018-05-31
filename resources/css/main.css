@@ -195,7 +195,7 @@ section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-drop
     line-height: 18px;
     border-radius: 5px 5px 0 0;
     position: relative;
-    background: rgba(235, 94, 0, 0.2);
+    background: powderblue;
 }
 .pricemonitor-product-selection-single-group,
 .pricemonitor-price-selection-single-group {
