@@ -277,8 +277,8 @@ function showTabContent(evt, tabName) {
        // After form is rendered append callbacks on all needed buttons.
         appendCallbacksOnAddExpressionButtons();
         appendCallbacksOnRemoveExpressionButtons();
-        // appendCallbacksOnAddGroupButtons();
-        // appendCallbacksOnRemoveGroupButtons();
+        appendCallbacksOnAddGroupButtons();
+        appendCallbacksOnRemoveGroupButtons();
 
         // var submitButton = document.getElementById(parentTemplateId + '-submit'),
         //     previewButton = document.getElementById(parentTemplateId + '-preview');
@@ -834,3 +834,114 @@ function showTabContent(evt, tabName) {
         filterRowForRemove.parentNode.removeChild(filterRowForRemove);
     }
 
+    function appendCallbacksOnAddGroupButtons()
+    {
+        var addGroupButtons =
+            document[formName].getElementsByClassName(parentTemplateId + 'add-new-group-button');
+
+        for (var i = 0; i < addGroupButtons.length; i++) {
+            addGroupButtons[i].addEventListener('click', addNewGroup);
+        }
+    }
+
+    function addNewGroup(event)
+    {
+        var groupIndex = getGroupAndExpressionIndex(event.target.id)['groupIndex'];
+
+        allGroups.push({'groupOperator': 'AND', 'operator': 'OR', 'expressions': []});
+        var newGroupWrapper = document.createElement('div');
+        newGroupWrapper.classList.add(parentTemplateId + '-single-group-wrapper');
+        newGroupWrapper.id = parentTemplateId + '-groupWrapper_' + groupIndex;
+        newGroupWrapper.innerHTML = createGroup(groupIndex, [], false);
+        var addGroupButton = event.target;
+        addGroupButton.parentNode.parentNode.removeChild(addGroupButton.parentNode);
+
+        template.appendChild(newGroupWrapper);
+
+        var formRow = document.createElement('div');
+        formRow.classList.add('form-row');
+        formRow.innerHTML = '<button class="' + parentTemplateId + 'add-new-group-button" ' +
+                                'id="' + parentTemplateId +'addNewGroup_' + allGroups.length + '">' +
+                                'Add group' +
+                            '</button>';
+
+        template.appendChild(formRow);
+
+        // Pricemonitor['filterableDropDown']['initDropdown'](
+        //     '',
+        //     document[formName][parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + 0]
+        // );
+
+        var addNewExpressionBtnId = parentTemplateId + 'AddExpression_' + groupIndex + '-' + 0,
+            addNewGroupBtnId = parentTemplateId +'addNewGroup_' + allGroups.length;
+
+        document.getElementById(addNewExpressionBtnId).addEventListener('click', addNewExpression);
+        document.getElementById(addNewGroupBtnId).addEventListener('click', addNewGroup);
+        appendCallbacksOnRemoveGroupButtons();
+    }
+
+    function appendCallbacksOnRemoveGroupButtons()
+    {
+        var removeGroupButtons =
+            document[formName].getElementsByClassName(parentTemplateId + 'remove-group');
+
+        for (var i = 0; i < removeGroupButtons.length; i++) {
+            var removeGroupButton = removeGroupButtons[i];
+            removeGroupButton.addEventListener('mouseup', removeGroupEventHandler);
+        }
+    }
+
+    function removeGroupEventHandler(event)
+    {
+        var allGroupWrappers =
+            document[formName].getElementsByClassName(parentTemplateId + '-single-group-wrapper');
+
+        if (allGroupWrappers.length === 1) {
+            // var messageModal = new Pricemonitor['modal']['MessageModalConstructor'](
+            //     Pricemonitor['utility']['translate'](
+            //         'Filter must have at least one group.'
+            //     )
+            // );
+
+            var messageModal = 'Filter must have at least one group.';
+
+            alert(messageModal);
+           // messageModal.open();
+            return;
+        }
+
+        // if (!isGroupEmpty()) {
+        //     var confirmationModal = new Pricemonitor['modal']['ConfirmationModalConstructor'](
+        //         Pricemonitor['utility']['translate'](
+        //             'There are expressions in this group. ' +
+        //             'Are you sure that you want to delete this group?'
+        //         ),
+        //         doGroupRemoval,
+        //         function() {
+        //             return false;
+        //         }
+        //     );
+
+        //     confirmationModal.open();
+        //     return;
+        // }
+
+        doGroupRemoval();
+
+        function isGroupEmpty()
+        {
+            var groupIndex = getGroupAndExpressionIndex(event.target.id)['groupIndex'],
+                targetGroup = document.getElementById(parentTemplateId + 'Group_' + groupIndex),
+                formRowsInTargetGroup = targetGroup.getElementsByClassName('form-row');
+
+            // Each group must have at least form row for group operator and for adding new
+            // expression
+            return formRowsInTargetGroup.length < 3;
+        }
+
+        function doGroupRemoval()
+        {
+            var groupForRemove = event.target.parentNode.parentNode.parentNode;
+            groupForRemove.parentNode.removeChild(groupForRemove);
+        }
+    }
