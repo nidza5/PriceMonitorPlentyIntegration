@@ -378,7 +378,7 @@ function showTabContent(evt, tabName) {
                 '</button>' +
                 '</h3>' +
                 '<div class="form-row">' +
-                '<label for="' + parentTemplateId + 'Operator_' + groupIndex + '">' +
+                '<label style="padding-right:1.5%;" for="' + parentTemplateId + 'Operator_' + groupIndex + '">' +
                 'Group type ' + '</label> ' +
                 '<select class="pricemonitor-form-field form-control" ' +
                 'name="' + parentTemplateId + 'Operator_' + groupIndex + '" ' +
