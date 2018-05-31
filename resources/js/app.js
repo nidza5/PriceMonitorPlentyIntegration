@@ -419,7 +419,7 @@ function showTabContent(evt, tabName) {
 
         return '<div class="form-row">' +
             createFilterRow(emptyExpression, groupIndex, groupExpressions.length) +
-            '<button class="' + parentTemplateId +'-add-expression" ' +
+            '<button style="height:33px;" class="' + parentTemplateId +'-add-expression  btn btn-success" ' +
             'id="' + parentTemplateId + 'AddExpression_' +  groupIndex + '-' +
             groupExpressions.length + '">' +
             '+' +
@@ -799,7 +799,7 @@ function showTabContent(evt, tabName) {
         addNewExpressionRow.classList.add('form-row');
         addNewExpressionRow.innerHTML =
             createFilterRow(emptyExpression, groupIndex, (expressionIndex + 1)) +
-            '<button class="' + parentTemplateId +'-add-expression" ' +
+            '<button style="height:33px;" class="' + parentTemplateId +'-add-expression btn btn-success " ' +
             'id="' + addNewExpressionBtnId + '">' +
             '+' +
             '</button>';
