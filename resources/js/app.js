@@ -379,7 +379,7 @@ function showTabContent(evt, tabName) {
                 '</h3>' +
                 '<div class="form-row">' +
                 '<label for="' + parentTemplateId + 'Operator_' + groupIndex + '">' +
-                'Group type ' + '</label>' +
+                'Group type ' + '</label> ' +
                 '<select class="pricemonitor-form-field form-control" ' +
                 'name="' + parentTemplateId + 'Operator_' + groupIndex + '" ' +
                 'id="' + parentTemplateId + 'Operator_' + groupIndex + '"' +
@@ -654,7 +654,7 @@ function showTabContent(evt, tabName) {
 
         selectInnerHtml += '<select ' +
             'name="' + valueFieldName + '" ' +
-            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control " ' +
+            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control col-sm-3 " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
 
         for (var i = 0; i < possibleFieldValues.length; i++) {
