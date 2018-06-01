@@ -174,18 +174,32 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $resultAttributes = $attributes->toArray();
 
-        $dataAttributes = array();    
-       
-        foreach($resultAttributes['entries'] as $att) 
+        $dataAttributes = array();
+
+        $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
+ 
+ 
+        foreach($systemAttr as $nonAttr)
         {
-            $arrNonSystemAttributes = array(
-                 "Id" => $att['id'],
-                 "Group" => "Non system attributes",
-                 "Name" => $att['backendName']
-            );
-            
-            $dataAttributes[] = $arrNonSystemAttributes;
-        }
+           $arrSystemAttributes = array(
+             "Id" => $nonAttr,
+             "Group" => "System attributes",
+             "Name" => $nonAttr
+        );       
+        
+             $dataAttributes[] = $arrSystemAttributes;
+        }        
+        
+         foreach($resultAttributes['entries'] as $att) 
+         {
+             $arrNonSystemAttributes = array(
+                  "Id" => $att['id'],
+                  "Group" => "Non system attributes",
+                  "Name" => $att['backendName']
+             );
+             
+             $dataAttributes[] = $arrNonSystemAttributes;
+         }
 
            echo json_encode($dataAttributes);
 
