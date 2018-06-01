@@ -238,12 +238,12 @@ function showTabContent(evt, tabName) {
                 console.log("attributeeees");
                 console.log(data);
 
-                var dataResult = null;
-                if(data != null)
-                    dataResult = jQuery.parseJSON(data);
+                // var dataResult = null;
+                // if(data != null)
+                //     dataResult = jQuery.parseJSON(data);
 
-                    console.log("parseed data");
-                    console.log(dataResult);
+                //     console.log("parseed data");
+                //     console.log(dataResult);
 
 
             },
