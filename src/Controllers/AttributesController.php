@@ -52,7 +52,44 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->sdkService = $sdkService;
         $this->attributeRepository = $attributeRepository;     
     }   
- 
+
+    public function getAttributes(Request $request) :string 
+    {
+
+        $attributesRepo = pluginApp(AttributeRepositoryContract::class);
+
+        $authHelperAttr = pluginApp(AuthHelper::class);
+        
+        $attributes = null;
+
+        $attributes = $authHelperAttr->processUnguarded(
+          function () use ($attributesRepo, $attributes) {
+          
+              return $attributesRepo->all();
+          }
+      );
+
+       $resultAttributes = $attributes->toArray();
+        
+       $dataAttributes = array();
+
+    
+       
+        foreach($resultAttributes['entries'] as $att) 
+        {
+            $arrNonSystemAttributes = array(
+                 "Id" => $att['id'],
+                 "Group" => "Non system attributes",
+                 "Name" => $att['backendName']
+            );
+            
+            $dataAttributes[] = $arrNonSystemAttributes;
+        }
+
+        echo json_encode($resultAttributes['entries']);
+
+        //return "OK";
+    }
 
  
  }
