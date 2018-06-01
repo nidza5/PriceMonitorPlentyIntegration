@@ -172,7 +172,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             }
         );
 
-          echo json_encode($attributes);
+        $resultAttributes = $attributes->toArray();
+
+          echo json_encode($resultAttributes);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
