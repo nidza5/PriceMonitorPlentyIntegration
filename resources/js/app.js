@@ -292,6 +292,9 @@ function showTabContent(evt, tabName) {
 
     function initializeAllFilterableDropdowns()
     {
+        $(".js-example-basic-single").select2({
+            width: '100%'
+         });
     }
 
     function generateAllGroupsFormFieldsHtml()
@@ -448,8 +451,8 @@ function showTabContent(evt, tabName) {
         }
 
         return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
-                    '<input type="text" ' +
-                        'class="pricemonitor-filterable-dropdown form-control ' +
+                    '<select ' +
+                        'class="pricemonitor-filterable-dropdown js-example-basic-single ' +
                         (savedAttribute && savedAttribute.hasOwnProperty('label') ?
                         "pricemonitor-form-field" : "") + '" ' +
                         'name="' + expressionFormFieldValue + '" ' +
@@ -460,7 +463,12 @@ function showTabContent(evt, tabName) {
                         + '" ' +
                         (savedAttribute ? "readonly disabled" : "") + ' ' +
                         'required' +
-                    '/>' +
+                    '/>' +  
+                        '<optgroup label="system attributes">' +
+                             '<option>GTIN</option>' +
+                             '<option>Variation name</option>' +
+                        '</optgroup>' +
+                    '</select>' +
                     '<input type="hidden" ' +
                         'class="' + (savedAttribute && savedAttribute.hasOwnProperty('code') ?
                         "pricemonitor-form-field" : "") + '" ' +
