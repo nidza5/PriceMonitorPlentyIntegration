@@ -271,22 +271,22 @@ function showTabContent(evt, tabName) {
     function generateAllAttributesCacheAndDropdownInnerHtml(allAttributes) {
         var dropdownInnerHtml = '';
 
-        for (var k in dataResult){
+        for (var k in allAttributes){
             if (dataResult.hasOwnProperty(k)) {
                 console.log("Key is " + k);
                 console.log("Value is ");
-                console.log(dataResult[k]);
+                console.log(allAttributes[k]);
 
                 dropdownInnerHtml += "<optgroup label= "+k+">";
 
-                for(var n in dataResult[k])
+                for(var n in allAttributes[k])
                 {
-                    if (dataResult[k].hasOwnProperty(n)) {
+                    if (allAttributes[k].hasOwnProperty(n)) {
                         console.log("Key is " + n);
                         console.log("Value is ");
-                        console.log(dataResult[k][n]);
+                        console.log(allAttributes[k][n]);
 
-                        dropdownInnerHtml += " <option value="+n+">"+ dataResult[k][n]  + "</option>"
+                        dropdownInnerHtml += " <option value="+n+">"+ allAttributes[k][n]  + "</option>"
 
                      }
                 }
