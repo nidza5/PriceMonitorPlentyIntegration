@@ -99,6 +99,33 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $dataAttributes[] = $arrNonSystemAttributes;
         }
 
+
+        $propertiesRepo = pluginApp(PropertyRepositoryContract::class);
+
+        $authHelperProp = pluginApp(AuthHelper::class);
+
+        $properties = null;
+
+        $properties = $authHelperProp->processUnguarded(
+          function () use ($propertiesRepo, $properties) {          
+              return $propertiesRepo->all();
+            }
+        );
+
+         $resultProperties = $properties->toArray();
+
+         foreach($resultProperties['entries'] as $prop) 
+         {
+             $arrProperties = array(
+                  "Id" => $prop['id'],
+                  "Group" => "Properties",
+                  "Name" => $prop['backendName']
+             );
+             
+             $dataAttributes[] = $arrProperties;
+         }
+
+
         foreach($dataAttributes as $arr){
             $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
         }
