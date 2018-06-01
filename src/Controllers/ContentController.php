@@ -176,7 +176,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $resultProperties = $properties->toArray();
 
 
-           echo json_encode($resultProperties);
+           echo json_encode($resultProperties['entries']);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
