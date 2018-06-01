@@ -245,6 +245,13 @@ function showTabContent(evt, tabName) {
                     console.log("parseed data");
                     console.log(dataResult);
 
+                    for (var k in target){
+                        if (target.hasOwnProperty(k)) {
+                            console.log("Key is " + k + ", value is" + target[k]);
+                             
+                        }
+                    }
+
 
             },
             error: function(xhr)
