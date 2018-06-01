@@ -21,6 +21,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
+ use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
 
  /**
   * Class ContentController
@@ -159,53 +160,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  
           //  echo json_encode($stores);
 
-          $attributesRepo = pluginApp(AttributeRepositoryContract::class);
+          $propertiesRepo = pluginApp(PropertyRepositoryContract::class);
 
-          $authHelperAttr = pluginApp(AuthHelper::class);
+          $authHelperProp = pluginApp(AuthHelper::class);
 
-          $attributes = null;
+          $properties = null;
 
-          $attributes = $authHelperAttr->processUnguarded(
-            function () use ($attributesRepo, $attributes) {
+          $properties = $authHelperAttr->processUnguarded(
+            function () use ($propertiesRepo, $properties) {
             
-                return $attributesRepo->all();
+                return $propertiesRepo->all();
             }
         );
 
-        $resultAttributes = $attributes->toArray();
+        $resultProperties = $properties->toArray();
 
-        $dataAttributes = array();
 
-        $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
- 
- 
-        foreach($systemAttr as $nonAttr)
-        {
-           $arrSystemAttributes = array(
-             "Id" => $nonAttr,
-             "Group" => "System attributes",
-             "Name" => $nonAttr
-        );       
-        
-             $dataAttributes[] = $arrSystemAttributes;
-        }        
-        
-         foreach($resultAttributes['entries'] as $att) 
-         {
-             $arrNonSystemAttributes = array(
-                  "Id" => $att['id'],
-                  "Group" => "Non system attributes",
-                  "Name" => $att['backendName']
-             );
-             
-             $dataAttributes[] = $arrNonSystemAttributes;
-         }
-
-         foreach($dataAttributes as $arr){
-            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
-        }
-
-           echo json_encode($finalResult);
+           echo json_encode($resultProperties);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 

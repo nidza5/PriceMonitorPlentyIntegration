@@ -13,6 +13,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
+ use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
 
  /**
   * Class AttributesController
