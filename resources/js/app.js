@@ -245,9 +245,9 @@ function showTabContent(evt, tabName) {
                     console.log("parseed data");
                     console.log(dataResult);
 
-                    for (var k in target){
-                        if (target.hasOwnProperty(k)) {
-                            console.log("Key is " + k + ", value is" + target[k]);
+                    for (var k in dataResult){
+                        if (dataResult.hasOwnProperty(k)) {
+                            console.log("Key is " + k + ", value is" + dataResult[k]);
                              
                         }
                     }
