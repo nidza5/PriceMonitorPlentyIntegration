@@ -166,7 +166,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           $properties = null;
 
-          $properties = $authHelperAttr->processUnguarded(
+          $properties = $authHelperProp->processUnguarded(
             function () use ($propertiesRepo, $properties) {
             
                 return $propertiesRepo->all();
