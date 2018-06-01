@@ -247,7 +247,9 @@ function showTabContent(evt, tabName) {
 
                     for (var k in dataResult){
                         if (dataResult.hasOwnProperty(k)) {
-                            console.log("Key is " + k + ", value is" + dataResult[k]);
+                            console.log("Key is " + k);
+                            console.log("Value is ");
+                            console.log(dataResult[k])
                              
                         }
                     }
