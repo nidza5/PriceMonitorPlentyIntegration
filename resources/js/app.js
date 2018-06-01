@@ -242,27 +242,8 @@ function showTabContent(evt, tabName) {
                 if(data != null)
                     dataResult = jQuery.parseJSON(data);
 
-                    console.log("parseed data");
-                    console.log(dataResult);
 
-                    for (var k in dataResult){
-                        if (dataResult.hasOwnProperty(k)) {
-                            console.log("Key is " + k);
-                            console.log("Value is ");
-                            console.log(dataResult[k]);
-
-                            for(var n in dataResult[k])
-                             {
-                                if (dataResult[k].hasOwnProperty(n)) {
-                                    console.log("Key is " + n);
-                                    console.log("Value is ");
-                                    console.log(dataResult[k][n]);
-
-                             }
-                        }
-                    }
-                    }
-
+                fillFormWithData(dataResult);
 
             },
             error: function(xhr)
@@ -271,8 +252,7 @@ function showTabContent(evt, tabName) {
             }
         });
 
-
-        fillFormWithData(null);
+        
 
     }
 
@@ -291,22 +271,31 @@ function showTabContent(evt, tabName) {
     function generateAllAttributesCacheAndDropdownInnerHtml(allAttributes) {
         var dropdownInnerHtml = '';
 
-        for (var prop in allAttributes) {
-            if (allAttributes.hasOwnProperty(prop)) {
-                dropdownInnerHtml += '<li class="pricemonitor-list-group">' + prop + '</li>';
+        for (var k in dataResult){
+            if (dataResult.hasOwnProperty(k)) {
+                console.log("Key is " + k);
+                console.log("Value is ");
+                console.log(dataResult[k]);
 
-                for (var i = 0; i < allAttributes[prop].length; i++) {
-                    dropdownInnerHtml += '<li class="pricemonitor-filterable-list-item">' +
-                        '<a id="' + allAttributes[prop][i]['code'] + '">' +
-                        allAttributes[prop][i]['label'] +
-                        '</a>' +
-                        '</li>';
+                dropdownInnerHtml += "<optgroup label= "+k+">";
 
-                    attributesCache[allAttributes[prop][i]['code']] = allAttributes[prop][i];
+                for(var n in dataResult[k])
+                {
+                    if (dataResult[k].hasOwnProperty(n)) {
+                        console.log("Key is " + n);
+                        console.log("Value is ");
+                        console.log(dataResult[k][n]);
+
+                        dropdownInnerHtml += " <option value="+n+">"+ dataResult[k][n]  + "</option>"
+
+                     }
                 }
+
+                dropdownInnerHtml += " </optgroup>";
+
             }
         }
-
+        
         return dropdownInnerHtml;
     }
 
@@ -506,10 +495,7 @@ function showTabContent(evt, tabName) {
                         (savedAttribute ? "readonly disabled" : "") + ' ' +
                         'required' +
                     '/>' +  
-                        '<optgroup label="system attributes">' +
-                             '<option>GTIN</option>' +
-                             '<option>Variation name</option>' +
-                        '</optgroup>' +
+                    dropdownInnerHtml +
                     '</select>' +
                     '<input type="hidden" ' +
                         'class="' + (savedAttribute && savedAttribute.hasOwnProperty('code') ?
@@ -520,7 +506,7 @@ function showTabContent(evt, tabName) {
                         'required' +
                     '/>' +
                     '<ul class="pricemonitor-filterable-list ' + parentTemplateId + '-all-attributes">' +
-                        dropdownInnerHtml +
+                       
                     '</ul>' +
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
