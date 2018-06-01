@@ -201,7 +201,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              $dataAttributes[] = $arrNonSystemAttributes;
          }
 
-           echo json_encode($dataAttributes);
+         foreach($dataAttributes as $arr){
+            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
+        }
+
+           echo json_encode($finalResult);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
