@@ -230,6 +230,30 @@ function showTabContent(evt, tabName) {
 
         // GetAttributes From ajax and in success call function fillFormwithData
 
+        $.ajax({
+            type: "GET",
+            url: "/getAttributes",
+            success: function(data)
+            {
+                console.log("attributeeees");
+                console.log(data);
+
+                var dataResult = null;
+                if(data != null)
+                    dataResult = jQuery.parseJSON(data);
+
+                    console.log("parseed data");
+                    console.log(dataResult);
+
+
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+
+
         fillFormWithData(null);
 
     }
