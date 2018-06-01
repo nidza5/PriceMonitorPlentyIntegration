@@ -272,7 +272,7 @@ function showTabContent(evt, tabName) {
         var dropdownInnerHtml = '';
 
         for (var k in allAttributes){
-            if (dataResult.hasOwnProperty(k)) {
+            if (allAttributes.hasOwnProperty(k)) {
                 console.log("Key is " + k);
                 console.log("Value is ");
                 console.log(allAttributes[k]);
