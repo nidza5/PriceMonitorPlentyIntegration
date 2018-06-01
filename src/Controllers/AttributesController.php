@@ -46,15 +46,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,AttributeRepositoryContract $attributeRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,AttributeRepositoryContract $attributeRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
-        $this->salesPriceRepository = $salesPriceRepository;        
-        $this->productFilterRepo = $productFilterRepo;   
         $this->attributeRepository = $attributeRepository;     
-    }
-    
+    }   
  
 
  
