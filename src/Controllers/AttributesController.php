@@ -118,7 +118,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              $arrProperties = array(
                   "Id" => $prop['id'],
                   "Group" => "Properties",
-                  "Name" => $prop['backendName']
+                  "Name" => $prop['backendName'],
+                  'Type' => $prop['valueType']
              );
              
              $dataAttributes[] = $arrProperties;
