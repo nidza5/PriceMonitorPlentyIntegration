@@ -462,14 +462,7 @@ function showTabContent(evt, tabName) {
     }
 
     function createFilterRow(expression, groupIndex, expressionIndex)
-    {
-            console.log("Expression");
-            console.log(expression);
-            console.log("groupIndex");
-            console.log(groupIndex);
-            console.log("expressionIndex");
-            console.log(expressionIndex);
-            
+    {       
         var expressionFormFieldName =
                 parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex,
             expressionFormFieldValue =
@@ -495,6 +488,7 @@ function showTabContent(evt, tabName) {
                         'name="' + expressionFormFieldValue + '" ' +
                         'id="' + expressionFormFieldValue + '" ' +
                         'autocomplete="off" ' +
+                        'onchange="loadConditionsAndAttributeValues(this)" ' +
                         'value="' +
                         (savedAttribute && savedAttribute.hasOwnProperty('label') ? savedAttribute['label'] : "")
                         + '" ' +
@@ -989,4 +983,13 @@ function showTabContent(evt, tabName) {
             var groupForRemove = event.target.parentNode.parentNode.parentNode;
             groupForRemove.parentNode.removeChild(groupForRemove);
         }
+    }
+
+
+    function loadConditionsAndAttributeValues(el)
+    {
+        var $el = $(el);
+       console.log("data type");
+       console.log($el.attr("data-type"));
+
     }
