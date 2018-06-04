@@ -162,8 +162,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $attributesValues = null;
 
         $attributesValues = $authHelperAttr->processUnguarded(
-            function () use ($attributesRepo, $attributesValues) {
-            
+            function () use ($attributesRepo, $attributesValues,$attributeId) {                   
+                
                 return $attributesRepo->findByAttributeId($attributeId);
             }
         );
