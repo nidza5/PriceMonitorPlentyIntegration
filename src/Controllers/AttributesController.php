@@ -142,8 +142,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         }     
 
         foreach($dataAttributes as $arr){
-            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
-            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Type"];
+            $finalResult[$arr["Group"]][$arr["Id"]][$arr["Type"]]=$arr["Name"];
         }
 
          return json_encode($finalResult);
