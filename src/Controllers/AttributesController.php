@@ -14,6 +14,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Repositories\Models;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
+ use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 
  /**
   * Class AttributesController
@@ -141,8 +142,35 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
         }
 
-         return json_encode($finalResult);
-    
+         return json_encode($finalResult);   
 
+    }
+
+    public function getAttributeValueByAttrId(Request $request) : string
+    {
+        $requestData = $request->all();
+
+        $attributeId = 0;
+
+        if($requestData != null)
+            $attributeId = $requestData['attributeId'];
+
+        $attributesRepo = pluginApp(AttributeValueRepositoryContract::class);
+
+        $authHelperAttr = pluginApp(AuthHelper::class);
+        
+        $attributesValues = null;
+
+        $attributesValues = $authHelperAttr->processUnguarded(
+            function () use ($attributesRepo, $attributesValues) {
+            
+                return $attributesRepo->findByAttributeId($attributeId);
+            }
+        );
+
+        $resultAttributes = $attributesValues->toArray();
+
+        return json_encode($resultAttributes);
+        
     }
  }

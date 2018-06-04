@@ -624,9 +624,42 @@ function showTabContent(evt, tabName) {
     function getPossibleFieldValues(expression)
     {
         var possibleFieldValues = [],
-            attributeCode = expression['code'];
-
+            attributeCode = expression['code'],
+            IdAttribute = expression["IdAttr"];
         
+            var dataOption = {
+                'attributeId' : IdAttribute
+            };
+      
+              $.ajax({
+                  type: "GET",
+                  url: "/getAttributeValueByAttrId" ,
+                  data: dataOption,
+                  success: function(data)
+                  {
+                      console.log("attributesValues");
+                      console.log(data);
+
+                      var dataAttrValues = null;
+
+                      if(data != null)
+                        dataAttrValues = jQuery.parseJSON( data );
+
+                        console.log("dataAttrValues");
+                        console.log(dataAttrValues);
+
+                        possibleFieldValues = dataAttrValues;
+
+                        return possibleFieldValues;
+
+                  },
+                  error: function(xhr)
+                  {
+                      console.log(xhr);
+                  }
+              });
+
+
 
         return possibleFieldValues;
     }
@@ -968,18 +1001,20 @@ function showTabContent(evt, tabName) {
 
     function loadConditionsAndAttributeValues(sender,sId)
     {
-        var id = $(sender).attr("id");
-        console.log("id");
-        console.log(id);
-        var dataType = $("#" + id + " option:selected").attr("data-type");
-        console.log("data type");
-        console.log(dataType);
+        var id = $(sender).attr("id");        
+        var dataType = $("#" + id + " option:selected").attr("data-type"); 
+        
+        var IdAttribute;
+
+        if(dataType != null && dataType != "" && dataType == "dropdown")
+            IdAttribute = $("#" + id + " option:selected").attr("value");  
+            
+
+         console.log("idAttribute");
+         console.log(IdAttribute);
 
         var nameFieldIdentifier = $(sender).attr("name");
 
-        console.log("Name");
-        console.log(nameFieldIdentifier);
-      
           /**
              * Expression that will be used for creating expression fields.
              *
@@ -988,6 +1023,7 @@ function showTabContent(evt, tabName) {
             var expression = {
                 'code': "",
                 'type': dataType ? dataType : 'text',
+                'IdAttr' : IdAttribute,
                 'value': []
             },
             expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
