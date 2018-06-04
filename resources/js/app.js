@@ -991,7 +991,7 @@ function showTabContent(evt, tabName) {
         var id = $(sender).attr("id");
         console.log("id");
         console.log(id);
-        var dataType = $("#" + sId + " option:selected").attr("data-type");
+        var dataType = $("#" + id + " option:selected").attr("data-type");
         console.log("data type");
         console.log(dataType);
       
