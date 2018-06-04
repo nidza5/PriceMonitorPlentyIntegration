@@ -1031,5 +1031,5 @@ function showTabContent(evt, tabName) {
                 createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex);
 
         setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
-        loadDateControl(addedDateFieldID);
+        
     }
