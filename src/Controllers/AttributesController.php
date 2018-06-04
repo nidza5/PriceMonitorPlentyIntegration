@@ -92,7 +92,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $arrNonSystemAttributes = array(
                  "Id" => $att['id'],
                  "Group" => "Non system attributes",
-                 "Name" => $att['backendName'].'-text'
+                 "Name" => $att['backendName'].'-'.$att['typeOfSelectionInOnlineStore'] 
             );
             
             $dataAttributes[] = $arrNonSystemAttributes;
