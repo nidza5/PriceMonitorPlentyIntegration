@@ -616,12 +616,12 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-        getPossibleFieldValues(valueFieldName, expression, possibleFieldValues);
+        getPossibleFieldValues(valueFieldName, expression);
 
       //  return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
 
-    function getPossibleFieldValues(valueFieldName, expression, possibleFieldValues)
+    function getPossibleFieldValues(valueFieldName, expression)
     {
         var possibleFieldValues = null,
             attributeCode = expression['code'],
@@ -649,7 +649,7 @@ function showTabContent(evt, tabName) {
                         console.log("dataAttrValues");
                         console.log(dataAttrValues);
 
-                        createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);                       
+                        createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, dataAttrValues);                       
 
                   },
                   error: function(xhr)
