@@ -708,10 +708,10 @@ function showTabContent(evt, tabName) {
 
         for (var i = 0; i < possibleFieldValues.length; i++) {
             selectInnerHtml +=
-                '<option value="' + possibleFieldValues[i].value + '"' +
-                (expression.value.indexOf(String(possibleFieldValues[i].value)) >= 0 ? ' selected' : '') +
+                '<option value="' + possibleFieldValues[i].id + '"' +
+                // (expression.value.indexOf(String(possibleFieldValues[i].value)) >= 0 ? ' selected' : '') +
                 '>' +
-                possibleFieldValues[i].label +
+                possibleFieldValues[i].backendName +
                 '</option>';
         }
 
