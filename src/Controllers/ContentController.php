@@ -22,6 +22,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
+ use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 
  /**
   * Class ContentController
@@ -160,7 +161,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  
           //  echo json_encode($stores);
 
-          $attributesRepo = pluginApp(AttributeRepositoryContract::class);
+          $attributesRepo = pluginApp(AttributeValueRepositoryContract::class);
 
           $authHelperAttr = pluginApp(AuthHelper::class);
           

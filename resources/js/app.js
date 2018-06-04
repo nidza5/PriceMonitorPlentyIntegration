@@ -581,10 +581,7 @@ function showTabContent(evt, tabName) {
 
     function hasPredefinedValues(expression)
     {
-        return (attributesCache.hasOwnProperty(expression['code']) &&
-            attributesCache[expression['code']].hasOwnProperty('options') &&
-            attributesCache[expression['code']]['options'].length > 0) ||
-            expression['type'].indexOf('[]') >= 0;
+        return expression['type'].indexOf('dropdown') >= 0;
     }
 
     function getConditionCodeTranslationMap()
@@ -612,16 +609,14 @@ function showTabContent(evt, tabName) {
      */
     function createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex)
     {
-        // Added date field should be reset when creating values field.
-        addedDateFieldID = null;
-
         var valueFieldName =
-                parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
-            possibleFieldValues = getPossibleFieldValues(expression);
-
+                parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex
+            
         if (!hasPredefinedValues(expression)) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
+
+       var possibleFieldValues = getPossibleFieldValues(expression);
 
         return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
@@ -631,15 +626,7 @@ function showTabContent(evt, tabName) {
         var possibleFieldValues = [],
             attributeCode = expression['code'];
 
-        if (expression['type'] === 'boolean') {
-            possibleFieldValues = [
-                {'label': 'Yes', 'value': 1},
-                {'label': 'No', 'value': 0}
-            ];
-        } else if (attributesCache.hasOwnProperty(attributeCode) &&
-            attributesCache[attributeCode].hasOwnProperty('options')) {
-            possibleFieldValues = attributesCache[attributeCode]['options'];
-        }
+        
 
         return possibleFieldValues;
     }
@@ -648,16 +635,8 @@ function showTabContent(evt, tabName) {
     {
         var type = 'text';
 
-        if (expression['type'] === 'integer' || expression['type'] === 'double') {
+        if (expression['type'] === 'int' || expression['type'] === 'float' || expression['type'] === 'price' ) {
             type = 'number';
-        } else if (expression['type'] === 'DateTime') {
-            if (expression.value.length === 0) {
-                // Only for new filter rows date control should be loaded. When filter is already saved
-                // input with date is all that is needed because date is not editable.
-                addedDateFieldID = valueFieldName;
-            } else {
-                expression.value = [createDateForView(expression.value[0])];
-            }
         }
 
         return '<input name="' + valueFieldName +'" ' +
@@ -666,7 +645,7 @@ function showTabContent(evt, tabName) {
             'value="' + (expression.value[0] ? expression.value[0] : '')  +'" ' +
             'type="' + type + '"' +
             ' autocomplete="off" ' +
-            (expression.type === "double" ? 'step="0.1" ' : '') +
+            (expression.type === "int" ? 'step="0.1" ' : '') +
             (expression.value.length > 0 ? " readonly disabled" : "") + '>';
     }
 
