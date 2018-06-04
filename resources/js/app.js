@@ -652,9 +652,9 @@ function showTabContent(evt, tabName) {
                         console.log("dataAttrValues");
                         console.log(dataAttrValues);
 
-                        possibleFieldValues = dataAttrValues;
+                       // possibleFieldValues = dataAttrValues;
 
-                        return possibleFieldValues;
+                        return dataAttrValues;
 
                   },
                   error: function(xhr)
