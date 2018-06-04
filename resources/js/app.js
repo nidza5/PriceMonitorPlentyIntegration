@@ -616,15 +616,12 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-       var possibleFieldValues = getPossibleFieldValues(expression);
+        getPossibleFieldValues(valueFieldName, expression, possibleFieldValues);
 
-       console.log("possibleFieldValues");
-       console.log(possibleFieldValues);
-
-        return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+      //  return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
 
-    function getPossibleFieldValues(expression)
+    function getPossibleFieldValues(valueFieldName, expression, possibleFieldValues)
     {
         var possibleFieldValues = null,
             attributeCode = expression['code'],
@@ -634,11 +631,11 @@ function showTabContent(evt, tabName) {
                 'attributeId' : IdAttribute
             };
       
-            return   $.ajax({
+           $.ajax({
                   type: "GET",
                   url: "/getAttributeValueByAttrId" ,
                   data: dataOption,
-                  async : false,
+                 // async : false,
                   success: function(data)
                   {
                       console.log("attributesValues");
@@ -652,9 +649,7 @@ function showTabContent(evt, tabName) {
                         console.log("dataAttrValues");
                         console.log(dataAttrValues);
 
-                       // possibleFieldValues = dataAttrValues;
-
-                        return dataAttrValues;
+                        createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);                       
 
                   },
                   error: function(xhr)
