@@ -283,7 +283,9 @@ function showTabContent(evt, tabName) {
                         console.log("Value is ");
                         console.log(allAttributes[k][n]);
 
-                        dropdownInnerHtml += " <option value="+n+">"+ allAttributes[k][n]  + "</option>"
+                        var splitedAttr = allAttributes[k][n].split('-');
+
+                        dropdownInnerHtml += " <option value="+n+">"+ splitedAttr[0]  + "</option>"
 
                      }
                 }
