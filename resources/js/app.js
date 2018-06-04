@@ -250,10 +250,7 @@ function showTabContent(evt, tabName) {
             {
                 console.log(xhr);
             }
-        });
-
-        
-
+        });     
     }
 
         /**
