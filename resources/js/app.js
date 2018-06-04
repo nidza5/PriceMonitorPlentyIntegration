@@ -572,7 +572,7 @@ function showTabContent(evt, tabName) {
                 'greater_or_equal',
                 'less_or_equal'
             ];
-        } else if(expression['image'].indexOf('Manufacturer') >= 0) {
+        } else if(expression['type'].indexOf('image') >= 0) {
             options=[];
         }
 
