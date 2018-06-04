@@ -81,8 +81,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           $arrSystemAttributes = array(
             "Id" => $nonAttr,
             "Group" => "System attributes",
-            "Name" => $nonAttr,
-            "Type" => "text"
+            "Name" => $nonAttr.'-text',
        );       
        
             $dataAttributes[] = $arrSystemAttributes;
@@ -93,8 +92,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $arrNonSystemAttributes = array(
                  "Id" => $att['id'],
                  "Group" => "Non system attributes",
-                 "Name" => $att['backendName'],
-                 "Type" => "text"
+                 "Name" => $att['backendName'].'-text'
             );
             
             $dataAttributes[] = $arrNonSystemAttributes;
@@ -120,8 +118,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
              $arrProperties = array(
                   "Id" => $prop['id'],
                   "Group" => "Properties",
-                  "Name" => $prop['backendName'],
-                  'Type' => $prop['valueType']
+                  "Name" => $prop['backendName'].'-'.$prop['valueType']
              );
              
              $dataAttributes[] = $arrProperties;
@@ -134,16 +131,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $arrOthers = array(
                 "Id" => $other,
                 "Group" => "Other",
-                "Name" => $other,
-                "Type" => "text"
+                "Name" => $other.'-text'  
          );  
 
             $dataAttributes[] = $arrOthers;
         }     
 
         foreach($dataAttributes as $arr){
-            $finalResult[$arr["Group"]][$arr["Id"]][$arr["Type"]]=$arr["Name"];
-           
+            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
         }
 
          return json_encode($finalResult);
