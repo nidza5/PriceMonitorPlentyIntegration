@@ -634,10 +634,11 @@ function showTabContent(evt, tabName) {
                 'attributeId' : IdAttribute
             };
       
-              $.ajax({
+            return   $.ajax({
                   type: "GET",
                   url: "/getAttributeValueByAttrId" ,
                   data: dataOption,
+                  async : false,
                   success: function(data)
                   {
                       console.log("attributesValues");
@@ -661,10 +662,6 @@ function showTabContent(evt, tabName) {
                       console.log(xhr);
                   }
               });
-
-
-
-        return possibleFieldValues;
     }
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
