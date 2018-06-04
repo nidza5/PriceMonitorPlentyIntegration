@@ -1016,7 +1016,7 @@ function showTabContent(evt, tabName) {
             expressionIndex = expressionAndGroupIndexes['expressionIndex'];
 
         loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
-      //  loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
+        loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
     }
 
     function loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression)
@@ -1042,4 +1042,15 @@ function showTabContent(evt, tabName) {
 
         wrapperNode.removeChild(document[formName][fieldName]);
         wrapperNode.innerHTML = wrapperInnerHTML;
+    }
+
+    function loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression)
+    {
+        var valueFieldName = parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
+            inputWrapperNode = document[formName][valueFieldName].parentNode,
+            inputWrapperValuesInnerHtml =
+                createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex);
+
+        setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
+        loadDateControl(addedDateFieldID);
     }
