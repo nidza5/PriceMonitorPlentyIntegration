@@ -618,12 +618,15 @@ function showTabContent(evt, tabName) {
 
        var possibleFieldValues = getPossibleFieldValues(expression);
 
+       console.log("possibleFieldValues");
+       console.log(possibleFieldValues);
+
         return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
 
     function getPossibleFieldValues(expression)
     {
-        var possibleFieldValues = [],
+        var possibleFieldValues = null,
             attributeCode = expression['code'],
             IdAttribute = expression["IdAttr"];
         
