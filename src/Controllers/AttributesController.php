@@ -131,7 +131,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $arrOthers = array(
                 "Id" => $other,
                 "Group" => "Other",
-                "Name" => $other.'-text'  
+                "Name" => $other.'-'.$other  
          );  
 
             $dataAttributes[] = $arrOthers;

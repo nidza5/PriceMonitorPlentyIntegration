@@ -551,18 +551,19 @@ function showTabContent(evt, tabName) {
 
     function getOptionsForExpressionType(expression)
     {
-        if (specificSystemAttributes.hasOwnProperty(expression['code'])) {
-            // If attribute is specific, and has expressions set in configuration then logic for getting
-            // conditions will not be executed and conditions from configuration will be returned.
-            return specificSystemAttributes[expression['code']]['conditions'];
-        }
+        // if (specificSystemAttributes.hasOwnProperty(expression['code'])) {
+        //     // If attribute is specific, and has expressions set in configuration then logic for getting
+        //     // conditions will not be executed and conditions from configuration will be returned.
+        //     return specificSystemAttributes[expression['code']]['conditions'];
+        // }
 
         // By default options fo text field are loaded.
         var options = ['equal', 'not_equal', 'contains', 'contains_not'];
 
-        if (hasPredefinedValues(expression)) {
-            options = ['equal', 'not_equal'];
-        } else if (isNumericOrDateAttribute(expression)) {
+        if ((expression['type'].indexOf('dropdown') >= 0) || (expression['type'].indexOf('box') >= 0) || (expression['type'].indexOf('Category') >= 0)
+        || (expression['type'].indexOf('Manufacturer') >= 0) || (expression['type'].indexOf('Supplier') >= 0) || (expression['type'].indexOf('Channel') >= 0) ) {
+            options = ['equal', 'not_equal']; 
+        } else if (isNumericOrPriceAttribute(expression)) {
             options = [
                 'equal',
                 'not_equal',
@@ -571,8 +572,8 @@ function showTabContent(evt, tabName) {
                 'greater_or_equal',
                 'less_or_equal'
             ];
-        } else if (expression['type'].indexOf('boolean') >= 0) {
-            options = ['equal', 'not_equal'];
+        } else if(expression['image'].indexOf('Manufacturer') >= 0) {
+            options=[];
         }
 
         return options;
@@ -707,11 +708,11 @@ function showTabContent(evt, tabName) {
         return selectInnerHtml;
     }
 
-    function isNumericOrDateAttribute(expression)
+    function isNumericOrPriceAttribute(expression)
     {
-        return expression['type'].indexOf('integer') >= 0 ||
-            expression['type'].indexOf('DateTime') >= 0 ||
-            expression['type'].indexOf('double') >= 0;
+        return expression['type'].indexOf('int') >= 0 ||
+            expression['type'].indexOf('float') >= 0 ||
+            expression['type'].indexOf('price') >= 0;
     }
 
     function appendCallbacksOnAddExpressionButtons()
@@ -994,6 +995,51 @@ function showTabContent(evt, tabName) {
         var dataType = $("#" + id + " option:selected").attr("data-type");
         console.log("data type");
         console.log(dataType);
+
+        var nameFieldIdentifier = $(sender).attr("name");
+
+        console.log("Name");
+        console.log(nameFieldIdentifier);
       
-    
+          /**
+             * Expression that will be used for creating expression fields.
+             *
+             * @type {{code: *, type: string, value: Array}}
+             */
+            var expression = {
+                'code': "",
+                'type': dataType ? dataType : 'text',
+                'value': []
+            },
+            expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
+            groupIndex = expressionAndGroupIndexes['groupIndex'],
+            expressionIndex = expressionAndGroupIndexes['expressionIndex'];
+
+        loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
+      //  loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
+    }
+
+    function loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression)
+    {
+        var conditionFieldName =
+                parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex,
+            inputWrapperNode = document[formName][conditionFieldName].parentNode,
+            inputWrapperConditionsInnerHtml =
+                '<select ' +
+                'name="' +
+                parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '">' +
+                createConditionOptionsForExpressionsAttributeType(expression) +
+                '</select>';
+
+        setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperConditionsInnerHtml, conditionFieldName);
+    } 
+
+    function setWrapperNodeForFieldIfChangesExist(wrapperNode, wrapperInnerHTML, fieldName)
+    {
+        if (wrapperNode.innerHTML === wrapperInnerHTML) {
+            return;
+        }
+
+        wrapperNode.removeChild(document[formName][fieldName]);
+        wrapperNode.innerHTML = wrapperInnerHTML;
     }
