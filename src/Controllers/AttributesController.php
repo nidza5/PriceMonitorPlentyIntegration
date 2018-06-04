@@ -170,7 +170,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $resultAttributes = $attributesValues->toArray();
 
-        return json_encode($resultAttributes);
+        return json_encode($resultAttributes['entries']);
         
     }
  }
