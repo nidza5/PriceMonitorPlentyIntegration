@@ -463,6 +463,13 @@ function showTabContent(evt, tabName) {
 
     function createFilterRow(expression, groupIndex, expressionIndex)
     {
+            console.log("Expression");
+            console.log(expression);
+            console.log("groupIndex");
+            console.log(groupIndex);
+            console.log("expressionIndex");
+            console.log(expressionIndex);
+            
         var expressionFormFieldName =
                 parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex,
             expressionFormFieldValue =
