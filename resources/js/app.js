@@ -986,10 +986,14 @@ function showTabContent(evt, tabName) {
     }
 
 
-    function loadConditionsAndAttributeValues(el)
+    function loadConditionsAndAttributeValues(sender,sId)
     {
-        var $el = $(el);
-       console.log("data type");
-       console.log($el.attr("data-type"));
-
+        var id = $(sender).attr("id");
+        console.log("id");
+        console.log(id);
+        var dataType = $("#" + sId + " option:selected").attr("data-type");
+        console.log("data type");
+        console.log(dataType);
+      
+    
     }
