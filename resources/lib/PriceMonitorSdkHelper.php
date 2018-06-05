@@ -52,7 +52,7 @@
 
         try {
 
-            ServiceRegister::registerConfigService(new ConfigurationService());
+            // ServiceRegister::registerConfigService(new ConfigurationService());
 
             $filter = self::getPopulatedFilter($filterData, $filterType);
 
