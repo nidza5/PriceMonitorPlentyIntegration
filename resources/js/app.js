@@ -618,6 +618,8 @@ function showTabContent(evt, tabName) {
 
        var possibleFieldValues = getPossibleFieldValues(expression);
 
+       console.log("create value field");
+        console.log(possibleFieldValues);
    //    return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
 
@@ -661,6 +663,8 @@ function showTabContent(evt, tabName) {
 
               console.log("valueeesss posibleee");
               console.log(possibleFieldValues);
+
+            return possibleFieldValues.responseJSON;
     }
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
