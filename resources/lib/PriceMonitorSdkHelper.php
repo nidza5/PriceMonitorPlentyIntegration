@@ -49,12 +49,25 @@
 
     public static function saveFilter($filterData, $filterType, $pricemonitorId)
     {
-        $filter = $this->getPopulatedFilter($filterData, $filterType);
 
-        $filterRepository = new FilterRepository();
-        $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
+        try {
 
-        return $filterResult;
+            $filter = $this->getPopulatedFilter($filterData, $filterType);
+
+            $filterRepository = new FilterRepository();
+            $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
+    
+            return $filterResult;
+
+        } catch(\Exception $ex) 
+        {
+            $response = [
+                'Code' => $ex->getCode(),
+                'Message' => $ex->getMessage()
+             ];
+
+             return $response;
+        }       
     }
 
     public static function getFilter($filterType, $pricemonitorId, $filterRepo)
