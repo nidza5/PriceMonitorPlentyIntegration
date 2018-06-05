@@ -616,7 +616,7 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-         getPossibleFieldValues(expression,function (possibleFieldValues) {
+      var htmlsss =    getPossibleFieldValues(expression,function (possibleFieldValues) {
             console.log("create value field");
             console.log(possibleFieldValues);
 
@@ -627,6 +627,9 @@ function showTabContent(evt, tabName) {
 
             return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
          });
+
+         console.log("htmlscss");
+         console.log(htmlsss);
     }
 
     function getPossibleFieldValues(expression,fCallBack)
