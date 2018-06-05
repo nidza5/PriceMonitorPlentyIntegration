@@ -621,9 +621,7 @@ function showTabContent(evt, tabName) {
        
     }
 
-
-
-    function createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex)
+    function createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName)
     {
         var valueFieldName =
                 parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex
@@ -646,7 +644,8 @@ function showTabContent(evt, tabName) {
             console.log("inputWrapperValuesInnerHtml");
             console.log(inputWrapperValuesInnerHtml);
 
-           // return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
+            setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
+           
          });
 
 
@@ -1078,10 +1077,7 @@ function showTabContent(evt, tabName) {
     function loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression)
     {
         var valueFieldName = parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
-            inputWrapperNode = document[formName][valueFieldName].parentNode,
-            inputWrapperValuesInnerHtml =
-                createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex);
-
-        setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
+            inputWrapperNode = document[formName][valueFieldName].parentNode;
         
+            createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName);
     }
