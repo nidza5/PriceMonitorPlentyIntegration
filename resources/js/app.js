@@ -628,7 +628,9 @@ function showTabContent(evt, tabName) {
                 parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex
             
         if (!hasPredefinedValues(expression)) {
-            return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
+            var fieldValue =  createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
+            setWrapperNodeForFieldIfChangesExist(inputWrapperNode, fieldValue, valueFieldName);
+
         }
 
          getPossibleFieldValues(expression,function (possibleFieldValues) {
