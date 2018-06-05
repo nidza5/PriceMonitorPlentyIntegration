@@ -646,6 +646,7 @@ function showTabContent(evt, tabName) {
                   }
               });
 
+              console.log("valueeesss posibleee");
               console.log(possibleFieldValues.responseJSON);
     }
 
