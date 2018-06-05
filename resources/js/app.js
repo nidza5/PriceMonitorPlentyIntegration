@@ -613,7 +613,7 @@ function showTabContent(evt, tabName) {
                     parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
                // possibleFieldValues = getPossibleFieldValues(expression);
                possibleFieldValues = [];
-               
+
             if (!hasPredefinedValues(expression)) {
                 return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
             }
@@ -717,9 +717,8 @@ function showTabContent(evt, tabName) {
     {
         var selectInnerHtml = '';
 
-        selectInnerHtml += '<select ' +
+        selectInnerHtml += '<select style= width:100% !important ' +
             'name="' + valueFieldName + '" ' +
-            'style= width:100% !important' +
             'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
 
