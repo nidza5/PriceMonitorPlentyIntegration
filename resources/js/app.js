@@ -925,6 +925,9 @@ function showTabContent(evt, tabName) {
         newGroupWrapper.classList.add(parentTemplateId + '-single-group-wrapper');
         newGroupWrapper.id = parentTemplateId + '-groupWrapper_' + groupIndex;
         newGroupWrapper.innerHTML = createGroup(groupIndex, [], false);
+
+        initializeAllFilterableDropdowns();
+
         var addGroupButton = event.target;
         addGroupButton.parentNode.parentNode.removeChild(addGroupButton.parentNode);
 
