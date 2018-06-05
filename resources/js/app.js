@@ -926,8 +926,6 @@ function showTabContent(evt, tabName) {
         newGroupWrapper.id = parentTemplateId + '-groupWrapper_' + groupIndex;
         newGroupWrapper.innerHTML = createGroup(groupIndex, [], false);
 
-        initializeAllFilterableDropdowns();
-
         var addGroupButton = event.target;
         addGroupButton.parentNode.parentNode.removeChild(addGroupButton.parentNode);
 
@@ -941,6 +939,8 @@ function showTabContent(evt, tabName) {
                             '</button>';
 
         template.appendChild(formRow);
+
+        initializeAllFilterableDropdowns();
 
         // Pricemonitor['filterableDropDown']['initDropdown'](
         //     '',
