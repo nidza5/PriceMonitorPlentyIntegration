@@ -390,7 +390,7 @@ function showTabContent(evt, tabName) {
      function generateGroupFormRowWithoutSavedValues(groupOperatorDisabled, groupIndex)
         {
             return '<div class="form-row">' +
-                '<select style="margin-bottom:2%;" class="' + (groupOperatorDisabled ? "pricemonitor-form-field" : "") + ' form-control col-sm-3" ' +
+                '<select style="margin-bottom:2%;" class="pricemonitor-form-field form-control col-sm-3" ' +
                 (groupOperatorDisabled ? 'disabled ' : '') +
                 'name="' + parentTemplateId + 'GroupOperator_' + groupIndex + '" ' +
                 ' required/>' +
@@ -483,9 +483,7 @@ function showTabContent(evt, tabName) {
 
         return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
                     '<select ' +
-                        'class="pricemonitor-filterable-dropdown js-example-basic-single ' +
-                        (savedAttribute && savedAttribute.hasOwnProperty('label') ?
-                        "pricemonitor-form-field" : "") + '" ' +
+                        'class="pricemonitor-filterable-dropdown js-example-basic-single pricemonitor-form-field ' + '" ' +
                         'name="' + expressionFormFieldValue + '" ' +
                         'id="' + expressionFormFieldValue + '" ' +
                         'autocomplete="off" ' +
@@ -499,8 +497,7 @@ function showTabContent(evt, tabName) {
                     dropdownInnerHtml +
                     '</select>' +
                     '<input type="hidden" ' +
-                        'class="' + (savedAttribute && savedAttribute.hasOwnProperty('code') ?
-                        "pricemonitor-form-field" : "") + '" ' +
+                        'class="pricemonitor-form-field '  + '" ' +
                         'name="' + expressionFormFieldName + '" ' +
                         'id="' + expressionFormFieldName + '" ' +
                         'value="' + (savedAttribute ? savedAttribute['code'] : "") + '" ' +
@@ -511,7 +508,7 @@ function showTabContent(evt, tabName) {
                     '</ul>' +
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
-                    '<select class="' +  (savedAttribute ? "pricemonitor-form-field" : "" ) + ' form-control" ' +
+                    '<select class="pricemonitor-form-field ' + ' form-control" ' +
                         'name="' +
                          parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
                          ' required ' +
@@ -695,7 +692,7 @@ function showTabContent(evt, tabName) {
 
         return '<input name="' + valueFieldName +'" ' +
             'id="' + valueFieldName + '" '+
-            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control" ' +
+            'class=" pricemonitor-form-field' + ' form-control" ' +
             'value="' + (expression.value[0] ? expression.value[0] : '')  +'" ' +
             'type="' + type + '"' +
             ' autocomplete="off" ' +
@@ -724,7 +721,7 @@ function showTabContent(evt, tabName) {
 
         selectInnerHtml += '<select style= width:100% !important ' +
             'name="' + valueFieldName + '" ' +
-            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control " ' +
+            'class="pricemonitor-form-field' + ' form-control " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
 
         for (var i = 0; i < possibleFieldValues.length; i++) {
