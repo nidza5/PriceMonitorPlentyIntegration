@@ -217,7 +217,10 @@ function showTabContent(evt, tabName) {
     var specificSystemAttributes = {};
     var  addedDateFieldID = null;
     var formName = "pricemonitorProductSelection";
-
+    var  filterQueryParams = {
+        'pricemonitorId': $("#contractId").val(),
+        'filterType': 'export_products'
+    };
 
     function createFiltersForm(responseData) {
 
@@ -1097,8 +1100,30 @@ function showTabContent(evt, tabName) {
         console.log("filters");
         console.log(filters);
 
-    }
+        var transferObject = {
+            'pricemonitorId': filterQueryParams.pricemonitorId,
+            'type': filterQueryParams.filterType,
+            'filters': filters
+        };
 
+        $.ajax({
+            type: "POST",
+            url: "/saveFilter",
+            data: transferObject,
+            success: function(data)
+            {
+                console.log("data");
+                console.log(data);
+
+                if(data == null) 
+                   return;
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+    }
 
     /**
      * Creates filters in proper format for a request.

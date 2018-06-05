@@ -29,7 +29,13 @@ class FilterStorage implements FilterStorageInterface
      */
      public function saveFilter($contractId, $type, $filter)
      {
-         
+         $filterArray = [
+            'contractId' => $contractId,
+            'type' => $type,
+            'filter' => $filter
+         ];
+
+         return $filterArray;
      }
  
      /**

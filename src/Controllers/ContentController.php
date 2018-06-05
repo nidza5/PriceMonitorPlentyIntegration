@@ -212,26 +212,4 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          return json_encode($contractInfo); 
       }
-
-      public function getFilters(Request $request) :string 
-      {
-            $requestData = $request->all();
-
-            $priceMonitorId = 0;
-
-            if($requestData != null)
-                $priceMonitorId = $requestData['priceMonitorId'];
-
-                $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
-
-                $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-                    'filterType' => FilterType::EXPORT_PRODUCTS,
-                    'priceMonitorId' => $priceMonitorId,
-                    'productFilterRepo' => $filter
-                ]);    
-
-          return json_encode($filters);  
-
-          //return "OK";
-      }
  }
