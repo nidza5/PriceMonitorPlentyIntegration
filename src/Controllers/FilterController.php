@@ -65,7 +65,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);
 
         echo "Filter For save!";
-        echo json_encode($filterForSave);
+       return json_encode($filterForSave);
 
         // $productFilter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
         // $productFilter->$contractId =  $productFilter['']   
