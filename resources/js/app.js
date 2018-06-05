@@ -629,22 +629,35 @@ function showTabContent(evt, tabName) {
             var dataOption = {
                 'attributeId' : IdAttribute
             };
-      
+
+
             var possibleFieldValues = $.ajax({
-                  type: "GET",
-                  url: "/getAttributeValueByAttrId" ,
-                  data: dataOption,
-                  async : false,
-                  success: function(data)
-                  {
-                      console.log("attributesValues");
-                      console.log(data);                          
-                  },
-                  error: function(xhr)
-                  {
-                      console.log(xhr);
-                  }
+                type: "GET",
+                url: "/getAttributeValueByAttrId",
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                dataType: "json"
+            })
+              .success(function (data) {
+                console.log("attributesValues");
+                console.log(data);        
               });
+      
+            // var possibleFieldValues = $.ajax({
+            //       type: "GET",
+            //       url: "/getAttributeValueByAttrId" ,
+            //       data: dataOption,
+            //       async : false,
+            //       success: function(data)
+            //       {
+            //           console.log("attributesValues");
+            //           console.log(data);                          
+            //       },
+            //       error: function(xhr)
+            //       {
+            //           console.log(xhr);
+            //       }
+            //   });
 
               console.log("valueeesss posibleee");
               console.log(possibleFieldValues);
