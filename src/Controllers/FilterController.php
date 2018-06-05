@@ -58,11 +58,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
           $requestData = $request->all();
 
-         $filterForSave =  $this->sdkService->call("saveFilter", [
-            'filterData' => $requestData['filters'],
-            'filterType' => $requestData['type'],
-            'priceMonitorId' => $requestData['pricemonitorId']
-        ]);
+        //  $filterForSave =  $this->sdkService->call("saveFilter", [
+        //     'filterData' => $requestData['filters'],
+        //     'filterType' => $requestData['type'],
+        //     'priceMonitorId' => $requestData['pricemonitorId']
+        // ]);
 
         echo "Filter For save!";
          return "OK";
