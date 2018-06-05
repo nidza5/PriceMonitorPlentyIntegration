@@ -880,6 +880,8 @@ function showTabContent(evt, tabName) {
         var dropdownFieldName =
             parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + (expressionIndex + 1);
 
+            initializeAllFilterableDropdowns();
+
         // Pricemonitor['filterableDropDown']['initDropdown'](
         //     '',
         //     document[formName][dropdownFieldName]
