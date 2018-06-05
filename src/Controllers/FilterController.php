@@ -64,7 +64,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'priceMonitorId' => $requestData['pricemonitorId']
         ]);
       
-         return "OK";
+         return json_encode($filterForSave);
 
         // $productFilter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
         // $productFilter->$contractId =  $productFilter['']   
