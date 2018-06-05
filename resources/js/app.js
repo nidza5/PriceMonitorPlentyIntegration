@@ -611,8 +611,9 @@ function showTabContent(evt, tabName) {
     {
             var valueFieldName =
                     parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
-                possibleFieldValues = getPossibleFieldValues(expression);
-
+               // possibleFieldValues = getPossibleFieldValues(expression);
+               possibleFieldValues = [];
+               
             if (!hasPredefinedValues(expression)) {
                 return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
             }
@@ -718,7 +719,8 @@ function showTabContent(evt, tabName) {
 
         selectInnerHtml += '<select ' +
             'name="' + valueFieldName + '" ' +
-            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control col-sm-3 " ' +
+            'style= width:100% !important' +
+            'class="' + (expression.value.length > 0 ? "pricemonitor-form-field" : "") + ' form-control " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
 
         for (var i = 0; i < possibleFieldValues.length; i++) {
@@ -1079,5 +1081,5 @@ function showTabContent(evt, tabName) {
         var valueFieldName = parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
             inputWrapperNode = document[formName][valueFieldName].parentNode;
         
-            createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName);
+        createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName);
     }
