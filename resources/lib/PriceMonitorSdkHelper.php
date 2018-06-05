@@ -52,7 +52,7 @@
 
         try {
 
-            $filter = $this->getPopulatedFilter($filterData, $filterType);
+            $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
