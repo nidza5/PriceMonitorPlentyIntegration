@@ -647,7 +647,7 @@ function showTabContent(evt, tabName) {
               });
 
               console.log("valueeesss posibleee");
-              console.log(possibleFieldValues.responseJSON);
+              console.log(possibleFieldValues);
     }
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
