@@ -616,14 +616,15 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-       var possibleFieldValues = getPossibleFieldValues(expression);
+         getPossibleFieldValues(expression,function (possibleFieldValues) {
+            console.log("create value field");
+            console.log(possibleFieldValues);
 
-       console.log("create value field");
-        console.log(possibleFieldValues);
-   //    return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+            return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+         });
     }
 
-    function getPossibleFieldValues(expression)
+    function getPossibleFieldValues(expression,fCallBack)
     {
           var attributeCode = expression['code'],
                IdAttribute = expression["IdAttr"];
@@ -632,39 +633,23 @@ function showTabContent(evt, tabName) {
                 'attributeId' : IdAttribute
             };
 
-
-            var possibleFieldValues = $.ajax({
-                type: "GET",
-                url: "/getAttributeValueByAttrId",
-                contentType: "application/json; charset=utf-8",
-                async: false,
-                dataType: "json"
-            })
-              .success(function (data) {
-                console.log("attributesValues");
-                console.log(data);        
+             $.ajax({
+                  type: "GET",
+                  url: "/getAttributeValueByAttrId" ,
+                  data: dataOption,
+                 // async : false,
+                  success: function(data)
+                  {
+                      console.log("attributesValues");
+                      console.log(data);    
+                      
+                      fCallBack(data);
+                  },
+                  error: function(xhr)
+                  {
+                      console.log(xhr);
+                  }
               });
-      
-            // var possibleFieldValues = $.ajax({
-            //       type: "GET",
-            //       url: "/getAttributeValueByAttrId" ,
-            //       data: dataOption,
-            //       async : false,
-            //       success: function(data)
-            //       {
-            //           console.log("attributesValues");
-            //           console.log(data);                          
-            //       },
-            //       error: function(xhr)
-            //       {
-            //           console.log(xhr);
-            //       }
-            //   });
-
-              console.log("valueeesss posibleee");
-              console.log(possibleFieldValues);
-
-            return possibleFieldValues.responseJSON;
     }
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
