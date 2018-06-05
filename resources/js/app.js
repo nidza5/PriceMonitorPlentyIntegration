@@ -609,6 +609,22 @@ function showTabContent(evt, tabName) {
      */
     function createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex)
     {
+            var valueFieldName =
+                    parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
+                possibleFieldValues = getPossibleFieldValues(expression);
+
+            if (!hasPredefinedValues(expression)) {
+                return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
+            }
+
+            return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+       
+    }
+
+
+
+    function createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex)
+    {
         var valueFieldName =
                 parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex
             
@@ -616,7 +632,7 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-      var htmlsss =    getPossibleFieldValues(expression,function (possibleFieldValues) {
+         getPossibleFieldValues(expression,function (possibleFieldValues) {
             console.log("create value field");
             console.log(possibleFieldValues);
 
@@ -625,11 +641,15 @@ function showTabContent(evt, tabName) {
             if(possibleFieldValues != null)
                 posibleValueField = jQuery.parseJSON(possibleFieldValues);
 
-            return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
+            var inputWrapperValuesInnerHtml = createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
+
+            console.log("inputWrapperValuesInnerHtml");
+            console.log(inputWrapperValuesInnerHtml);
+
+           // return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
          });
 
-         console.log("htmlscss");
-         console.log(htmlsss);
+
     }
 
     function getPossibleFieldValues(expression,fCallBack)
@@ -1060,7 +1080,7 @@ function showTabContent(evt, tabName) {
         var valueFieldName = parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex,
             inputWrapperNode = document[formName][valueFieldName].parentNode,
             inputWrapperValuesInnerHtml =
-                createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex);
+                createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex);
 
         setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
         
