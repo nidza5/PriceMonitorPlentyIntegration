@@ -616,47 +616,37 @@ function showTabContent(evt, tabName) {
             return createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
         }
 
-        getPossibleFieldValues(valueFieldName, expression);
+       var possibleFieldValues = getPossibleFieldValues(expression);
 
-      //  return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+   //    return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
     }
 
-    function getPossibleFieldValues(valueFieldName, expression)
+    function getPossibleFieldValues(expression)
     {
-        var possibleFieldValues = null,
-            attributeCode = expression['code'],
-            IdAttribute = expression["IdAttr"];
+          var attributeCode = expression['code'],
+               IdAttribute = expression["IdAttr"];
         
             var dataOption = {
                 'attributeId' : IdAttribute
             };
       
-           $.ajax({
+            var possibleFieldValues = $.ajax({
                   type: "GET",
                   url: "/getAttributeValueByAttrId" ,
                   data: dataOption,
-                 // async : false,
+                  async : false,
                   success: function(data)
                   {
                       console.log("attributesValues");
-                      console.log(data);
-
-                      var dataAttrValues = null;
-
-                      if(data != null)
-                        dataAttrValues = jQuery.parseJSON( data );
-
-                        console.log("dataAttrValues");
-                        console.log(dataAttrValues);
-
-                        createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, dataAttrValues);                       
-
+                      console.log(data);                          
                   },
                   error: function(xhr)
                   {
                       console.log(xhr);
                   }
               });
+
+              console.log(possibleFieldValues.responseJSON);
     }
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
