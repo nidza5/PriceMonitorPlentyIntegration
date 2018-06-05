@@ -212,6 +212,7 @@ function showTabContent(evt, tabName) {
     var addedAttributeDropdownsFieldNameValues = []; 
     var template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
     var parentTemplateId = "pricemonitor-product-selection";
+    var parentTemplate = document.getElementById(parentTemplateId);
     var attributesCache = {};
     var specificSystemAttributes = {};
     var  addedDateFieldID = null;
@@ -1085,4 +1086,72 @@ function showTabContent(evt, tabName) {
             inputWrapperNode = document[formName][valueFieldName].parentNode;
         
         createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName);
+    }
+
+    function saveFilter() {
+
+        var filters = createFiltersForRequest();
+
+        console.log("filters");
+        console.log(filters);
+
+    }
+
+
+    /**
+     * Creates filters in proper format for a request.
+     *
+     * @returns {Array}
+     */
+    function createFiltersForRequest()
+    {
+        var allGroupElements = parentTemplate.getElementsByClassName(
+                parentTemplateId + '-single-group-wrapper'
+            ),
+            groups = [];
+
+        for (var i = 0; i < allGroupElements.length; i++) {
+            var groupIndex = getGroupAndExpressionIndex(allGroupElements[i].id)['groupIndex'],
+                group = {
+                    'name': 'Group' + ' ' + (i + 1),
+                    'groupOperator':
+                    document[formName][parentTemplateId + 'GroupOperator_'+ groupIndex].value,
+                    'operator':
+                    document[formName][parentTemplateId + 'Operator_'+ groupIndex].value,
+                    'expressions': []
+                },
+                attributeCodeSelector = '.pricemonitor-form-field[name^=' + parentTemplateId +
+                    'ExpressionAttrCode_' + groupIndex,
+                groupFields = allGroupElements[i].querySelectorAll(attributeCodeSelector);
+
+            for (var j = 0; j < groupFields.length; j++) {
+                var expressionIndex =
+                        getGroupAndExpressionIndex(groupFields[j]['name'])['expressionIndex'],
+                    conditionFieldName =
+                        parentTemplateId +'ExpressionCondition_' + groupIndex +'-'+ expressionIndex,
+                    valueFieldName =
+                        parentTemplateId +'ExpressionValue_' + groupIndex + '-' + expressionIndex;
+
+                var value = [document[formName][valueFieldName].value];
+
+                // if (attributesCache.hasOwnProperty(groupFields[j].value) &&
+                //     attributesCache[groupFields[j].value].type === 'DateTime'
+                // ) {
+                //     value = [createDateObject(value[0]).toISOString().split('T')[0]];
+                // }
+
+                group['expressions'].push(
+                    {
+                        'code': groupFields[j].value,
+                        'condition': document[formName][conditionFieldName].value,
+                        'type': 'string',
+                        'value': value
+                    }
+                );
+            }
+
+            groups.push(group);
+        }
+
+        return groups;
     }
