@@ -620,7 +620,12 @@ function showTabContent(evt, tabName) {
             console.log("create value field");
             console.log(possibleFieldValues);
 
-            return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
+            var posibleValueField = null;
+
+            if(possibleFieldValues != null)
+                posibleValueField = jQuery.parseJSON(possibleFieldValues);
+
+            return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
          });
     }
 
