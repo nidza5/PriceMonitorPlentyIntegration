@@ -1,8 +1,6 @@
 <?php
- 
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
- require_once __DIR__ . '/ConfigurationService.php';
  require_once __DIR__ . '/FilterStorage.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
