@@ -53,9 +53,9 @@
 
         try {
 
-            // ServiceRegister::registerConfigService(new ConfigurationService());
+           //ServiceRegister::registerConfigService(new ConfigurationService());
 
-           // $filter = self::getPopulatedFilter($filterData, $filterType);
+           $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
