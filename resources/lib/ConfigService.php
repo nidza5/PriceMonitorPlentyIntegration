@@ -1,9 +1,10 @@
 <?php
 
-use Patagona\Pricemonitor\Core\Interfaces\ConfigService as ConfigServiceInterface;
+//use Patagona\Pricemonitor\Core\Interfaces\ConfigService as ConfigServiceInterface;
 // use Plenty\Plugin\ConfigRepository;
 
-class ConfigService implements ConfigServiceInterface
+// class ConfigService implements ConfigServiceInterface
+class ConfigService
 {
 
     // /**
