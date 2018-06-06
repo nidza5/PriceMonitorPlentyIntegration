@@ -57,7 +57,7 @@
 
         //    $filter = self::getPopulatedFilter($filterData, $filterType);
 
-        ServiceRegister::registerFilterStorage(new FilterStorage());
+        ServiceRegister::registerFilterStorage(new FilterStorage(null));
 
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
