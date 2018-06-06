@@ -289,7 +289,10 @@ function showTabContent(evt, tabName) {
 
                         var splitedAttr = allAttributes[k][n].split('-');
 
-                        dropdownInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>"
+                        dropdownInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
+
+                        attributesCache[n] = "Code-" + n;
+
 
                      }
                 }
@@ -472,7 +475,7 @@ function showTabContent(evt, tabName) {
             expressionFormFieldValue =
                 parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
             savedAttribute = attributesCache[expression['code']];
-
+     
         if (!savedAttribute) {
             // saved attribute will not exist when adding new row for adding expressions. It is
             // important to add them in array for initialization drop-downs.
@@ -1047,7 +1050,7 @@ function showTabContent(evt, tabName) {
              * @type {{code: *, type: string, value: Array}}
              */
             var expression = {
-                'code': "",
+                'code': IdAttribute,
                 'type': dataType ? dataType : 'text',
                 'IdAttr' : IdAttribute,
                 'value': []
@@ -1055,6 +1058,11 @@ function showTabContent(evt, tabName) {
             expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
             groupIndex = expressionAndGroupIndexes['groupIndex'],
             expressionIndex = expressionAndGroupIndexes['expressionIndex'];
+
+            var expressionFormFieldName =
+                    parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
+
+            $("#"+expressionFormFieldName).val(IdAttribute);
 
         loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
         loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
