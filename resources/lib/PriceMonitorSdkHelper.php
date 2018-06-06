@@ -63,7 +63,7 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return $filter;
+            return $filterResult;
 
         } catch(\Exception $ex) 
         {
