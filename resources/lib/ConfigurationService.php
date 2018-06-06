@@ -13,10 +13,10 @@ class ConfigurationService implements ConfigService
     private $config;
 
 
-    public function __construct(ConfigRepository $config)
-    {
-         $this->config = $config;
-    }
+    // public function __construct(ConfigRepository $config)
+    // {
+    //      $this->config = $config;
+    // }
 
     public function getCredentials()
     {
