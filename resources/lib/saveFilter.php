@@ -10,6 +10,8 @@ $filterType = SdkRestApi::getParam('filterType');
 
 $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 
-return PriceMonitorSdkHelper::saveFilter($filterData,$filterType,$priceMonitorId);
+$productFilterRepo = SdkRestApi::getParam('productFilterRepo');
+
+return PriceMonitorSdkHelper::saveFilter($filterData,$filterType,$priceMonitorId,$productFilterRepo);
 
 ?>

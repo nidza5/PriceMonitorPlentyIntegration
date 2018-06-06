@@ -61,7 +61,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          $filterForSave =  $this->sdkService->call("saveFilter", [
             'filterData' => $requestData['filters'],
             'filterType' => $requestData['type'],
-            'priceMonitorId' => $requestData['pricemonitorId']
+            'priceMonitorId' => $requestData['pricemonitorId'],
+            'productFilterRepo' => $this->productFilterRepo
         ]);
       
          return json_encode($filterForSave);

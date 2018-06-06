@@ -47,7 +47,7 @@
     }
 
 
-    public static function saveFilter($filterData, $filterType, $pricemonitorId)
+    public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo)
     {
 
         try {
@@ -57,7 +57,7 @@
             $client = new PriceMonitorHttpClient();
             ServiceRegister::registerHttpClient($client);
 
-           ServiceRegister::registerFilterStorage(new FilterStorage(null));
+           ServiceRegister::registerFilterStorage(new FilterStorage($productFilterRepo));
            $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
