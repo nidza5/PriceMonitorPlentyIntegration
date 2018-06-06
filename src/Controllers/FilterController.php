@@ -76,21 +76,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
             $requestData = $request->all();
 
-        //     $priceMonitorId = 0;
+            $priceMonitorId = 0;
 
-        //     if($requestData != null)
-        //         $priceMonitorId = $requestData['priceMonitorId'];
+            if($requestData != null)
+                $priceMonitorId = $requestData['priceMonitorId'];
 
-        //         $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
+                $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
-        //         $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-        //             'filterType' => FilterType::EXPORT_PRODUCTS,
-        //             'priceMonitorId' => $priceMonitorId,
-        //             'productFilterRepo' => $filter
-        //         ]);    
+                $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+                    'filterType' => FilterType::EXPORT_PRODUCTS,
+                    'priceMonitorId' => $priceMonitorId,
+                    'productFilterRepo' => $filter
+                ]);    
 
-        //   return json_encode($filters);  
+          return json_encode($filters);  
 
-          return null;
+        //   return null;
       }
  }
