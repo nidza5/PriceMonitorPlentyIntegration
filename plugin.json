@@ -6,7 +6,7 @@
 	"type":"template",
 	"dependencies":{
 	  "patagona/pricemonitor-core":"dev-master",
-	  "guzzlehttp/guzzle": "6.2.*"
+	  "guzzlehttp/guzzle": "5.3.*"
     },
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
 	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
