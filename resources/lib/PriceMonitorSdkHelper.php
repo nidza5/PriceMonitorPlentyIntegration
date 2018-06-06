@@ -58,7 +58,7 @@
             ServiceRegister::registerHttpClient($client);
 
           //  ServiceRegister::registerFilterStorage(new FilterStorage(null));
-            $filter = self::getPopulatedFilter($filterData, $filterType);
+          //  $filter = self::getPopulatedFilter($filterData, $filterType);
 
             // $filterRepository = new FilterRepository();
             // $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
