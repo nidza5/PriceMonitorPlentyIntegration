@@ -2,7 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
-//  require_once __DIR__ . '/ConfigurationService.php';
+ require_once __DIR__ . '/ConfigService.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
@@ -53,11 +53,9 @@
 
         try {
 
-        //     ServiceRegister::registerConfigService(new ConfigurationService());
+            ServiceRegister::registerConfigService(new ConfigService());
 
-        //    $filter = self::getPopulatedFilter($filterData, $filterType);
-
-            ServiceRegister::registerFilterStorage(new FilterStorage(null));
+          //  ServiceRegister::registerFilterStorage(new FilterStorage(null));
             $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
