@@ -52,7 +52,7 @@
 
         try {
             require_once __DIR__ . '/ConfigService.php';
-            ServiceRegister::registerConfigService(new ConfigService(null));
+            ServiceRegister::registerConfigService(new ConfigService());
 
           //  ServiceRegister::registerFilterStorage(new FilterStorage(null));
             $filter = self::getPopulatedFilter($filterData, $filterType);

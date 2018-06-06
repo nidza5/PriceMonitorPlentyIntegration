@@ -13,10 +13,10 @@ class ConfigService implements ConfigServiceInterface
     private $config;
 
 
-    public function __construct(ConfigRepository $config)
-    {
-         $this->config = $config;
-    }
+    // public function __construct(ConfigRepository $config)
+    // {
+    //      $this->config = $config;
+    // }
 
     public function getCredentials()
     {
@@ -59,7 +59,7 @@ class ConfigService implements ConfigServiceInterface
      */
     public function set($key, $value)
     {
-        $this->config->set($key,$value);
+       // $this->config->set($key,$value);
     }
 
     public function getComponentName()
