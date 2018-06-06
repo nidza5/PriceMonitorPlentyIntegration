@@ -18,49 +18,49 @@ class ConfigService implements ConfigServiceInterface
          $this->config = $config;
     }
 
-    public function getCredentials()
-    {
-        return [
-            'email' => $this->get('email'),
-            'password' => $this->get('password')
-        ];
-    }
+    // public function getCredentials()
+    // {
+    //     return [
+    //         'email' => $this->get('email'),
+    //         'password' => $this->get('password')
+    //     ];
+    // }
 
-    /**
-     * Sets clients credentials.
-     *
-     * @param $email
-     * @param $password
-     */
-    public function setCredentials($email, $password)
-    {
-          $this->set('email',$email);
-          $this->set('password',$password);
-    }
+    // /**
+    //  * Sets clients credentials.
+    //  *
+    //  * @param $email
+    //  * @param $password
+    //  */
+    // public function setCredentials($email, $password)
+    // {
+    //       $this->set('email',$email);
+    //       $this->set('password',$password);
+    // }
 
-    /**
-     * Get value from config for given key
-     * 
-     * @param $key
-     * 
-     * @return string
-     */
-    public function get($key)
-    {
-        $config = $this->config->get($key);
-        return $config;
-    }
+    // /**
+    //  * Get value from config for given key
+    //  * 
+    //  * @param $key
+    //  * 
+    //  * @return string
+    //  */
+    // public function get($key)
+    // {
+    //     $config = $this->config->get($key);
+    //     return $config;
+    // }
 
-    /**
-     * Create or update config
-     * 
-     * @param $key
-     * @param $value
-     */
-    public function set($key, $value)
-    {
-        $this->config->set($key,$value);
-    }
+    // /**
+    //  * Create or update config
+    //  * 
+    //  * @param $key
+    //  * @param $value
+    //  */
+    // public function set($key, $value)
+    // {
+    //     $this->config->set($key,$value);
+    // }
 }
 
 
