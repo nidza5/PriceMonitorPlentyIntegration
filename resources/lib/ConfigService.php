@@ -47,8 +47,8 @@ class ConfigService implements ConfigServiceInterface
      */
     public function get($key)
     {
-        $config = $this->config->get($key);
-        return $config;
+        // $config = $this->config->get($key);
+        // return $config;
     }
 
     /**
