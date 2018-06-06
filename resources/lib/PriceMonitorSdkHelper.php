@@ -57,7 +57,7 @@
             $client = new PriceMonitorHttpClient();
             ServiceRegister::registerHttpClient($client);
 
-           ServiceRegister::registerFilterStorage(new FilterStorage(null,new ProductFilterRepository()));
+           ServiceRegister::registerFilterStorage(new FilterStorage(null,$productFilterRepo));
            $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
