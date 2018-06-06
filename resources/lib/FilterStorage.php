@@ -13,9 +13,12 @@ class FilterStorage implements FilterStorageInterface
     */
     private $productFilter;
 
-    public function __construct($productFilter)
+    private $productRepo;
+
+    public function __construct($productFilter,$productRepo)
     {
         $this->productFilter = $productFilter;
+        $this->productRepo = $productRepo;
     }
 
     /**
@@ -29,7 +32,7 @@ class FilterStorage implements FilterStorageInterface
      */
      public function saveFilter($contractId, $type, $filter)
      {
-        $filterArr = $this->productFilter->getFilterByContractIdAndType($contractId,"export_products");
+        $filterArr = $this->productRepo->getFilterByContractIdAndType($contractId,"export_products");
 
          return $filterArr;
      }
