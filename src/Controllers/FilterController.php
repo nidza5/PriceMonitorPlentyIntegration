@@ -54,12 +54,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     }
     
 
-      public function saveFilter(Request $request) : string
+      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
       {
           $requestData = $request->all();
 
           echo  "filter repo";
-          echo json_encode($this->productFilterRepo);
+          echo json_encode($productFilterRepo);
 
         //  $filterForSave =  $this->sdkService->call("saveFilter", [
         //     'filterData' => $requestData['filters'],
