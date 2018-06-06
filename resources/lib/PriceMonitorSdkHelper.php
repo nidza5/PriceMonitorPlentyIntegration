@@ -54,6 +54,9 @@
             require_once __DIR__ . '/ConfigService.php';
             ServiceRegister::registerConfigService(new ConfigService());
 
+            $client = new PriceMonitorHttpClient();
+            ServiceRegister::registerHttpClient($client);
+
           //  ServiceRegister::registerFilterStorage(new FilterStorage(null));
             $filter = self::getPopulatedFilter($filterData, $filterType);
 
