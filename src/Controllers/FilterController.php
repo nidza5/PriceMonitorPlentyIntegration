@@ -91,6 +91,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           return json_encode($filters);  
 
-        //   return null;
+          //return "OK";
       }
  }
