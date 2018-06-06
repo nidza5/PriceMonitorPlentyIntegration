@@ -60,10 +60,10 @@
           //  ServiceRegister::registerFilterStorage(new FilterStorage(null));
             $filter = self::getPopulatedFilter($filterData, $filterType);
 
-            $filterRepository = new FilterRepository();
-            $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
+            // $filterRepository = new FilterRepository();
+            // $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return $filterResult;
+            return $filter;
 
         } catch(\Exception $ex) 
         {
