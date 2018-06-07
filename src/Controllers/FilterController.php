@@ -75,7 +75,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       }
 
-      public function getFilters(Request $request) :string 
+      public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
       {
             $requestData = $request->all();
 
@@ -89,7 +89,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                     'filterType' => FilterType::EXPORT_PRODUCTS,
                     'priceMonitorId' => $priceMonitorId,
-                    'productFilterRepo' => $this->productFilterRepo
+                    'productFilterRepo' => $productFilterRepo
                 ]);    
 
           return json_encode($filters);  
