@@ -15,7 +15,7 @@ class FilterStorage implements FilterStorageInterface
 
     private $productRepo;
 
-    public function __construct($productRepo)
+    public function __construct(ProductFilterRepositoryContract $productRepo)
     {
         $this->productRepo = $productRepo;
     }
