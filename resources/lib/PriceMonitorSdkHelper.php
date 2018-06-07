@@ -80,7 +80,7 @@
     {
         try {
 
-            ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
+            ServiceRegister::registerFilterStorage(new FilterStorage(new ProductFilterRepository()));
 
             $result = array('type' => $filterType, 'filters' => array());
             $filterRepository = new FilterRepository();
