@@ -114,6 +114,8 @@
 
         // return $result;
 
+        return array();
+
         } catch(\Exception $ex)
         {
             return $ex->getMessage();
