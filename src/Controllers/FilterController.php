@@ -65,7 +65,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'filterData' => $requestData['filters'],
             'filterType' => $requestData['type'],
             'priceMonitorId' => $requestData['pricemonitorId'],
-            'productFilterRepositoryParam' => $this->productFilterRepo
+            'productFilterRepositoryParam' => $productFilterRepo
         ]);
       
          return json_encode($filterForSave);
