@@ -48,7 +48,7 @@ class FilterStorage implements FilterStorageInterface
      {
          $filterOriginal = $this->productRepo->getFilterByContractIdAndType($contractId,$type);
 
-         return ($filterOriginal !== null) ? $filter['serializedFilter'] : null;
+         return ($filterOriginal !== null) ? $filterOriginal['serializedFilter'] : null;
      }
 }
 
