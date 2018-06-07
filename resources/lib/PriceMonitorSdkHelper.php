@@ -1,8 +1,9 @@
 <?php
 
-
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
+ require_once __DIR__ . '/../../src/Repositories/ProductFilterRepository.php';
+
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
@@ -18,7 +19,7 @@
  class PriceMonitorSdkHelper
  {
     public static function loginInPriceMonitor($email,$password)
-   { 
+    { 
         try {
             new ServiceRegister();
 
@@ -40,7 +41,7 @@
 
             return $response;
         }
-    }
+     }
 
     public static function setUpCredentials($email,$password)
     {
