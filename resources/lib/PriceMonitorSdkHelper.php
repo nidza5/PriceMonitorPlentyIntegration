@@ -1,8 +1,8 @@
 <?php
 
+
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
- require_once __DIR__ . '/../../Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
@@ -81,7 +81,7 @@
     {
         try {
 
-            ServiceRegister::registerFilterStorage(new FilterStorage(new ProductFilterRepository()));
+            ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
 
             $result = array('type' => $filterType, 'filters' => array());
             $filterRepository = new FilterRepository();
