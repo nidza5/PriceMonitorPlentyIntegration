@@ -65,7 +65,7 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return $filterData;
+            return $filter;
 
         } catch(\Exception $ex) 
         {
@@ -132,35 +132,47 @@
      */
     public static function getPopulatedFilter($filterData, $filterType)
     {
-        $filterGroups = array();
-        foreach ($filterData as $key => $filterGroup) {
-            if (empty($filterGroup['expressions'])) {
-                continue;
+
+        try {
+
+            $filterGroups = array();
+            foreach ($filterData as $key => $filterGroup) {
+                if (empty($filterGroup['expressions'])) {
+                    continue;
+                }
+
+                $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
+                $group = new Group($name, $filterGroup['groupOperator']);
+
+                $expressions = array();
+                foreach ($filterGroup['expressions'] as $expression) {
+                    $expressions[] = new Expression(
+                        $expression['code'],
+                        $expression['condition'],
+                        $expression['type'],
+                        $expression['value'],
+                        $filterGroup['operator']
+                    );
+                }
+
+                $group->setExpressions($expressions);
+                $filterGroups[] = $group;
             }
 
-            $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
-            $group = new Group($name, $filterGroup['groupOperator']);
+            $filter = new Filter('Filter', $filterType);
+            $filter->setExpressions($filterGroups);
+            return $filter;
+            
+        } catch(\Exception $ex) 
+        {    
+            $response = [
+                'Code' => $ex->getCode(),
+                'Message' => $ex->getMessage()
+             ];
 
-            $expressions = array();
-            foreach ($filterGroup['expressions'] as $expression) {
-                $expressions[] = new Expression(
-                    $expression['code'],
-                    $expression['condition'],
-                    $expression['type'],
-                    $expression['value'],
-                    $filterGroup['operator']
-                );
-            }
-
-            $group->setExpressions($expressions);
-            $filterGroups[] = $group;
-        }
-
-        $filter = new Filter('Filter', $filterType);
-        $filter->setExpressions($filterGroups);
-        return $filter;
+             return $response;
+        }        
     }
-
  }
 
 ?>
