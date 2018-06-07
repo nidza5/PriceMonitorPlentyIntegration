@@ -468,4 +468,18 @@ section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-drop
     width: 100%;
 }
 
+/**********************************************   ATTRIBUTE MAPPING  ********************************************************/
 
+section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-dropdown-wrapper input {
+    width: 100%;
+}
+
+#attributes-mapping-custom-tags .form-row .filterable-dropdown-wrapper {
+    margin: 0 10px;
+    position: relative;
+}
+
+.filterable-dropdown-wrapper,
+.filterable-dropdown-wrapper input {
+    font-size: 12px;
+}
