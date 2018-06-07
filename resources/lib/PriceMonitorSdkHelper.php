@@ -3,7 +3,7 @@
 // define(root, $_SERVER['DOCUMENT_ROOT']);
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
- require_once $_SERVER['DOCUMENT_ROOT'] . '/src/Repositories/ProductFilterRepository.php';
+ require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
