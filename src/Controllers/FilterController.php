@@ -61,14 +61,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           
           return json_encode($productFilterRepo);
 
-        //  $filterForSave =  $this->sdkService->call("saveFilter", [
-        //     'filterData' => $requestData['filters'],
-        //     'filterType' => $requestData['type'],
-        //     'priceMonitorId' => $requestData['pricemonitorId'],
-        //     'productFilterRepo' => $this->productFilterRepo
-        // ]);
+         $filterForSave =  $this->sdkService->call("saveFilter", [
+            'filterData' => $requestData['filters'],
+            'filterType' => $requestData['type'],
+            'priceMonitorId' => $requestData['pricemonitorId'],
+            'productFilterRepo' => $this->productFilterRepo
+        ]);
       
-        //  return json_encode($filterForSave);
+         return json_encode($filterForSave);
 
         // $productFilter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
         // $productFilter->$contractId =  $productFilter['']   
