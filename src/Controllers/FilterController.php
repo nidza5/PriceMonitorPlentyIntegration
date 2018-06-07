@@ -70,7 +70,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       
         //  return json_encode($filterForSave);
 
-        $productFilter = $productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
+        $productFilter = $productFilterRepo->getFilterByContractIdAndType($requestData['pricemonitorId'],FilterType::EXPORT_PRODUCTS);
         return json_encode($productFilter);
 
       }
