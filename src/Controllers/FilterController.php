@@ -89,7 +89,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
                     'filterType' => FilterType::EXPORT_PRODUCTS,
                     'priceMonitorId' => $priceMonitorId,
-                    'productFilterRepo' => &$productFilterRepo
+                    'productFilterRepo' => $productFilterRepo
                 ]);    
 
           return json_encode($filters);  

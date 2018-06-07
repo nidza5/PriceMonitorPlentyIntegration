@@ -31,9 +31,6 @@ class FilterStorage implements FilterStorageInterface
      */
      public function saveFilter($contractIds, $type, $filter)
      {
-            return [
-                "id" => 5
-            ];
         // $f = $this->productRepo->getFilterByContractIdAndType($contractIds,"export_products");
         // return $f;
      }
