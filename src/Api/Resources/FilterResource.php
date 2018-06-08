@@ -12,7 +12,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
  * Class OrderResource
  * @package IO\Api\Resources
  */
-class OrderResource extends ApiResource
+class FilterResource extends ApiResource
 {
     /**
      * OrderResource constructor.
@@ -33,8 +33,9 @@ class OrderResource extends ApiResource
 	{
 		// $page  = (int)$this->request->get("page", 1);
 		// $items = (int)$this->request->get("items", 10);
-		// $data = pluginApp(CustomerService::class)->getOrders($page, $items);
-		// return $this->response->create($data, ResponseCode::OK);
+        // $data = pluginApp(CustomerService::class)->getOrders($page, $items);
+        $data = [];
+		 return $this->response->create($data, ResponseCode::OK);
 	}
     /**
      * Create an order
