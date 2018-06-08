@@ -1040,6 +1040,9 @@ function showTabContent(evt, tabName) {
             
          var attrValue = $("#" + id + " option:selected").attr("value"); 
 
+         console.log("attr value");
+         console.log(attrValue);
+
         var nameFieldIdentifier = $(sender).attr("name");
 
           /**
