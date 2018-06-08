@@ -144,8 +144,7 @@
                 $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
                 $group = new Group($name, $filterGroup['groupOperator']);
 
-                return $group; 
-
+                
                 $expressions = array();
                 foreach ($filterGroup['expressions'] as $expression) {
                     $expressions[] = new Expression(
@@ -162,7 +161,7 @@
             }
 
             $filter = new Filter('Filter', $filterType);
-            $filter->setExpressions($filterGroups);
+           // $filter->setExpressions($filterGroups);
             return $filter;
             
         } catch(\Exception $ex) 
