@@ -161,8 +161,8 @@
             }
 
             $filter = new Filter('Filter', $filterType);
-           // $filter->setExpressions($filterGroups);
-            return $filter;
+            $filter->setExpressions($filterGroups);
+            return (array)$filter;
             
         } catch(\Exception $ex) 
         {    
