@@ -12,13 +12,13 @@ use PriceMonitorPlentyIntegration\Models\ProductFilter;
 // use IO\Services\OrderService;
 // use IO\Services\CustomerService;
 /**
- * Class OrderResource
+ * Class FilterResource
  * @package IO\Api\Resources
  */
 class FilterResource extends ApiResource
 {
     /**
-     * OrderResource constructor.
+     * FilterResource constructor.
      * @param Request $request
      * @param ApiResponse $response
      */
