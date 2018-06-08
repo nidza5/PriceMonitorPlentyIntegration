@@ -67,8 +67,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'priceMonitorId' => $requestData['pricemonitorId'],
             'productFilterRepositoryParam' => $productFilterRepo
         ]);
+
+         $unserializeFilters = unserialize($filterForSave);
       
-          return json_encode($filterForSave);
+          return json_encode($unserializeFilters);
 
         // return $filterForSave;
 
