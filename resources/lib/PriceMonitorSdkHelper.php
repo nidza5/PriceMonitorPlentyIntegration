@@ -65,7 +65,11 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return serialize($filter);
+            $filters = array();
+
+            $filters[] = $filter;
+
+            return $filters;
 
         } catch(\Exception $ex) 
         {

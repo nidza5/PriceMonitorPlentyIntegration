@@ -30,8 +30,7 @@ class FilterStorage implements FilterStorageInterface
      * @return void
      */
      public function saveFilter($contractIds, $type, $filter)
-     {
-         return;
+     { 
         // $f = $this->productRepo->getFilterByContractIdAndType($contractIds,"export_products");
         // return $f;
      }
