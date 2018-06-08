@@ -17,11 +17,11 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
     public function map(Router $router,ApiRouter $api)
     {
 
-        $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources'], function ($api)
-		{
-            $api->post('priceMonitor/filter', 'FilterResource@store');
+        // $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources'], function ($api)
+		// {
+        //     $api->post('priceMonitor/filter', 'FilterResource@store');
 			
-		});
+		// });
 
         $router->get('integrationhome', 'PriceMonitorPlentyIntegration\Controllers\ContentController@home');
         $router->get('loginPriceMonitor', 'PriceMonitorPlentyIntegration\Controllers\ContentController@loginPriceMonitor');
