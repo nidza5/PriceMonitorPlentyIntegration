@@ -41,7 +41,7 @@ class FilterStorage implements FilterStorageInterface
      { 
 
         $client = new PriceMonitorHttpClient();
-        $dataaa =  $client->request("POST", "priceMonitor/filter");
+        $dataaa =  $client->request("POST", "https://023c892989219d0ada8822ece320bfdf1a4deb5a.plentymarkets-cloud-de.com/priceMonitor/filter");
 
         // $filterOriginals = pluginApp(ProductFilter::class);
         // $this->dataBase->save($filterOriginals); 
