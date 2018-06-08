@@ -9,7 +9,6 @@ use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 use PriceMonitorPlentyIntegration\Models\ProductFilter;
-use Plenty\Plugin\Log\Loggable;
 // use IO\Services\OrderService;
 // use IO\Services\CustomerService;
 /**
@@ -51,7 +50,6 @@ class FilterResource extends ApiResource
         // $type = $this->request->get('type', '');
         // $filter = $this->request->get('filter', '');
 
-        $this->getLogger("FilterResource_store")->debug('u store metodi', "");
 
           $filterOriginals = pluginApp(ProductFilter::class);
           $filterOriginals->contractId = "1";
