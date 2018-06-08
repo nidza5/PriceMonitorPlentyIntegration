@@ -4,6 +4,8 @@ use Patagona\Pricemonitor\Core\Interfaces\FilterStorage as FilterStorageInterfac
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+use PriceMonitorPlentyIntegration\Models\ProductFilter;
+use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 
 class FilterStorage implements FilterStorageInterface
 {
@@ -31,6 +33,9 @@ class FilterStorage implements FilterStorageInterface
      */
      public function saveFilter($contractIds, $type, $filter)
      { 
+        $filterOriginals = pluginApp(ProductFilter::class);
+        $this->dataBase->save($filterOriginals); 
+
         // $f = $this->productRepo->getFilterByContractIdAndType($contractIds,"export_products");
         // return $f;
      }

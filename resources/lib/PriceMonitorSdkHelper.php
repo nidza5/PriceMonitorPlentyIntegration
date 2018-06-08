@@ -64,10 +64,8 @@
 
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
-            
-            $filters = array();
-
-            return json_decode($filters);
+           
+            return $filter;
 
         } catch(\Exception $ex) 
         {
