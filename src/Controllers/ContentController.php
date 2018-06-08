@@ -164,7 +164,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           $originalfilter = $this->productFilterRepo->getAllFilters();
           echo "filters";
-          echo $originalfilter;
+          echo json_encode($originalfilter);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
