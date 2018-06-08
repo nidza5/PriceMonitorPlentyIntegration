@@ -68,7 +68,7 @@
             $returnedArray = [
                 "contractId" => $pricemonitorId,
                 "filterType" => $filterType,
-                 "filter" => serialize($filter)
+                 "filter" => $filterResult
             ];
 
             return $returnedArray;
