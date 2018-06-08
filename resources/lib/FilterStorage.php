@@ -40,8 +40,15 @@ class FilterStorage implements FilterStorageInterface
      public function saveFilter($contractIds, $type, $filter)
      { 
 
+         $dataTransfer = [
+                "ContractId" => $contractIds,
+                 "type" => $type,
+                 "filter" => $filter
+         ];
+
         $client = new PriceMonitorHttpClient();
-        $dataaa =  $client->request("POST", "https://023c892989219d0ada8822ece320bfdf1a4deb5a.plentymarkets-cloud-de.com/priceMonitor/filter");
+        $savedData =  $client->request("POST", "https://023c892989219d0ada8822ece320bfdf1a4deb5a.plentymarkets-cloud-de.com/priceMonitor/filter",$dataTransfer);
+        return $savedData;
 
         // $filterOriginals = pluginApp(ProductFilter::class);
         // $this->dataBase->save($filterOriginals); 

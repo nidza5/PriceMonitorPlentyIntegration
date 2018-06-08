@@ -18,6 +18,14 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
          
      }
 
+     public function getAllFilters() : array
+     {
+        $database = pluginApp(DataBase::class);
+        $productFilterList = $database->query(ProductFilter::class)->get();
+        
+        return $productFilterList;
+     }
+
       /**
      * Get filter by contractId 
      *

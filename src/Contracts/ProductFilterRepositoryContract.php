@@ -19,6 +19,8 @@ interface ProductFilterRepositoryContract
      */
     public function getFilterByContractIdAndType($contractId,$type) : ProductFilter;
 
+    public function getAllFilters() :array;
+
     /**
      * Save product filter
      *
