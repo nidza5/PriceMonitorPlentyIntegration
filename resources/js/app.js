@@ -1038,11 +1038,7 @@ function showTabContent(evt, tabName) {
         if(dataType != null && dataType != "" && dataType == "dropdown")
             IdAttribute = $("#" + id + " option:selected").attr("value");  
             
-
-         console.log("idAttribute");
-         console.log(IdAttribute);
-
-         var attrValue = IdAttribute;
+         var attrValue = $("#" + id + " option:selected").attr("value"); 
 
         var nameFieldIdentifier = $(sender).attr("name");
 
@@ -1064,7 +1060,7 @@ function showTabContent(evt, tabName) {
             var expressionFormFieldName =
                     parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
 
-            $("#"+expressionFormFieldName).val(IdAttribute);
+            $("#"+expressionFormFieldName).val(attrValue);
 
         loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
         loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
