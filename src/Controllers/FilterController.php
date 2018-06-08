@@ -68,7 +68,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'productFilterRepositoryParam' => $productFilterRepo
         ]);
             
-        
+
+        $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
         
          return json_encode($filterForSave);
 

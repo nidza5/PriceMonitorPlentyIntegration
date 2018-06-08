@@ -1123,6 +1123,8 @@ function showTabContent(evt, tabName) {
                 console.log("data");
                 console.log(data);
 
+                toastr["success"]("Data are successfully saved!", "Successfully saved!");
+
                 if(data == null) 
                    return;
             },
