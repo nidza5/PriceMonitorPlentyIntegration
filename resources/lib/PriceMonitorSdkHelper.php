@@ -141,10 +141,10 @@
                     continue;
                 }
 
-                echo "u foreach-u";
-
                 $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
                 $group = new Group($name, $filterGroup['groupOperator']);
+
+                return $group; 
 
                 $expressions = array();
                 foreach ($filterGroup['expressions'] as $expression) {
