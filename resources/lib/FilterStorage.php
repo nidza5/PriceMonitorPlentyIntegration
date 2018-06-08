@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . '/PriceMonitorHttpClient.php';
+
+
 use Patagona\Pricemonitor\Core\Interfaces\FilterStorage as FilterStorageInterface;
 use Patagona\Pricemonitor\Core\Infrastructure\Logger;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
@@ -8,6 +11,7 @@ use PriceMonitorPlentyIntegration\Models\ProductFilter;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use Plenty\Plugin\Http\Request;
 use Plenty\Plugin\Http\Response;
+
 
 class FilterStorage implements FilterStorageInterface
 {
@@ -35,8 +39,12 @@ class FilterStorage implements FilterStorageInterface
      */
      public function saveFilter($contractIds, $type, $filter)
      { 
-        $filterOriginals = pluginApp(ProductFilter::class);
-        $this->dataBase->save($filterOriginals); 
+
+        $client = new PriceMonitorHttpClient();
+        $dataaa =  $client->request("POST", "priceMonitor/filter");
+
+        // $filterOriginals = pluginApp(ProductFilter::class);
+        // $this->dataBase->save($filterOriginals); 
 
         // $f = $this->productRepo->getFilterByContractIdAndType($contractIds,"export_products");
         // return $f;
