@@ -30,6 +30,14 @@ interface ProductFilterRepositoryContract
 
     public function saveProductFilter(array $data);
 
+        /**
+     *  deleteAllproductFilter
+     *
+     * @return void
+     */
+
+    public function deleteAllProductFilter();
+
  
     
 

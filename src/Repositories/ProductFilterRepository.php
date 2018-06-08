@@ -61,4 +61,17 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
         return $productFilter[0] === null ? pluginApp(ProductFilter::class) : $productFilter[0];
 
      }
+
+    public function deleteAllProductFilter()
+    {
+        $database = pluginApp(DataBase::class);
+ 
+        $productFilterList = $database->query(ProductFilter::class)->get();
+ 
+        foreach($productFilterList as $con)
+        {
+            $database->delete($con);
+        }
+    }
+
 }

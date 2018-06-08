@@ -56,6 +56,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
       {
+
+          $productFilterRepo->deleteAllProductFilter();
+
           $requestData = $request->all();
 
           
@@ -101,4 +104,5 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           //return "OK";
       }
+      
  }
