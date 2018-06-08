@@ -6,6 +6,8 @@ use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 use PriceMonitorPlentyIntegration\Models\ProductFilter;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
+use Plenty\Plugin\Http\Request;
+use Plenty\Plugin\Http\Response;
 
 class FilterStorage implements FilterStorageInterface
 {
