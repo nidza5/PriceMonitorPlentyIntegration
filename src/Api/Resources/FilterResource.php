@@ -51,7 +51,7 @@ class FilterResource extends ApiResource
         $filter = $this->request->get('filter', '');
 
           $filterOriginals = pluginApp(ProductFilter::class);
-          $filterOriginals->contractId = 1;
+          $filterOriginals->contractId = "1";
           $filterOriginals->type = "string";
           $filterOriginals->serializedFilter = $filter;
           
