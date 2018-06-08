@@ -46,8 +46,9 @@ class FilterResource extends ApiResource
      */
 	public function store():Response
 	{
-		  $filterOriginals = pluginApp(ProductFilter::class);
-          $this->dataBase->save($filterOriginals); 
+          $filterOriginals = pluginApp(ProductFilter::class);
+          $database = pluginApp(DataBase::class);
+          $database->save($filterOriginals); 
 		return $this->response->create($filterOriginals, ResponseCode::OK);
 	}
 }
