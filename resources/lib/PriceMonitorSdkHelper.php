@@ -60,34 +60,7 @@
             ServiceRegister::registerHttpClient($client);
 
            ServiceRegister::registerFilterStorage(new FilterStorage($productFilterRepo));
-          // $filter = self::getPopulatedFilter($filterData, $filterType);
-
-          $filterGroups = array();
-         foreach ($filterData as $key => $filterGroup) {
-            if (empty($filterGroup['expressions'])) {
-                continue;
-            }
-
-            $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
-            $group = new Group($name, $filterGroup['groupOperator']);
-
-            $expressions = array();
-            foreach ($filterGroup['expressions'] as $expression) {
-                $expressions[] = new Expression(
-                    $expression['code'],
-                    $expression['condition'],
-                    $expression['type'],
-                    $expression['value'],
-                    $filterGroup['operator']
-                );
-            }
-
-            $group->setExpressions($expressions);
-            $filterGroups[] = $group;
-        }
-
-        $filter = new Filter('Filter', $filterType);
-        $filter->setExpressions($filterGroups);
+           $filter = self::getPopulatedFilter($filterData, $filterType);
 
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
@@ -167,6 +140,8 @@
                 if (empty($filterGroup['expressions'])) {
                     continue;
                 }
+
+                echo "u foreach-u";
 
                 $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
                 $group = new Group($name, $filterGroup['groupOperator']);
