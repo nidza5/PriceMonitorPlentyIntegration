@@ -65,7 +65,7 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return json_decode(json_encode($filter),TRUE);
+            return serialize($filter);
 
         } catch(\Exception $ex) 
         {
