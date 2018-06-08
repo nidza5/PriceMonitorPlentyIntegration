@@ -67,9 +67,7 @@
             
             $filters = array();
 
-            $filters[] = $filter;
-
-            return $filters;
+            return json_encode($filters);
 
         } catch(\Exception $ex) 
         {
