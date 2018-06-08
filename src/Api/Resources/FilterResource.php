@@ -6,6 +6,8 @@ use PriceMonitorPlentyIntegration\Api\ApiResource;
 use PriceMonitorPlentyIntegration\Api\ApiResponse;
 use PriceMonitorPlentyIntegration\Api\ResponseCode;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
+use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 // use IO\Services\OrderService;
 // use IO\Services\CustomerService;
 /**
