@@ -65,7 +65,7 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
             
-            return $filter;
+            return (array)$filter;
 
         } catch(\Exception $ex) 
         {
@@ -162,7 +162,7 @@
 
             $filter = new Filter('Filter', $filterType);
             $filter->setExpressions($filterGroups);
-            return (array)$filter;
+            return $filter;
             
         } catch(\Exception $ex) 
         {    
