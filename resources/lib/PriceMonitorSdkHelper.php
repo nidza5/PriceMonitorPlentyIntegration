@@ -66,6 +66,7 @@
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
            
             $returnedArray = [
+                "contractId" => $pricemonitorId,
                 "filterType" => $filterType,
                  "filter" => serialize($filter)
             ];

@@ -15,7 +15,27 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
      */
      public function saveProductFilter(array $data)
      {
-         
+        /**
+         * @var DataBase $database
+         */
+        $database = pluginApp(DataBase::class);
+ 
+        $productFilter = pluginApp(ProductFilter::class);
+
+        $contractId = $data['contractId'];
+
+        $filterType = $data['filterType'];
+
+        $serializedFilter = $data['filter'];
+ 
+        $productFilter->contractId = $contractId;
+
+        $productFilter->type = $filterType;
+
+        $productFilter->serializedFilter = $serializedFilter;
+ 
+        $database->save($productFilter);
+ 
      }
 
      public function getAllFilters() : array
