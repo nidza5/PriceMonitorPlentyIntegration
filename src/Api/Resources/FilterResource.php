@@ -54,6 +54,8 @@ class FilterResource extends ApiResource
           $filterOriginals->contractId = "1";
           $filterOriginals->type = "string";
           $filterOriginals->serializedFilter = $filter;
+
+          throw new \Exception("Exceptions");
           
           $database = pluginApp(DataBase::class);
           $database->save($filterOriginals); 
