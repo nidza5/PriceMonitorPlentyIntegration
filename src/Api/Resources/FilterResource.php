@@ -46,16 +46,15 @@ class FilterResource extends ApiResource
      */
 	public function store():Response
 	{
-        $priceMonitorId = $this->request->get('ContractId', 0);
-        $type = $this->request->get('type', '');
-        $filter = $this->request->get('filter', '');
+        // $priceMonitorId = $this->request->get('ContractId', 0);
+        // $type = $this->request->get('type', '');
+        // $filter = $this->request->get('filter', '');
 
           $filterOriginals = pluginApp(ProductFilter::class);
           $filterOriginals->contractId = "1";
           $filterOriginals->type = "string";
-          $filterOriginals->serializedFilter = $filter;
+          $filterOriginals->serializedFilter = "";
 
-          throw new \Exception("Exceptions");
           
           $database = pluginApp(DataBase::class);
           $database->save($filterOriginals); 
