@@ -65,10 +65,13 @@
             $filterRepository = new FilterRepository();
             $filterResult = $filterRepository->saveFilter($pricemonitorId, $filter);
            
+            $serializedFilter = serialize($filter);
+
+            $unserialized = unserialize($serializedFilter);
             $returnedArray = [
                 "contractId" => $pricemonitorId,
                 "filterType" => $filterType,
-                 "filter" => serialize($filter)
+                 "filter" => (array) $unserialized
             ];
 
             return $returnedArray;
