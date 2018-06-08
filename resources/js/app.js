@@ -1042,6 +1042,8 @@ function showTabContent(evt, tabName) {
          console.log("idAttribute");
          console.log(IdAttribute);
 
+         var attrValue = IdAttribute;
+
         var nameFieldIdentifier = $(sender).attr("name");
 
           /**
