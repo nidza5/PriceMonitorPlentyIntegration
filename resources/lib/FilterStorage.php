@@ -40,15 +40,15 @@ class FilterStorage implements FilterStorageInterface
      public function saveFilter($contractIds, $type, $filter)
      { 
 
-         $dataTransfer = [
-                "ContractId" => $contractIds,
-                 "type" => $type,
-                 "filter" => $filter
-         ];
+        //  $dataTransfer = [
+        //         "ContractId" => $contractIds,
+        //          "type" => $type,
+        //          "filter" => $filter
+        //  ];
 
-        $client = new PriceMonitorHttpClient();
-        $savedData =  $client->request("POST", "https://023c892989219d0ada8822ece320bfdf1a4deb5a.plentymarkets-cloud-de.com/priceMonitor/filter",[], json_encode($dataTransfer));
-        return $savedData;
+        // $client = new PriceMonitorHttpClient();
+        // $savedData =  $client->request("POST", "https://023c892989219d0ada8822ece320bfdf1a4deb5a.plentymarkets-cloud-de.com/priceMonitor/filter",[], json_encode($dataTransfer));
+        // return $savedData;
 
         // $filterOriginals = pluginApp(ProductFilter::class);
         // $this->dataBase->save($filterOriginals); 
@@ -67,7 +67,7 @@ class FilterStorage implements FilterStorageInterface
       */
      public function getFilter($idContract, $typeFilter)
      {
-           return ($this->productRepo !== null) ? $this->productRepo['serializedFilter'] : null;
+           return ($this->productRepo !== null) ? base64_decode($this->productRepo['serializedFilter']) : null;
      }
 }
 
