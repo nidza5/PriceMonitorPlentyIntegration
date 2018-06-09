@@ -60,7 +60,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           $productFilterRepo->deleteAllProductFilter();
 
           $requestData = $request->all();
-
           
          // return json_encode($productFilterRepo);
 
@@ -77,8 +76,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
         
-
-         return json_encode($filterForSave);
+        return json_encode($filterForSave['filter']);
 
         // return $filterForSave;
 
