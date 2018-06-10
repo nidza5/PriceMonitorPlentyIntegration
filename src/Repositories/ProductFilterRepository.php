@@ -18,6 +18,10 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
         /**
          * @var DataBase $database
          */
+
+         if($data == null)
+            return;
+            
         $database = pluginApp(DataBase::class);
  
         $productFilter = pluginApp(ProductFilter::class);
@@ -27,6 +31,9 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
         $filterType = $data['filterType'];
 
         $serializedFilter = $data['filter'];
+
+        if($contractId != null && $filterType != null)
+            $productFilter = $this->getFilterByContractIdAndType($contractId,$filterType);
  
         $productFilter->contractId = $contractId;
 

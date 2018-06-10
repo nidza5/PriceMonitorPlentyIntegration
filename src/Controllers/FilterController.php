@@ -57,12 +57,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
       {
 
-          $productFilterRepo->deleteAllProductFilter();
-
+        //  $productFilterRepo->deleteAllProductFilter();
           $requestData = $request->all();
-          
-         // return json_encode($productFilterRepo);
-
+       
          $filterForSave =  $this->sdkService->call("saveFilter", [
             'filterData' => $requestData['filters'],
             'filterType' => $requestData['type'],
@@ -73,16 +70,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)
             throw new \Exception("some parameters of product filter are null");
 
-
         $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
         
         return json_encode($filterForSave['filter']);
-
-        // return $filterForSave;
-
-        // $productFilter = $productFilterRepo->getFilterByContractIdAndType($requestData['pricemonitorId'],FilterType::EXPORT_PRODUCTS);
-        // return json_encode($productFilter);
-
       }
 
       public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
