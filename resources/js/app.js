@@ -457,6 +457,7 @@ function showTabContent(evt, tabName) {
             expressionFormFieldValue =
                 parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
             savedAttribute = attributesCache["Code-" + expression['code']];
+            
      
         if (!savedAttribute) {
             // saved attribute will not exist when adding new row for adding expressions. It is
@@ -477,7 +478,7 @@ function showTabContent(evt, tabName) {
                         'autocomplete="off" ' +
                         'onchange="loadConditionsAndAttributeValues(this)" ' +
                         'value="' +
-                        (savedAttribute && savedAttribute.hasOwnProperty('code') ? savedAttribute['code'] : "")
+                        (savedAttribute  ? savedAttribute : "")
                         + '" ' +
                         (savedAttribute ? "readonly disabled" : "") + ' ' +
                         'required' +
