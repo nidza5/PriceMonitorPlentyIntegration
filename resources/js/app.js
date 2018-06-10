@@ -61,8 +61,7 @@ function assignDataToContract(el) {
 
 function setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue) {
 
-    $("#idContract").val(idContract);
-    
+    $("#idContract").val(idContract);    
     $("#contractId").val(contractId);
 
     if(contractName != null && contractName != "")
@@ -131,7 +130,6 @@ function showTabContent(evt, tabName) {
             evt.currentTarget.className += " active";
     }
 }
-
 
  function updateContractInfo() {
 
@@ -246,9 +244,7 @@ function showTabContent(evt, tabName) {
                 if(data != null)
                     dataResult = jQuery.parseJSON(data);
 
-
                 fillFormWithData(dataResult);
-
             },
             error: function(xhr)
             {
@@ -261,11 +257,8 @@ function showTabContent(evt, tabName) {
          * Sets all options in filterable drop-downs.
          */
     function fillFormWithData(response) {
-
          dropdownInnerHtml = generateAllAttributesCacheAndDropdownInnerHtml(response);
-
          renderFiltersForm();
-
     }
 
 
@@ -283,22 +276,13 @@ function showTabContent(evt, tabName) {
                 for(var n in allAttributes[k])
                 {
                     if (allAttributes[k].hasOwnProperty(n)) {
-                        console.log("Key is " + n);
-                        console.log("Value is ");
-                        console.log(allAttributes[k][n]);
-
                         var splitedAttr = allAttributes[k][n].split('-');
-
                         dropdownInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
-
-                        attributesCache[n] = "Code-" + n;
-
-
+                        attributesCache["Code-"+ n] = n;
                      }
-                }
+                 }
 
                 dropdownInnerHtml += " </optgroup>";
-
             }
         }
         
@@ -308,7 +292,6 @@ function showTabContent(evt, tabName) {
     function renderFiltersForm()
     {
         addedAttributeDropdownsFieldNameValues = [];
-
         template.innerHTML = generateAllGroupsFormFieldsHtml();
 
         // After the template is rendered append event handlers.
@@ -337,7 +320,6 @@ function showTabContent(evt, tabName) {
     function generateAllGroupsFormFieldsHtml()
     {
         var groupsHtml = '';
-
         groupsHtml += generateAllGroupsWithFilterRows(allGroups);
 
         if (allGroups.length === 0) {
@@ -474,7 +456,7 @@ function showTabContent(evt, tabName) {
                 parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex,
             expressionFormFieldValue =
                 parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
-            savedAttribute = attributesCache[expression['code']];
+            savedAttribute = attributesCache["Code-" + expression['code']];
      
         if (!savedAttribute) {
             // saved attribute will not exist when adding new row for adding expressions. It is
@@ -495,7 +477,7 @@ function showTabContent(evt, tabName) {
                         'autocomplete="off" ' +
                         'onchange="loadConditionsAndAttributeValues(this)" ' +
                         'value="' +
-                        (savedAttribute && savedAttribute.hasOwnProperty('label') ? savedAttribute['label'] : "")
+                        (savedAttribute && savedAttribute.hasOwnProperty('code') ? savedAttribute['code'] : "")
                         + '" ' +
                         (savedAttribute ? "readonly disabled" : "") + ' ' +
                         'required' +
