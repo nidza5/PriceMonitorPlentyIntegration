@@ -458,7 +458,7 @@ function showTabContent(evt, tabName) {
                 parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
             savedAttribute = attributesCache["Code-" + expression['code']];
                     
-            console.log("saved attribute");
+            console.log("expression code");
             console.log(savedAttribute);
 
         if (!savedAttribute) {
@@ -480,7 +480,7 @@ function showTabContent(evt, tabName) {
                         'autocomplete="off" ' +
                         'onchange="loadConditionsAndAttributeValues(this)" ' +
                         'value="' +
-                        (savedAttribute  ? savedAttribute : "")
+                        (expression['code']  ? expression['code'] : "")
                         + '" ' +
                         (savedAttribute ? "readonly disabled" : "") + ' ' +
                         'required' +
