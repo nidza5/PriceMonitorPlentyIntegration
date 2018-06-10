@@ -10,7 +10,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\Model;
  * @property int     $id
  * @property string  $contractId
  * @property  string  $type
- * @property string  $serializedFilter
+ * @property array  $serializedFilter
  */
 class ProductFilter extends Model
 {
@@ -21,7 +21,7 @@ class ProductFilter extends Model
      */
     public $contractId    = "";
     public $type          = "";
-    public $serializedFilter  = "";
+    public $serializedFilter  = [];
 
     /**
      * @return string

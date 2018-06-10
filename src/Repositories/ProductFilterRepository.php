@@ -26,7 +26,7 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
 
         $filterType = $data['filterType'];
 
-        $serializedFilter = (string)$data['filter'];
+        $serializedFilter = $data['filter'];
  
         $productFilter->contractId = $contractId;
 

@@ -11,5 +11,7 @@
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
 	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
 				  "PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTableAddNewProperty",
-	 			  "PriceMonitorPlentyIntegration\\Migrations\\CreateProductFilterTable"]
+				   "PriceMonitorPlentyIntegration\\Migrations\\CreateProductFilterTable",
+				   "PriceMonitorPlentyIntegration\\Migrations\\UpdateProductFilterTable"
+				]
 }
