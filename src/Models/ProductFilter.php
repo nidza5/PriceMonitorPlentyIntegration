@@ -9,7 +9,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\Model;
  *
  * @property int     $id
  * @property string  $contractId
- * @property string  $type
+ * @property  string  $type
  * @property string  $serializedFilter
  */
 class ProductFilter extends Model
