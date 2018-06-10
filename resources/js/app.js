@@ -457,8 +457,10 @@ function showTabContent(evt, tabName) {
             expressionFormFieldValue =
                 parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
             savedAttribute = attributesCache["Code-" + expression['code']];
-            
-     
+                    
+            console.log("saved attribute");
+            console.log(savedAttribute);
+
         if (!savedAttribute) {
             // saved attribute will not exist when adding new row for adding expressions. It is
             // important to add them in array for initialization drop-downs.
