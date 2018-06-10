@@ -459,7 +459,7 @@ function showTabContent(evt, tabName) {
             savedAttribute = attributesCache["Code-" + expression['code']];
                     
             console.log("expression code");
-            console.log(savedAttribute);
+            console.log(expression['code']);
 
         if (!savedAttribute) {
             // saved attribute will not exist when adding new row for adding expressions. It is
