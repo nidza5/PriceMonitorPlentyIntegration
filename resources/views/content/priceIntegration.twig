@@ -198,14 +198,14 @@
                                         <div class="col-sm-4">                                    
                                             <div class="filterable-dropdown-wrapper input-wrapper">
                                                 <!--        Filterable drop down    -->
-                                                <select
-                                                    class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-price-attributes"
-                                                    name="attribute-referencePrice"
-                                                    id="attribute-ref-price"
-                                                    autocomplete="off"
-                                                    required
-                                                />
+                                                <select class="js-example-basic-multiple pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-referencePrice[]" id="attribute-ref-price" multiple="multiple">
+                                                    {% if salesPrices is not null %}
+                                                        {% for salePrice in salesPrices %}
+                                                                <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                        {% endfor %}
+                                                    {% endif %}
                                                 </select>
+                                                
                                                 <input type="hidden"
                                                     class="pricemonitor-form-field"
                                                     name="attributeRefPriceMappedCode"
