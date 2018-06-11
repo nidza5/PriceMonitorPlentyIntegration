@@ -314,9 +314,8 @@ function showTabContent(evt, tabName) {
          });
 
          for(i = 0; i <addedAttributeDropdownsFieldNameValues.length; i++) {
-            $("#" + addedAttributeDropdownsFieldNameValues[i].name).select2("val", addedAttributeDropdownsFieldNameValues[i].value);
-            // $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
-        }
+            $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
+         }
     }
 
     function generateAllGroupsFormFieldsHtml()
