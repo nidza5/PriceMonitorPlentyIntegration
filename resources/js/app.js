@@ -312,6 +312,10 @@ function showTabContent(evt, tabName) {
         $(".js-example-basic-single").select2({
             width: '100%'
          });
+
+         for(i = 0; i <addedAttributeDropdownsFieldNameValues.length; i++) {
+            $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
+         }
     }
 
     function generateAllGroupsFormFieldsHtml()
@@ -458,16 +462,24 @@ function showTabContent(evt, tabName) {
             console.log("expression code");
             console.log(expression['code']);
 
-        if (!savedAttribute) {
-            // saved attribute will not exist when adding new row for adding expressions. It is
-            // important to add them in array for initialization drop-downs.
-            addedAttributeDropdownsFieldNameValues.push(
+            if(expression['code'] != null && expression['code'] != "")
+                addedAttributeDropdownsFieldNameValues.push(
                 {
-                    'name': expressionFormFieldValue,
-                    'value': ''
+                    'name': expressionFormFieldValue ,
+                    'value': expression['code'] ? expression['code'] : ""
                 }
-            );
-        }
+            );         
+
+        // if (!savedAttribute) {
+        //     saved attribute will not exist when adding new row for adding expressions. It is
+        //     important to add them in array for initialization drop-downs.
+        //     addedAttributeDropdownsFieldNameValues.push(
+        //         {
+        //             'name': expressionFormFieldValue,
+        //             'value': ''
+        //         }
+        //     );
+        // }
 
         return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
                     '<select ' +
