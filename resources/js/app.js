@@ -267,9 +267,6 @@ function showTabContent(evt, tabName) {
 
         for (var k in allAttributes){
             if (allAttributes.hasOwnProperty(k)) {
-                console.log("Key is " + k);
-                console.log("Value is ");
-                console.log(allAttributes[k]);
 
                 dropdownInnerHtml += "<optgroup label= "+k+">";
 

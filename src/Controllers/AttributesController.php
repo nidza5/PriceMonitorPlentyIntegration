@@ -77,17 +77,38 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
        $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
 
-       foreach($systemAttr as $nonAttr)
-       {
-          $arrSystemAttributes = array(
-            "Id" => $nonAttr,
-            "Group" => "System attributes",
-            "Name" => $nonAttr.'-text',
-       );       
+       $systemAttr = [
+            "VariationN" => "Variation name",
+            "VariationNo" => "Variation No",
+            "GTIN13" => "GTIN 13 barcode",
+            "GTIN128" => "GTIN 128 barcode",
+            "UPC" => "UPC barcode",
+            "IBBN" => "ISBN barcode"
+       ];
+
+    //    foreach($systemAttr as $nonAttr)
+    //    {
+    //       $arrSystemAttributes = array(
+    //         "Id" => $nonAttr,
+    //         "Group" => "System attributes",
+    //         "Name" => $nonAttr.'-text',
+    //    );       
        
+    //         $dataAttributes[] = $arrSystemAttributes;
+    //    }        
+       
+        foreach($systemAttr as $key => $value)
+        {
+            $arrSystemAttributes = array(
+                "Id" => $key,
+                "Group" => "System attributes",
+                "Name" => $value.'-text',
+            );       
+            
             $dataAttributes[] = $arrSystemAttributes;
-       }        
-       
+        }
+
+
         foreach($resultAttributes['entries'] as $att) 
         {
             $arrNonSystemAttributes = array(
