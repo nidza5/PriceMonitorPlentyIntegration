@@ -489,6 +489,7 @@ function showTabContent(evt, tabName) {
                         'id="' + expressionFormFieldValue + '" ' +
                         'autocomplete="off" ' +
                         'onchange="loadConditionsAndAttributeValues(this)" ' +
+                        'data-type="' + expression['type'] + '" ' +
                         'value="' +
                         (expression['code']  ? expression['code'] : "")
                         + '" ' +
