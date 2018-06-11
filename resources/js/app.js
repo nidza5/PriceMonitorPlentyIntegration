@@ -315,7 +315,8 @@ function showTabContent(evt, tabName) {
 
          for(i = 0; i <addedAttributeDropdownsFieldNameValues.length; i++) {
             $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
-         }
+            cancelLoadAttributesValues = true;
+        }
     }
 
     function generateAllGroupsFormFieldsHtml()
@@ -1021,46 +1022,53 @@ function showTabContent(evt, tabName) {
         }
     }
 
+    var cancelLoadAttributesValues = false;
 
     function loadConditionsAndAttributeValues(sender,sId)
     {
-        // var id = $(sender).attr("id");        
-        // var dataType = $("#" + id + " option:selected").attr("data-type"); 
-        
-        // var IdAttribute;
-
-        // if(dataType != null && dataType != "" && dataType == "dropdown")
-        //     IdAttribute = $("#" + id + " option:selected").attr("value");  
+        if(cancelLoadAttributesValues)
+        {
+            cancelLoadAttributesValues = false;
+            return;
+        }
             
-        //  var attrValue = $("#" + id + " option:selected").attr("value"); 
+        var id = $(sender).attr("id");        
+        var dataType = $("#" + id + " option:selected").attr("data-type"); 
+        
+        var IdAttribute;
 
-        //  console.log("attr value");
-        //  console.log(attrValue);
+        if(dataType != null && dataType != "" && dataType == "dropdown")
+            IdAttribute = $("#" + id + " option:selected").attr("value");  
+            
+         var attrValue = $("#" + id + " option:selected").attr("value"); 
 
-        // var nameFieldIdentifier = $(sender).attr("name");
+         console.log("attr value");
+         console.log(attrValue);
 
-        //   /**
-        //      * Expression that will be used for creating expression fields.
-        //      *
-        //      * @type {{code: *, type: string, value: Array}}
-        //      */
-        //     var expression = {
-        //         'code': IdAttribute,
-        //         'type': dataType ? dataType : 'text',
-        //         'IdAttr' : IdAttribute,
-        //         'value': []
-        //     },
-        //     expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
-        //     groupIndex = expressionAndGroupIndexes['groupIndex'],
-        //     expressionIndex = expressionAndGroupIndexes['expressionIndex'];
+        var nameFieldIdentifier = $(sender).attr("name");
 
-        //     var expressionFormFieldName =
-        //             parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
+          /**
+             * Expression that will be used for creating expression fields.
+             *
+             * @type {{code: *, type: string, value: Array}}
+             */
+            var expression = {
+                'code': IdAttribute,
+                'type': dataType ? dataType : 'text',
+                'IdAttr' : IdAttribute,
+                'value': []
+            },
+            expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
+            groupIndex = expressionAndGroupIndexes['groupIndex'],
+            expressionIndex = expressionAndGroupIndexes['expressionIndex'];
 
-        //     $("#"+expressionFormFieldName).val(attrValue);
+            var expressionFormFieldName =
+                    parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
 
-        // loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
-        // loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
+            $("#"+expressionFormFieldName).val(attrValue);
+
+        loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
+        loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
     }
 
     function loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression)
