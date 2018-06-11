@@ -26,7 +26,7 @@ class ProductFilterRepository implements ProductFilterRepositoryContract
  
         $productFilter = pluginApp(ProductFilter::class);
 
-        $contractId = $data['contractId'];
+        $contractId = $data['priceMonitorId'];
 
         $filterType = $data['filterType'];
 
