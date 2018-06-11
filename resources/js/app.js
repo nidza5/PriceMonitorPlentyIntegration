@@ -1181,6 +1181,11 @@ function showTabContent(evt, tabName) {
                 //     value = [createDateObject(value[0]).toISOString().split('T')[0]];
                 // }
 
+                var dataTypeFilter = groupFields[j]['data-type'];
+
+                console.log("data type filter");
+                console.log(dataTypeFilter);
+
                 group['expressions'].push(
                     {
                         'code': groupFields[j].value,
