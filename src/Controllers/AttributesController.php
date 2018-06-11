@@ -15,6 +15,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Services\AttributeService;
 
  /**
   * Class AttributesController
@@ -58,33 +59,33 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     public function getAttributes(Request $request) :string 
     {
 
-        $attributesRepo = pluginApp(AttributeRepositoryContract::class);
+    //     $attributesRepo = pluginApp(AttributeRepositoryContract::class);
 
-        $authHelperAttr = pluginApp(AuthHelper::class);
+    //     $authHelperAttr = pluginApp(AuthHelper::class);
         
-        $attributes = null;
+    //     $attributes = null;
 
-        $attributes = $authHelperAttr->processUnguarded(
-          function () use ($attributesRepo, $attributes) {
+    //     $attributes = $authHelperAttr->processUnguarded(
+    //       function () use ($attributesRepo, $attributes) {
           
-              return $attributesRepo->all();
-          }
-      );
+    //           return $attributesRepo->all();
+    //       }
+    //   );
 
-       $resultAttributes = $attributes->toArray();
+    //    $resultAttributes = $attributes->toArray();
         
-       $dataAttributes = array();
+    //    $dataAttributes = array();
 
-       $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
+    //    $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
 
-       $systemAttr = [
-            "VariationN" => "Variation name",
-            "VariationNo" => "Variation No",
-            "GTIN13" => "GTIN 13 barcode",
-            "GTIN128" => "GTIN 128 barcode",
-            "UPC" => "UPC barcode",
-            "IBBN" => "ISBN barcode"
-       ];
+    //    $systemAttr = [
+    //         "VariationN" => "Variation name",
+    //         "VariationNo" => "Variation No",
+    //         "GTIN13" => "GTIN 13 barcode",
+    //         "GTIN128" => "GTIN 128 barcode",
+    //         "UPC" => "UPC barcode",
+    //         "IBBN" => "ISBN barcode"
+    //    ];
 
     //    foreach($systemAttr as $nonAttr)
     //    {
@@ -97,71 +98,78 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     //         $dataAttributes[] = $arrSystemAttributes;
     //    }        
        
-        foreach($systemAttr as $key => $value)
-        {
-            $arrSystemAttributes = array(
-                "Id" => $key,
-                "Group" => "System attributes",
-                "Name" => $value.'-string',
-            );       
+        // foreach($systemAttr as $key => $value)
+        // {
+        //     $arrSystemAttributes = array(
+        //         "Id" => $key,
+        //         "Group" => "System attributes",
+        //         "Name" => $value.'-string',
+        //     );       
             
-            $dataAttributes[] = $arrSystemAttributes;
-        }
+        //     $dataAttributes[] = $arrSystemAttributes;
+        // }
 
 
-        foreach($resultAttributes['entries'] as $att) 
-        {
-            $arrNonSystemAttributes = array(
-                 "Id" => $att['id'],
-                 "Group" => "Non system attributes",
-                 "Name" => $att['backendName'].'-'.$att['typeOfSelectionInOnlineStore'] 
-            );
+        // foreach($resultAttributes['entries'] as $att) 
+        // {
+        //     $arrNonSystemAttributes = array(
+        //          "Id" => $att['id'],
+        //          "Group" => "Non system attributes",
+        //          "Name" => $att['backendName'].'-'.$att['typeOfSelectionInOnlineStore'] 
+        //     );
             
-            $dataAttributes[] = $arrNonSystemAttributes;
-        }
+        //     $dataAttributes[] = $arrNonSystemAttributes;
+        // }
 
 
-        $propertiesRepo = pluginApp(PropertyRepositoryContract::class);
+        // $propertiesRepo = pluginApp(PropertyRepositoryContract::class);
 
-        $authHelperProp = pluginApp(AuthHelper::class);
+        // $authHelperProp = pluginApp(AuthHelper::class);
 
-        $properties = null;
+        // $properties = null;
 
-        $properties = $authHelperProp->processUnguarded(
-          function () use ($propertiesRepo, $properties) {          
-              return $propertiesRepo->all();
-            }
-        );
+        // $properties = $authHelperProp->processUnguarded(
+        //   function () use ($propertiesRepo, $properties) {          
+        //       return $propertiesRepo->all();
+        //     }
+        // );
 
-         $resultProperties = $properties->toArray();
+        //  $resultProperties = $properties->toArray();
 
-         foreach($resultProperties['entries'] as $prop) 
-         {
-             $arrProperties = array(
-                  "Id" => $prop['id'],
-                  "Group" => "Properties",
-                  "Name" => $prop['backendName'].'-'.$prop['valueType']
-             );
+        //  foreach($resultProperties['entries'] as $prop) 
+        //  {
+        //      $arrProperties = array(
+        //           "Id" => $prop['id'],
+        //           "Group" => "Properties",
+        //           "Name" => $prop['backendName'].'-'.$prop['valueType']
+        //      );
              
-             $dataAttributes[] = $arrProperties;
-         }
+        //      $dataAttributes[] = $arrProperties;
+        //  }
 
-         $othersArr = array("Category","Manufacturer","Supplier","Channel");
+        //  $othersArr = array("Category","Manufacturer","Supplier","Channel");
 
-         foreach($othersArr as $other)
-         {
-            $arrOthers = array(
-                "Id" => $other,
-                "Group" => "Other",
-                "Name" => $other.'-string'  
-         );  
+        //  foreach($othersArr as $other)
+        //  {
+        //     $arrOthers = array(
+        //         "Id" => $other,
+        //         "Group" => "Other",
+        //         "Name" => $other.'-string'  
+        //  );  
 
-            $dataAttributes[] = $arrOthers;
-        }     
+        //     $dataAttributes[] = $arrOthers;
+        // }     
 
-        foreach($dataAttributes as $arr){
-            $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
-        }
+        // foreach($dataAttributes as $arr){
+        //     $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
+        // }
+
+        // /**
+        //  * @var AttributeService $attributeService
+        //  */
+        // $attributeService = pluginApp(OrderService::class);
+
+        $finalResult = $attributeService->getAllTypeAttributes();
 
          return json_encode($finalResult);   
 
