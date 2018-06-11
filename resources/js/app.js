@@ -588,7 +588,7 @@ function showTabContent(evt, tabName) {
     {
         return {
             'string': 'string',
-            'dropdown': 'string[]',
+            'dropdown': 'string',
             'text' : 'string',
             'int' : 'integer',
             'float': 'double'
