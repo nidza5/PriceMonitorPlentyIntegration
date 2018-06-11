@@ -584,6 +584,17 @@ function showTabContent(evt, tabName) {
         return expression['type'].indexOf('dropdown') >= 0;
     }
 
+    function getMappedDataTypes()
+    {
+        return {
+            'string': 'string',
+            'dropdown': 'string[]',
+            'text' : 'string',
+            'int' : 'integer',
+            'float': 'double'
+        };
+    }
+
     function getConditionCodeTranslationMap()
     {
         return {
@@ -1183,14 +1194,17 @@ function showTabContent(evt, tabName) {
 
                 var dataTypeFilter = groupFields[j].dataset.type;
 
-                console.log("data type filter");
-                console.log(dataTypeFilter);
+                var typeDatas = getMappedDataTypes();
+                var filterTypeData = typeDatas[dataTypeFilter];
+
+                console.log("filterTypeData");
+                console.log(filterTypeData);
 
                 group['expressions'].push(
                     {
                         'code': groupFields[j].value,
                         'condition': document[formName][conditionFieldName].value,
-                        'type': "string",
+                        'type': filterTypeData,
                         'value': value
                     }
                 );
