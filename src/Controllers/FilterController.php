@@ -77,10 +77,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
       {
-        //    $productFilterRepo->deleteAllProductFilter();
+            $productFilterRepo->deleteAllProductFilter();
             $requestData = $request->all();
             $priceMonitorId = 0;
-            
+
             if($requestData != null)
                 $priceMonitorId = $requestData['priceMonitorId'];
 
