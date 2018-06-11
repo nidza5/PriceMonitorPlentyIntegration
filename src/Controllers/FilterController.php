@@ -67,7 +67,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'productFilterRepositoryParam' => $productFilterRepo
         ]);
 
-        echo json_encode($filterForSave );
             
         if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
             throw new \Exception("some parameters of product filter are null");
@@ -79,7 +78,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
       {
-            // $productFilterRepo->deleteAllProductFilter();
+            $productFilterRepo->deleteAllProductFilter();
             $requestData = $request->all();
             $priceMonitorId = 0;
 

@@ -150,7 +150,6 @@
                 $name = isset($filterGroup['name']) ? $filterGroup['name'] : ('Group ' . (++$key));
                 $group = new Group($name, $filterGroup['groupOperator']);
 
-                
                 $expressions = array();
                 foreach ($filterGroup['expressions'] as $expression) {
                     $expressions[] = new Expression(
