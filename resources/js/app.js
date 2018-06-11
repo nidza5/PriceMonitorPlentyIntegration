@@ -488,7 +488,7 @@ function showTabContent(evt, tabName) {
                         'class="pricemonitor-form-field '  + '" ' +
                         'name="' + expressionFormFieldName + '" ' +
                         'id="' + expressionFormFieldName + '" ' +
-                        'value="' + (savedAttribute ? savedAttribute['code'] : "") + '" ' +
+                        'value="' + (expression['code'] ? expression['code'] : "") + '" ' +
                         'required' +
                     '/>' +
                     '<ul class="pricemonitor-filterable-list ' + parentTemplateId + '-all-attributes">' +
