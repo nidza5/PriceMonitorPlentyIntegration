@@ -1024,43 +1024,43 @@ function showTabContent(evt, tabName) {
 
     function loadConditionsAndAttributeValues(sender,sId)
     {
-        var id = $(sender).attr("id");        
-        var dataType = $("#" + id + " option:selected").attr("data-type"); 
+        // var id = $(sender).attr("id");        
+        // var dataType = $("#" + id + " option:selected").attr("data-type"); 
         
-        var IdAttribute;
+        // var IdAttribute;
 
-        if(dataType != null && dataType != "" && dataType == "dropdown")
-            IdAttribute = $("#" + id + " option:selected").attr("value");  
+        // if(dataType != null && dataType != "" && dataType == "dropdown")
+        //     IdAttribute = $("#" + id + " option:selected").attr("value");  
             
-         var attrValue = $("#" + id + " option:selected").attr("value"); 
+        //  var attrValue = $("#" + id + " option:selected").attr("value"); 
 
-         console.log("attr value");
-         console.log(attrValue);
+        //  console.log("attr value");
+        //  console.log(attrValue);
 
-        var nameFieldIdentifier = $(sender).attr("name");
+        // var nameFieldIdentifier = $(sender).attr("name");
 
-          /**
-             * Expression that will be used for creating expression fields.
-             *
-             * @type {{code: *, type: string, value: Array}}
-             */
-            var expression = {
-                'code': IdAttribute,
-                'type': dataType ? dataType : 'text',
-                'IdAttr' : IdAttribute,
-                'value': []
-            },
-            expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
-            groupIndex = expressionAndGroupIndexes['groupIndex'],
-            expressionIndex = expressionAndGroupIndexes['expressionIndex'];
+        //   /**
+        //      * Expression that will be used for creating expression fields.
+        //      *
+        //      * @type {{code: *, type: string, value: Array}}
+        //      */
+        //     var expression = {
+        //         'code': IdAttribute,
+        //         'type': dataType ? dataType : 'text',
+        //         'IdAttr' : IdAttribute,
+        //         'value': []
+        //     },
+        //     expressionAndGroupIndexes = getGroupAndExpressionIndex(nameFieldIdentifier),
+        //     groupIndex = expressionAndGroupIndexes['groupIndex'],
+        //     expressionIndex = expressionAndGroupIndexes['expressionIndex'];
 
-            var expressionFormFieldName =
-                    parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
+        //     var expressionFormFieldName =
+        //             parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
 
-            $("#"+expressionFormFieldName).val(attrValue);
+        //     $("#"+expressionFormFieldName).val(attrValue);
 
-        loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
-        loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
+        // loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
+        // loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
     }
 
     function loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression)
