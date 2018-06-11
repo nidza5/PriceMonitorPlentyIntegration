@@ -1190,7 +1190,7 @@ function showTabContent(evt, tabName) {
                     {
                         'code': groupFields[j].value,
                         'condition': document[formName][conditionFieldName].value,
-                        'type': dataTypeFilter,
+                        'type': "string",
                         'value': value
                     }
                 );
