@@ -1065,7 +1065,7 @@ function showTabContent(evt, tabName) {
                     parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
 
             $("#"+expressionFormFieldName).val(attrValue);
-            $("#"+expressionFormFieldName ).val(dataType);
+            $("#"+expressionFormFieldName ).attr("data-type",dataType);
 
         loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
         loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
