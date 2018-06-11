@@ -314,8 +314,8 @@ function showTabContent(evt, tabName) {
          });
 
          for(i = 0; i <addedAttributeDropdownsFieldNameValues.length; i++) {
-            $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
             cancelLoadAttributesValues = true;
+            $("#" + addedAttributeDropdownsFieldNameValues[i].name).val(addedAttributeDropdownsFieldNameValues[i].value).trigger('change');
         }
     }
 
