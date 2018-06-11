@@ -1026,7 +1026,7 @@ function showTabContent(evt, tabName) {
 
     function loadConditionsAndAttributeValues(sender,sId)
     {
-        if(cancelLoadAttributesValues)
+        if(cancelLoadAttributesValues === true)
         {
             cancelLoadAttributesValues = false;
             return;
