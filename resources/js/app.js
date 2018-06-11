@@ -70,6 +70,9 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
     $("#salesPriceVariationSelect").val(insertPricesValue);
     
     $("#salesPrice").val(insertSalesPriceValue).change();
+
+    //set sales price value on attribute mapping tab
+    $("#attribute-ref-price").val(insertSalesPriceValue).change();
 }
 
 function updateDataAttributeContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue)
