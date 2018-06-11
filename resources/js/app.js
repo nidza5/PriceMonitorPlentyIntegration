@@ -489,7 +489,6 @@ function showTabContent(evt, tabName) {
                         'id="' + expressionFormFieldValue + '" ' +
                         'autocomplete="off" ' +
                         'onchange="loadConditionsAndAttributeValues(this)" ' +
-                        'data-type="' + expression['type'] + '" ' +
                         'value="' +
                         (expression['code']  ? expression['code'] : "")
                         + '" ' +
@@ -502,6 +501,7 @@ function showTabContent(evt, tabName) {
                         'class="pricemonitor-form-field '  + '" ' +
                         'name="' + expressionFormFieldName + '" ' +
                         'id="' + expressionFormFieldName + '" ' +
+                        'data-type="' + expression['type'] + '" ' +
                         'value="' + (expression['code'] ? expression['code'] : "") + '" ' +
                         'required' +
                     '/>' +
