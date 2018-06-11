@@ -618,7 +618,6 @@ function showTabContent(evt, tabName) {
             }
 
             return createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, possibleFieldValues);
-       
     }
 
     function createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName)
@@ -1066,6 +1065,7 @@ function showTabContent(evt, tabName) {
                     parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex;
 
             $("#"+expressionFormFieldName).val(attrValue);
+            $("#"+expressionFormFieldName ).val(dataType);
 
         loadConditionsForSelectedAttribute(groupIndex, expressionIndex, expression);
         loadAttributeValuesForSelectedAttribute(groupIndex, expressionIndex, expression);
