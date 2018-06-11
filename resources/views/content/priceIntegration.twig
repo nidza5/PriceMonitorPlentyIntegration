@@ -205,7 +205,7 @@
                                                         {% endfor %}
                                                     {% endif %}
                                                 </select>
-                                                
+
                                                 <input type="hidden"
                                                     class="pricemonitor-form-field"
                                                     name="attributeRefPriceMappedCode"
@@ -226,14 +226,14 @@
                                                <div class="row">
                                                     <div class="input-wrapper col-sm-3">
                                                         <!--        Filterable drop down    -->
-                                                        <select
-                                                            class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-price-attributes"
-                                                            name="attribute-minPriceBoundary"
-                                                            id="attribute-min-price"
-                                                            autocomplete="off"
-                                                            required
-                                                        />
+                                                         <select class="js-example-basic-multiple pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-minPriceBoundary[]" id="attribute-min-price" multiple="multiple">
+                                                            {% if salesPrices is not null %}
+                                                                {% for salePrice in salesPrices %}
+                                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
                                                         </select>
+                                
                                                         <input type="hidden"
                                                             class="pricemonitor-form-field"
                                                             name="attribute-minPriceBoundary-code"
@@ -275,12 +275,15 @@
                                                <div class="row">
                                                  <div class="input-wrapper col-sm-3">
                                                     <!--        Filterable drop down    -->
-                                                        <select  class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-price-attributes"
-                                                                 name="attribute-maxPriceBoundary"
-                                                                 id="attribute-max-price"
-                                                                 autocomplete="off"
-                                                                 required
-                                                        /> </select>
+
+                                                    <select class="js-example-basic-multiple pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-maxPriceBoundary[]" id="attribute-max-price" multiple="multiple">
+                                                            {% if salesPrices is not null %}
+                                                                {% for salePrice in salesPrices %}
+                                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        </select>
+                                                            
                                                         <input type="hidden"
                                                             name="attributeMaxPriceMappedCode"
                                                             class="pricemonitor-form-field"

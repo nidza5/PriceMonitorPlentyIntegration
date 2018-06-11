@@ -73,6 +73,8 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
 
     //set sales price value on attribute mapping tab
     $("#attribute-ref-price").val(insertSalesPriceValue).change();
+    $("#attribute-min-price").val(insertSalesPriceValue).change();
+    $("#attribute-max-price").val(insertSalesPriceValue).change();
 }
 
 function updateDataAttributeContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue)
