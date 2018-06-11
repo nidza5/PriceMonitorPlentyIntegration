@@ -146,13 +146,14 @@
                                         <div class="col-sm-4">
                                              <div class="filterable-dropdown-wrapper input-wrapper">
                                                 <!--        Filterable drop down    -->
-                                                <input type="text"
-                                                    class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                <select
+                                                    class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-text-attributes"
                                                     name="attribute-gtin"
                                                     id="attribute-gtin"
                                                     autocomplete="off"
                                                     required
                                                 />
+                                                </select>
                                                 <input type="hidden"
                                                     class="pricemonitor-form-field"
                                                     name="attributeGtinMappedCode"
@@ -171,13 +172,14 @@
                                         <div class="col-sm-4">                                    
                                             <div class="filterable-dropdown-wrapper input-wrapper">
                                                     <!--        Filterable drop down    -->
-                                                    <input type="text"
-                                                        class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                    <select
+                                                        class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-text-attributes"
                                                         name="attribute-name"
                                                         id="attribute-name"
                                                         autocomplete="off"
                                                         required
                                                     />
+                                                    </select>
                                                     <input type="hidden"
                                                         class="pricemonitor-form-field"
                                                         name="attributeNameMappedCode"
@@ -192,17 +194,18 @@
                                     </div> 
 
                                     <div class="form-group row">
-                                        <label for="attribute-ref-price" class="col-sm-2 col-form-label">Reference price:</label>
+                                        <label for="attribute-ref-price" class="col-sm-2 col-form-label ">Reference price:</label>
                                         <div class="col-sm-4">                                    
                                             <div class="filterable-dropdown-wrapper input-wrapper">
                                                 <!--        Filterable drop down    -->
-                                                <input type="text"
-                                                    class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                <select
+                                                    class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-text-attributes"
                                                     name="attribute-referencePrice"
                                                     id="attribute-ref-price"
                                                     autocomplete="off"
                                                     required
                                                 />
+                                                </select>
                                                 <input type="hidden"
                                                     class="pricemonitor-form-field"
                                                     name="attributeRefPriceMappedCode"
@@ -223,13 +226,14 @@
                                                <div class="row">
                                                     <div class="input-wrapper col-sm-3">
                                                         <!--        Filterable drop down    -->
-                                                        <input type="text"
-                                                            class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                        <select
+                                                            class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-text-attributes"
                                                             name="attribute-minPriceBoundary"
                                                             id="attribute-min-price"
                                                             autocomplete="off"
                                                             required
                                                         />
+                                                        </select>
                                                         <input type="hidden"
                                                             class="pricemonitor-form-field"
                                                             name="attribute-minPriceBoundary-code"
@@ -271,13 +275,12 @@
                                                <div class="row">
                                                  <div class="input-wrapper col-sm-3">
                                                     <!--        Filterable drop down    -->
-                                                        <input type="text"
-                                                                 class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                        <select  class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control pricemonitor-filterable-list attributes-mapping-text-attributes"
                                                                  name="attribute-maxPriceBoundary"
                                                                  id="attribute-max-price"
                                                                  autocomplete="off"
                                                                  required
-                                                        />
+                                                        /> </select>
                                                         <input type="hidden"
                                                             name="attributeMaxPriceMappedCode"
                                                             class="pricemonitor-form-field"
@@ -309,9 +312,8 @@
                                         </div>
                                      </div>
                                   </div>
-                                </div>                                                             
-                                        
-                                </fieldset>
+                                </div>                                                            
+                               </fieldset>
                                 <fieldset class="custom-tags scheduler-border" id="attributes-mapping-custom-tags" onsubmit="return false;">
                                     <legend class="scheduler-border">Custom tags</legend>
                                 </fieldset>
