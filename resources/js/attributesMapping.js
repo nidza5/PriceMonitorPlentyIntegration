@@ -1,4 +1,11 @@
 
+$(document).ready(function() {
+   
+   document.getElementById("tabAttMapping").addEventListener("click", fetchDataAndSetPage);
+      
+});
+
+var allMappingsAtttribute = [];
 function fetchDataAndSetPage()
 {
     $.ajax({
@@ -24,18 +31,46 @@ function setAttributesMappingForm(response)
     if(response == null)
         return;
 
-    // Fetch price type attributes because only price types attributes can be mapped on min, max and ref price.
-    Pricemonitor['ajax']['get'](
-        Pricemonitor['config']['urls']['attributes'],
-        {'pricemonitorContractId': Pricemonitor['config']['pricemonitorId'], 'type': 'price'},
-        setPriceAndSavedAttributes,
-        'json',
-        true
-    );
+    console.log("mapping response");
+    console.log(response);
 
-    allAttributes = response['data'];
+    allMappingsAtttribute = response;   
 
-    Pricemonitor['contracts']['utility']['scopeDestroy'](document['pricemonitorAttributesMapping']);
     setListOptionsForTextAttributes();
+}
 
+function setListOptionsForTextAttributes() {
+
+    var textAttrsInnerHtml = '';
+
+    for (var k in allAttributes){
+        if (allAttributes.hasOwnProperty(k)) {
+
+            textAttrsInnerHtml += "<optgroup label= "+k+">";
+
+            for(var n in allAttributes[k])
+            {
+                if (allAttributes[k].hasOwnProperty(n)) {
+                    var splitedAttr = allAttributes[k][n].split('-');
+                     
+                    if(splitedAttr[1] === "string")
+                        textAttrsInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
+                 }
+             }
+             textAttrsInnerHtml += " </optgroup>";
+        }
+    }
+
+    appendListOptionsOnSelectBoxes('attributes-mapping-text-attributes', textAttrsInnerHtml);
+}
+
+ /**
+  * Appends created HTML in dropdowns based on options wrapper class name and options HTML.
+ */
+function appendListOptionsOnSelectBoxes(optionsWrapperClassName, optionsHTML)
+{
+    var optionsWrappers = document.getElementsByClassName(optionsWrapperClassName);
+    for (var i = 0; i < optionsWrappers.length; i++) {
+        optionsWrappers[i].innerHTML = optionsHTML;
+    }
 }
