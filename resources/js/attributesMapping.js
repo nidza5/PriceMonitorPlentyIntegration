@@ -43,15 +43,15 @@ function setListOptionsForTextAttributes() {
 
     var textAttrsInnerHtml = '';
 
-    for (var k in allAttributes){
-        if (allAttributes.hasOwnProperty(k)) {
+    for (var k in allMappingsAtttribute){
+        if (allMappingsAtttribute.hasOwnProperty(k)) {
 
             textAttrsInnerHtml += "<optgroup label= "+k+">";
 
-            for(var n in allAttributes[k])
+            for(var n in allMappingsAtttribute[k])
             {
-                if (allAttributes[k].hasOwnProperty(n)) {
-                    var splitedAttr = allAttributes[k][n].split('-');
+                if (allMappingsAtttribute[k].hasOwnProperty(n)) {
+                    var splitedAttr = allMappingsAtttribute[k][n].split('-');
                      
                     if(splitedAttr[1] === "string")
                         textAttrsInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
