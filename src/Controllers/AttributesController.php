@@ -102,7 +102,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $arrSystemAttributes = array(
                 "Id" => $key,
                 "Group" => "System attributes",
-                "Name" => $value.'-text',
+                "Name" => $value.'-string',
             );       
             
             $dataAttributes[] = $arrSystemAttributes;
