@@ -10,6 +10,24 @@ use Plenty\Plugin\Http\Request;
 
 class AttributeService {
 
+
+     /**
+     *
+     * @var PropertyRepository
+     */
+    private $propertyRepository;
+
+    /**
+     *
+     * @var AttributeRepository
+     */
+    private $attributeRepository;
+
+    /**
+     *
+     * @var AttributeValueRepository
+     */
+    private $attributeValueRepository;
      /**
      * Constructor.
      *
@@ -17,17 +35,11 @@ class AttributeService {
      * @param PropertyRepositoryContract $propRepo
      * @param AttributeRepositoryContract $attributeRepo
      */
-    public function __construct(OrderRepositoryContract $orderRepository)
+    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository)
     {
-        $this->sdkService = $sdkService;
-        $this->config = $config;
-        $this->itemRepository = $itemRepository;
-        $this->session = $session;
-        $this->addressRepository = $addressRepository;
-        $this->countryRepository = $countryRepository;
-        $this->webstoreHelper = $webstoreHelper;
-        $this->paymentHelper = $paymentHelper;
-        $this->orderRepository = $orderRepository;
+        $this->propertyRepository = $propertyRepository;
+        $this->attributeRepository = $attributeRepository;
+        $this->attributeValueRepository = $attributeValueRepository;
     }
 
     public function getAllTypeAttributes()

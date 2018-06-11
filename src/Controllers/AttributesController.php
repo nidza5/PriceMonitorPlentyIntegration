@@ -164,10 +164,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //     $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
         // }
 
-        // /**
-        //  * @var AttributeService $attributeService
-        //  */
-        // $attributeService = pluginApp(OrderService::class);
+        /**
+         * @var AttributeService $attributeService
+         */
+        $attributeService = pluginApp(AttributeService::class);
 
         $finalResult = $attributeService->getAllTypeAttributes();
 
