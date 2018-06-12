@@ -194,8 +194,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  }                  
               }
 
+              $contractsIds = array();
+              
+              foreach($originalContracts as $origContract)
+              {
+                    $contractsIds[] = $origContract->id;
+              }
+
         $templateData = array("contracts" => $originalContracts,
-                            "salesPrices" => $salesPricesEnglish);
+                            "salesPrices" => $salesPricesEnglish,
+                            "contractsIds" => contractsIds);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
