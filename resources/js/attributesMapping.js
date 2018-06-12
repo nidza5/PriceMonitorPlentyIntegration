@@ -1,13 +1,13 @@
 
-// $(document).ready(function() {
+$(document).ready(function() {
    
-//    document.getElementById("tabAttMapping").addEventListener("click", fetchDataAndSetPage);
+   document.getElementById("tabAttMapping").addEventListener("click", fetchDataAndSetPage);
       
-// });
+});
 
 var allMappingsAtttribute = [],
-    templateId = 'pricemonitor-attributes-mapping',
-    template = document.getElementById(templateId),
+    templateIdMappings = 'pricemonitor-attributes-mapping',
+    templateMappings = document.getElementById(templateIdMappings),
     pricemonitorAttributes = ['gtin', 'name', 'referencePrice', 'minPriceBoundary', 'maxPriceBoundary'];
 
 function fetchDataAndSetPage()
