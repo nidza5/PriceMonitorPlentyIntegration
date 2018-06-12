@@ -36,6 +36,8 @@ function setAttributesMappingForm(response)
 
     allMappingsAtttribute = response;   
 
+    setSavedMappings();
+
     setListOptionsForTextAttributes();
 }
 
@@ -73,4 +75,9 @@ function appendListOptionsOnSelectBoxes(optionsWrapperClassName, optionsHTML)
     for (var i = 0; i < optionsWrappers.length; i++) {
         optionsWrappers[i].innerHTML = optionsHTML;
     }
+}
+
+function setSavedMappings() {
+
+
 }

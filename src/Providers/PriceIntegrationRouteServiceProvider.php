@@ -31,5 +31,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
         $router->post('saveFilter', 'PriceMonitorPlentyIntegration\Controllers\FilterController@saveFilter');
         $router->get('getAttributes', 'PriceMonitorPlentyIntegration\Controllers\AttributesController@getAttributes');
         $router->get('getAttributeValueByAttrId', 'PriceMonitorPlentyIntegration\Controllers\AttributesController@getAttributeValueByAttrId');
+        $router->get('getMappedAttributes', 'PriceMonitorPlentyIntegration\Controllers\AttributesMappingController@getMappedAttributes');
+        $router->post('saveAttributesMapping', 'PriceMonitorPlentyIntegration\Controllers\AttributesMappingController@saveAttributesMapping');
     } 
 }
