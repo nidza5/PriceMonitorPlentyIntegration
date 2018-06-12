@@ -289,21 +289,21 @@ function setSavedValuesOnView(response) {
                     ['customTagAttributeCode'].value
             };
 
-            if (!isValidMappingAttributeCode(newMapping['pricemonitorCode']) ||
-                pricemonitorAttributes.indexOf(newMapping['pricemonitorCode'].toLowerCase()) >= 0
-            ) {
-                document['pricemonitorAttributesMapping']
-                    ['customTagPricemonitorCode'].classList.add('pricemonitor-invalid');
+            // if (!isValidMappingAttributeCode(newMapping['pricemonitorCode']) ||
+            //     pricemonitorAttributes.indexOf(newMapping['pricemonitorCode'].toLowerCase()) >= 0
+            // ) {
+            //     document['pricemonitorAttributesMapping']
+            //         ['customTagPricemonitorCode'].classList.add('pricemonitor-invalid');
 
-                return;
-            }
+            //     return;
+            // }
 
-            if (!isValidMappingAttributeCode(newMapping['attributeCode'])) {
-                document['pricemonitorAttributesMapping']
-                    ['customTagAttributeValue'].classList.add('pricemonitor-invalid');
+            // if (!isValidMappingAttributeCode(newMapping['attributeCode'])) {
+            //     document['pricemonitorAttributesMapping']
+            //         ['customTagAttributeValue'].classList.add('pricemonitor-invalid');
 
-                return;
-            }
+            //     return;
+            // }
 
             var customTagsWrapper = document.getElementById('attributes-mapping-custom-tags'),
                 allCustomTagsRows = customTagsWrapper.getElementsByClassName('form-row'),
