@@ -22,7 +22,7 @@ interface AttributesMappingRepositoryContract
     /**
      *  AttributeMapping
      *
-     * @return AttributeMapping[]
+     * @return AttributeMapping
      */
     public function getAttributeMappingByPriceMonitorId($priceMonitorId): AttributeMapping;
 
