@@ -77,6 +77,12 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
     //set sales price value on attribute mapping tab
     adjustOptionPrices(insertSalesPriceValue,"attribute-ref-price");
     addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-ref-price");
+    
+    adjustOptionPrices(insertSalesPriceValue,"attribute-min-price");
+    addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-min-price");
+
+    adjustOptionPrices(insertSalesPriceValue,"attribute-max-price");
+    addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-max-price");
     // $("#attribute-ref-price").val(insertSalesPriceValue).change();
     // $("#attribute-min-price").val(insertSalesPriceValue).change();
     // $("#attribute-max-price").val(insertSalesPriceValue).change();
