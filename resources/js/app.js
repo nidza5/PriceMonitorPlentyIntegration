@@ -93,10 +93,14 @@ function updateDataAttributeContractInfo(idContract,contractId,contractName,inse
 
 function removeOptionPrices(insertSalesPriceValue,idSelect) {
     var selectobject=document.getElementById(idSelect)
-    for (var i=0; i<selectobject.length; i++){
-     if (!isInArray(selectobject.options[i].value, insertSalesPriceValue))
-       selectobject.remove(i);
-     }
+    for (var i=0; i<selectobject.length; i++) {
+     if (!isInArray(selectobject.options[i].value, insertSalesPriceValue)) {
+            //selectobject.remove(i);
+       selectobject.style.display = 'none';
+     } else {
+        selectobject.style.display = 'block';
+     }       
+  }
 }
 
 function isInArray(value, array) {
