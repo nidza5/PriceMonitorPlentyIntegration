@@ -9,6 +9,8 @@ use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
 
 /**
  * Class PriceIntegrationServiceProvider
