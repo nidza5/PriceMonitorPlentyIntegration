@@ -126,7 +126,7 @@ function setSavedMappings() {
         data: dataOption,
         success: function(data)
         {
-            setSavedValuesOnView(response);
+           // setSavedValuesOnView(response);
         },
         error: function(xhr)
         {
