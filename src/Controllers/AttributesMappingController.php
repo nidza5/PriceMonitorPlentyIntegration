@@ -15,10 +15,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
 
  /**
-  * Class AttributesController
+  * Class AttributesMappingController
   * @package PriceMonitorPlentyIntegration\Controllers
   */
- class AttributesController extends Controller
+ class AttributesMappingController extends Controller
  {
      use Loggable;
    
