@@ -230,11 +230,11 @@ function setSavedValuesOnView(response) {
 
         function resetUnsavedFields(dropdownName)
         {
-            document['pricemonitorAttributesMapping'][dropdownName].value = '';
-            document['pricemonitorAttributesMapping'][dropdownName]
-                .parentNode
-                .querySelector('input[type=hidden]')
-                .value = '';
+            // document['pricemonitorAttributesMapping'][dropdownName].value = '';
+            // document['pricemonitorAttributesMapping'][dropdownName]
+            //     .parentNode
+            //     .querySelector('input[type=hidden]')
+            //     .value = '';
         }
 
         /**
