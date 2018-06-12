@@ -123,8 +123,8 @@ function addOptionToSelectIfNotExist(insertSalesPriceValue,idSelect) {
 
             if(optonsForAdd != null) {
                 var option = document.createElement("option");
-                option.text = optonsForAdd.Text;
-                option.value = optonsForAdd.Value;                
+                option.text = optonsForAdd[0].Text;
+                option.value = optonsForAdd[0].Value;                
                 selectobject.appendChild(option);
             }            
         }
