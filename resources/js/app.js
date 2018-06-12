@@ -99,8 +99,8 @@ function adjustOptionPrices(insertSalesPriceValue,idSelect) {
 
     for (var i=0; i<selectobject.length; i++) {
         var salesOption = {
-            "Value" : selectobject.options[i].value,
-            "Text" : selectobject.options[i].text
+            Value : selectobject.options[i].value,
+            Text : selectobject.options[i].text
         };
         
         allPossibileValuesSalesPrices.push(salesOption);
