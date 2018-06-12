@@ -197,15 +197,15 @@
 
                                     <div class="form-group row">
                                         <label for="attribute-ref-price" class="col-sm-2 col-form-label ">Reference price:</label>
+                
                                         <div class="col-sm-4">                                    
                                             <div class="filterable-dropdown-wrapper input-wrapper">
                                                 <!--        Filterable drop down    -->
                                                 <select class="js-example-basic-multiple pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-referencePrice[]" id="attribute-ref-price" multiple="multiple">
                                                     {% if salesPrices is not null %}
                                                         {% for salePrice in salesPrices %}
-                                                            {{salePrice.salesPriceId}}
-                                                            {{contract.salesPricesImport}}
-                                                            {% if salePrice.salesPriceId in contract.salesPricesImport|keys %}
+                                                            
+                                                            {% if salePrice.salesPriceId|string in contract.salesPricesImport|keys %}
                                                                 <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
                                                             {% endif %}
                                                         {% endfor %}
