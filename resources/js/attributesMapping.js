@@ -461,60 +461,60 @@ function saveAttributesMapping()
 
         return mappings;
 
-        function setMandatoryAttributesMappings()
-        {
-            for (var i = 0; i < pricemonitorAttributes.length; i++) {
-                var prop = pricemonitorAttributes[i],
-                    formFieldName = 'attribute-' + prop + '-code',
-                    operand = '',
-                    value = '';
+    function setMandatoryAttributesMappings()
+    {
+        for (var i = 0; i < pricemonitorAttributes.length; i++) {
+            var prop = pricemonitorAttributes[i],
+                formFieldName = 'attribute-' + prop + '-code',
+                operand = '',
+                value = '';
 
-                if (prop === 'minPriceBoundary') {
-                    operand =document['pricemonitorAttributesMapping']
-                        ['attribute-minPriceBoundary-operation'].value;
-                    value = document['pricemonitorAttributesMapping']['attribute-minPriceBoundary-offset']
-                        .value;
-                } else if (prop === 'maxPriceBoundary') {
-                    operand = document['pricemonitorAttributesMapping']
-                        ['attribute-maxPriceBoundary-operation'].value;
-                    value = document['pricemonitorAttributesMapping']['attribute-maxPriceBoundary-offset']
-                        .value;
+            if (prop === 'minPriceBoundary') {
+                operand =document['pricemonitorAttributesMapping']
+                    ['attribute-minPriceBoundary-operation'].value;
+                value = document['pricemonitorAttributesMapping']['attribute-minPriceBoundary-offset']
+                    .value;
+            } else if (prop === 'maxPriceBoundary') {
+                operand = document['pricemonitorAttributesMapping']
+                    ['attribute-maxPriceBoundary-operation'].value;
+                value = document['pricemonitorAttributesMapping']['attribute-maxPriceBoundary-offset']
+                    .value;
+            }
+
+            mappings.push(
+                {
+                    'pricemonitorCode': prop,
+                    'attributeCode': document['pricemonitorAttributesMapping'][formFieldName].value,
+                    'operand': operand,
+                    'value': value
                 }
-
-                mappings.push(
-                    {
-                        'pricemonitorCode': prop,
-                        'attributeCode': document['pricemonitorAttributesMapping'][formFieldName].value,
-                        'operand': operand,
-                        'value': value
-                    }
-                );
-            }
+            );
         }
+    }
 
-        function setCustomAttributesMappings()
-        {
-            var customTagsWrapper = document.getElementById('attributes-mapping-custom-tags'),
-                allRemoveButtons = customTagsWrapper.getElementsByClassName('remove-custom-tag');
+    function setCustomAttributesMappings()
+    {
+        var customTagsWrapper = document.getElementById('attributes-mapping-custom-tags'),
+            allRemoveButtons = customTagsWrapper.getElementsByClassName('remove-custom-tag');
 
-            for (var i = 0; i < allRemoveButtons.length; i++) {
-                var customTagIndexParts = allRemoveButtons[i].id.split('-'),
-                    customTagIndex = customTagIndexParts[customTagIndexParts.length - 1],
-                    customTagIdInputName = 'customTagId-' + customTagIndex,
-                    customAttributeInputName = 'customTagAttributeCode-' + customTagIndex,
-                    customPMAttributeInputName = 'customTagPricemonitorCode-' + customTagIndex;
+        for (var i = 0; i < allRemoveButtons.length; i++) {
+            var customTagIndexParts = allRemoveButtons[i].id.split('-'),
+                customTagIndex = customTagIndexParts[customTagIndexParts.length - 1],
+                customTagIdInputName = 'customTagId-' + customTagIndex,
+                customAttributeInputName = 'customTagAttributeCode-' + customTagIndex,
+                customPMAttributeInputName = 'customTagPricemonitorCode-' + customTagIndex;
 
-                mappings.push(
-                    {
-                        'id': document['pricemonitorAttributesMapping'][customTagIdInputName].value,
-                        'pricemonitorCode':
-                        document['pricemonitorAttributesMapping'][customPMAttributeInputName].value,
-                        'attributeCode':
-                        document['pricemonitorAttributesMapping'][customAttributeInputName].value,
-                        'operand': '',
-                        'value': ''
-                    }
-                );
-            }
+            mappings.push(
+                {
+                    'id': document['pricemonitorAttributesMapping'][customTagIdInputName].value,
+                    'pricemonitorCode':
+                    document['pricemonitorAttributesMapping'][customPMAttributeInputName].value,
+                    'attributeCode':
+                    document['pricemonitorAttributesMapping'][customAttributeInputName].value,
+                    'operand': '',
+                    'value': ''
+                }
+            );
         }
+    }
     }
