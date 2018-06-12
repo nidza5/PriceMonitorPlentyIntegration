@@ -40,7 +40,7 @@ function setAttributesMappingForm(response)
 
     allMappingsAtttribute = response;   
 
-    setSavedMappings();
+  //  setSavedMappings();
 
     setListOptionsForTextAttributes();
 }
