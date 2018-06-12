@@ -7,10 +7,10 @@ use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
 use PriceMonitorPlentyIntegration\Models\AttributeMapping;
  
-class AttributeMappingRepository implements AttributesMappingRepositoryContract
+class AttributesMappingRepository implements AttributesMappingRepositoryContract
 {
      /**
-     * Save productFilter
+     * saveAttributeMapping
      * @param array $data 
      */
      public function saveAttributeMapping(array $data)
