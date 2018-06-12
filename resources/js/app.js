@@ -75,6 +75,7 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
     console.log(insertSalesPriceValue);
 
     //set sales price value on attribute mapping tab
+    removeOptionPrices(insertSalesPriceValue,"attribute-ref-price");
     // $("#attribute-ref-price").val(insertSalesPriceValue).change();
     // $("#attribute-min-price").val(insertSalesPriceValue).change();
     // $("#attribute-max-price").val(insertSalesPriceValue).change();
@@ -90,10 +91,17 @@ function updateDataAttributeContractInfo(idContract,contractId,contractName,inse
 
 }
 
-function removeOptionPrices(insertSalesPriceValue) {
-
-
+function removeOptionPrices(insertSalesPriceValue,idSelect) {
+    var selectobject=document.getElementById(idSelect)
+    for (var i=0; i<selectobject.length; i++){
+     if (!isInArray(selectobject.options[i].value, insertSalesPriceValue))
+       selectobject.remove(i);
+     }
 }
+
+function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
 
 $(document).ready(function() {
      
