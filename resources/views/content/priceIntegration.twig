@@ -203,6 +203,8 @@
                                                 <select class="js-example-basic-multiple pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-referencePrice[]" id="attribute-ref-price" multiple="multiple">
                                                     {% if salesPrices is not null %}
                                                         {% for salePrice in salesPrices %}
+                                                            {{salePrice.salesPriceId}}
+                                                            {{contract.salesPricesImport}}
                                                             {% if salePrice.salesPriceId in contract.salesPricesImport|keys %}
                                                                 <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
                                                             {% endif %}
