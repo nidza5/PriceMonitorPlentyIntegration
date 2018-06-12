@@ -148,7 +148,7 @@ function setSavedValuesOnView(response) {
     for (var i = 0; i < attributeMappings.length; i++) {
         if (pricemonitorAttributes.indexOf(attributeMappings[i]['pricemonitorCode']) >= 0) {
             setMandatoryAttributesValues(attributeMappings[i]);
-        // } else {
+        } //else {
         //     customAttributeIndex++;
         //     createCustomField(customAttributeIndex, attributeMappings[i]);
         // }
