@@ -1,9 +1,9 @@
 
-$(document).ready(function() {
+// $(document).ready(function() {
    
-   document.getElementById("tabAttMapping").addEventListener("click", fetchDataAndSetPage);
+//    document.getElementById("tabAttMapping").addEventListener("click", fetchDataAndSetPage);
       
-});
+// });
 
 var allMappingsAtttribute = [],
     templateId = 'pricemonitor-attributes-mapping',
@@ -40,7 +40,7 @@ function setAttributesMappingForm(response)
 
     allMappingsAtttribute = response;   
 
-  //  setSavedMappings();
+    setSavedMappings();
 
     setListOptionsForTextAttributes();
 }
