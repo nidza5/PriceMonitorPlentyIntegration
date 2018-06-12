@@ -96,7 +96,7 @@ function removeOptionPrices(insertSalesPriceValue,idSelect) {
     for (var i=0; i<selectobject.length; i++) {
      if (!isInArray(selectobject.options[i].value, insertSalesPriceValue)) {
             //selectobject.remove(i);
-       selectobjectoptions[i].style.display = 'none';
+       selectobject.options[i].style.display = 'none';
      } else {
         selectobject.options[i].style.display = 'block';
      }       
