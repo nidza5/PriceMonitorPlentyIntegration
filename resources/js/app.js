@@ -75,7 +75,8 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
     console.log(insertSalesPriceValue);
 
     //set sales price value on attribute mapping tab
-    removeOptionPrices(insertSalesPriceValue,"attribute-ref-price");
+    adjustOptionPrices(insertSalesPriceValue,"attribute-ref-price");
+    addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-ref-price");
     // $("#attribute-ref-price").val(insertSalesPriceValue).change();
     // $("#attribute-min-price").val(insertSalesPriceValue).change();
     // $("#attribute-max-price").val(insertSalesPriceValue).change();
@@ -91,16 +92,43 @@ function updateDataAttributeContractInfo(idContract,contractId,contractName,inse
 
 }
 
-function removeOptionPrices(insertSalesPriceValue,idSelect) {
-    var selectobject=document.getElementById(idSelect)
+var allPossibileValuesSalesPrices = [];
+
+function adjustOptionPrices(insertSalesPriceValue,idSelect) {
+    var selectobject=document.getElementById(idSelect);
+
     for (var i=0; i<selectobject.length; i++) {
+        var salesOption = {
+            "Value" : selectobject.options[i].value,
+            "Text" : selectobject.options[i].text
+        };
+        
+        allPossibileValuesSalesPrices.push(salesOption);
+
      if (!isInArray(selectobject.options[i].value, insertSalesPriceValue)) {
-            //selectobject.remove(i);
-       selectobject.options[i].style.display = 'none';
-     } else {
-        selectobject.options[i].style.display = 'block';
+            selectobject.remove(i);
      }       
   }
+}
+
+function addOptionToSelectIfNotExist(insertSalesPriceValue,idSelect) {
+
+    var selectobject=document.getElementById(idSelect);
+    for (var i=0; i<insertSalesPriceValue.length; i++) { 
+        if ($("#" + idSelect).find('option[value="'+insertSalesPriceValue[i] +'"]').length == 0) {
+
+            var optonsForAdd = allPossibileValuesSalesPrices.filter(function( obj ) {
+                return obj.Value == insertSalesPriceValue[i] ;
+            });
+
+            if(optonsForAdd != null) {
+                var option = document.createElement("option");
+                option.text = optonsForAdd.Text;
+                option.value = optonsForAdd.Value;                
+                selectobject.appendChild(option);
+            }            
+        }
+    }
 }
 
 function isInArray(value, array) {
