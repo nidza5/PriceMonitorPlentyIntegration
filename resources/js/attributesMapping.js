@@ -402,10 +402,11 @@ function setSavedValuesOnView(response) {
 function updateCodeValuesOnInput(sender) {
 
     var id = $(sender).attr("id"); 
+    var name = $(sender).attr("name");
 
     var attrValue = $("#" + id + " option:selected").attr("value"); 
 
-    $(this).next().val(attrValue);
+    $("#" + name + "-code").val(attrValue);
 
 }
 
