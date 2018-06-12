@@ -96,9 +96,9 @@ function removeOptionPrices(insertSalesPriceValue,idSelect) {
     for (var i=0; i<selectobject.length; i++) {
      if (!isInArray(selectobject.options[i].value, insertSalesPriceValue)) {
             //selectobject.remove(i);
-       selectobject.style.display = 'none';
+       selectobjectoptions[i].style.display = 'none';
      } else {
-        selectobject.style.display = 'block';
+        selectobject.options[i].style.display = 'block';
      }       
   }
 }
