@@ -205,7 +205,7 @@
                                                     {% if salesPrices is not null %}
                                                         {% for salePrice in salesPrices %}
                                                             
-                                                            {% if salePrice.salesPriceId in [1,2] %}
+                                                            {% if salePrice.salesPriceId|number_format in [1,2] %}
                                                                 <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
                                                             {% endif %}
                                                         {% endfor %}
