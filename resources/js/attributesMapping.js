@@ -399,6 +399,16 @@ function setSavedValuesOnView(response) {
         }
 }
 
+function updateCodeValuesOnInput(sender) {
+
+    var id = $(sender).attr("id"); 
+
+    var attrValue = $("#" + id + " option:selected").attr("value"); 
+
+    $(this).next().val(attrValue);
+
+}
+
 function saveAttributesMapping()
 {
     console.log("prvi put proba");
