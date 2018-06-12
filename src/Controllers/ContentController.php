@@ -203,7 +203,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish,
-                            "contractsIds" => contractsIds);
+                            "contractsIds" => $contractsIds);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
