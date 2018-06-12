@@ -205,7 +205,7 @@
                                                     {% if salesPrices is not null %}
                                                         {% for salePrice in salesPrices %}
                                                             
-                                                            {% if salePrice.salesPriceId|string in contract.salesPricesImport|keys %}
+                                                            {% if salePrice.salesPriceId in [1,2] %}
                                                                 <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
                                                             {% endif %}
                                                         {% endfor %}
