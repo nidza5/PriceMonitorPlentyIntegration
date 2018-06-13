@@ -56,7 +56,7 @@ class AttributesMappingRepository implements AttributesMappingRepositoryContract
      public function deleteMappingsForContract($contractPriceMonitorId) 
      {
         $database = pluginApp(DataBase::class);
-        $mappingforDelete = getAttributeMappingCollectionByPriceMonitorId($contractPriceMonitorId);
+        $mappingforDelete = $this->getAttributeMappingCollectionByPriceMonitorId($contractPriceMonitorId);
         
         foreach($mappingforDelete as $mapDelete)
         {
