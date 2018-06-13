@@ -81,7 +81,6 @@ function appendListOptionsOnSelectBoxes(optionsWrapperClassName, optionsHTML)
     }
 }
 
-
 /**
  * Creates options inner HTML based on source attributes.
  *
@@ -197,6 +196,7 @@ function setSavedValuesOnView(response) {
             //set dropDown
 
             $('select[name='+dropdownName+']').val(attributeMapping['attributeCode']);
+            $('#' + dropdownName + "-code").val(attributeMapping['attributeCode']);
 
         // Pricemonitor['filterableDropDown']['initDropdown'](
         //     attributeMapping['attributeCode'],
