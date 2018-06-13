@@ -342,7 +342,7 @@
                                         <legend class="scheduler-border">Scheduled export</legend>
                                         
                                         <div class="col-md-12">
-                                            <div class="form-row pricemonitor-form-inline">
+                                            <div class="form-row pricemonitor-form-inline" style="margin-left:2%">
                                                 <input type="checkbox"
                                                     class="pricemonitor-form-field form-check-input"
                                                     name="enableExport"
@@ -353,19 +353,20 @@
                                                 </label>
                                             </div>
 
-                                            <div class="form-row">
+                                            <div class="form-row" style="padding-top:3%;">
                                                 <label for="start-at-date">Start at:</label>
-                                                <input type="text" class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control"
+                                                <input type="text" class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control col-md-6"
                                                     name="startAtDate"
                                                     id="start-at-date"
                                                     autocomplete="off"
                                                     readonly
+                                                    style="margin-left:11%"
                                                     disabled />
                                             </div>
 
-                                            <div class="form-row">
+                                            <div class="form-row" style="padding-top:3%;">
                                                 <label for="repeat-interval">Repeat interval:</label>
-                                                <select title="operation" name="exportInterval"  id="export-interval" class="pricemonitor-form-field form-control" disabled >
+                                                <select title="operation" name="exportInterval"  id="export-interval" class="pricemonitor-form-field form-control col-md-6"   style="margin-left:11%" disabled >
                                                         <option value="14400">4 hours</option>
                                                         <option value="43200">12 hours</option>
                                                         <option value="86400">1 day</option>
@@ -373,7 +374,7 @@
                                                         <option value="604800">1 week</option>
                                                 </select>
                                             </div>
-                                            <div class="form-row">
+                                            <div class="form-group">
                                                 <button type="submit"  class="pricemonitor-input-button btn btn-primary float-right" id="pricemonitor-product-export-submit"  name="submit">
                                                     Save
                                                 </button>
