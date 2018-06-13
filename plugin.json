@@ -13,6 +13,7 @@
 				  "PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTableAddNewProperty",
 				   "PriceMonitorPlentyIntegration\\Migrations\\CreateProductFilterTable",
 				   "PriceMonitorPlentyIntegration\\Migrations\\UpdateProductFilterTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateAttributeMappingTable"
+				   "PriceMonitorPlentyIntegration\\Migrations\\CreateAttributeMappingTable",
+				   "PriceMonitorPlentyIntegration\\Migrations\\CreateScheduleTable"
 				]
 }

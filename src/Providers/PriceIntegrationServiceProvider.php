@@ -11,6 +11,8 @@ use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
+use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
 
 /**
  * Class PriceIntegrationServiceProvider
@@ -28,6 +30,7 @@ use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
          $this->getApplication()->bind(ContractRepositoryContract::class, ContractRepository::class);
          $this->getApplication()->bind(ProductFilterRepositoryContract::class, ProductFilterRepository::class);
          $this->getApplication()->bind(AttributesMappingRepositoryContract::class, AttributesMappingRepository::class);
+         $this->getApplication()->bind(ScheduleRepositoryContract::class, ScheduleRepository::class);
      }
 
      public function boot(ReferenceContainer $referenceContainer)
