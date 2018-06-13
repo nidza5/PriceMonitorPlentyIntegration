@@ -60,7 +60,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($requestData != null)
             $priceMonitorId = $requestData['priceMonitorContractId'];
 
-        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingByPriceMonitorId($priceMonitorId);    
+        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
         return json_encode($attributeMapping);     
     }
