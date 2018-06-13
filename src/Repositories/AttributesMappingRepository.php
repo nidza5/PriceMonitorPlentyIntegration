@@ -16,7 +16,7 @@ class AttributesMappingRepository implements AttributesMappingRepositoryContract
      public function  saveAttributeMapping($contractId, $contractPricemonitorId,array $mappings)
      {
         
-          $this->deleteMappingsForContract($contractPriceMonitorId);
+          $this->deleteMappingsForContract($contractPricemonitorId);
 
           $database = pluginApp(DataBase::class);
  
