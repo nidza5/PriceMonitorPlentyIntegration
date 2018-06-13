@@ -145,19 +145,13 @@ function setSavedValuesOnView(response) {
     attributeMappings = response != null ? jQuery.parseJSON(response) : null,
     savedPricemonitorAttributeCodes = [];
 
-    console.log('attributeMappings');
-    console.log(attributeMappings);
-
     for (var i = 0; i < attributeMappings.length; i++) {
-         console.log("attributemappings i");
-         console.log(attributeMappings[i]);
-
         if (pricemonitorAttributes.indexOf(attributeMappings[i]['priceMonitorCode']) >= 0) {
             setMandatoryAttributesValues(attributeMappings[i]);
-        } //else {
-        //     customAttributeIndex++;
-        //     createCustomField(customAttributeIndex, attributeMappings[i]);
-        // }
+        } else {
+            customAttributeIndex++;
+            createCustomField(customAttributeIndex, attributeMappings[i]);
+        }
     }
 
     initializeNotSavedAttributeDropdowns();
