@@ -19,10 +19,9 @@ class AttributesMappingRepository implements AttributesMappingRepositoryContract
           $this->deleteMappingsForContract($contractPricemonitorId);
 
           $database = pluginApp(DataBase::class);
- 
-          $attributeMapping = pluginApp(AttributeMapping::class);
 
           foreach($mappings as $mapping) {
+               $attributeMapping = pluginApp(AttributeMapping::class);
                $attributeMapping->attributeCode = $mapping['attributeCode'];
                $attributeMapping->priceMonitorCode = $mapping['pricemonitorCode'];
                $attributeMapping->operand = $mapping['operand'];
