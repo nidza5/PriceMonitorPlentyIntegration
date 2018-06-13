@@ -142,7 +142,7 @@ function setSavedValuesOnView(response) {
     cleanUpCustomTags();
 
     var customAttributeIndex = -1,
-    attributeMappings = response,
+    attributeMappings = response != null ? jQuery.parseJSON(response) : null,
     savedPricemonitorAttributeCodes = [];
 
     console.log('attributeMappings');
