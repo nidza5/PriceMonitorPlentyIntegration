@@ -149,6 +149,9 @@ function setSavedValuesOnView(response) {
     console.log(attributeMappings);
 
     for (var i = 0; i < attributeMappings.length; i++) {
+         console.log("attributemappings i");
+         console.log(attributeMappings[i]);
+
         if (pricemonitorAttributes.indexOf(attributeMappings[i]['priceMonitorCode']) >= 0) {
             setMandatoryAttributesValues(attributeMappings[i]);
         } //else {
