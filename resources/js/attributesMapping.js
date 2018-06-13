@@ -149,7 +149,7 @@ function setSavedValuesOnView(response) {
     console.log(attributeMappings);
 
     for (var i = 0; i < attributeMappings.length; i++) {
-        if (pricemonitorAttributes.indexOf(attributeMappings[i]['pricemonitorCode']) >= 0) {
+        if (pricemonitorAttributes.indexOf(attributeMappings[i]['priceMonitorCode']) >= 0) {
             setMandatoryAttributesValues(attributeMappings[i]);
         } //else {
         //     customAttributeIndex++;
@@ -187,13 +187,13 @@ function setSavedValuesOnView(response) {
             console.log("setMandatoryAttributesValues");
 
         attributeMapping = attributeMapping || attributeMappings[i];
-        savedPricemonitorAttributeCodes.push(attributeMapping['pricemonitorCode']);
+        savedPricemonitorAttributeCodes.push(attributeMapping['priceMonitorCode']);
 
-        var dropdownName = 'attribute-' + attributeMapping['pricemonitorCode'],
+        var dropdownName = 'attribute-' + attributeMapping['priceMonitorCode'],
             operandFieldName =
-                'attribute-' + attributeMapping['pricemonitorCode'] + '-operation',
+                'attribute-' + attributeMapping['priceMonitorCode'] + '-operation',
             valueFieldName =
-                'attribute-' + attributeMapping['pricemonitorCode'] + '-offset',
+                'attribute-' + attributeMapping['priceMonitorCode'] + '-offset',
             operandField = document['pricemonitorAttributesMapping'][operandFieldName],
             valueField = document['pricemonitorAttributesMapping'][valueFieldName];
 
@@ -291,7 +291,7 @@ function setSavedValuesOnView(response) {
             var newMapping =
             {
                 'id': null,
-                'pricemonitorCode': document['pricemonitorAttributesMapping']
+                'priceMonitorCode': document['pricemonitorAttributesMapping']
                     ['customTagPricemonitorCode'].value,
                 'attributeCode': document['pricemonitorAttributesMapping']
                     ['customTagAttributeCode'].value
@@ -356,7 +356,7 @@ function setSavedValuesOnView(response) {
 
             formRow.innerHTML =
                 '<input type="text" name="customTagPricemonitorCode-' + index + '"  ' +
-                'disabled value=' + mappedAttribute['pricemonitorCode'] +' required>' +
+                'disabled value=' + mappedAttribute['priceMonitorCode'] +' required>' +
                 '<input type="hidden" value="' + mappedAttribute['id'] + '"' +
                 ' name="customTagId-' + index +'" required>' +
                 '<div class="filterable-dropdown-wrapper">' +
