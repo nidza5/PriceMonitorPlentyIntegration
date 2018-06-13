@@ -14,10 +14,10 @@
     {
         intervals = [];
         registerEventListeners();
-        toggleFieldSets(true);
-        loadTransactionHistoryMasterData(limit, currentOffset);
-        loadLastExportData();
-        loadScheduledExport();
+      //  toggleFieldSets(true);
+      //  loadTransactionHistoryMasterData(limit, currentOffset);
+       // loadLastExportData();
+       // loadScheduledExport();
     }
 
     /**
