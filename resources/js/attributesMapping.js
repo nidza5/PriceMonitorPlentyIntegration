@@ -255,7 +255,7 @@ function setSavedValuesOnView(response) {
                 '<input type="text" name="customTagPricemonitorCode" class="pricemonitor-form-field">' +
                     '<div class="filterable-dropdown-wrapper">' +
                         '<select ' +
-                        'onchange=updateCustomTagValuesOnInput(this)' +
+                        'onchange="updateCustomTagValuesOnInput(this)" ' +
                         'class="pricemonitor-filterable-dropdown form-control pricemonitor-form-field pricemonitor-filterable-list attributes-mapping-custom-attributes" ' +
                         'name="customTagAttributeValue" ' +
                         'id="custom-tag-add" ' +
