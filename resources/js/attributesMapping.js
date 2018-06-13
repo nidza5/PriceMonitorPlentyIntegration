@@ -353,11 +353,11 @@ function setSavedValuesOnView(response) {
             formRow.classList.add('form-row');
 
             formRow.innerHTML =
-                '<input type="text" class="form-control" name="customTagPricemonitorCode-' + index + '"  ' +
+                '<input type="text" style="width:21%" class="form-control" name="customTagPricemonitorCode-' + index + '"  ' +
                 'disabled value=' + mappedAttribute['priceMonitorCode'] +' required>' +
                 '<input type="hidden" value="' + mappedAttribute['id'] + '"' +
                 ' name="customTagId-' + index +'" required>' +
-                '<div class="filterable-dropdown-wrapper">' +
+                '<div class="filterable-dropdown-wrapper" style="width:20%">' +
                 '<input type="text" ' +
                 'class="pricemonitor-filterable-dropdown pricemonitor-form-field form-control" ' +
                 'name="customTagAttributeValue-' + index + '" ' +
