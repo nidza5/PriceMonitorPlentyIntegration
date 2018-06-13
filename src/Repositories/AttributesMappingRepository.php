@@ -13,14 +13,25 @@ class AttributesMappingRepository implements AttributesMappingRepositoryContract
      * saveAttributeMapping
      * @param array $data 
      */
-     public function saveAttributeMapping(array $data)
+     public function  saveAttributeMapping($contractId, $contractPricemonitorId,array $mappings)
      {
-        /**
-         * @var DataBase $database
-         */
+        
+          $this->deleteMappingsForContract($contractPriceMonitorId);
 
-         if($data == null)
-            return; 
+          $database = pluginApp(DataBase::class);
+ 
+          $attributeMapping = pluginApp(AttributeMapping::class);
+
+          foreach($mappings as $mapping) {
+               $attributeMapping->attributeCode = $mapping['attributeCode'];
+               $attributeMapping->priceMonitorCode = $mapping['pricemonitorCode'];
+               $attributeMapping->operand = $mapping['operand'];
+               $attributeMapping->value = $mapping['value'];
+               $attributeMapping->contractId = $contractId;
+               $attributeMapping->priceMonitorContractId = $contractPricemonitorId;
+               $database->save($attributeMapping);
+          }
+         
      }
 
      public function getAttributeMappingByPriceMonitorId($priceMonitorId): AttributeMapping
@@ -32,5 +43,33 @@ class AttributesMappingRepository implements AttributesMappingRepositoryContract
           return pluginApp(AttributeMapping::class);
 
         return $attributeMappingOriginal[0];
+     }
+
+    public function getAttributeMappingCollectionByPriceMonitorId($priceMonitorId)
+    {
+        $databaseAttributeMapping = pluginApp(DataBase::class);
+        $attributeMappingOriginal = $databaseAttributeMapping->query(AttributeMapping::class)->where('priceMonitorContractId', '=', $priceMonitorId)->get();
+
+        return $attributeMappingOriginal;
+    }
+
+     public function deleteMappingsForContract($contractPriceMonitorId) 
+     {
+        $database = pluginApp(DataBase::class);
+        $mappingforDelete = getAttributeMappingCollectionByPriceMonitorId($contractPriceMonitorId);
+        
+        foreach($mappingforDelete as $mapDelete)
+        {
+            $database->delete($mapDelete);
+        }
+     }
+
+     public function getAllAttributeMappings() 
+     {
+        $database = pluginApp(DataBase::class);
+        $attMappingList = $database->query(AttributeMapping::class)->get();
+        
+        return $attMappingList;
+
      }
 }

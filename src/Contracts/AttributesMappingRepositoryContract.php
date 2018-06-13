@@ -16,7 +16,7 @@ interface AttributesMappingRepositoryContract
      * @param array $data
      * @return void
      */
-    public function saveAttributeMapping(array $data);
+    public function saveAttributeMapping($contractId, $contractPricemonitorId,array $mappings);
 
  
     /**
@@ -27,5 +27,9 @@ interface AttributesMappingRepositoryContract
     public function getAttributeMappingByPriceMonitorId($priceMonitorId): AttributeMapping;
 
 
+    public function deleteMappingsForContract($contractPriceMonitorId);
 
+    public function getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);
+
+    public function getAllAttributeMappings();
 }

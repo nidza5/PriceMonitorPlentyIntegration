@@ -412,39 +412,34 @@ function updateCodeValuesOnInput(sender) {
 
 function saveAttributesMapping()
 {
-    console.log("prvi put proba");
+    var requestMapping = createAttributesMappingForRequest();
 
-    console.log(createAttributesMappingForRequest());
-    // var filters = createFiltersForRequest();
+    console.log(requestMapping);
 
-    // console.log("filters");
-    // console.log(filters);
+    var transferObject = {
+        'pricemonitorId': $("#contractId").val(),
+        'mappings': requestMapping
+    };
 
-    // var transferObject = {
-    //     'pricemonitorId': $("#contractId").val(),
-    //     'type': filterQueryParams.filterType,
-    //     'filters': filters
-    // };
+    $.ajax({
+        type: "POST",
+        url: "/saveAttributesMapping",
+        data: transferObject,
+        success: function(data)
+        {
+            console.log("data");
+            console.log(data);
 
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/saveAttributesMapping",
-    //     data: transferObject,
-    //     success: function(data)
-    //     {
-    //         console.log("data");
-    //         console.log(data);
+            toastr["success"]("Data are successfully saved!", "Successfully saved!");
 
-    //         toastr["success"]("Data are successfully saved!", "Successfully saved!");
-
-    //         if(data == null) 
-    //            return;
-    //     },
-    //     error: function(data)
-    //     {
-    //         console.log(data);
-    //     }
-    // });
+            if(data == null) 
+               return;
+        },
+        error: function(data)
+        {
+            console.log(data);
+        }
+    });
 }
 
 /**

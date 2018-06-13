@@ -14,6 +14,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Repositories\Models;
  use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
+ use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 
  /**
   * Class AttributesMappingController
@@ -35,11 +37,17 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $attributesMappingRepo;
 
+        /**
+         *
+         * @var ContractRepositoryContract
+         */
+        private $contractRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,AttributesMappingRepositoryContract $attributesMappingRepo)
+    public function __construct(PriceMonitorSdkService $sdkService,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo)
     {
         $this->sdkService = $sdkService;       
         $this->attributesMappingRepo = $attributesMappingRepo;      
+        $this->contractRepo = $contractRepo;
     }
 
 
@@ -59,6 +67,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
     public function saveAttributesMapping(Request $request)
     {
-        return "OK"; 
+        $requestData = $request->all();
+
+        if($requestData == null)
+            return;
+
+        $priceMonitorId = $requestData['pricemonitorId'];
+        $mappings = $requestData['mappings'];
+
+        if($priceMonitorId === 0 || $priceMonitorId === null)
+            throw new \Exception("PriceMonitorId is empty");
+
+        if($mappings == null)
+            throw new \Exception("Mappings is empty");
+        
+        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+
+        if($contract == null)
+            throw new \Exception("Contract is empty");
+
+         $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
+
+         return "OK";        
     }
  }
