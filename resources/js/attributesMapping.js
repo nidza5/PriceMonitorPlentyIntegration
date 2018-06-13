@@ -196,6 +196,9 @@ function setSavedValuesOnView(response) {
             valueField = document['pricemonitorAttributesMapping'][valueFieldName];
 
             //set dropDown
+
+            $('select[name='+dropdownName+']').val(attributeMapping['attributeCode']);
+
         // Pricemonitor['filterableDropDown']['initDropdown'](
         //     attributeMapping['attributeCode'],
         //     document['pricemonitorAttributesMapping'][dropdownName]
