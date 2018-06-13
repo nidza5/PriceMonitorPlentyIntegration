@@ -75,18 +75,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $priceMonitorId = $requestData['pricemonitorId'];
         $mappings = $requestData['mappings'];
 
-        if($priceMonitorId === 0 || $priceMonitorId === null)
-            throw new \Exception("PriceMonitorId is empty");
+        return json_encode($mappings);
 
-        if($mappings == null)
-            throw new \Exception("Mappings is empty");
+        // if($priceMonitorId === 0 || $priceMonitorId === null)
+        //     throw new \Exception("PriceMonitorId is empty");
+
+        // if($mappings == null)
+        //     throw new \Exception("Mappings is empty");
         
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        if($contract == null)
-            throw new \Exception("Contract is empty");
+        // if($contract == null)
+        //     throw new \Exception("Contract is empty");
 
-         $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
+        //  $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
 
          return "OK";        
     }
