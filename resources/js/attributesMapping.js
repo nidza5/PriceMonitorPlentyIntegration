@@ -250,6 +250,7 @@ function setSavedValuesOnView(response) {
         {
             var formRow = document.createElement('div');
             formRow.classList.add('form-row');
+            formRow.classList.add('rows-grid');
 
             formRow.innerHTML =
                 '<input type="text" name="customTagPricemonitorCode" class="pricemonitor-form-field">' +
