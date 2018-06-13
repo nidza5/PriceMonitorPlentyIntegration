@@ -184,6 +184,8 @@ function setSavedValuesOnView(response) {
      */
      function setMandatoryAttributesValues(attributeMapping)
      {
+            console.log("setMandatoryAttributesValues");
+
         attributeMapping = attributeMapping || attributeMappings[i];
         savedPricemonitorAttributeCodes.push(attributeMapping['pricemonitorCode']);
 
