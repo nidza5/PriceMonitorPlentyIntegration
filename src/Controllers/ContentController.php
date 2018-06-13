@@ -71,21 +71,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $attributeRepository;
 
-        private $attributeMappingsRepository;
-
+       
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,AttributeRepositoryContract $attributeRepository,AttributesMappingRepositoryContract $attributeMappingsRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,AttributeRepositoryContract $attributeRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;        
         $this->productFilterRepo = $productFilterRepo;   
-        $this->attributeRepository = $attributeRepository;  
-        $this->attributeMappingsRepository = $attributeMappingsRepository;   
+        $this->attributeRepository = $attributeRepository;   
     }
     
      public function home(Twig $twig) : string
@@ -169,11 +167,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //   $originalfilter = $this->productFilterRepo->getAllFilters();
         //   echo "filters";
         //   echo json_encode($originalfilter);
-
-            $originalAttributesMappings = $this->attributeMappingsRepository->getAllAttributeMappings();
-
-            echo "attributes mapping";
-            echo json_encode($originalAttributesMappings);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
