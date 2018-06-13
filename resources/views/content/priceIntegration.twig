@@ -334,8 +334,120 @@
                     </section>
                 </div>
                 <div id="ItemExport" class="tabcontent">
-                    <h3>ItemExport</h3>
-                    <p>ItemExport content form</p>
+                    <section class="pricemonitor-product-export pricemonitor-page" id="pricemonitor-product-export">
+                        <form name="pricemonitorProductExport" novalidate onsubmit="return false;">
+                             <div class="row">
+                                <div class="col-md-8 first-row">
+                                    <fieldset>
+                                        <legend>Scheduled export</legend>
+                                        <h2>Scheduled export</h2>
+
+                                        <div class="col-md-12">
+                                            <div class="form-row pricemonitor-form-inline">
+                                                <input type="checkbox"
+                                                    class="pricemonitor-form-field"
+                                                    name="enableExport"
+                                                    id="enabled-scheduled-export"
+                                                    autocomplete="off" />
+                                                <label for="enabled-scheduled-export">
+                                                    Enable scheduled export
+                                                </label>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <label for="start-at-date">Start at:</label>
+                                                <input type="text" class="pricemonitor-filterable-dropdown pricemonitor-form-field"
+                                                    name="startAtDate"
+                                                    id="start-at-date"
+                                                    autocomplete="off"
+                                                    readonly
+                                                    disabled />
+                                            </div>
+
+                                            <div class="form-row">
+                                                <label for="repeat-interval">Repeat interval:</label>
+                                                <select title="operation"
+                                                        name="exportInterval"
+                                                        id="export-interval"
+                                                        class="pricemonitor-form-field"
+                                                        disabled>
+                                                    <option value="14400">4 hours</option>
+                                                    <option value="43200">12 hours</option>
+                                                    <option value="86400">1 day</option>
+                                                    <option value="172800">2 days</option>
+                                                    <option value="604800">1 week</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <button type="submit"
+                                                        class="pricemonitor-input-button"
+                                                        id="pricemonitor-product-export-submit"
+                                                        name="submit">
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-md-4 first-row">
+                                    <fieldset>
+                                        <div id="pricemonitor-last-export">
+                                            <div class="pricemonitor-no-sync-data">
+                                                There are no product exports.
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <h2>Manual export</h2>
+                                        <legend>Manual export</legend>
+                                        <div class="col-md-6">
+                                            <button type="button"
+                                                    class="pricemonitor-input-button"
+                                                    id="export-now">Export now</button>
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="grid pricemonitor-tg-responsive" id="transaction-history-export-master">
+                                        <fieldset>
+                                            <h2>Transaction History</h2>
+                                            <div>
+                                                <div class="col-sm-12 pricemonitor-pagination">
+
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <table class="pricemonitor-tg">
+                                                        <thead>
+                                                        <tr class="headings">
+                                                            <th class="column-width-0">#</th>
+                                                            <th class="column-width-2">Export Time</th>
+                                                            <th class="column-width-2">Status</th>
+                                                            <th class="column-width-1">Success Count</th>
+                                                            <th class="column-width-1">Failed Count</th>
+                                                            <th>Note</th>
+                                                            <th class="column-width-0">Link</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                    <div class="pricemonitor-no-data">
+                                                        No data to display
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    Total: <span class="pricemonitor-total">0</span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>                        
+                    </section>
                 </div>
 
                 <div id="PriceSelection" class="tabcontent">
