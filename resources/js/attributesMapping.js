@@ -371,7 +371,7 @@ function setSavedValuesOnView(response) {
                 'class="pricemonitor-form-field" ' +
                 'id="attribute-custom-tag-mapped-code-' + index + '" required/>' +
                 '</div>' +
-                '<button class="remove-custom-tag btn btn-success" id="remove-custom-tag-' + index + '">-</button>';
+                '<button class="remove-custom-tag btn btn-danger" id="remove-custom-tag-' + index + '">-</button>';
 
             document.getElementById('attributes-mapping-custom-tags').appendChild(formRow);
 
