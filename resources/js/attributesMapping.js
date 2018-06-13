@@ -367,6 +367,7 @@ function setSavedValuesOnView(response) {
                 ' disabled required />' +
                 '<input type="hidden" ' +
                 'name="customTagAttributeCode-' + index +'" ' +
+                'value="' + mappedAttribute["attributeCode"] + '"' +
                 'class="pricemonitor-form-field" ' +
                 'id="attribute-custom-tag-mapped-code-' + index + '" required/>' +
                 '</div>' +
