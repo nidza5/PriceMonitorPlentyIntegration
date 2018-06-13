@@ -145,6 +145,9 @@ function setSavedValuesOnView(response) {
     attributeMappings = response,
     savedPricemonitorAttributeCodes = [];
 
+    console.log('attributeMappings');
+    console.log(attributeMappings);
+
     for (var i = 0; i < attributeMappings.length; i++) {
         if (pricemonitorAttributes.indexOf(attributeMappings[i]['pricemonitorCode']) >= 0) {
             setMandatoryAttributesValues(attributeMappings[i]);
