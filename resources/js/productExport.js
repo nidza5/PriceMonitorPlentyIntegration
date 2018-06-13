@@ -6,6 +6,7 @@
     intervals = [];
 
     $(document).ready(function() {   
+        $('#datetimepicker1').datetimepicker();
         document.getElementById("itemExport").addEventListener("click", initExportForm);
     });
 
