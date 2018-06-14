@@ -109,9 +109,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
 
-         $this->sdkService->call("enqueueProductExport", [
+        $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId                
         ]); 
+
+        echo json_encode($enqueAndRun);
 
         return "OK";
     }
