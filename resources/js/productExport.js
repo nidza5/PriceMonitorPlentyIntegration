@@ -121,8 +121,6 @@
             data: transferObject,
             success: function(data)
             {
-                toastr["success"]("Data are successfully saved!", "Successfully saved!");
-    
                 if(data == null) 
                    return;
 
@@ -143,33 +141,24 @@
             
             var response = jQuery.parseJSON(data);
 
-            console.log("response schedule");
-            console.log(response);
-        // document['pricemonitorProductExport']['enableExport'].checked = response.data.enableExport;
-        // toggleFieldSets(!response.data.hasMappings);
-        // toggleScheduledExport(response.data.enableExport);
+        document['pricemonitorProductExport']['enableExport'].checked = response.enableExport == 1 ? true : false;
+       // toggleFieldSets(!response.data.hasMappings);
+        toggleScheduledExport(response.enableExport);
 
-        // if (response.data.enableExport) {
-        //     if (response.data.startAt) {
-        //         document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.data.startAt);
-        //     }
+        if (response.enableExport) {
+            if (response.exportStart) {
+                document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.exportStart);
+            }
 
-        //     if (response.data.exportInterval) {
-        //         document['pricemonitorProductExport']['exportInterval'].value = response.data.exportInterval;
-        //     }
-        // } else {
-        //     document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.data.startAt);
-        // }
+            if (response.exportInterval) {
+                document['pricemonitorProductExport']['exportInterval'].value = response.exportInterval;
+            }
+        } else {
+            document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.exportStart);
+        }
 
-        // if (response['message']) {
-        //     Pricemonitor['utility']['showMessage'](response['message'], response['success']);
-        // }
+        toastr["success"]("Data are successfully saved!", "Successfully saved!");
 
-        // loadDateControl();
-
-        // // Form data is loaded, invoke function from base controller so that detecting changes on tab
-        // // switch can work.
-        // Pricemonitor['contracts']['utility']['formsDataLoaded']();
     }
 
      /**
