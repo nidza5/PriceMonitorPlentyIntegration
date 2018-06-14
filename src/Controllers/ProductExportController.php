@@ -17,6 +17,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
  use PriceMonitorPlentyIntegration\Services\ScheduleExportService;
+ use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
+ use PriceMonitorPlentyIntegration\Constants\QueueType;
 
  /**
   * Class ProductExportController
@@ -44,11 +47,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $contractRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo)
+         /**
+         *
+         * @var PriceMonitorQueueRepositoryContract
+         */
+        private $queueRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
         $this->contractRepo = $contractRepo;
+        $this->queueRepo = $queueRepo;
     }
 
     public function getSchedule(Request $request) :string 
@@ -105,15 +115,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Request data are empty!");
 
         $priceMonitorId = $requestData['pricemonitorId'];
-       
+
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
 
+        $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
+
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
-            'priceMonitorId' => $priceMonitorId                
+            'priceMonitorId' => $priceMonitorId,
+            'queueModel' => $queue            
         ]); 
 
         echo json_encode($enqueAndRun);
+
+        
 
         return "OK";
     }

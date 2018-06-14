@@ -20,7 +20,6 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
        
     }
     
-
     public function getQueueByName($queueName)
     {
         $databaseQueue = pluginApp(DataBase::class);

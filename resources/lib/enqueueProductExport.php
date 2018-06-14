@@ -2,15 +2,23 @@
 
 require_once __DIR__ . '/RunnerService.php';
 
+use PriceMonitorPlentyIntegration\Services\ScheduleExportService;
+
 try {
 
-    $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
+    // $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 
-    $runnerService = new RunnerService();
+    // $queueModel = SdkRestApi::getParam('queueModel');
+
+    // $runnerService = new RunnerService($queueModel);
+
+    // $runnerService->enqueueProductExportJob($priceMonitorId);
     
-    $runnerService->enqueueProductExportJob($priceMonitorId);
-    
-    $runnerService->runAsync();
+    // $runnerService->runAsync();
+    $scheduleExportService = pluginApp(ScheduleExportService::class);
+
+    $scheduleSaved = $scheduleExportService->getAdequateScheduleByContract($priceMonitorId);
+
 
 } catch(\Exception $ex) {
     

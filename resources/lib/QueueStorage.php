@@ -5,6 +5,14 @@ use Patagona\Pricemonitor\Core\Sync\Queue\StorageModel;
 
 class QueueStorage implements Storage
 {
+
+    private $queueModel;
+
+    public function __construct($queueModel)
+    {
+        $this->queueModel = $queueModel;
+    }
+
     /**
      * @inheritdoc
      */
@@ -81,26 +89,21 @@ class QueueStorage implements Storage
      */
     protected function getStorageModel($queueName, $lock = false)
     {
-        /** @var Patagona_Pricemonitor_Model_Resource_Queue_Collection $queueCollection */
-        $queueCollection = Mage::getResourceModel('pricemonitor/queue_collection');
-        $queueCollection->filterByQueueName($queueName, $lock);
+        $queueItem = $this->queueModel;
 
-        /** @var Patagona_Pricemonitor_Model_Queue $queueItem */
-        $queueItem = $queueCollection->setPageSize(1)->getLastItem();
-
-        if (!$queueItem || !$queueItem->getId()) {
+        if (!$queueItem) {
             return null;
         }
-
-        $reservationTime = $queueItem->getReservationTime() === null ? null :
-            DateTime::createFromFormat('Y-m-d H:i:s', $queueItem->getReservationTime());
+        
+        $reservationTime = $queueItem["reservationTime"] === null ? null :
+            DateTime::createFromFormat('Y-m-d H:i:s', $queueItem["reservationTime"]);
 
         return new StorageModel(
             array(
-                'id' => $queueItem->getId(),
+                'id' => $queueItem['id'],
                 'reservationTime' => $reservationTime,
-                'attempts' => $queueItem->getAttempts(),
-                'payload' => $queueItem->getPayload()
+                'attempts' => $queueItem['attempts'],
+                'payload' => $queueItem['payload']
             )
         );
     }
