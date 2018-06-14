@@ -106,6 +106,7 @@
      */
     function onClickExportNow()
     {
+        console.log("export now");
         var transferObject = {
             'pricemonitorId' : $("#contractId").val()
         };
@@ -116,6 +117,7 @@
             data: transferObject,
             success: function(data)
             {
+                console.log(data);
                 toastr["success"]("Product export has been started.");
             },
             error: function(data)
