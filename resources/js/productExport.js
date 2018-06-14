@@ -42,6 +42,7 @@
         $.ajax({
             type: "GET",
             url: "/getSchedule",
+            data: dataOption,
             success: function(data)
             {
                 populateScheduleData(data);
