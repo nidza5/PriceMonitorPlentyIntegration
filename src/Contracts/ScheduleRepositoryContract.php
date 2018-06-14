@@ -16,14 +16,15 @@ interface ScheduleRepositoryContract
      * @param array $data
      * @return void
      */
-    public function saveSchedule(array $data);
+    public function saveSchedule($contractId,array $data);
 
- 
     /**
      *  Schedule
      *
      * @return Schedule
      */
     public function getScheduleByContractId($contractId): Schedule;
+
+    public function getAllSchedule();
 
 }

@@ -15,9 +15,33 @@ class ScheduleRepository implements ScheduleRepositoryContract
      * @param array $data
      * @return void
      */
-    public function saveSchedule(array $data) 
+    public function saveSchedule($contractId,array $data) 
     {
+        $database = pluginApp(DataBase::class);
+     
+        $schedule = pluginApp(Schedule::class);
+        
+        if($contractId != null && $contractId != 0)
+            $schedule = $this->getScheduleByContractId($contractId);
 
+        $startAt = $data['startAt'];
+        $isEnabledExport = (bool)$data['enableExport'];
+        $exportInterval = (int)$data['exportInterval'];
+
+        $schedule->enableExport = $isEnabledExport;
+        $schedule->contractId = $contractId;
+
+        if ($isEnabledExport) {
+            $schedule->exportStart = $startAt;
+            $schedule->nextStart = $startAt;
+            $schedule->exportInterval = $exportInterval;
+        } else {
+            $schedule->exportStart = null;
+            $schedule->nextStart = null;
+            $schedule->exportInterval = $exportInterval;
+        }
+
+        $database->save($schedule);
     }
     
     /**
@@ -27,9 +51,20 @@ class ScheduleRepository implements ScheduleRepositoryContract
      */
     public function getScheduleByContractId($contractId): Schedule
     {
-        $database = pluginApp(DataBase::class);
-        $schedule = pluginApp(Schedule::class);
+        $databaseSchedule = pluginApp(DataBase::class);
+        $scheduleOriginal = $databaseSchedule->query(Schedule::class)->where('contractId', '=', $contractId)->get();
 
-        return $schedule;
+        if($scheduleOriginal == null)
+          return pluginApp(Schedule::class);
+
+        return $scheduleOriginal[0];
+    }
+
+    public function getAllSchedule() 
+    {
+        $database = pluginApp(DataBase::class);
+        $scheduleList = $database->query(Schedule::class)->get();
+        
+        return $scheduleList;
     }
 }

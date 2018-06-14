@@ -115,6 +115,26 @@
         console.log("transfer object");
         console.log(transferObject);
 
+        $.ajax({
+            type: "POST",
+            url: "/saveSchedule",
+            data: transferObject,
+            success: function(data)
+            {
+                console.log("data");
+                console.log(data);
+    
+                toastr["success"]("Data are successfully saved!", "Successfully saved!");
+    
+                if(data == null) 
+                   return;
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+
         // var url = Pricemonitor['config']['urls']['productExportSaveSchedule'],
         //     startAtDate = createDateObject(document['pricemonitorProductExport']['startAtDate'].value),
         //     transferObject = {

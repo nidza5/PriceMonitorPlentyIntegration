@@ -24,8 +24,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
  //todo delete
- use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
+ use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
 
  /**
   * Class ContentController
@@ -67,9 +67,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
            /**
          *
-         * @var AttributeRepositoryContract
+         * @var ScheduleRepositoryContract
          */
-        private $attributeRepository;
+        private $scheduleRepository;
 
        
     /**
@@ -77,13 +77,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,AttributeRepositoryContract $attributeRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;        
         $this->productFilterRepo = $productFilterRepo;   
-        $this->attributeRepository = $attributeRepository;   
+        $this->scheduleRepository = $scheduleRepository;   
     }
     
      public function home(Twig $twig) : string
@@ -161,6 +161,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'email' => $credentials['email'],
             'password' => $credentials['password']
         ]);
+
+        $allSchedule = $this->scheduleRepository->getAllSchedule();
+
+        echo json_encode($allSchedule);
  
           //  echo json_encode($stores);
 
