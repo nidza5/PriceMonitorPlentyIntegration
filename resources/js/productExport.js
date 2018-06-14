@@ -13,7 +13,7 @@
     function initExportForm()
     {
         intervals = [];
-        registerEventListeners();
+       // registerEventListeners();
       //  toggleFieldSets(true);
       //  loadTransactionHistoryMasterData(limit, currentOffset);
        // loadLastExportData();
