@@ -147,14 +147,14 @@
 
         if (response.enableExport) {
             if (response.exportStart) {
-                document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.exportStart);
+                $('#datetimepicker1').data("DateTimePicker").date(response.exportStart);
             }
 
             if (response.exportInterval) {
                 document['pricemonitorProductExport']['exportInterval'].value = response.exportInterval;
             }
         } else {
-            document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.exportStart);
+            $('#datetimepicker1').data("DateTimePicker").date(response.exportStart);
         }
 
         toastr["success"]("Data are successfully saved!", "Successfully saved!");
