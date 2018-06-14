@@ -16,6 +16,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
+ use PriceMonitorPlentyIntegration\Services\ScheduleExportService;
 
  /**
   * Class ProductExportController
@@ -58,7 +59,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($requestData != null)
             $priceMonitorId = $requestData['pricemonitorId'];
 
-        return "OK";     
+        if($priceMonitorId === 0 || $priceMonitorId === null)
+            throw new \Exception("PriceMonitorId is empty");
+
+         /**
+         * @var ScheduleExportService $scheduleExportService
+         */
+        $scheduleExportService = pluginApp(ScheduleExportService::class);
+
+        $scheduleSaved = $scheduleExportService->getAdequateScheduleByContract($priceMonitorId);
+
+        return json_encode($scheduleSaved);  
+   
     }
 
     public function saveSchedule(Request $request)

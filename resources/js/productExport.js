@@ -27,7 +27,30 @@
       //  toggleFieldSets(true);
       //  loadTransactionHistoryMasterData(limit, currentOffset);
        // loadLastExportData();
-       // loadScheduledExport();
+         loadScheduledExport();
+    }
+
+    /**
+     * Loads scheduled export data
+     */
+    function loadScheduledExport()
+    {
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val()
+        };
+        
+        $.ajax({
+            type: "GET",
+            url: "/getSchedule",
+            success: function(data)
+            {
+                populateScheduleData(data);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        }); 
     }
 
     /**
