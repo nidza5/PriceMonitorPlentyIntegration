@@ -121,33 +121,55 @@
             data: transferObject,
             success: function(data)
             {
-                console.log("data");
-                console.log(data);
-    
                 toastr["success"]("Data are successfully saved!", "Successfully saved!");
     
                 if(data == null) 
                    return;
+
+                populateScheduleData(data);
             },
             error: function(data)
             {
                 console.log(data);
             }
         });
+    }
 
-        // var url = Pricemonitor['config']['urls']['productExportSaveSchedule'],
-        //     startAtDate = createDateObject(document['pricemonitorProductExport']['startAtDate'].value),
-        //     transferObject = {
-        //         'startAt': startAtDate,
-        //         'enableExport': document['pricemonitorProductExport']['enableExport'].checked,
-        //         'exportInterval': document['pricemonitorProductExport']['exportInterval'].value
-        //     }, params = {
-        //         form_key: document['pricemonitorProductExport']['form_key'].value,
-        //         pricemonitorId: Pricemonitor['config']['pricemonitorId']
-        //     };
 
-        // Pricemonitor['utility']['loadingWindow'].open();
-        // Pricemonitor['ajax']['post'](url, transferObject, populateScheduleData, 'json', true, params);
+    function populateScheduleData(data)
+    {
+            if(data == null)
+                return;
+            
+            var response = jQuery.parseJSON(data);
+
+            console.log("response schedule");
+            console.log(response);
+        // document['pricemonitorProductExport']['enableExport'].checked = response.data.enableExport;
+        // toggleFieldSets(!response.data.hasMappings);
+        // toggleScheduledExport(response.data.enableExport);
+
+        // if (response.data.enableExport) {
+        //     if (response.data.startAt) {
+        //         document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.data.startAt);
+        //     }
+
+        //     if (response.data.exportInterval) {
+        //         document['pricemonitorProductExport']['exportInterval'].value = response.data.exportInterval;
+        //     }
+        // } else {
+        //     document['pricemonitorProductExport']['startAtDate'].value = createDateForView(response.data.startAt);
+        // }
+
+        // if (response['message']) {
+        //     Pricemonitor['utility']['showMessage'](response['message'], response['success']);
+        // }
+
+        // loadDateControl();
+
+        // // Form data is loaded, invoke function from base controller so that detecting changes on tab
+        // // switch can work.
+        // Pricemonitor['contracts']['utility']['formsDataLoaded']();
     }
 
      /**

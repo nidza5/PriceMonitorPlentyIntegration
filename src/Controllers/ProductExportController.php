@@ -80,6 +80,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $this->scheduleRepo->saveSchedule($contract->id,$requestData);
 
-         return "OK";        
+         $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+
+         return json_encode($scheduleSaved);        
     }
  }
