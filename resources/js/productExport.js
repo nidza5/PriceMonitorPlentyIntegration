@@ -106,18 +106,23 @@
      */
     function onClickExportNow()
     {
-    //     var url = Pricemonitor['config']['urls']['productExportRunNow'], params = {
-    //         'form_key': document['pricemonitorProductExport']['form_key'].value,
-    //         'pricemonitorId': Pricemonitor['config']['pricemonitorId']
-    //     };
+        var transferObject = {
+            'pricemonitorId' : $("#contractId").val()
+        };
 
-    //     Pricemonitor['utility']['loadingWindow'].open();
-    //     Pricemonitor['ajax']['post'](url, {}, exportStarted, 'json', true, params);
-
-    //     function exportStarted(response)
-    //     {
-    //         Pricemonitor['utility']['showMessage'](response['message'], response['success']);
-    //     }
+        $.ajax({
+            type: "POST",
+            url: "/runProductExport",
+            data: transferObject,
+            success: function(data)
+            {
+                toastr["success"]("Product export has been started.");
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
      }
 
       /**

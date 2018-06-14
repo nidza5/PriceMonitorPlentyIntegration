@@ -96,4 +96,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          return json_encode($scheduleSaved);        
     }
+
+    public function runProductExport(Request $request)
+    {
+        $requestData = $request->all();
+
+        if($requestData == null)
+            throw new \Exception("Request data are empty!");
+
+        $priceMonitorId = $requestData['pricemonitorId'];
+       
+        if($priceMonitorId === 0 || $priceMonitorId === null)
+            throw new \Exception("PriceMonitorId is empty");
+
+         $this->sdkService->call("enqueueProductExport", [
+            'priceMonitorId' => $priceMonitorId                
+        ]); 
+
+        return "OK";
+    }
  }
