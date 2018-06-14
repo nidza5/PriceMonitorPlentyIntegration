@@ -127,7 +127,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]); 
 
         echo json_encode($enqueAndRun);
-
         
 
         return "OK";

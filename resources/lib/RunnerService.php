@@ -92,8 +92,15 @@ class RunnerService
         $queue = ServiceRegister::getQueueStorage()->peek($queueName);
 
         if (!empty($queue)) {
-            $runnerToken = $this->createRunnerToken();
-            $this->callAsyncRequest($runnerToken->getToken(), $queueName);
+           // $runnerToken = $this->createRunnerToken();
+            //$this->callAsyncRequest($runnerToken->getToken(), $queueName);
+
+            return ['isCreateRunnerToken' => true,
+                    'queueName' => $queueName ];
+        }
+        else {
+            return ['isCreateRunnerToken' => false,
+                    'queueName' => $queueName ];
         }
     }
 
