@@ -94,7 +94,7 @@ class QueueStorage implements Storage
         if (!$queueItem) {
             return null;
         }
-        
+
         $reservationTime = $queueItem["reservationTime"] === null ? null :
             DateTime::createFromFormat('Y-m-d H:i:s', $queueItem["reservationTime"]);
 
@@ -119,27 +119,27 @@ class QueueStorage implements Storage
      */
     protected function setStorageModel($queueName, $storageModel)
     {
-        /** @var Patagona_Pricemonitor_Model_Queue $queueModel */
-        $queueModel = Mage::getModel('pricemonitor/queue');
+        
+        // $queueModel = Mage::getModel('pricemonitor/queue');
 
-        if ($storageModel->getId() === null) {
-            $queueModel->setQueueName($queueName);
-        } else {
-            $queueModel = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
+        // if ($storageModel->getId() === null) {
+        //     $queueModel->setQueueName($queueName);
+        // } else {
+        //     $queueModel = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
 
-            if (!$queueModel->getId()) {
-                return false;
-            }
-        }
+        //     if (!$queueModel->getId()) {
+        //         return false;
+        //     }
+        // }
 
-        $reservationTime = $storageModel->getReservationTime() !== null ?
-            $storageModel->getReservationTime()->format('Y-m-d H:i:s') : null;
+        // $reservationTime = $storageModel->getReservationTime() !== null ?
+        //     $storageModel->getReservationTime()->format('Y-m-d H:i:s') : null;
 
-        $queueModel->setReservationTime($reservationTime);
-        $queueModel->setAttempts($storageModel->getAttempts());
-        $queueModel->setPayload($storageModel->getPayload());
-        $queueModel->save();
-        return true;
+        // $queueModel->setReservationTime($reservationTime);
+        // $queueModel->setAttempts($storageModel->getAttempts());
+        // $queueModel->setPayload($storageModel->getPayload());
+        // $queueModel->save();
+        // return true;
     }
 
     /**
@@ -153,17 +153,17 @@ class QueueStorage implements Storage
      */
     protected function unsetStorageModel($queueName, $storageModel)
     {
-        /** @var Patagona_Pricemonitor_Model_Queue $queueModel */
-        $queueModel = Mage::getModel('pricemonitor/queue');
-        /** @var Patagona_Pricemonitor_Model_Queue $queue */
-        $queue = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
+        
+        // $queueModel = Mage::getModel('pricemonitor/queue');
+        // /** @var Patagona_Pricemonitor_Model_Queue $queue */
+        // $queue = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
 
-        if (!$queue->getId()) {
-            return false;
-        }
+        // if (!$queue->getId()) {
+        //     return false;
+        // }
 
-        $queue->delete();
-        return true;
+        // $queue->delete();
+        // return true;
     }
 
     /**
@@ -171,9 +171,9 @@ class QueueStorage implements Storage
      */
     protected function getConnection()
     {
-        /** @var \Mage_Core_Model_Resource $resource */
-        $resource = Mage::getSingleton('core/resource');
-        return $resource->getConnection('default_write');
+        
+        // $resource = Mage::getSingleton('core/resource');
+        // return $resource->getConnection('default_write');
     }
 
 }

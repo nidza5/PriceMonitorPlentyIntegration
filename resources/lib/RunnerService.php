@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/QueueStorage.php';
+
 use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
 use Patagona\Pricemonitor\Core\Sync\PriceImport\Job as PriceImportJob;
 use Patagona\Pricemonitor\Core\Sync\ProductExport\Job as ProductExportJob;
