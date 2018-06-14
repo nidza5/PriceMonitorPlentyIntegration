@@ -147,18 +147,41 @@
 
         if (response.enableExport) {
             if (response.exportStart) {
-                $('#datetimepicker1').data("DateTimePicker").date(response.exportStart);
+                $('#datetimepicker1').find("input").val(createDateForViews(response.exportStart));                
             }
 
             if (response.exportInterval) {
                 document['pricemonitorProductExport']['exportInterval'].value = response.exportInterval;
             }
         } else {
-            $('#datetimepicker1').data("DateTimePicker").date(response.exportStart);
+            $('#datetimepicker1').find("input").val(createDateForView(response.exportStart));
         }
 
         toastr["success"]("Data are successfully saved!", "Successfully saved!");
 
+    }
+
+        /**
+     * @param dateISOString
+     * @return {*}
+     */
+    function createDateForViews(dateISOString)
+    {
+        var datetimeParts = dateISOString.split(' '),
+            dateParts = datetimeParts[0].split('-'),
+            timeParts = datetimeParts[1].split(':');
+
+        if (dateParts.length === 3 && timeParts.length === 3) {
+            var day = dateParts[2],
+                month = dateParts[1],
+                year = dateParts[0],
+                hour = timeParts[0],
+                minute = timeParts[1];
+
+            return day + '/' + month + '/' + year + ' ' + hour + ':' + minute;
+        }
+
+        return dateISOString;
     }
 
      /**
