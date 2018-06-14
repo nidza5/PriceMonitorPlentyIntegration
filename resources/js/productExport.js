@@ -22,7 +22,7 @@
     function initExportForm()
     {
         intervals = [];
-       // registerEventListeners();
+        registerEventListeners();
       //  toggleFieldSets(true);
       //  loadTransactionHistoryMasterData(limit, currentOffset);
        // loadLastExportData();
@@ -44,14 +44,14 @@
 
         // refresh transaction history table view and
         // last export box on every 10s
-        var intervalId = setInterval(
-            function () {
-                loadTransactionHistoryMasterData(limit, currentOffset);
-                loadLastExportData();
-            }, 10000
-        );
+        // var intervalId = setInterval(
+        //     function () {
+        //         loadTransactionHistoryMasterData(limit, currentOffset);
+        //         loadLastExportData();
+        //     }, 10000
+        // );
 
-        intervals.push(intervalId);
+       // intervals.push(intervalId);
     }
 
        /**
@@ -100,6 +100,11 @@
      */
     function onClickSave()
     {
+        var startAt = $("#datetimepicker1").find("input").val();
+        console.log("start at");
+        console.log(startAt);
+
+
         // var url = Pricemonitor['config']['urls']['productExportSaveSchedule'],
         //     startAtDate = createDateObject(document['pricemonitorProductExport']['startAtDate'].value),
         //     transferObject = {
