@@ -7,6 +7,7 @@
 
     $(document).ready(function() {   
         $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm',
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -104,6 +105,9 @@
         console.log("start at");
         console.log(startAt);
 
+        var startAtDate = createDateObject(startAt);
+        console.log("start at");
+        console.log(startAtDate);
 
         // var url = Pricemonitor['config']['urls']['productExportSaveSchedule'],
         //     startAtDate = createDateObject(document['pricemonitorProductExport']['startAtDate'].value),
