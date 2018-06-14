@@ -102,12 +102,18 @@
     function onClickSave()
     {
         var startAt = $("#datetimepicker1").find("input").val();
-        console.log("start at");
-        console.log(startAt);
-
         var startAtDate = createDateObject(startAt);
-        console.log("start at");
-        console.log(startAtDate);
+        
+        var transferObject = {
+            'startAt': startAtDate,
+            'enableExport': document['pricemonitorProductExport']['enableExport'].checked,
+            'exportInterval': document['pricemonitorProductExport']['exportInterval'].value,
+            'pricemonitorId' : $("#contractId").val()
+
+        };
+
+        console.log("transfer object");
+        console.log(transferObject);
 
         // var url = Pricemonitor['config']['urls']['productExportSaveSchedule'],
         //     startAtDate = createDateObject(document['pricemonitorProductExport']['startAtDate'].value),
