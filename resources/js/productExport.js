@@ -149,6 +149,8 @@
                    return;
 
                 populateScheduleData(data);
+
+                toastr["success"]("Data are successfully saved!", "Successfully saved!");
             },
             error: function(data)
             {
@@ -160,10 +162,10 @@
 
     function populateScheduleData(data)
     {
-            if(data == null)
-                return;
+        if(data == null)
+          return;
             
-            var response = jQuery.parseJSON(data);
+        var response = jQuery.parseJSON(data);
 
         document['pricemonitorProductExport']['enableExport'].checked = response.enableExport == 1 ? true : false;
        // toggleFieldSets(!response.data.hasMappings);
@@ -180,8 +182,6 @@
         } else {
             $('#datetimepicker1').find("input").val(createDateForView(response.exportStart));
         }
-
-        toastr["success"]("Data are successfully saved!", "Successfully saved!");
 
     }
 
