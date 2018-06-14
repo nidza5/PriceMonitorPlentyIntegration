@@ -6,7 +6,16 @@
     intervals = [];
 
     $(document).ready(function() {   
-        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker1').datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-arrow-up",
+                down: "fa fa-arrow-down",
+                next: "fa fa-arrow-right",
+                previous: "fa fa-arrow-left"
+            }
+        });
         document.getElementById("itemExport").addEventListener("click", initExportForm);
     });
 
