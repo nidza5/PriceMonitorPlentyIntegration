@@ -4,7 +4,6 @@
  require_once __DIR__ . '/FilterStorage.php';
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
-
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Patagona\Pricemonitor\Core\Infrastructure\Proxy;
  use Patagona\Pricemonitor\Core\Infrastructure\Logger;
