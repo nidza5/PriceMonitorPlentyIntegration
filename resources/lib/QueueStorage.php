@@ -90,8 +90,8 @@ class QueueStorage implements Storage
     protected function getStorageModel($queueName, $lock = false)
     {
         $queueItem = $this->queueModel;
+        return ['is null' => true];
 
-        return  $queueItem;
         // if ($queueItem == null) {
         //     return ['is null' => true];
         // }
