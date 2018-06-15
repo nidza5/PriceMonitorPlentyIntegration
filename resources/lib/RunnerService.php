@@ -29,7 +29,7 @@ class RunnerService
 
     private $queueModel; 
 
-    public function __construct($queueModel)
+    public function __construct($queueModel = null)
     {
         ServiceRegister::registerQueueStorage(new QueueStorage($queueModel));
         ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage());
