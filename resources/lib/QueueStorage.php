@@ -91,7 +91,7 @@ class QueueStorage implements Storage
     {
         $queueItem = $this->queueModel;
 
-        if (!$queueItem) {
+        if ($queueItem == null) {
             return null;
         }
 
