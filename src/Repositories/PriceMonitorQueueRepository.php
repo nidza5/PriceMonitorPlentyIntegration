@@ -34,9 +34,9 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
         $reservationTime = $data['reservationTime'] != null ?
                 $data['reservationTime']->format('Y-m-d H:i:s') : "";
         
-        $queueModel->reservationTime = "2018-05-05";
-        $queueModel->attempts = $data['attempts'];
-        $queueModel->reservationTime = $data['payload'];
+        $queueModel->reservationTime = $reservationTime;
+        $queueModel->attempts = $data['attempts'] !== null ? $data['attempts'] : "";
+        $queueModel->payload = $data['payload'] !== null ? $data['payload'] : "";
 
         $database->save($queueModel);
     }
