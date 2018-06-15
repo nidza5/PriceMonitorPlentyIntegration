@@ -38,7 +38,7 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
         $queueModel->attempts = $data['attempts'];
         $queueModel->reservationTime = $data['payload'];
 
-        $database->save($queueModel);
+     //   $database->save($queueModel);
     }
     
     public function getQueueByName($queueName)
