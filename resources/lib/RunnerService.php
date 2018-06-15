@@ -98,11 +98,11 @@ class RunnerService
             //$this->callAsyncRequest($runnerToken->getToken(), $queueName);
 
             return ['isCreateRunnerToken' => true,
-                    'queueName' => $queue ];
+                    'queueName' => $queueName ];
         }
         else {
             return ['isCreateRunnerToken' => false,
-                    'queueName' => $queue ];
+                    'queueName' => $queueName ];
         }
     }
 
