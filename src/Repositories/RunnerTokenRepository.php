@@ -28,7 +28,7 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
 
         $tokenModel->token = $hashToken;
 
-        $database->save();
+        $database->save($tokenModel);
 
         return $hashToken;
     }
