@@ -130,9 +130,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
-        echo "queue";
-        echo json_encode($queue);
-
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId,
             'queueModel' => $queue            
@@ -150,6 +147,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
         
+        echo "create token";
+        echo json_encode($createToken);
+
         if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
         {
            $savedToken = $this->tokenRepo->saveRunnerToken("pricemonitor_");
