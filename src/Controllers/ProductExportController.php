@@ -150,6 +150,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         echo "create token";
         echo json_encode($createToken);
 
+        if($createToken != null && $createToken['error'])
+           throw new \Exception($createToken['error_msg']);
+        
         if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
         {
            $savedToken = $this->tokenRepo->saveRunnerToken("pricemonitor_");
