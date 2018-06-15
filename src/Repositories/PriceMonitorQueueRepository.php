@@ -31,7 +31,7 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
               return false;
       }
 
-        $reservationTime = $data['reservationTime'] !== null ?
+        $reservationTime = $data['reservationTime'] != null ?
                 $data['reservationTime']->format('Y-m-d H:i:s') : "";
         
         $queueModel->reservationTime = $reservationTime;
