@@ -62,7 +62,7 @@ class QueueStorage implements Storage
      */
     public function beginTransaction()
     {
-        $this->getConnection()->beginTransaction();
+        return true;
     }
 
     /**
@@ -70,7 +70,7 @@ class QueueStorage implements Storage
      */
     public function commit()
     {
-        $this->getConnection()->commit();
+        return true;
     }
 
     /**
@@ -78,7 +78,7 @@ class QueueStorage implements Storage
      */
     public function rollBack()
     {
-        $this->getConnection()->rollBack();
+       return false;
     }
 
     /**
@@ -119,27 +119,11 @@ class QueueStorage implements Storage
      */
     protected function setStorageModel($queueName, $storageModel)
     {
-        
-        // $queueModel = Mage::getModel('pricemonitor/queue');
+       //return parameter to save in src folder
+       // within lib there is no way to do insert in database
 
-        // if ($storageModel->getId() === null) {
-        //     $queueModel->setQueueName($queueName);
-        // } else {
-        //     $queueModel = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
-
-        //     if (!$queueModel->getId()) {
-        //         return false;
-        //     }
-        // }
-
-        // $reservationTime = $storageModel->getReservationTime() !== null ?
-        //     $storageModel->getReservationTime()->format('Y-m-d H:i:s') : null;
-
-        // $queueModel->setReservationTime($reservationTime);
-        // $queueModel->setAttempts($storageModel->getAttempts());
-        // $queueModel->setPayload($storageModel->getPayload());
-        // $queueModel->save();
-        // return true;
+       return ['queueName' => $queueName,
+               'storageModel' => $storageModel];
     }
 
     /**

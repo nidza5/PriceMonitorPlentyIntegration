@@ -10,9 +10,9 @@ try {
 
     $runnerService = new RunnerService($queueModel);
 
-    $runnerService->enqueueProductExportJob($priceMonitorId);
+   return $runnerService->enqueueProductExportJob($priceMonitorId);
     
-    return  $runnerService->runAsync();
+  //  return  $runnerService->runAsync();
 
 } catch(\Exception $ex) {
     

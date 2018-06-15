@@ -42,7 +42,7 @@ class RunnerService
     public function enqueueProductExportJob($pricemonitorContractId)
     {
         $queue = new Queue();
-        $queue->enqueue(new ProductExportJob($pricemonitorContractId));
+        return  $queue->enqueue(new ProductExportJob($pricemonitorContractId));
     }
 
     /**

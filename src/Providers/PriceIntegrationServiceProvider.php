@@ -17,6 +17,11 @@ use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
 use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
+use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
+use PriceMonitorPlentyIntegration\Contracts\TransactionDetailsRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
+
 
 /**
  * Class PriceIntegrationServiceProvider
@@ -37,6 +42,8 @@ use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
          $this->getApplication()->bind(ScheduleRepositoryContract::class, ScheduleRepository::class);
          $this->getApplication()->bind(PriceMonitorQueueRepositoryContract::class, PriceMonitorQueueRepository::class);
          $this->getApplication()->bind(RunnerTokenRepositoryContract::class, RunnerTokenRepository::class);
+         $this->getApplication()->bind(TransactionHistoryRepositoryContract::class, TransactionHistoryRepository::class);
+         $this->getApplication()->bind(TransactionDetailsRepositoryContract::class, TransactionDetailsRepository::class);
      }
 
      public function boot(ReferenceContainer $referenceContainer)
