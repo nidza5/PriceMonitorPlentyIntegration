@@ -92,7 +92,7 @@ class QueueStorage implements Storage
         $queueItem = $this->queueModel;
 
         if ($queueItem == null) {
-            return ['is null' => true];
+            return false;
         }
 
         $reservationTime = $queueItem["reservationTime"] === null ? "" :
