@@ -18,7 +18,7 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
     public function saveRunnerToken($token): string
     {
         if($token === null)
-            return false;
+            return "";
             
         $database = pluginApp(DataBase::class);
      
