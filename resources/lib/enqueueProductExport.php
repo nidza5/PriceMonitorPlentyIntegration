@@ -8,11 +8,9 @@ try {
 
     $queueModel = SdkRestApi::getParam('queueModel');
 
-    return $queueModel;
+    $runnerService = new RunnerService($queueModel);
 
-//     $runnerService = new RunnerService($queueModel);
-
-//    return $runnerService->enqueueProductExportJob($priceMonitorId);
+    return $runnerService->enqueueProductExportJob($priceMonitorId);
     
   //  return  $runnerService->runAsync();
 
