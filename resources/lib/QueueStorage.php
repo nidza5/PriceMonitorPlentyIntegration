@@ -90,23 +90,22 @@ class QueueStorage implements Storage
     protected function getStorageModel($queueName, $lock = false)
     {
         $queueItem = $this->queueModel;
-        return ['isnull' => true];
 
-        // if ($queueItem == null) {
-        //     return ['is null' => true];
-        // }
+        if ($queueItem == null) {
+            return ['is null' => true];
+        }
 
-        // $reservationTime = $queueItem["reservationTime"] === null ? "" :
-        //     DateTime::createFromFormat('Y-m-d H:i:s', $queueItem["reservationTime"]);
+        $reservationTime = $queueItem["reservationTime"] === null ? "" :
+            DateTime::createFromFormat('Y-m-d H:i:s', $queueItem["reservationTime"]);
 
-        // return new StorageModel(
-        //     array(
-        //         'id' => $queueItem['id'],
-        //         'reservationTime' => $reservationTime,
-        //         'attempts' => $queueItem['attempts'],
-        //         'payload' => $queueItem['payload']
-        //     )
-        // );
+        return new StorageModel(
+            array(
+                'id' => $queueItem['id'],
+                'reservationTime' => $reservationTime,
+                'attempts' => $queueItem['attempts'],
+                'payload' => $queueItem['payload']
+            )
+        );
     }
 
     /**
