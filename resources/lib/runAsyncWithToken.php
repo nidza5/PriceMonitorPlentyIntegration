@@ -4,7 +4,8 @@ require_once __DIR__ . '/RunnerService.php';
 
 try {
 
-   $runnerService = new RunnerService();
+   $queueModel = SdkRestApi::getParam('queueModel');
+   $runnerService = new RunnerService($queueModel);
    
    return  $runnerService->runAsync();
 

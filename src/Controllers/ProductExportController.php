@@ -147,7 +147,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($enqueAndRun != null)
             $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
 
-        $createToken =  $this->sdkService->call("runAsyncWithToken", []);   
+        $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
         
         if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
         {
