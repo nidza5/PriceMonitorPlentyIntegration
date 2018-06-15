@@ -27,8 +27,6 @@ class RunnerService
      */
     protected static $_debugKey = '';
 
-    private $queueModel; 
-
     public function __construct($queueModel)
     {
         ServiceRegister::registerQueueStorage(new QueueStorage($queueModel));
