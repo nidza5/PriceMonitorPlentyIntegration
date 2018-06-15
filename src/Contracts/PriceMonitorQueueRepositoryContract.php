@@ -16,9 +16,9 @@ interface PriceMonitorQueueRepositoryContract
      * @param array $data
      * @return void
      */
-    public function savePriceMonitorQueue(array $data);
+    public function savePriceMonitorQueue($queueName,array $data);
 
     public function getQueueByName($queueName);
 
-
+    function getQueueByIdName($id,$queueName);
 }

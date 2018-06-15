@@ -14,9 +14,9 @@ interface RunnerTokenRepositoryContract
      * saveRunnerToken
      *
      * @param array $data
-     * @return void
+     * @return string
      */
-    public function saveRunnerToken(array $data);
+    public function saveRunnerToken($token): string;
 
     public function getByToken($token);
 

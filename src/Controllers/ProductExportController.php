@@ -20,6 +20,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
  use PriceMonitorPlentyIntegration\Constants\QueueType;
+ use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
 
  /**
   * Class ProductExportController
@@ -53,12 +55,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $queueRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo)
+          /**
+         *
+         * @var RunnerTokenRepositoryContract
+         */
+        private $tokenRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
         $this->contractRepo = $contractRepo;
         $this->queueRepo = $queueRepo;
+        $this->tokenRepo = $tokenRepo; 
     }
 
     public function getSchedule(Request $request) :string 
@@ -126,9 +135,33 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'queueModel' => $queue            
         ]); 
 
-        echo json_encode($enqueAndRun);
+        if($enqueAndRun != null && $enqueAndRun['error'])
+        {
+            return [
+                'Message' => $enqueAndRun['error']
+            ];
+        }
+
+        if($enqueAndRun != null)
+            $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+
+        $createToken =  $this->sdkService->call("runAsyncWithToken", []);   
+        
+        if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
+        {
+           $savedToken = $this->tokenRepo->saveRunnerToken("pricemonitor_");
+            
+           $returnValues = [
+               "token" => $savedToken,
+               "queueName" => $enqueAndRun['queueName']
+           ];
+            // call async
+            return json_encode($returnValues);
+        }
+
+          return json_encode("OK");
         
 
-        return "OK";
+      
     }
  }

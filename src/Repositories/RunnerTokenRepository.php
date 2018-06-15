@@ -12,12 +12,25 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
       /**
      * saveRunnerToken
      *
-     * @param array $data
-     * @return void
+     * @param string $token
+     * @return string
      */
-    public function saveRunnerToken(array $data)
+    public function saveRunnerToken($token): string
     {
-       
+        if($token === null)
+            return false;
+            
+        $database = pluginApp(DataBase::class);
+     
+        $tokenModel = pluginApp(RunnerToken::class);
+
+        $hashToken = sha1($token);
+
+        $tokenModel->token = $hashToken;
+
+        $database->save();
+
+        return $hashToken;
     }
     
 
