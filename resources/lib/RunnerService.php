@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/QueueStorage.php';
+require_once __DIR__ . '/TransactionStorage.php';
 
 use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
 use Patagona\Pricemonitor\Core\Sync\PriceImport\Job as PriceImportJob;
@@ -31,6 +32,7 @@ class RunnerService
     public function __construct($queueModel)
     {
         ServiceRegister::registerQueueStorage(new QueueStorage($queueModel));
+        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage());
     }
 
     /**
