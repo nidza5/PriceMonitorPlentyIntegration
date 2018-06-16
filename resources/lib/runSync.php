@@ -1,23 +1,23 @@
 <?php
 
-// require_once __DIR__ . '/RunnerService.php';
+require_once __DIR__ . '/RunnerService.php';
 
-// try {
+try {
 
-//    $queueModel = SdkRestApi::getParam('queueModel');
-//    $queueName = SdkRestApi::getParam('queueName');
-//    $runnerService = new RunnerService($queueModel);
+   $queueModel = SdkRestApi::getParam('queueModel');
+   $queueName = SdkRestApi::getParam('queueName');
+   $runnerService = new RunnerService($queueModel);
    
-//    return  $runnerService->runSync($queueName);
+   return  $runnerService->runSync($queueName);
 
-// } catch(\Exception $ex) {
+} catch(\Exception $ex) {
     
-//     $response = [
-//         'Code' => $ex->getCode(),
-//         'Message' => $ex->getMessage()
-//      ];
+    $response = [
+        'Code' => $ex->getCode(),
+        'Message' => $ex->getMessage()
+     ];
 
-//     return $response;
-// }
+    return $response;
+}
 
 ?>
