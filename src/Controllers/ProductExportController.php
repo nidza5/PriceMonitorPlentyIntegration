@@ -156,9 +156,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
            $hashUniqueToken =  StringUtils::getUniqueString(20);    
 
            $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
-
-           $this->tokenRepo->deleteAllTokens();
-            
+ 
            $returnValues = [
                "token" => $savedToken,
                "queueName" => $enqueAndRun['queueName']
