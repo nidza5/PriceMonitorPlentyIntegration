@@ -24,11 +24,11 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
      
         $tokenModel = pluginApp(RunnerToken::class);
 
-        $tokenModel->token = $hashToken;
+        $tokenModel->token = $token ;
 
         $database->save($tokenModel);
 
-        return $hashToken;
+        return $token;
     }
     
 
