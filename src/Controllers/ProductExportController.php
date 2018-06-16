@@ -146,10 +146,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
 
         $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
-        
-        echo "create token";
-        echo json_encode($createToken);
-
+      
         if($createToken != null && $createToken['error'])
            throw new \Exception($createToken['error_msg']);
         
