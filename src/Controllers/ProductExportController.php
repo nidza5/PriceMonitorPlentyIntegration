@@ -142,7 +142,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'Message' => $enqueAndRun['error']
             ];
         }
-
+        
         if($enqueAndRun != null)
             $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
 

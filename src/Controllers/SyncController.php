@@ -14,6 +14,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Repositories\Models;
  use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
+ use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
+ use PriceMonitorPlentyIntegration\Constants\QueueType;
 
 
  /**
@@ -36,11 +39,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $tokenRepo;
 
+        /**
+         *
+         * @var PriceMonitorQueueRepositoryContract
+         */
+        private $queueRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo)
     {
         $this->sdkService = $sdkService;
-        $this->tokenRepo = $tokenRepo;        
+        $this->tokenRepo = $tokenRepo;  
+        $this->queueRepo = $queueRepo;      
     }
 
     
@@ -61,8 +71,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($token === "" || $token === null)
             throw new \Exception("token is empty");
 
+        $this->tokenRepo->deleteToken($token); 
 
-        
+        $queue = $this->queueRepo->getQueueByName($queueName);
+
+        $syncRun =  $this->sdkService->call("runSync", [
+            'queueModel' => $queue,
+            'queueName' => $queueName            
+        ]);   
+         
+        $result = ['successSync' => $syncRun];
+        return  json_encode($result);
     }
-
  }

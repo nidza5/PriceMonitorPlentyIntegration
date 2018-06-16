@@ -22,4 +22,6 @@ interface RunnerTokenRepositoryContract
 
     public function deleteAllTokens();
 
+    public function deleteToken($token);
+
 }

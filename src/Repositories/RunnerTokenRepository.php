@@ -56,4 +56,14 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
         }
 
     }
+
+    public function deleteToken($token) 
+    {
+        $database = pluginApp(DataBase::class);
+ 
+        $runnerTokenOriginal = $databaseRunnerToken->query(RunnerToken::class)->where('token', '=', $token)->get();
+
+        if($runnerTokenOriginal != null)
+                $database->delete($runnerTokenOriginal[0]);
+    }
 }

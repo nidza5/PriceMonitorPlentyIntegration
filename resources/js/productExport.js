@@ -149,13 +149,26 @@
                 type: "POST",
                 url: "/run",
                 data: transferObject,
+                async: true,
                 success: function(data)
                 {
                     console.log(data);
-                    toastr["success"]("Product export has been started.");
                     
                     if(data == null) 
                         return;
+
+                    var dataSync = jQuery.parseJSON(data);
+
+                    if(dataSync != null && dataSync == true) {
+                        callAssyncSync(dataForSync);
+
+                    if(dataForSync.queueName == "StatusChecking") {
+                        dataForSync.queueName = "StatusChecking";
+                        callAssyncSync(dataForSync);
+                    }
+                }
+                   
+                    toastr["success"]("Product export has been started.");
                     
                 },
                 error: function(data)
