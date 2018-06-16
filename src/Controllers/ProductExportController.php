@@ -22,6 +22,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Constants\QueueType;
  use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
+ use PriceMonitorPlentyIntegration\Helper\StringUtils;
 
  /**
   * Class ProductExportController
@@ -152,7 +153,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
         if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
         {
-           $savedToken = $this->tokenRepo->saveRunnerToken("pricemonitor_");
+           $hashUniqueToken =  StringUtils::getUniqueString(20);    
+
+           $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
+
+           $this->tokenRepo->deleteAllTokens();
             
            $returnValues = [
                "token" => $savedToken,

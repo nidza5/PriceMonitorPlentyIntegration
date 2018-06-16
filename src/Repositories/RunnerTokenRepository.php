@@ -24,8 +24,6 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
      
         $tokenModel = pluginApp(RunnerToken::class);
 
-        $hashToken = sha1($token);
-
         $tokenModel->token = $hashToken;
 
         $database->save($tokenModel);
@@ -44,5 +42,18 @@ class RunnerTokenRepository implements RunnerTokenRepositoryContract
 
       return $runnerTokenOriginal[0];
       
+    }
+
+    public function deleteAllTokens()
+    {
+        $database = pluginApp(DataBase::class);
+ 
+        $tokensList = $database->query(RunnerToken::class)->get();
+ 
+        foreach($tokensList as $con)
+        {
+            $database->delete($con);
+        }
+
     }
 }

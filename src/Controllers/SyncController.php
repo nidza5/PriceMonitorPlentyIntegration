@@ -12,6 +12,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
+ use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
 
 
  /**
@@ -28,15 +30,37 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
+        /**
+         *
+         * @var RunnerTokenRepositoryContract
+         */
+        private $tokenRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo)
     {
-        $this->sdkService = $sdkService;       
+        $this->sdkService = $sdkService;
+        $this->tokenRepo = $tokenRepo;        
     }
 
     
     public function run(Request $request)
     {
+        $requestData = $request->all();
+
+        if($requestData == null)
+            throw new \Exception("Request data are empty!");
+
+        $queueName = $requestData['queueName'];
+
+        if($queueName === "" || $queueName === null)
+            throw new \Exception("queueName is empty");
+
+        $token = $requestData['token'];
+
+        if($token === "" || $token === null)
+            throw new \Exception("token is empty");
+
 
         
     }

@@ -118,13 +118,51 @@
             success: function(data)
             {
                 console.log(data);
-                toastr["success"]("Product export has been started.");
+                if(data == null) 
+                    return;
+                
+                var dataJson = jQuery.parseJSON(data);
+                if(dataJson == null) {
+                    console.log("dataJSON is null");
+                    return;
+                }
+                
+                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName)
+                    callAssyncSync(dataJson);
+                // toastr["success"]("Product export has been started.");
             },
             error: function(data)
             {
                 console.log(data);
             }
         });
+     }
+
+     function callAssyncSync(dataForSync)
+     {      
+            var transferObject = {
+                'queueName' : dataForSync.queueName,
+                'token' : dataForSync.token
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/run",
+                data: transferObject,
+                success: function(data)
+                {
+                    console.log(data);
+                    toastr["success"]("Product export has been started.");
+                    
+                    if(data == null) 
+                        return;
+                    
+                },
+                error: function(data)
+                {
+                    console.log(data);
+                }
+            });
      }
 
       /**
