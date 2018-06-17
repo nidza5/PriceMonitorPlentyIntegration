@@ -189,19 +189,17 @@ function showTabContent(evt, tabName) {
 
     if(tabName == "ItemSelection") {
 
-       // var template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
+         template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
          parentTemplateId = "pricemonitor-product-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorProductSelection";
-         console.log("parent template je:");
-         console.log(parentTemplateId);
 
     } else if(tabName == "PriceSelection") {
+         template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper-price')[0];
          parentTemplateId = "pricemonitor-price-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorPriceSelection";
-         console.log("parent template je:");
-         console.log(parentTemplateId);
+        
     }
 }
 
