@@ -25,7 +25,7 @@
         intervals = [];
         registerEventListeners();
       //  toggleFieldSets(true);
-      //  loadTransactionHistoryMasterData(limit, currentOffset);
+         loadTransactionHistoryMasterData(limit, currentOffset);
        // loadLastExportData();
          loadScheduledExport();
     }
@@ -85,6 +85,31 @@
     function onClickEnableScheduledExport()
     {
         toggleScheduledExport(this.checked)
+    }
+
+
+     /**
+     * Loads transaction history master data
+     *
+     * @param limit
+     * @param offset
+     */
+    function loadTransactionHistoryMasterData(limit, offset)
+    {
+        var url = Pricemonitor['config']['urls']['transactionHistory'],
+            params = {
+                'pricemonitorId': Pricemonitor['config']['pricemonitorId'],
+                'limit': limit,
+                'offset': offset
+            };
+
+        currentOffset = offset;
+        transactionHistoryMasterData = {};
+        Pricemonitor['ajax']['get'](
+            url, params, function (response) {
+                populateTransactionHistoryMasterTable(response, limit, offset)
+            }, 'json', true
+        );
     }
 
       /**
