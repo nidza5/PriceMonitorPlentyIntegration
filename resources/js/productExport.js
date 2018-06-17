@@ -187,7 +187,7 @@
                     if(dataSync != null && dataSync == true) {
                         callAssyncSync(dataForSync);
 
-                    if(dataForSync.queueName == "StatusChecking") {
+                    if(dataForSync.queueName == "Default") {
                         dataForSync.queueName = "StatusChecking";
                         callAssyncSync(dataForSync);
                     }
