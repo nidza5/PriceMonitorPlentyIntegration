@@ -76,7 +76,7 @@
                     <button class="tablinks" id="tabItemSelection" onclick="showTabContent(event, 'ItemSelection')">Item selection</button>
                     <button class="tablinks" id="tabAttMapping" onclick="showTabContent(event, 'AttributesMapping')" >Attributes mapping</button>
                     <button class="tablinks" id="itemExport" onclick="showTabContent(event, 'ItemExport')">Item export </button>
-                    <button class="tablinks" onclick="showTabContent(event, 'PriceSelection')">Price selection </button>
+                    <button class="tablinks" id="tabPriceSelection" onclick="showTabContent(event, 'PriceSelection')">Price selection </button>
                     <button class="tablinks" onclick="showTabContent(event, 'PriceImport')">Price import </button>
                 </div>
                 <div id="ContractInfo" class="tabcontent">
@@ -448,8 +448,18 @@
                 </div>
 
                 <div id="PriceSelection" class="tabcontent">
-                    <h3>PriceSelection</h3>
-                    <p>PriceSelection content form</p>
+                    <section class="pricemonitor-price-selection pricemonitor-page" id="pricemonitor-price-selection">
+                    <form name="pricemonitorPriceSelection" novalidate onsubmit="return false;">
+                        <fieldset>
+                            <div class="pricemonitor-filter-groups-wrapper col-md-8">
+                                <!-- Groups will be generated here based on data fetched from the API -->
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group" id="groupSubmitPriceSelection">
+                             <button type="submit" id="pricemonitor-price-selection-submit" style="margin-top:10%;" class="btn btn-primary float-right input-button" onclick="saveFilter(); return false;">Save</button>
+                        </div> 
+                    </form>
                 </div>
                 <div id="PriceImport" class="tabcontent">
                     <h3>PriceImport</h3>

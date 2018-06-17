@@ -83,9 +83,6 @@ function setDataContractInfo(idContract,contractId,contractName,insertPricesValu
 
     adjustOptionPrices(insertSalesPriceValue,"attribute-max-price");
     addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-max-price");
-    // $("#attribute-ref-price").val(insertSalesPriceValue).change();
-    // $("#attribute-min-price").val(insertSalesPriceValue).change();
-    // $("#attribute-max-price").val(insertSalesPriceValue).change();
 }
 
 function updateDataAttributeContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue)
@@ -154,6 +151,7 @@ $(document).ready(function() {
       document.getElementById("defaultOpen").click(); 
 
       document.getElementById("tabItemSelection").addEventListener("click", getFilter);
+      document.getElementById("tabPriceSelection").addEventListener("click", getFilter);
       
   });
 
@@ -187,6 +185,19 @@ function showTabContent(evt, tabName) {
     {
         if(evt.currentTarget != null)
             evt.currentTarget.className += " active";
+    }
+
+    if(tabName == "ItemSelection") {
+
+       // var template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper')[0];
+         parentTemplateId = "pricemonitor-product-selection";
+         parentTemplate = document.getElementById(parentTemplateId);
+         formName = "pricemonitorProductSelection";
+
+    } else if(tabName == "PriceSelection") {
+         parentTemplateId = "pricemonitor-price-selection";
+         parentTemplate = document.getElementById(parentTemplateId);
+         formName = "pricemonitorPriceSelection";
     }
 }
 
