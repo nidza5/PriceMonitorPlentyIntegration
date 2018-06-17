@@ -193,11 +193,15 @@ function showTabContent(evt, tabName) {
          parentTemplateId = "pricemonitor-product-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorProductSelection";
+         console.log("parent template je:");
+         console.log(parentTemplateId);
 
     } else if(tabName == "PriceSelection") {
          parentTemplateId = "pricemonitor-price-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorPriceSelection";
+         console.log("parent template je:");
+         console.log(parentTemplateId);
     }
 }
 
