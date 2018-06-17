@@ -67,7 +67,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'productFilterRepositoryParam' => $productFilterRepo
         ]);
 
-        echo json_encode( $filterForSave);
+        echo "filters";
+        echo json_encode( $requestData['filters']);
             
         if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
             throw new \Exception("some parameters of product filter are null");
