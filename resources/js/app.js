@@ -1196,8 +1196,8 @@ function showTabContent(evt, tabName) {
 
         var filters = createFiltersForRequest();
 
-        console.log("filters");
-        console.log(filters);
+        console.log("filters type");
+        console.log(filterQueryParams.filterType);
 
         var transferObject = {
             'pricemonitorId': $("#contractId").val(),
