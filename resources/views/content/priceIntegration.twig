@@ -466,25 +466,17 @@
                         <form name="pricemonitorPriceImport" novalidate onsubmit="return false;">
                             <div class="row">
                                 <div class="col-md-8 first-row">
-                                    <fieldset>
-                                        <legend>Import settings</legend>
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border">Import settings</legend>
                                            <div class="col-md-12">
                                             <div class="form-row pricemonitor-form-inline">
                                                 <input type="checkbox"
-                                                        class="pricemonitor-form-field"
+                                                        class="pricemonitor-form-field form-check-input"
                                                         name="enableImport"
                                                         id="enabled-scheduled-import"
                                                         autocomplete="off" />
-                                                <label for="enabled-scheduled-import">
-                                                    Import when new price is available
-                                                    <div class="popover-wrapper">
-                                                        <div class="popover-button">?</div>
-                                                        <div class="popover">
-                                                            <div class="popover-text">
-                                                               Price will be imported as a price defined on Contract Info tab.
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <label class="form-check-label" for="enabled-scheduled-import">
+                                                    Import when new price is available                    
                                                 </label>
                                             </div>
                                             <div class="form-row">
@@ -510,19 +502,19 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                <fieldset>
-                                    <legend>Manual import</legend>
-                                    <div class="col-md-6">
-                                        <button type="button" id="import-now">Import now</button>
-                                    </div>
-                                </fieldset>
-
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border">Manual import</legend>
+                                        <div class="col-md-6">
+                                            <button type="button" id="import-now">Import now</button>
+                                        </div>
+                                    </fieldset>
+                                 </div>
+                                <div class="col-md-4">
                                 <div class="grid pricemonitor-tg-responsive" id="transaction-history-import-master">
-                                    <fieldset>
-                                        <h2>Transaction History</h2>
+                                    <fieldset class="scheduler-border">
+                                        <legend class="scheduler-border">Transaction History</legend>
                                         <div>
                                             <div class="col-sm-12 pricemonitor-pagination">
-
                                             </div>
                                             <div class="col-sm-12">
                                                 <table class="pricemonitor-tg">
@@ -551,8 +543,8 @@
                                     </fieldset>
                                 </div>
                             </div>
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                 </section>
                 </div>
              </div>
