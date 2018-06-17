@@ -82,16 +82,22 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $requestData = $request->all();
             $priceMonitorId = 0;
 
-            if($requestData != null)
-                $priceMonitorId = $requestData['priceMonitorId'];
+            if($requestData == null)
+                return;
 
-                $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
+            $priceMonitorId = $requestData['priceMonitorId'];
+            $filterType = $requestData['filterType'];
 
-                $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-                    'filterType' => FilterType::EXPORT_PRODUCTS,
-                    'priceMonitorId' => $priceMonitorId,
-                    'productFilterRepo' => $filter
-                ]);    
+            if($priceMonitorId == null || $filterType == null)
+                throw new \Exception("Price monitor id or filter type is null");
+
+            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
+
+            $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+                'filterType' => $filterType,
+                'priceMonitorId' => $priceMonitorId,
+                'productFilterRepo' => $filter
+            ]);    
 
           return json_encode($filters);  
 

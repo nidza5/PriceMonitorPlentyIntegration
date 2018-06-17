@@ -193,12 +193,15 @@ function showTabContent(evt, tabName) {
          parentTemplateId = "pricemonitor-product-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorProductSelection";
+         filterQueryParams['filterType'] = 'export_products';
 
     } else if(tabName == "PriceSelection") {
-         template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper-price')[0];
+         
+        template = document.getElementsByClassName('pricemonitor-filter-groups-wrapper-price')[0];
          parentTemplateId = "pricemonitor-price-selection";
          parentTemplate = document.getElementById(parentTemplateId);
          formName = "pricemonitorPriceSelection";
+         filterQueryParams['filterType'] = 'import_prices';
         
     }
 }
@@ -255,7 +258,8 @@ function showTabContent(evt, tabName) {
     function getFilter() {
 
       var dataOption = {
-          'priceMonitorId' : $("#contractId").val()
+          'priceMonitorId' : $("#contractId").val(),
+          'filterType' :  filterQueryParams.filterType
       };
 
         $.ajax({
