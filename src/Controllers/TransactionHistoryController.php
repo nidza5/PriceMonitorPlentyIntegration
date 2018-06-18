@@ -114,6 +114,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'emailForConfig' =>  $emailForConfig,
             'passwordForConfig' =>  $passwordForConfig
         ]);   
+
+        echo json_encode( $transactionHistoryAct);
         
         if($transactionHistoryAct != null && $transactionHistoryAct['error'])
            throw new \Exception($transactionHistoryAct['error_msg']);
