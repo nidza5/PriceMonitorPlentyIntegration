@@ -170,6 +170,9 @@
                 'token' : dataForSync.token
             };
 
+            console.log("data for sync transfer");
+            console.log(transferObject);
+
             $.ajax({
                 type: "POST",
                 url: "/run",
