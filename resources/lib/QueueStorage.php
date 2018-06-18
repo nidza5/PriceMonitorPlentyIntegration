@@ -123,7 +123,7 @@ class QueueStorage implements Storage
        // within lib there is no way to do insert in database
 
        return ['queueName' => $queueName,
-               'storageModel' => serialize($storageModel)];
+               'storageModel' => json_encode($storageModel)];
     }
 
     /**
