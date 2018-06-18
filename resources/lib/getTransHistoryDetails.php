@@ -13,6 +13,11 @@ try {
     $transactionHistoryRecords = SdkRestApi::getParam('transactionHistoryRecords');
     $totalHistoryRecords = SdkRestApi::getParam('totalHistoryRecords');
 
+    $emailForConfig = SdkRestApi::getParam('emailForConfig');
+    $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+
+    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+
     return PriceMonitorSdkHelper::getTransHistoryDetails($pricemonitorId,$masterId,$limit,$offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords);
 
 } catch(\Exception $ex) {

@@ -52,12 +52,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $transactionHistoryRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ContractRepositoryContract $contractRepo,TransactionDetailsRepositoryContract $transactionDetailsRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo)
+         /**
+         *
+         * @var ConfigRepository
+         */
+        private $config;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ContractRepositoryContract $contractRepo,TransactionDetailsRepositoryContract $transactionDetailsRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,ConfigRepository $config)
     {
         $this->sdkService = $sdkService;       
         $this->contractRepo = $contractRepo;
         $this->transactionDetailsRepo = $transactionDetailsRepo;
         $this->transactionHistoryRepo = $transactionHistoryRepo;
+        $this->config = $config;
     }
 
     public function getTransactionHistory(Request $request)
@@ -92,6 +99,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $totalHistoryRecords = $this->transactionHistoryRepo->getTransactionHistoryMasterCount($contract->id,FilterType::EXPORT_PRODUCTS);
         }
 
+        $emailForConfig = $this->config->get('email');
+        $passwordForConfig = $this->config->get('password');
+
         $transactionHistoryAct =  $this->sdkService->call("getTransHistoryDetails", [
             'masterId' => $masterId,
             'pricemonitorId' => $pricemonitorId,
@@ -100,7 +110,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'transactionHistoryDetailsRecord' => $transactionHistoryDetailsRecords,
             'totalDetailedRecords' => $totalDetailedRecords,
             'transactionHistoryRecords' => $transactionHistoryRecords,
-            'totalHistoryRecords' => $totalHistoryRecords
+            'totalHistoryRecords' => $totalHistoryRecords,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig
         ]);   
         
         if($transactionHistoryAct != null && $transactionHistoryAct['error'])
