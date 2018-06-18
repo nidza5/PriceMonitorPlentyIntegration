@@ -203,6 +203,8 @@
 
         $type = TransactionHistoryType::EXPORT_PRODUCTS;
 
+        $detailed = $masterId !== null;
+
         if ($detailed) {
             $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
             $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
