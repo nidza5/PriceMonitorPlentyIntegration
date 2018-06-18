@@ -64,4 +64,16 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
       return $queueOriginal[0];
       
     }
+
+    public function deleteAllQueue() 
+    {
+        $database = pluginApp(DataBase::class);
+ 
+        $queueList = $database->query(PriceMonitorQueue::class)->get();
+ 
+        foreach($queueList as $con)
+        {
+            $database->delete($con);
+        }
+    }
 }

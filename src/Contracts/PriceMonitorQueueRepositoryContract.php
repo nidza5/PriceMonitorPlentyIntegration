@@ -20,5 +20,7 @@ interface PriceMonitorQueueRepositoryContract
 
     public function getQueueByName($queueName);
 
-    function getQueueByIdName($id,$queueName);
+    public function getQueueByIdName($id,$queueName);
+
+    public function deleteAllQueue();
 }
