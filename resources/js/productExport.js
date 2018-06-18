@@ -109,7 +109,7 @@
             data: dataOption,
             success: function(data)
             {
-                populateTransactionHistoryMasterTable(response, limit, offset)
+                populateTransactionHistoryMasterTable(response, limit, offset);
             },
             error: function(xhr)
             {
@@ -138,6 +138,9 @@
    {
        var wrapper = document.getElementById('transaction-history-export-master');
 
+       console.log(response);
+       console.log(limit);
+       console.log(offset);
     //    Pricemonitor['contracts']['utility'].populateTable(
     //        response, wrapper, limit, offset,
     //        createTransactionHistoryMasterRow,
