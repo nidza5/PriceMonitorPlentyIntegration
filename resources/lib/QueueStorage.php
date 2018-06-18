@@ -62,7 +62,7 @@ class QueueStorage implements Storage
      */
     public function beginTransaction()
     {
-        return true;
+        
     }
 
     /**
@@ -70,7 +70,7 @@ class QueueStorage implements Storage
      */
     public function commit()
     {
-        return true;
+       
     }
 
     /**
@@ -78,7 +78,7 @@ class QueueStorage implements Storage
      */
     public function rollBack()
     {
-       return false;
+      
     }
 
     /**
