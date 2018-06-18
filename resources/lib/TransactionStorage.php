@@ -26,13 +26,7 @@ class TransactionStorage implements TransactionHistoryStorage
         $this->totalHistoryRecords = $totalHistoryRecords;
     }
 
-    /**
-     * Gets transaction master data based on passed filters.
-     *
-     * @param TransactionHistoryMasterFilter $filter
-     *
-     * @return TransactionHistoryMaster[]
-     */
+
     public function getTransactionHistoryMaster(TransactionHistoryMasterFilter $filter)
     {
        $transactionModels = $this->transactionHistoryRecords;
@@ -91,13 +85,6 @@ class TransactionStorage implements TransactionHistoryStorage
        
     }
 
-    /**
-     * Gets transaction history details based on set filters.
-     *
-     * @param TransactionHistoryDetailFilter $filter
-     *
-     * @return \Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryDetail[]
-     */
     public function getTransactionHistoryDetails(TransactionHistoryDetailFilter $filter)
     {
         $transactionDetailsModels = $this->transactionHistoryDetailsRecord;
@@ -142,63 +129,30 @@ class TransactionStorage implements TransactionHistoryStorage
 
     }
 
-    /**
-     * Gets number of transaction details for master transaction.
-     *
-     * @param int $masterId
-     *
-     * @return int
-     */
     public function getTransactionHistoryDetailsCount($masterId)
     {
        return $this->totalDetailedRecords;
     }
 
-    /**
-     * Saves transaction history master and details. If id is set for master or for details UPDATE should be done.
-     * If id is null, INSERT of the new transaction should be done. Array od TransactionHistoryStorageDTO should be
-     * returned which will contain affected transactions.
-     *
-     * @param TransactionHistoryMaster $transactionMaster
-     * @param array $transactionDetails
-     *
-     * @return TransactionHistoryStorageDTO
-     */
+  
     public function saveTransactionHistory(TransactionHistoryMaster $transactionMaster, $transactionDetails = array())
     {
        
     }
 
-    /**
-     * Deletes transaction master records, when date of creation is older than it is set for cleanup period.
-     *
-     * @param int $numberOfDays
-     *
-     * @return bool
-     */
+
     public function cleanupMaster($numberOfDays)
     {
       
     }
 
-    /**
-     * Deletes transaction details records, when date of creation is older than it is set for cleanup period.
-     *
-     * @param int $numberOfDays
-     *
-     * @return bool
-     */
+
     public function cleanupDetails($numberOfDays)
     {
         
     }
 
-    /**
-     * @param TransactionHistoryMasterFilter|TransactionHistoryDetailFilter $filter
-     * @param $records
-     *
-     * @return Patagona_Pricemonitor_Model_Resource_TransactionHistory_Collection
-     */
+
     protected function sortRecords($filter, $records)
     {
         $orderBy = $filter->getOrderBy();
@@ -254,11 +208,7 @@ class TransactionStorage implements TransactionHistoryStorage
         return $createdMasterTransactions;
     }
 
-    /**
-     * @param Patagona_Pricemonitor_Model_TransactionHistory|object $transactionDetailModels
-     *
-     * @return TransactionHistoryDetail[]
-     */
+
     protected function createTransactionDetails($transactionDetailModels)
     {
         $createdTransactionsDetails = array();
@@ -302,12 +252,7 @@ class TransactionStorage implements TransactionHistoryStorage
        
     }
 
-    /**
-     * @param int $numberOfDays
-     * @param Mage_Core_Model_Resource_Db_Collection_Abstract $records
-     *
-     * @return bool
-     */
+   
     protected function cleanUp($numberOfDays, $records)
     {
        
