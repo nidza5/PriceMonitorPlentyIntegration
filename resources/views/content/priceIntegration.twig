@@ -557,7 +557,7 @@
                 <fieldset>
                     <legend>My Account</legend>
                    
-                    <div class="col-md-6">                        
+                    <div class="col-md-12">                        
                         <div class="form-group row">
                             <label for="pricemonitor-user-email" class="col-sm-2 col-form-label">Email:</label>
                             <div class="input-wrapper col-sm-4">
@@ -578,9 +578,9 @@
                                     class="small-input form-control"
                                     type="number"
                                     min="1"
-                                    name="transactionsRetention" />
-                                days
+                                    name="transactionsRetention" />                                
                             </div>
+                            <div clas="col-sm-2">days</div>
                         </div>
                         <div class="form-group row">
                             <label for="pricemonitor-transaction-details-retention" class="form-label col-sm-2 col-form-label">
@@ -590,13 +590,13 @@
                                     class="small-input form-control"
                                     type="number"
                                     min="1"
-                                    name="transactionDetailsRetention" />
-                                days
+                                    name="transactionDetailsRetention" />                                
                             </div>
+                             <div clas="col-sm-2">days</div>
                         </div>
                     </div>
                 </fieldset>
-                <div class="form-row">
+                <div class="form-row" style="margin-left:90%;">
                     <button type="submit"
                             class="input-button btn btn-primary float-right"
                             id="pricemonitor-save-account-info"
