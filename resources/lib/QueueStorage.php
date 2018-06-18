@@ -125,19 +125,12 @@ class QueueStorage implements Storage
        $reservationTime = $storageModel->getReservationTime() !== null ?
             $storageModel->getReservationTime()->format('Y-m-d H:i:s') : null;
             
-    //    $storageModelArray = [
-    //        "id" => $storageModel->getId(),
-    //         "reservationTime" => $reservationTime,
-    //         "attempts" => $storageModel->getAttempts() ,
-    //         "payload" => $storageModel->getPayload()
-    //    ];
-
-    $storageModelArray = [
-        "id" => 1,
-         "reservationTime" => "",
-         "attempts" =>"5" ,
-         "payload" => "5"
-    ];
+       $storageModelArray = [
+            "id" => $storageModel->getId(),
+            "reservationTime" => $reservationTime,
+            "attempts" => $storageModel->getAttempts() ,
+            "payload" => $storageModel->getPayload()
+       ];
 
        return ['queueName' => $queueName,
                'storageModel' => $storageModelArray];
