@@ -19,6 +19,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 
+
  /**
   * Class FilterController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -59,12 +60,17 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         //  $productFilterRepo->deleteAllProductFilter();
           $requestData = $request->all();
+
+          $emailForConfig = $this->config->get('email');
+          $passwordForConfig = $this->config->get('password');
        
          $filterForSave =  $this->sdkService->call("saveFilter", [
             'filterData' => $requestData['filters'],
             'filterType' => $requestData['type'],
             'priceMonitorId' => $requestData['pricemonitorId'],
-            'productFilterRepositoryParam' => $productFilterRepo
+            'productFilterRepositoryParam' => $productFilterRepo,
+            'emailForConfig' => $emailForConfig,
+            'passwordForConfig' => $passwordForConfig
         ]);
     
         if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  

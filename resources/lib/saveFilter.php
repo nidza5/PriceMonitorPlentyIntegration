@@ -12,7 +12,11 @@ $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 
 $productFilterRepositoryParam = SdkRestApi::getParam('productFilterRepositoryParam');
 
-return PriceMonitorSdkHelper::saveFilter($filterData,$filterType,$priceMonitorId,$productFilterRepositoryParam);
+$emailForConfig = SdkRestApi::getParam('emailForConfig');
+
+$passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+
+return PriceMonitorSdkHelper::saveFilter($filterData,$filterType,$priceMonitorId,$productFilterRepositoryParam,$emailForConfig,$passwordForConfig);
 
 
 ?>

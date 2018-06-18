@@ -23,6 +23,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
+ 
 
  /**
   * Class ProductExportController
@@ -62,13 +63,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $tokenRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo)
+       /**
+         *
+         * @var ConfigRepository
+         */
+        private $config;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
         $this->contractRepo = $contractRepo;
         $this->queueRepo = $queueRepo;
         $this->tokenRepo = $tokenRepo; 
+        $this->config = $config;
     }
 
     public function getSchedule(Request $request) :string 
@@ -131,9 +139,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
+        $emailForConfig = $this->config->get('email');
+        $passwordForConfig = $this->config->get('password');
+
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId,
-            'queueModel' => $queue            
+            'queueModel' => $queue,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig        
         ]); 
 
         if($enqueAndRun != null && $enqueAndRun['error'])

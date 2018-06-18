@@ -1,13 +1,19 @@
 <?php
 
 require_once __DIR__ . '/RunnerService.php';
+require_once __DIR__ . '/PriceMonitorSdkHelper.php';
 
 try {
 
    $queueModel = SdkRestApi::getParam('queueModel');
    $queueName = SdkRestApi::getParam('queueName');
-   $runnerService = new RunnerService($queueModel);
    
+   $emailForConfig = SdkRestApi::getParam('emailForConfig');
+   $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+
+   PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+
+   $runnerService = new RunnerService($queueModel);
    return  $runnerService->runSync($queueName);
 
 } catch(\Exception $ex) {

@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/RunnerService.php';
+require_once __DIR__ . '/PriceMonitorSdkHelper.php';
 
 try {
 
@@ -9,6 +10,12 @@ try {
     $queueModel = SdkRestApi::getParam('queueModel');
 
     $runnerService = new RunnerService($queueModel);
+
+    $emailForConfig = SdkRestApi::getParam('emailForConfig');
+
+    $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+
+    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
     return $runnerService->enqueueProductExportJob($priceMonitorId);
     

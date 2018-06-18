@@ -157,6 +157,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         }
 
         // set price monitor credentials
+
+        $this->config->set('email',$credentials['email']);
+        $this->config->set('password',$credentials['password']);
+
          $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password']

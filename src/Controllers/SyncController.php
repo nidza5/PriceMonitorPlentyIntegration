@@ -45,12 +45,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $queueRepo;
 
+         /**
+         *
+         * @var ConfigRepository
+         */
+        private $config;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
-        $this->queueRepo = $queueRepo;      
+        $this->queueRepo = $queueRepo;
+        $this->config = $config;      
     }
 
     
@@ -75,9 +82,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
+        $emailForConfig = $this->config->get('email');
+        $passwordForConfig = $this->config->get('password');
+
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,
-            'queueName' => $queueName            
+            'queueName' => $queueName,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig             
         ]);   
          
         $result = ['successSync' => $syncRun];

@@ -63,13 +63,19 @@
         ServiceRegister::getConfigService()->setCredentials($email, $password);
     }
 
+    public static function registerConfigService($email,$password)
+    {
+        require_once __DIR__ . '/ConfigService.php';
+        ServiceRegister::registerConfigService(new ConfigService($email,$password));
+    }
 
-    public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo)
+
+    public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo,$emailForConfig,$passwordForConfig)
     {
 
         try {
             require_once __DIR__ . '/ConfigService.php';
-            ServiceRegister::registerConfigService(new ConfigService());
+            ServiceRegister::registerConfigService(new ConfigService($emailForConfig,$passwordForConfig));
 
             $client = new PriceMonitorHttpClient();
             ServiceRegister::registerHttpClient($client);
