@@ -22,16 +22,16 @@
 
  class PriceMonitorSdkHelper
  {
-    /**
-     * @var array
-     */
-    protected static $_statusMap = array(
-        null => '',
-        TransactionHistoryStatus::FAILED => 'Failed',
-        TransactionHistoryStatus::FINISHED => 'Success',
-        TransactionHistoryStatus::IN_PROGRESS => 'In Progress',
-        TransactionHistoryStatus::FILTERED_OUT => 'Filtered Out',
-    );
+    // /**
+    //  * @var array
+    //  */
+    // protected static $_statusMap = array(
+    //     null => '',
+    //     TransactionHistoryStatus::FAILED => 'Failed',
+    //     TransactionHistoryStatus::FINISHED => 'Success',
+    //     TransactionHistoryStatus::IN_PROGRESS => 'In Progress',
+    //     TransactionHistoryStatus::FILTERED_OUT => 'Filtered Out',
+    // );
 
     public static function loginInPriceMonitor($email,$password)
     { 
@@ -219,156 +219,130 @@
         // return $finalHistoryDetails;
     }
 
-    public static function transform($data, $type = TransactionHistoryType::EXPORT_PRODUCTS, $detailed = false)
-    {
-        if ($type === TransactionHistoryType::EXPORT_PRODUCTS) {
-            return self::transformExport($data, $detailed);
-        } else {
-            return self::transformImport($data, $detailed);
-        }
-    }
+    // public static function transform($data, $type = TransactionHistoryType::EXPORT_PRODUCTS, $detailed = false)
+    // {
+    //     if ($type === TransactionHistoryType::EXPORT_PRODUCTS) {
+    //         return self::transformExport($data, $detailed);
+    //     } else {
+    //         return self::transformImport($data, $detailed);
+    //     }
+    // }
 
-    /**
-     * @param array $data
-     * @param bool $detailed
-     *
-     * @return array
-     */
-    public static function transformImport($data, $detailed = false)
-    {
-        if ($detailed) {
-            $result = self::transformDetailImportData($data);
-        } else {
-            $result = self::transformMasterImportData($data);
-        }
+   
+    // public static function transformImport($data, $detailed = false)
+    // {
+    //     if ($detailed) {
+    //         $result = self::transformDetailImportData($data);
+    //     } else {
+    //         $result = self::transformMasterImportData($data);
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
-     /**
-     * @param array $data
-     * @param bool $detailed
-     *
-     * @return array
-     */
-    public static function transformExport($data, $detailed = false)
-    {
-        if ($detailed) {
-            $result = self::transformDetailExportData($data);
-        } else {
-            $result = self::transformMasterExportData($data);
-        }
+  
+    // public static function transformExport($data, $detailed = false)
+    // {
+    //     if ($detailed) {
+    //         $result = self::transformDetailExportData($data);
+    //     } else {
+    //         $result = self::transformMasterExportData($data);
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
-     /**
-     * @param array $data
-     *
-     * @return array
-     */
-    public static function transformDetailExportData($data)
-    {
-        $result = array();
+  
+    // public static function transformDetailExportData($data)
+    // {
+    //     $result = array();
 
-        /** @var TransactionHistoryDetail $record */
-        foreach ($data as $record) {
-            $status = self::$_statusMap[$record->getStatus()];
+    //     /** @var TransactionHistoryDetail $record */
+    //     foreach ($data as $record) {
+    //         $status = self::$_statusMap[$record->getStatus()];
 
-            $result[] = array(
-                'gtin' => (string)$record->getGtin(),
-                'name' => (string)$record->getProductName(),
-                'refPrice' => $record->getReferencePrice(),
-                'minPrice' => $record->getMinPrice(),
-                'maxPrice' => $record->getMaxPrice(),
-                'status' => $status,
-                'note' => (string)$record->getNote(),
-            );
-        }
+    //         $result[] = array(
+    //             'gtin' => (string)$record->getGtin(),
+    //             'name' => (string)$record->getProductName(),
+    //             'refPrice' => $record->getReferencePrice(),
+    //             'minPrice' => $record->getMinPrice(),
+    //             'maxPrice' => $record->getMaxPrice(),
+    //             'status' => $status,
+    //             'note' => (string)$record->getNote(),
+    //         );
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
-      /**
-     * @param array $data
-     *
-     * @return array
-     */
-    public static function transformMasterExportData($data)
-    {
-        $result = array();
+  
+    // public static function transformMasterExportData($data)
+    // {
+    //     $result = array();
 
-        /** @var TransactionHistoryMaster $record */
-        foreach ($data as $record) {
-            $status = self::$_statusMap[$record->getStatus()];
+    //     /** @var TransactionHistoryMaster $record */
+    //     foreach ($data as $record) {
+    //         $status = self::$_statusMap[$record->getStatus()];
 
-            $result[] = array(
-                'id' => (int)$record->getId(),
-                'exportTime' => $this->formatDate($record->getTime()),
-                'successCount' => (int)$record->getSuccessCount(),
-                'failedCount' => (int)$record->getFailedCount(),
-                'status' => $status,
-                'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
-                'note' => (string)$record->getNote(),
-            );
-        }
+    //         $result[] = array(
+    //             'id' => (int)$record->getId(),
+    //             'exportTime' => $this->formatDate($record->getTime()),
+    //             'successCount' => (int)$record->getSuccessCount(),
+    //             'failedCount' => (int)$record->getFailedCount(),
+    //             'status' => $status,
+    //             'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
+    //             'note' => (string)$record->getNote(),
+    //         );
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
-    /**
-     * @param array $data
-     *
-     * @return array
-     */
-    public static function transformDetailImportData($data)
-    {
-        $result = array();
+  
+    // public static function transformDetailImportData($data)
+    // {
+    //     $result = array();
 
-        /** @var TransactionHistoryDetail $record */
-        foreach ($data as $record) {
-            $status = self::$_statusMap[$record->getStatus()];
-            $isUpdated = $record->isUpdatedInShop() ? 'Yes' : 'No';
+    //     /** @var TransactionHistoryDetail $record */
+    //     foreach ($data as $record) {
+    //         $status = self::$_statusMap[$record->getStatus()];
+    //         $isUpdated = $record->isUpdatedInShop() ? 'Yes' : 'No';
 
-            $result[] = array(
-                'status' => $status,
-                'gtin' => (string)$record->getGtin(),
-                'name' => (string)$record->getProductName(),
-                'isUpdated' => $isUpdated,
-                'note' => (string)$record->getNote(),
-            );
-        }
+    //         $result[] = array(
+    //             'status' => $status,
+    //             'gtin' => (string)$record->getGtin(),
+    //             'name' => (string)$record->getProductName(),
+    //             'isUpdated' => $isUpdated,
+    //             'note' => (string)$record->getNote(),
+    //         );
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
-     /**
-     * @param $data
-     *
-     * @return array
-     */
-    public static function transformMasterImportData($data)
-    {
-        $result = array();
+   
+    // public static function transformMasterImportData($data)
+    // {
+    //     $result = array();
 
-        /** @var TransactionHistoryMaster $record */
-        foreach ($data as $record) {
-            $status = self::$_statusMap[$record->getStatus()];
+    //     /** @var TransactionHistoryMaster $record */
+    //     foreach ($data as $record) {
+    //         $status = self::$_statusMap[$record->getStatus()];
 
-            $result[] = array(
-                'id' => (int)$record->getId(),
-                'importTime' => $this->formatDate($record->getTime()),
-                'importedPrices' => (int)$record->getTotalCount(),
-                'updatedPrices' => (int)$record->getSuccessCount(),
-                'failedCount' => (int)$record->getFailedCount(),
-                'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
-                'status' => $status,
-                'note' => (string)$record->getNote(),
-            );
-        }
+    //         $result[] = array(
+    //             'id' => (int)$record->getId(),
+    //             'importTime' => $this->formatDate($record->getTime()),
+    //             'importedPrices' => (int)$record->getTotalCount(),
+    //             'updatedPrices' => (int)$record->getSuccessCount(),
+    //             'failedCount' => (int)$record->getFailedCount(),
+    //             'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
+    //             'status' => $status,
+    //             'note' => (string)$record->getNote(),
+    //         );
+    //     }
 
-        return $result;
-    }
+    //     return $result;
+    // }
 
  }
 
