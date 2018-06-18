@@ -35,7 +35,47 @@ class TransactionStorage implements TransactionHistoryStorage
      */
     public function getTransactionHistoryMaster(TransactionHistoryMasterFilter $filter)
     {
-       
+       $transactionModels = $this->transactionHistoryRecords;
+
+       $id = $filter->getId();
+
+       if ($id !== null) {
+            $transactionModels = array_filter($transactionModels, function ($u) use ($id) {
+                return $u['id'] == $id;
+            });
+       }
+
+       $uniqueIdentifier = $filter->getUniqueIdentifier();
+
+       if ($uniqueIdentifier !== null) {
+            $transactionModels = array_filter($transactionModels, function ($u) use ($uniqueIdentifier) {
+                return $u['uniqueIdentifier'] == $uniqueIdentifier;
+            });
+       }
+
+       $contractId = $filter->getContractId();
+
+       if ($contractId !== null) {
+            $transactionModels = array_filter($transactionModels, function ($u) use ($contractId) {
+                return $u['priceMonitorContractId'] == $contractId;
+            });
+       }
+
+       $type = $filter->getType();
+
+       if ($type !== null) {
+            $transactionModels = array_filter($transactionModels, function ($u) use ($type) {
+                return $u['type'] == $type;
+            });
+       }
+
+       //TO DO  SORT AND PAGINATE RECORD
+
+    //    $transactionModels = $this->sortRecords($filter, $transactionModels);
+    //    $transactionModels = $this->getPaginatedRecords($filter, $transactionModels);
+
+       return $this->createTransactions($transactionModels);
+
     }
 
     /**
@@ -60,7 +100,46 @@ class TransactionStorage implements TransactionHistoryStorage
      */
     public function getTransactionHistoryDetails(TransactionHistoryDetailFilter $filter)
     {
+        $transactionDetailsModels = $this->transactionHistoryDetailsRecord;
+
+        $id = $filter->getId();
+
+        if($id !== null) {
+            $transactionDetailsModels = array_filter($transactionDetailsModels, function ($u) use ($id) {
+                return $u['id'] == $id;
+            });
+        }
         
+        $transactionId = $filter->getMasterId();
+
+        if ($transactionId !== null) {
+            $transactionDetailsModels = array_filter($transactionDetailsModels, function ($u) use ($transactionId) {
+                return $u['transactionId'] == $transactionId;
+            });
+        }
+
+        $uniqueIdentifier = $filter->getMasterUniqueIdentifier();
+        
+        if ($uniqueIdentifier !== null) {
+            $transactionDetailsModels = array_filter($transactionDetailsModels, function ($u) use ($uniqueIdentifier) {
+                return $u['transactionUniqueIdentifier'] == $uniqueIdentifier;
+            });
+        }
+
+        $status = $filter->getStatus();
+
+        if ($status !== null) {
+            $transactionDetailsModels = array_filter($transactionDetailsModels, function ($u) use ($status) {
+                return $u['status'] == $status;
+            });
+        }
+
+        //TO DO ORDER AND PAGINATED
+        // $transactionDetailModels = $this->sortRecords($filter, $transactionDetailModels);
+        // $transactionDetailModels = $this->getPaginatedRecords($filter, $transactionDetailModels);
+
+        return $this->createTransactionDetails($transactionDetailModels);
+
     }
 
     /**
@@ -72,7 +151,7 @@ class TransactionStorage implements TransactionHistoryStorage
      */
     public function getTransactionHistoryDetailsCount($masterId)
     {
-      
+       return $this->totalDetailedRecords;
     }
 
     /**
@@ -156,18 +235,18 @@ class TransactionStorage implements TransactionHistoryStorage
         /** @var Patagona_Pricemonitor_Model_TransactionHistory $transaction */
         foreach ($transactions as $transaction) {
             $createdMasterTransaction = new TransactionHistoryMaster(
-                $transaction->getPricemonitorContractId(),
-                new DateTime($transaction->getTime()),
-                $transaction->getType(),
-                $transaction->getStatus(),
-                $transaction->getId(),
-                $transaction->getUniqueIdentifier()
+                $transaction['priceMonitorContractId'],
+                new DateTime($transaction['time']),
+                $transaction['type'],
+                $transaction['status'],
+                $transaction['id'],
+                $transaction['uniqueIdentifier']
             );
 
-            $createdMasterTransaction->setFailedCount((int)$transaction->getFailedCount());
-            $createdMasterTransaction->setTotalCount((int)$transaction->getTotalCount());
-            $createdMasterTransaction->setNote($transaction->getNote());
-            $createdMasterTransaction->setSuccessCount((int)$transaction->getSuccessCount());
+            $createdMasterTransaction->setFailedCount((int)$transaction['failedCount']);
+            $createdMasterTransaction->setTotalCount((int)$transaction['totalCount']);
+            $createdMasterTransaction->setNote($transaction['note']);
+            $createdMasterTransaction->setSuccessCount((int)$transaction['successCount']);
 
             $createdMasterTransactions[] = $createdMasterTransaction;
         }
@@ -184,24 +263,23 @@ class TransactionStorage implements TransactionHistoryStorage
     {
         $createdTransactionsDetails = array();
 
-        /** @var Patagona_Pricemonitor_Model_TransactionHistoryDetail $transactionDetail */
         foreach ($transactionDetailModels as $transactionDetail) {
             $createdTransaction = new TransactionHistoryDetail(
-                $transactionDetail->getStatus(),
-                new DateTime($transactionDetail->getTime()),
-                $transactionDetail->getId(),
-                $transactionDetail->getTransactionId(),
-                $transactionDetail->getTransactionUniqueIdentifier(),
-                $transactionDetail->getProductId(),
-                $transactionDetail->getGtin(),
-                $transactionDetail->getProductName(),
-                (float)$transactionDetail->getReferencePrice(),
-                (float)$transactionDetail->getMinPrice(),
-                (float)$transactionDetail->getMaxPrice()
+                $transactionDetail['status'],
+                new DateTime($transactionDetail['time']),
+                $transactionDetail['id'],
+                $transactionDetail['transactionId'],
+                $transactionDetail['transactionUniqueIdentifier'],
+                $transactionDetail['productId'],
+                $transactionDetail['gtin'],
+                $transactionDetail['productName'],
+                (float)$transactionDetail['referencePrice'],
+                (float)$transactionDetail['minPrice'],
+                (float)$transactionDetail['maxPrice']
             );
 
-            $createdTransaction->setNote($transactionDetail->getNote());
-            $createdTransaction->setUpdatedInShop((bool)$transactionDetail->getIsUpdated());
+            $createdTransaction->setNote($transactionDetail['note']);
+            $createdTransaction->setUpdatedInShop((bool)$transactionDetail['isUpdated']);
 
             $createdTransactionsDetails[] = $createdTransaction;
         }
