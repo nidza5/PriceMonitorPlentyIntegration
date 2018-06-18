@@ -559,23 +559,23 @@
                    
                     <div class="col-md-6">                        
                         <div class="form-row">
-                            <label for="pricemonitor-user-email">Email:</label>
+                            <label for="pricemonitor-user-email" class="form-label">Email:</label>
                             <div class="input-wrapper">
-                                <input id="pricemonitor-user-email" type="email" name="email" />
+                                <input id="pricemonitor-user-email" class="form-control" type="email" name="email" />
                             </div>
                         </div>
                         <div class="form-row">
-                            <label for="pricemonitor-user-password">Password:</label>
+                            <label for="pricemonitor-user-password" class="form-label">Password:</label>
                             <div class="input-wrapper">
-                                <input id="pricemonitor-user-password" type="password" name="password" />
+                                <input id="pricemonitor-user-password" class="form-control" type="password" name="password" />
                             </div>
                         </div>
                         <div class="form-row">
-                            <label for="pricemonitor-transactions-retention">
+                            <label for="pricemonitor-transactions-retention" class="form-label">
                                History master data retention interval: </label>
                             <div class="input-wrapper">
                                 <input id="pricemonitor-transactions-retention"
-                                    class="small-input"
+                                    class="small-input form-control"
                                     type="number"
                                     min="1"
                                     name="transactionsRetention" />
@@ -583,11 +583,11 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <label for="pricemonitor-transaction-details-retention">
+                            <label for="pricemonitor-transaction-details-retention" class="form-label">
                                 History detail data retention interval: </label>
                             <div class="input-wrapper">
                                 <input id="pricemonitor-transaction-details-retention"
-                                    class="small-input"
+                                    class="small-input form-control"
                                     type="number"
                                     min="1"
                                     name="transactionDetailsRetention" />
@@ -598,7 +598,7 @@
                 </fieldset>
                 <div class="form-row">
                     <button type="submit"
-                            class="input-button"
+                            class="input-button btn btn-primary float-right"
                             id="pricemonitor-save-account-info"
                             name="saveAccount">
                        Save
