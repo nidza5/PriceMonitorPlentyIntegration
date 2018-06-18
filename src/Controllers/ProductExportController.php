@@ -129,8 +129,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
 
-            $this->queueRepo->deleteAllQueue();
-
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
