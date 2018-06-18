@@ -122,8 +122,25 @@ class QueueStorage implements Storage
        //return parameter to save in src folder
        // within lib there is no way to do insert in database
 
+       $reservationTime = $storageModel->getReservationTime() !== null ?
+            $storageModel->getReservationTime()->format('Y-m-d H:i:s') : null;
+            
+    //    $storageModelArray = [
+    //        "id" => $storageModel->getId(),
+    //         "reservationTime" => $reservationTime,
+    //         "attempts" => $storageModel->getAttempts() ,
+    //         "payload" => $storageModel->getPayload()
+    //    ];
+
+    $storageModelArray = [
+        "id" => 1,
+         "reservationTime" => "",
+         "attempts" =>"5" ,
+         "payload" => "5"
+    ];
+
        return ['queueName' => $queueName,
-               'storageModel' => json_decode(json_encode($storageModel), true)];
+               'storageModel' => $storageModelArray];
     }
 
     /**
