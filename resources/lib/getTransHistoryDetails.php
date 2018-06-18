@@ -13,7 +13,7 @@ try {
     $transactionHistoryRecords = SdkRestApi::getParam('transactionHistoryRecords');
     $totalHistoryRecords = SdkRestApi::getParam('totalHistoryRecords');
 
-    return PriceMonitorSdkHelper::getTransHistoryDetails($pricemonitorId,$masterId,$limit,$offset);
+    return PriceMonitorSdkHelper::getTransHistoryDetails($pricemonitorId,$masterId,$limit,$offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords);
 
 } catch(\Exception $ex) {
     
