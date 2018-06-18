@@ -109,7 +109,7 @@
             data: dataOption,
             success: function(data)
             {
-                populateTransactionHistoryMasterTable(response, limit, offset);
+                populateTransactionHistoryMasterTable(data, limit, offset);
             },
             error: function(xhr)
             {
