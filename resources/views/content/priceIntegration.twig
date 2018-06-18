@@ -552,7 +552,60 @@
     </div>
 
     <div id="MyAccount" class="tabcontentprestaprice">  
-        <p>My account</p>
+        <section class="pricemonitor-main-content pricemonitor-page visible">
+            <form name="accountInfo" id="accountInfo" novalidate onsubmit="return false;">
+                <fieldset>
+                    <legend>My Account</legend>
+                   
+                    <div class="col-md-6">                        
+                        <div class="form-row">
+                            <label for="pricemonitor-user-email">Email:</label>
+                            <div class="input-wrapper">
+                                <input id="pricemonitor-user-email" type="email" name="email" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="pricemonitor-user-password">Password:</label>
+                            <div class="input-wrapper">
+                                <input id="pricemonitor-user-password" type="password" name="password" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="pricemonitor-transactions-retention">
+                               History master data retention interval: </label>
+                            <div class="input-wrapper">
+                                <input id="pricemonitor-transactions-retention"
+                                    class="small-input"
+                                    type="number"
+                                    min="1"
+                                    name="transactionsRetention" />
+                                days
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="pricemonitor-transaction-details-retention">
+                                History detail data retention interval: </label>
+                            <div class="input-wrapper">
+                                <input id="pricemonitor-transaction-details-retention"
+                                    class="small-input"
+                                    type="number"
+                                    min="1"
+                                    name="transactionDetailsRetention" />
+                                days
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-row">
+                    <button type="submit"
+                            class="input-button"
+                            id="pricemonitor-save-account-info"
+                            name="saveAccount">
+                       Save
+                    </button>
+                </div>
+            </form>
+        </section>
     </div>
 </div> 
   
