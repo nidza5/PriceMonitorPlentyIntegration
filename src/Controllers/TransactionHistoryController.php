@@ -74,7 +74,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
         $detailed = $masterId !== null;
 
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        $contract = $this->contractRepo->getContractByPriceMonitorId($pricemonitorId);
 
         if(!$contract)
             throw new \Exception("Contract is null");
@@ -86,7 +86,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         if($detailed) {
             $transactionHistoryDetailsRecords  = $this->transactionDetailsRepo->getAllTransactionDetails();
-            $totalDetailedRecords = $this->getTransactionHistoryDetailsCount();
+            $totalDetailedRecords = $this->transactionDetailsRepo->getTransactionHistoryDetailsCount();
         } else {
             $transactionHistoryRecords = $this->transactionHistoryRepo->getAllTransactionHistory();
             $totalHistoryRecords = $this->transactionHistoryRepo->getTransactionHistoryMasterCount($contract->id,FilterType::EXPORT_PRODUCTS);
