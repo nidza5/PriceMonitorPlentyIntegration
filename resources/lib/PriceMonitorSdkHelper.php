@@ -2,7 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
- require_once __DIR__ . '/TransactionStorage.php';
+//  require_once __DIR__ . '/TransactionStorage.php';
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
@@ -66,7 +66,7 @@
     public static function registerConfigService($email,$password)
     {
         require_once __DIR__ . '/ConfigService.php';
-        ServiceRegister::registerConfigService(new ConfigService());
+        ServiceRegister::registerConfigService(new ConfigService($email,$password));
     }
 
 
@@ -75,7 +75,7 @@
 
         try {
             require_once __DIR__ . '/ConfigService.php';
-            ServiceRegister::registerConfigService(new ConfigService());
+            ServiceRegister::registerConfigService(new ConfigService($emailForConfig,$passwordForConfig));
 
             $client = new PriceMonitorHttpClient();
             ServiceRegister::registerHttpClient($client);
