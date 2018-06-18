@@ -75,8 +75,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
-        echo json_encode($queue);
-
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,
             'queueName' => $queueName            
