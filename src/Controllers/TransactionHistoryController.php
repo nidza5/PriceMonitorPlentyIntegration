@@ -86,7 +86,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         if($detailed) {
             $transactionHistoryDetailsRecords  = $this->transactionDetailsRepo->getAllTransactionDetails();
-            $totalDetailedRecords = $this->transactionDetailsRepo->getTransactionHistoryDetailsCount();
+            $totalDetailedRecords = $this->transactionDetailsRepo->getTransactionHistoryDetailsCount($masterId);
         } else {
             $transactionHistoryRecords = $this->transactionHistoryRepo->getAllTransactionHistory();
             $totalHistoryRecords = $this->transactionHistoryRepo->getTransactionHistoryMasterCount($contract->id,FilterType::EXPORT_PRODUCTS);
