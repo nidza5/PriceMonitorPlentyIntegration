@@ -197,26 +197,26 @@
 
     public static function getTransHistoryDetails($pricemonitorId, $masterId, $limit, $offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords, $totalHistoryRecords)
     {
-        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
+        // ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
        
-        $transactionHistory = new TransactionHistory();
+        // $transactionHistory = new TransactionHistory();
 
-        $type = TransactionHistoryType::EXPORT_PRODUCTS;
+        // $type = TransactionHistoryType::EXPORT_PRODUCTS;
 
-        if ($detailed) {
-            $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
-            $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
-        } else {
-            $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, $offset);
-            $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
-        }
+        // if ($detailed) {
+        //     $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
+        //     $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
+        // } else {
+        //     $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, $offset);
+        //     $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
+        // }
         
-        $records = self::transform($records, $type, $detailed);
+        // $records = self::transform($records, $type, $detailed);
 
-        $finalHistoryDetails = ['records' => $records,
-                                'total' => $total];
+        // $finalHistoryDetails = ['records' => $records,
+        //                         'total' => $total];
 
-        return $finalHistoryDetails;
+        // return $finalHistoryDetails;
     }
 
     public static function transform($data, $type = TransactionHistoryType::EXPORT_PRODUCTS, $detailed = false)
