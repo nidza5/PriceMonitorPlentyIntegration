@@ -131,6 +131,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
+        echo "queue export";
+        echo json_encode($queue);
+        
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId,
             'queueModel' => $queue            
@@ -143,6 +146,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             ];
         }
         
+        echo "enqueu run";
         echo json_encode($enqueAndRun);
 
         if($enqueAndRun != null)
