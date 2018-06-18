@@ -66,7 +66,7 @@
     public static function registerConfigService($email,$password)
     {
         require_once __DIR__ . '/ConfigService.php';
-        ServiceRegister::registerConfigService(new ConfigService($email,$password));
+        ServiceRegister::registerConfigService(new ConfigService());
     }
 
 
@@ -75,7 +75,7 @@
 
         try {
             require_once __DIR__ . '/ConfigService.php';
-            ServiceRegister::registerConfigService(new ConfigService($emailForConfig,$passwordForConfig));
+            ServiceRegister::registerConfigService(new ConfigService());
 
             $client = new PriceMonitorHttpClient();
             ServiceRegister::registerHttpClient($client);
