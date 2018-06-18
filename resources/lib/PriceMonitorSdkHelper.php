@@ -2,7 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
- require_once __DIR__ . '/TransactionStorage.php';
+
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
@@ -203,6 +203,7 @@
 
     public static function getTransHistoryDetails($pricemonitorId, $masterId, $limit, $offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords, $totalHistoryRecords)
     {
+        require_once __DIR__ . '/TransactionStorage.php';
         ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
        
         $transactionHistory = new TransactionHistory();
@@ -211,21 +212,20 @@
 
         $detailed = $masterId !== null;
 
-        // if ($detailed) {
-        //     $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
-        //     $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
-        // } else {
-        //     $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, $offset);
-        //     $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
-        // }
+        if ($detailed) {
+            $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
+            $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
+        } else {
+            $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, $offset);
+            $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
+        }
         
-        // $records = self::transform($records, $type, $detailed);
+        $records = self::transform($records, $type, $detailed);
 
-        // $finalHistoryDetails = ['records' => $records,
-        //                         'total' => $total];
+        $finalHistoryDetails = ['records' => $records,
+                                'total' => $total];
 
-       // return $finalHistoryDetails;
-       return "OK";
+        return $finalHistoryDetails;
     }
 
     public static function transform($data, $type = TransactionHistoryType::EXPORT_PRODUCTS, $detailed = false)
