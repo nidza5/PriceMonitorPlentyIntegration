@@ -187,14 +187,14 @@
 
                     var dataSync = jQuery.parseJSON(data);
 
-                    if(dataSync != null && dataSync == true) {
-                        callAssyncSync(dataForSync);
+                //     if(dataSync != null && dataSync == true) {
+                //         callAssyncSync(dataForSync);
 
-                    if(dataForSync.queueName == "Default") {
-                        dataForSync.queueName = "StatusChecking";
-                        callAssyncSync(dataForSync);
-                    }
-                }
+                //     if(dataForSync.queueName == "Default") {
+                //         dataForSync.queueName = "StatusChecking";
+                //         callAssyncSync(dataForSync);
+                //     }
+                // }
                    
                     toastr["success"]("Product export has been started.");
                     
