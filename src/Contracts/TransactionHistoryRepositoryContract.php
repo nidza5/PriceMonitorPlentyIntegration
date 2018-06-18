@@ -18,4 +18,8 @@ interface TransactionHistoryRepositoryContract
      */
     public function saveTransactionHistory(array $data);
 
+    public function getAllTransactionHistory();
+
+    public function getTransactionHistoryMasterCount($contractId,$type);
+
 }

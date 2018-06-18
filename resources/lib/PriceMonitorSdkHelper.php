@@ -2,6 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
+ require_once __DIR__ . '/TransactionStorage.php';
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
@@ -14,9 +15,24 @@
  use Patagona\Pricemonitor\Core\Sync\Filter\Expression;
  use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistory;
+ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMasterFilter;
+ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistorySortFields;
+ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMaster;
 
  class PriceMonitorSdkHelper
  {
+    /**
+     * @var array
+     */
+    protected static $_statusMap = array(
+        null => '',
+        TransactionHistoryStatus::FAILED => 'Failed',
+        TransactionHistoryStatus::FINISHED => 'Success',
+        TransactionHistoryStatus::IN_PROGRESS => 'In Progress',
+        TransactionHistoryStatus::FILTERED_OUT => 'Filtered Out',
+    );
+
     public static function loginInPriceMonitor($email,$password)
     { 
         try {
@@ -178,6 +194,183 @@
              return $response;
         }        
     }
+
+    public static function getTransHistoryDetails($pricemonitorId, $masterId, $limit, $offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords, $totalHistoryRecords)
+    {
+        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
+       
+        $transactionHistory = new TransactionHistory();
+
+        $type = TransactionHistoryType::EXPORT_PRODUCTS;
+
+        if ($detailed) {
+            $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, $offset);
+            $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
+        } else {
+            $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, $offset);
+            $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
+        }
+        
+        $records = self::transform($records, $type, $detailed);
+
+        $finalHistoryDetails = ['records' => $records,
+                                'total' => $total];
+
+        return $finalHistoryDetails;
+    }
+
+    public static function transform($data, $type = TransactionHistoryType::EXPORT_PRODUCTS, $detailed = false)
+    {
+        if ($type === TransactionHistoryType::EXPORT_PRODUCTS) {
+            return self::transformExport($data, $detailed);
+        } else {
+            return self::transformImport($data, $detailed);
+        }
+    }
+
+    /**
+     * @param array $data
+     * @param bool $detailed
+     *
+     * @return array
+     */
+    public static function transformImport($data, $detailed = false)
+    {
+        if ($detailed) {
+            $result = self::transformDetailImportData($data);
+        } else {
+            $result = self::transformMasterImportData($data);
+        }
+
+        return $result;
+    }
+
+     /**
+     * @param array $data
+     * @param bool $detailed
+     *
+     * @return array
+     */
+    public static function transformExport($data, $detailed = false)
+    {
+        if ($detailed) {
+            $result = self::transformDetailExportData($data);
+        } else {
+            $result = self::transformMasterExportData($data);
+        }
+
+        return $result;
+    }
+
+     /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public static function transformDetailExportData($data)
+    {
+        $result = array();
+
+        /** @var TransactionHistoryDetail $record */
+        foreach ($data as $record) {
+            $status = self::$_statusMap[$record->getStatus()];
+
+            $result[] = array(
+                'gtin' => (string)$record->getGtin(),
+                'name' => (string)$record->getProductName(),
+                'refPrice' => $record->getReferencePrice(),
+                'minPrice' => $record->getMinPrice(),
+                'maxPrice' => $record->getMaxPrice(),
+                'status' => $status,
+                'note' => (string)$record->getNote(),
+            );
+        }
+
+        return $result;
+    }
+
+      /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public static function transformMasterExportData($data)
+    {
+        $result = array();
+
+        /** @var TransactionHistoryMaster $record */
+        foreach ($data as $record) {
+            $status = self::$_statusMap[$record->getStatus()];
+
+            $result[] = array(
+                'id' => (int)$record->getId(),
+                'exportTime' => $this->formatDate($record->getTime()),
+                'successCount' => (int)$record->getSuccessCount(),
+                'failedCount' => (int)$record->getFailedCount(),
+                'status' => $status,
+                'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
+                'note' => (string)$record->getNote(),
+            );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return array
+     */
+    public static function transformDetailImportData($data)
+    {
+        $result = array();
+
+        /** @var TransactionHistoryDetail $record */
+        foreach ($data as $record) {
+            $status = self::$_statusMap[$record->getStatus()];
+            $isUpdated = $record->isUpdatedInShop() ? 'Yes' : 'No';
+
+            $result[] = array(
+                'status' => $status,
+                'gtin' => (string)$record->getGtin(),
+                'name' => (string)$record->getProductName(),
+                'isUpdated' => $isUpdated,
+                'note' => (string)$record->getNote(),
+            );
+        }
+
+        return $result;
+    }
+
+     /**
+     * @param $data
+     *
+     * @return array
+     */
+    public static function transformMasterImportData($data)
+    {
+        $result = array();
+
+        /** @var TransactionHistoryMaster $record */
+        foreach ($data as $record) {
+            $status = self::$_statusMap[$record->getStatus()];
+
+            $result[] = array(
+                'id' => (int)$record->getId(),
+                'importTime' => $this->formatDate($record->getTime()),
+                'importedPrices' => (int)$record->getTotalCount(),
+                'updatedPrices' => (int)$record->getSuccessCount(),
+                'failedCount' => (int)$record->getFailedCount(),
+                'inProgress' => $record->getStatus() === TransactionHistoryStatus::IN_PROGRESS,
+                'status' => $status,
+                'note' => (string)$record->getNote(),
+            );
+        }
+
+        return $result;
+    }
+
  }
+
 
 ?>

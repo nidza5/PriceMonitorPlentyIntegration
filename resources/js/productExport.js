@@ -96,21 +96,55 @@
      */
     function loadTransactionHistoryMasterData(limit, offset)
     {
-        var url = Pricemonitor['config']['urls']['transactionHistory'],
-            params = {
-                'pricemonitorId': Pricemonitor['config']['pricemonitorId'],
-                'limit': limit,
-                'offset': offset
-            };
 
-        currentOffset = offset;
-        transactionHistoryMasterData = {};
-        Pricemonitor['ajax']['get'](
-            url, params, function (response) {
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val(),
+            'limmit' : limit,
+            'offset' : offset
+        };
+        
+        $.ajax({
+            type: "GET",
+            url: "/getTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
                 populateTransactionHistoryMasterTable(response, limit, offset)
-            }, 'json', true
-        );
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        }); 
+
+        // var url = Pricemonitor['config']['urls']['transactionHistory'],
+        //     params = {
+        //         'pricemonitorId': Pricemonitor['config']['pricemonitorId'],
+        //         'limit': limit,
+        //         'offset': offset
+        //     };
+
+        // currentOffset = offset;
+        // transactionHistoryMasterData = {};
+        // Pricemonitor['ajax']['get'](
+        //     url, params, function (response) {
+        //         populateTransactionHistoryMasterTable(response, limit, offset)
+        //     }, 'json', true
+        // );
     }
+
+    
+   function populateTransactionHistoryMasterTable(response, limit, offset)
+   {
+       var wrapper = document.getElementById('transaction-history-export-master');
+
+    //    Pricemonitor['contracts']['utility'].populateTable(
+    //        response, wrapper, limit, offset,
+    //        createTransactionHistoryMasterRow,
+    //        loadTransactionHistoryMasterData
+    //    );
+    //    Pricemonitor['utility']['loadingWindow'].close();
+   }
 
       /**
      * Toggles form for scheduled export depending on enabled/disabled.

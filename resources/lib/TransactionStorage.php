@@ -13,7 +13,19 @@ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStorage
 
 class TransactionStorage implements TransactionHistoryStorage
 {
-  
+    private $transactionHistoryDetailsRecord;
+    private $totalDetailedRecords;
+    private $transactionHistoryRecords;
+    private $totalHistoryRecords;
+
+    public function __construct($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords)
+    {
+        $this->transactionHistoryDetailsRecord = $transactionHistoryDetailsRecord;
+        $this->totalDetailedRecords = $totalDetailedRecords;
+        $this->transactionHistoryRecords = $transactionHistoryRecords;
+        $this->totalHistoryRecords = $totalHistoryRecords;
+    }
+
     /**
      * Gets transaction master data based on passed filters.
      *
@@ -72,8 +84,6 @@ class TransactionStorage implements TransactionHistoryStorage
      * @param array $transactionDetails
      *
      * @return TransactionHistoryStorageDTO
-     *
-     * @throws Mage_Core_Exception
      */
     public function saveTransactionHistory(TransactionHistoryMaster $transactionMaster, $transactionDetails = array())
     {
@@ -125,12 +135,7 @@ class TransactionStorage implements TransactionHistoryStorage
         return $records;
     }
 
-    /**
-     * @param TransactionHistoryMasterFilter|TransactionHistoryDetailFilter $filter
-     * @param Patagona_Pricemonitor_Model_Resource_TransactionHistory_Collection $records
-     *
-     * @return Patagona_Pricemonitor_Model_Resource_TransactionHistory_Collection
-     */
+   
     protected function getPaginatedRecords($filter, $records)
     {
         $offset = $filter->getOffset();
@@ -143,11 +148,7 @@ class TransactionStorage implements TransactionHistoryStorage
         return $records;
     }
 
-    /**
-     * @param Patagona_Pricemonitor_Model_Resource_TransactionHistory_Collection $transactions
-     *
-     * @return TransactionHistoryMaster[]
-     */
+   
     protected function createTransactions($transactions)
     {
         $createdMasterTransactions = array();
@@ -208,34 +209,16 @@ class TransactionStorage implements TransactionHistoryStorage
         return $createdTransactionsDetails;
     }
 
-    /**
-     * @param TransactionHistoryMaster $transactionHistoryMaster
-     *
-     * @return TransactionHistoryMaster
-     * @throws Mage_Core_Exception
-     */
     protected function saveMasterTransaction(TransactionHistoryMaster $transactionHistoryMaster)
     {
         
     }
 
-    /**
-     * @param TransactionHistoryDetail[] $transactionHistoryDetails
-     *
-     * @return array
-     * @throws Mage_Core_Exception
-     */
     protected function saveTransactionHistoryDetails($transactionHistoryDetails)
     {
         
     }
 
-    /**
-     * @param TransactionHistoryDetail $transactionDetail
-     *
-     * @return TransactionHistoryDetail
-     * @throws Mage_Core_Exception
-     */
     protected function saveTransactionDetail(TransactionHistoryDetail $transactionDetail)
     {
        
@@ -252,10 +235,6 @@ class TransactionStorage implements TransactionHistoryStorage
        
     }
 
-    /**
-     * @param TransactionHistoryDetail $transactionDetail
-     * @param Patagona_Pricemonitor_Model_TransactionHistoryDetail $transactionDetailModel
-     */
     protected function fillTransactionDetailModel(TransactionHistoryDetail $transactionDetail, $transactionDetailModel)
     {
         if ($transactionDetail->getStatus() !== null) {

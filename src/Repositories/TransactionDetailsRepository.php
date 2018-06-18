@@ -19,4 +19,20 @@ class TransactionDetailsRepository implements TransactionDetailsRepositoryContra
     {
         
     }
+
+    public function getAllTransactionDetails()
+    {
+        $database = pluginApp(DataBase::class);
+        $transactionDetails = $database->query(TransactionDetails::class)->get();
+        
+        return $transactionDetails;
+    }
+
+    public function getTransactionHistoryDetailsCount($masterId)
+    {
+        $database = pluginApp(DataBase::class);
+        $transactionDetailsCount = $database->query(TransactionDetails::class)->where('transactionId', '=', $masterId)->count();
+        
+        return $transactionDetailsCount;
+    }
 }

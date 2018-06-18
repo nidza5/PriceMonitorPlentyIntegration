@@ -19,4 +19,21 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
     {
         
     }
+
+    public function getAllTransactionHistory() 
+    {
+        $database = pluginApp(DataBase::class);
+        $transactionHistory = $database->query(TransactionHistory::class)->get();
+        
+        return $transactionHistory;
+    }
+
+    public function getTransactionHistoryMasterCount($contractId,$type)
+    {
+        $database = pluginApp(DataBase::class);
+        $transactionHistoryCount = $database->query(TransactionHistory::class)->where('priceMonitorContractId', '=', $contractId)->where('type', '=', $type)->count();
+        
+        return $transactionHistoryCount;
+
+    }
 }

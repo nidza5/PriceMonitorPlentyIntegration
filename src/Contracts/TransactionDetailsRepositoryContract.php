@@ -18,4 +18,7 @@ interface TransactionDetailsRepositoryContract
      */
     public function saveTransactionDetails(array $data);
 
+    public function getAllTransactionDetails();
+
+    public function getTransactionHistoryDetailsCount($masterId);
 }

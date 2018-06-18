@@ -29,7 +29,7 @@ class TransactionHistory extends Model
     public $totalCount = 0;
     public $successCount = 0;
     public $failedCount = 0;
-    public $type = 0;
+    public $type = "";
     public $priceMonitorContractId = "";
 
 
