@@ -2,7 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
-
+ require_once __DIR__ . '/TransactionStorage.php';
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
@@ -203,7 +203,6 @@
 
     public static function getTransHistoryDetails($pricemonitorId, $masterId, $limit, $offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords, $totalHistoryRecords)
     {
-        require_once __DIR__ . '/TransactionStorage.php';
         ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
        
         $transactionHistory = new TransactionHistory();
