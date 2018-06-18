@@ -143,9 +143,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             ];
         }
         
-            echo "storage model";
-            echo  json_encode($enqueAndRun['storageModel']);
-
         if($enqueAndRun != null)
             $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
 
