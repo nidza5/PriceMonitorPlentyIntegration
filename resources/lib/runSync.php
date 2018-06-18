@@ -1,8 +1,12 @@
 <?php
 
 require_once __DIR__ . '/RunnerService.php';
+require_once __DIR__ . '/ConfigService.php';
 
 try {
+
+  
+   ServiceRegister::registerConfigService(new ConfigService());
 
    $queueModel = SdkRestApi::getParam('queueModel');
    $queueName = SdkRestApi::getParam('queueName');
