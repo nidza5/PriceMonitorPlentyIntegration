@@ -1314,9 +1314,9 @@ function showTabContent(evt, tabName) {
         });
    }
 
-      function populateAccountFormWithSavedValues(data) {
+      function populateAccountFormWithSavedValues(response) {
             console.log("populate for fields");
-            console.log(data);
+            console.log(response);
 
         var transactionsRetention = response['transactionsRetentionInterval'],
         transactionDetailsRetention = response['transactionDetailsRetentionInterval'],
