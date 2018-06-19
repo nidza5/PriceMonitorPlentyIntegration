@@ -82,7 +82,7 @@ class TransactionStorage implements TransactionHistoryStorage
      */
     public function getTransactionHistoryMasterCount($contractId, $type)
     {
-       
+        return $this->totalHistoryRecords;
     }
 
     public function getTransactionHistoryDetails(TransactionHistoryDetailFilter $filter)

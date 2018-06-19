@@ -218,10 +218,10 @@
         $detailed = $masterId !== null;
 
         if ($detailed) {
-            $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, $limit, (int)$offset);
+            $records = $transactionHistory->getTransactionHistoryDetails($pricemonitorId, $masterId, (int)$limit, (int)$offset);
             $total = $transactionHistory->getTransactionHistoryDetailsCount($pricemonitorId, $masterId);
         } else {
-            $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, $limit, (int)$offset);
+            $records = $transactionHistory->getTransactionHistoryMaster($pricemonitorId, $type, (int)$limit, (int)$offset);
             $total = $transactionHistory->getTransactionHistoryMasterCount($pricemonitorId, $type);
         }
         
