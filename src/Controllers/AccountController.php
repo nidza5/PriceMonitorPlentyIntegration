@@ -14,6 +14,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Repositories\Models;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
 
  /**
@@ -42,20 +44,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $contractRepo;
 
+          /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ContractRepositoryContract $contractRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ContractRepositoryContract $contractRepo,ConfigRepositoryContract $configInfoRep)
     {
         $this->sdkService = $sdkService;
         $this->config = $config;
-        $this->contractRepo = $contractRepo;      
+        $this->contractRepo = $contractRepo;
+        $this->configInfoRepo = $configInfoRepo;      
     }
 
     public function getAccountInfo()
     {
-        $email = $this->config->get('email');
-        $password = $this->config->get('password');
-        $transactionsRetentionInterval = $this->config->get('transactionsRetentionInterval');
-        $transactionDetailsRetentionInterval = $this->config->get('transactionDetailsRetentionInterval');
+        $email = $this->configInfoRepo->getConfig('email');
+        $password = $this->configInfoRepo->getConfig('password');
+        $transactionsRetentionInterval = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
+        $transactionDetailsRetentionInterval = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
     
         $data = array(
             'userEmail' =>   $email,
@@ -87,19 +96,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($contracts == null || $contracts['error']) 
             throw new \Exception("Contracts doesn't exist or some error occurred!");
             
-        $emailFromConfig = $this->config->get('email');
-        $passwordFromConfig = $this->config->get('password');
-        $transactionsRetentionIntervalFromConfig = $this->config->get('transactionsRetentionInterval');
-        $transactionDetailsRetentionIntervalFromConfig = $this->config->get('transactionDetailsRetentionInterval');
+        $emailFromConfig = $this->configInfoRepo->getConfig('email');
+        $passwordFromConfig = $this->configInfoRepo->getConfig('password');
+        $transactionsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
+        $transactionDetailsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
         
         if ($email !== $emailFromConfig) {
             $this->contractRepo->saveContracts($contracts);
         }
 
-        $this->config->set('email',$email);
-        $this->config->set('password',$password);
-        $this->config->set('transactionsRetentionInterval',$transactionsRetentionInterval);
-        $this->config->set('transactionDetailsRetentionInterval',$transactionDetailsRetentionInterval);
+        $this->configInfoRepo->saveConfig('email',$email);
+        $this->configInfoRepo->saveConfig('password',$password);
+        $this->configInfoRepo->saveConfig('transactionsRetentionInterval',$transactionsRetentionInterval);
+        $this->configInfoRepo->saveConfig('transactionDetailsRetentionInterval',$transactionDetailsRetentionInterval);
 
         return "Account information saved successfully";
     }
