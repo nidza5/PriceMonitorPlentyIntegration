@@ -51,7 +51,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         private $configInfoRepo;
 
 
-    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ContractRepositoryContract $contractRepo,ConfigRepositoryContract $configInfoRep)
+    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ContractRepositoryContract $contractRepo,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;
         $this->config = $config;
