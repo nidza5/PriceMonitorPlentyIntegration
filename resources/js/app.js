@@ -1301,8 +1301,7 @@ function showTabContent(evt, tabName) {
 
         $.ajax({
             type: "GET",
-            url: "/getAccountInfo" ,
-            data: dataOption,
+            url: "/getAccountInfo",
             success: function(data)
             {
                 populateAccountFormWithSavedValues(data);
