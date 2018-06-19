@@ -136,6 +136,8 @@ function setSavedMappings() {
 
 function setSavedValuesOnView(response) {
 
+    console.log("logovanje mapiranja");
+    console.log(response);
     // Custom tags container should be emptied each time the page is loaded, so there aren't
     // duplicated rows.
     cleanUpCustomTags();

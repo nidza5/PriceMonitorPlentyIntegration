@@ -62,9 +62,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
-        echo "attribute mappings";
-        echo json_encode($attributeMapping);
-
         return json_encode($attributeMapping);     
     }
 
