@@ -8,6 +8,7 @@ use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Modules\Item\Item\Contracts\ItemRepositoryContract;
+use Plenty\Modules\Item\DataLayer\Contracts\ItemDataLayerRepositoryContract;
 
 class ProductFilterService {
 
@@ -41,6 +42,15 @@ class ProductFilterService {
      * @var AttributeValueRepository
      */
     private $attributeValueRepository;
+
+
+       /**
+     *
+     * @var ItemDataLayerRepositoryContract
+     */
+    private $itemDataLayerRepo;
+    
+
      /**
      * Constructor.
      *
@@ -48,47 +58,64 @@ class ProductFilterService {
      * @param PropertyRepositoryContract $propRepo
      * @param AttributeRepositoryContract $attributeRepo
      */
-    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository)
+    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository,ItemDataLayerRepositoryContract $itemDataLayerRepo )
     {
         $this->propertyRepository = $propertyRepository;
         $this->attributeRepository = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;
+        $this->itemDataLayerRepo = $itemDataLayerRepo;
     }
 
-    public function getProducts($filter,$mappedAttributes)
+    public function getProducts()
     {
-        if(hasMandatoryMappings($mappedAttributes)) {
-            throw new \Exception("Mandatory fields must be mapped!");
+        // if(hasMandatoryMappings($mappedAttributes)) {
+        //     throw new \Exception("Mandatory fields must be mapped!");
+        // }
+
+        $itemColumns = [
+            'itemDescription' => [
+                'name1',
+                'description'
+            ],
+            'variationBase' => [
+                'id'
+            ],
+            'variationRetailPrice' => [
+                'price'
+            ],
+            'variationImageList' => [
+                'path',
+                'cleanImageName'
+            ]
+        ];
+ 
+        $itemFilter = [
+            'itemBase.isStoreSpecial' => [
+                'shopAction' => [3]
+            ]
+        ];
+ 
+        $itemParams = [
+            'language' => 'en'
+        ];
+ 
+        $resultItems = $this->itemDataLayerRepo
+            ->search($itemColumns, $itemFilter, $itemParams);
+ 
+        $items = array();
+        foreach ($resultItems as $item)
+        {
+            $items[] = $item;
         }
-    
-        $mappedAttributesCodes = $this->hasMandatoryMappings($mappedAttributes);
 
-        if($mappedAttributesCodes == null ||  empty($mappedAttributesCodes) )
-            throw new \Exception("Mapped attributes codes doesn't exist!");
-
-            $productsRepo = pluginApp(ItemRepositoryContract::class);
-
-            $authHelperAttr = pluginApp(AuthHelper::class);
-            
-            $productsOriginal = null;
-    
-            $productsOriginal = $authHelperAttr->processUnguarded(
-              function () use ($productsRepo, $productsOriginal) {
-              
-                  return $productsRepo->all();
-              }
-          );
-    
-           $resultItems = $productsOriginal->toArray();
-
-          return $resultItems;
+          return $items;
     }
 
-    public function hasMandatoryMappings($mappings)
-    {
-        $diff = array_diff(self::$mandatoryAttributes, array_column($mappings, 'priceMonitorCode'));
-        return empty($diff);
-    }
+    // public function hasMandatoryMappings($mappings)
+    // {
+    //     $diff = array_diff(self::$mandatoryAttributes, array_column($mappings, 'priceMonitorCode'));
+    //     return empty($diff);
+    // }
 
     public function getMappedAttributesCode($mappedAttribute) {
         $mappings = $mappedAttribute->toArray();
