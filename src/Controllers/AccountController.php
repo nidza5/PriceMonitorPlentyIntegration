@@ -66,10 +66,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $transactionsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
         $transactionDetailsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
     
-        $email = $emailObject['value'];
-        $password = $passwordObject['value'];
-        $transactionsRetentionInterval = $transactionsRetentionIntervalObject['value'];
-        $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject['value'];
+        $email = $emailObject->value;
+        $password = $passwordObject->value;
+        $transactionsRetentionInterval = $transactionsRetentionIntervalObject->value;
+        $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject->value;
 
         $data = array(
             'userEmail' =>   $email,
