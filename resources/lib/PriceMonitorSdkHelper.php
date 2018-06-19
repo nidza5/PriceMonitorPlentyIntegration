@@ -69,6 +69,12 @@
         ServiceRegister::registerConfigService(new ConfigService($email,$password));
     }
 
+    public static function registerHttpService()
+    {
+        $client = new PriceMonitorHttpClient();
+        ServiceRegister::registerHttpClient($client);
+    }
+
 
     public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo,$emailForConfig,$passwordForConfig)
     {

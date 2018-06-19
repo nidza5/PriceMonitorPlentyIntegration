@@ -17,6 +17,7 @@ try {
     $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
 
      PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+     PriceMonitorSdkHelper::registerHttpService();
 
     return PriceMonitorSdkHelper::getTransHistoryDetails($pricemonitorId,$masterId,$limit,$offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords);
 
