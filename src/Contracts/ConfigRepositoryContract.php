@@ -2,7 +2,7 @@
  
 namespace PriceMonitorPlentyIntegration\Contracts;
  
-use PriceMonitorPlentyIntegration\Models\Config;
+use PriceMonitorPlentyIntegration\Models\ConfigInfo;
  
 /**
  * Class ConfigRepositoryContract

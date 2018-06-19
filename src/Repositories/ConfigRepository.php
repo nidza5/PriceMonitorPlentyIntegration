@@ -5,7 +5,7 @@ namespace PriceMonitorPlentyIntegration\Repositories;
 use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
-use PriceMonitorPlentyIntegration\Models\Config;
+use PriceMonitorPlentyIntegration\Models\ConfigInfo;
  
 class ConfigRepository implements ConfigRepositoryContract
 {
@@ -20,7 +20,7 @@ class ConfigRepository implements ConfigRepositoryContract
         
         $database = pluginApp(DataBase::class);
 
-        $configValues = pluginApp(Config::class);
+        $configValues = pluginApp(ConfigInfo::class);
     
 
         if($key!= null)
@@ -37,11 +37,11 @@ class ConfigRepository implements ConfigRepositoryContract
     public function getConfig($key)
     {
         if($key == null)
-            return pluginApp(Config::class);
+            return pluginApp(ConfigInfo::class);
 
         $database = pluginApp(DataBase::class);
-        $config = $database->query(Config::class)->where('key', '=', $key)->get();
-        return $config[0] === null ? pluginApp(Config::class) : $config[0];
+        $config = $database->query(ConfigInfo::class)->where('key', '=', $key)->get();
+        return $config[0] === null ? pluginApp(ConfigInfo::class) : $config[0];
     }
 
 }

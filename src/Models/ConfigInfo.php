@@ -5,15 +5,14 @@ namespace PriceMonitorPlentyIntegration\Models;
 use Plenty\Modules\Plugin\DataBase\Contracts\Model;
  
 /**
- * Class Config
+ * Class ConfigInfo
  *
  * @property int     $id
  * @property string  $key
  * @property string  $value
  */
-class Config extends Model
-{
-    
+class ConfigInfo extends Model
+{    
     public $id = 0;
     public $key    = "";
     public $value = "";
@@ -23,6 +22,6 @@ class Config extends Model
      */
     public function getTableName(): string
     {
-        return 'PriceMonitorPlentyIntegration::Config';
+        return 'PriceMonitorPlentyIntegration::ConfigInfo';
     }
 }
