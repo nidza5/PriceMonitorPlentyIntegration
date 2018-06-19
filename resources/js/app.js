@@ -1317,6 +1317,19 @@ function showTabContent(evt, tabName) {
       function populateAccountFormWithSavedValues(data) {
             console.log("populate for fields");
             console.log(data);
+
+        var transactionsRetention = response['transactionsRetentionInterval'],
+        transactionDetailsRetention = response['transactionDetailsRetentionInterval'],
+        TRANSACTION_DEFAULT_RETENTION_INTERVAL = 30,
+        TRANSACTION_DETAILS_DEFAULT_RETENTION_INTERVAL = 7;
+
+        document['accountInfo']['email']['value'] = response['userEmail'];
+        document['accountInfo']['password']['value'] = response['userPassword'];
+        document['accountInfo']['transactionsRetention']['value'] =
+            (transactionsRetention !== '') ? transactionsRetention : TRANSACTION_DEFAULT_RETENTION_INTERVAL;
+        document['accountInfo']['transactionDetailsRetention']['value'] =
+            (transactionDetailsRetention !== '') ?
+                transactionDetailsRetention : TRANSACTION_DETAILS_DEFAULT_RETENTION_INTERVAL;
     }
 
 
