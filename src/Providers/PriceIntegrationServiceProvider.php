@@ -21,6 +21,8 @@ use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract
 use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
 use PriceMonitorPlentyIntegration\Contracts\TransactionDetailsRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
+use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ConfigRepository;
 
 
 /**
@@ -44,6 +46,7 @@ use PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
          $this->getApplication()->bind(RunnerTokenRepositoryContract::class, RunnerTokenRepository::class);
          $this->getApplication()->bind(TransactionHistoryRepositoryContract::class, TransactionHistoryRepository::class);
          $this->getApplication()->bind(TransactionDetailsRepositoryContract::class, TransactionDetailsRepository::class);
+         $this->getApplication()->bind(ConfigRepositoryContract::class, ConfigRepository::class);
      }
 
      public function boot(ReferenceContainer $referenceContainer)

@@ -18,6 +18,7 @@
 				   "PriceMonitorPlentyIntegration\\Migrations\\CreateQueueTable",
 				   "PriceMonitorPlentyIntegration\\Migrations\\CreateRunnerTokenTable",
 				   "PriceMonitorPlentyIntegration\\Migrations\\CreateTransactionHistoryTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateTransactionDetailsTable"
+				   "PriceMonitorPlentyIntegration\\Migrations\\CreateTransactionDetailsTable",
+				   "PriceMonitorPlentyIntegration\\Migrations\\CreateConfigTable"
 				]
 }
