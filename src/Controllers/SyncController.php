@@ -100,7 +100,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
-        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
+        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
         $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
             'filterType' => FilterType::EXPORT_PRODUCTS,
