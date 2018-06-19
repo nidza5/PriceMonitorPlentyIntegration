@@ -35,6 +35,8 @@ function showTabContentContent(evt, nameTab,el) {
         $("#tabContractInfo").click();
         $("#tabContractInfo").addClass("active");
         assignDataToContract(el);        
+    } else if(nameTab == "MyAccount") {
+        getAccountInformation();
     }
 }
 
@@ -1290,4 +1292,61 @@ function showTabContent(evt, tabName) {
         }
 
         return groups;
+    }
+
+
+    /*********************************** ACCOUNT FORM ***************************************/
+
+    function getAccountInformation() {
+
+        $.ajax({
+            type: "GET",
+            url: "/getAccountInfo" ,
+            data: dataOption,
+            success: function(data)
+            {
+                populateAccountFormWithSavedValues(data);
+
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+   }
+
+      function populateAccountFormWithSavedValues(data) {
+            console.log("populate for fields");
+            console.log(data);
+    }
+
+
+    function saveAccountInfo() {
+
+        var data = {
+            'email' : document['accountInfo']['email']['value'],
+            'password' : document['accountInfo']['password']['value'],
+            'transactionsRetentionInterval' : document['accountInfo']['transactionsRetention']['value'],
+            'transactionDetailsRetentionInterval' : document['accountInfo']['transactionDetailsRetention']['value']
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/saveAccountInfo",
+            data: data,
+            success: function(data)
+            {
+                console.log("data");
+                console.log(data);
+
+                toastr["success"]("Account info is successfully saved!", "Successfully saved!"); 
+               
+            },
+            error: function(data)
+            {
+                console.log("u error");
+                console.log(data);
+            }
+        });
+
     }
