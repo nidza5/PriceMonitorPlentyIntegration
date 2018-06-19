@@ -19,7 +19,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Constants\QueueType;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
-
+ use PriceMonitorPlentyIntegration\Constants\FilterType;
+ use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
 
  /**
   * Class SyncController
@@ -59,14 +61,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $configInfoRepo;
 
+         /**
+         *
+         * @var ProductFilterRepository
+         */
+        private $productFilterRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
         $this->queueRepo = $queueRepo;
         $this->config = $config;   
-        $this->configInfoRepo = $configInfoRepo;     
+        $this->configInfoRepo = $configInfoRepo;
+        $this->productFilterRepo = $productFilterRepo;     
     }
 
     
@@ -90,6 +99,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->tokenRepo->deleteToken($token); 
 
         $queue = $this->queueRepo->getQueueByName($queueName);
+
+        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
+
+        $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter
+        ]);
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
