@@ -66,7 +66,7 @@
 
     public static function registerConfigService($email,$password)
     {
-        ServiceRegister::registerConfigService(new ConfigService($email,$password));
+       // ServiceRegister::registerConfigService(new ConfigService($email,$password));
     }
 
 
