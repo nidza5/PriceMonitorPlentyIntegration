@@ -17,6 +17,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
  use PriceMonitorPlentyIntegration\Constants\QueueType;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
 
  /**
@@ -51,13 +53,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $config;
 
+          /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
         $this->queueRepo = $queueRepo;
-        $this->config = $config;      
+        $this->config = $config;   
+        $this->configInfoRepo = $configInfoRepo;     
     }
 
     
@@ -82,8 +91,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
-        $emailForConfig = $this->config->get('email');
-        $passwordForConfig = $this->config->get('password');
+        $emailForConfig = $this->configInfoRepo->getConfig('email');
+        $passwordForConfig = $this->configInfoRepo->getConfig('password');
 
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,

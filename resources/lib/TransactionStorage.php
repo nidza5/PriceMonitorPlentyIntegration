@@ -137,7 +137,7 @@ class TransactionStorage implements TransactionHistoryStorage
   
     public function saveTransactionHistory(TransactionHistoryMaster $transactionMaster, $transactionDetails = array())
     {
-       
+       throw new \Exception("SAve transaction history");
     }
 
 
