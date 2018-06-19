@@ -29,6 +29,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  //todo delete
  use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
+ use PriceMonitorPlentyIntegration\Services\ProductFilterService;
 
  /**
   * Class ContentController
@@ -216,6 +217,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
               }
 
               $contractsIds = array();
+
+              $itemService = pluginApp(ProductFilterService::class);
+
+        $finalResult = $itemService->getProducts();
+
+        echo "products";
+        echo json_encode($finalResult);
               
 
         $templateData = array("contracts" => $originalContracts,
