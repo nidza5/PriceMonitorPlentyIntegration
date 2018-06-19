@@ -83,9 +83,7 @@ class ProductFilterService {
             'variationRetailPrice' => [
                 'price'
             ],
-            'itemProperty' => [
-                'propertyId'
-            ]
+            'itemPropertyList'
         ];
  
         $itemFilter = [
