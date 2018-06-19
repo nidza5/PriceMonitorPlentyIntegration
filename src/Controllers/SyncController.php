@@ -96,6 +96,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($token === "" || $token === null)
             throw new \Exception("token is empty");
 
+        $priceMonitorId = $requestData['pricemonitorId'];
+
         $this->tokenRepo->deleteToken($token); 
 
         $queue = $this->queueRepo->getQueueByName($queueName);

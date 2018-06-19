@@ -204,7 +204,8 @@
      {      
             var transferObject = {
                 'queueName' : dataForSync.queueName,
-                'token' : dataForSync.token
+                'token' : dataForSync.token,
+                'pricemonitorId' : $("#contractId").val()
             };
 
             console.log("data for sync transfer");
