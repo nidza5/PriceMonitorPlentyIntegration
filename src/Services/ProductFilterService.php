@@ -83,9 +83,8 @@ class ProductFilterService {
             'variationRetailPrice' => [
                 'price'
             ],
-            'variationImageList' => [
-                'path',
-                'cleanImageName'
+            'ItemProperty' => [
+                'propertyId'
             ]
         ];
  
