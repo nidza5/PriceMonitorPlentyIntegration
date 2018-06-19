@@ -7,11 +7,11 @@ class ConfigService implements ConfigServiceInterface
     private $email;
     private $password;
 
-    // public function __construct($email,$password)
-    // {
-    //      $this->email = $email;
-    //      $this->password = $password;
-    // }
+    public function __construct($email,$password)
+    {
+         $this->email = $email;
+         $this->password = $password;
+    }
 
     public function getCredentials()
     {
@@ -32,6 +32,22 @@ class ConfigService implements ConfigServiceInterface
         $this->email = $email;
         $this->password = $password;
     }
+
+     public function getComponentName() {
+        return "";
+     }
+
+     public function getSource() {
+         return "";
+     }
+
+     public function get($key) {
+
+     }
+
+     public function set($key, $value) {
+         
+     }
 }
 
 ?>
