@@ -61,11 +61,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
     public function getAccountInfo()
     {
-        $email = $this->configInfoRepo->getConfig('email');
-        $password = $this->configInfoRepo->getConfig('password');
-        $transactionsRetentionInterval = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
-        $transactionDetailsRetentionInterval = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
+        $emailObject = $this->configInfoRepo->getConfig('email');
+        $passwordObject = $this->configInfoRepo->getConfig('password');
+        $transactionsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
+        $transactionDetailsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
     
+        $email = $emailObject['value'];
+        $password = $passwordObject['value'];
+        $transactionsRetentionInterval = $transactionsRetentionIntervalObject['value'];
+        $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject['value'];
+
         $data = array(
             'userEmail' =>   $email,
             'userPassword' => $password,
