@@ -1318,13 +1318,18 @@ function showTabContent(evt, tabName) {
             console.log("populate for fields");
             console.log(response);
 
-        var transactionsRetention = response['transactionsRetentionInterval'],
-        transactionDetailsRetention = response['transactionDetailsRetentionInterval'],
+            if(response == null)
+                return;
+
+           var data = jQuery.parseJSON(response);     
+
+        var transactionsRetention = data['transactionsRetentionInterval'],
+        transactionDetailsRetention = data['transactionDetailsRetentionInterval'],
         TRANSACTION_DEFAULT_RETENTION_INTERVAL = 30,
         TRANSACTION_DETAILS_DEFAULT_RETENTION_INTERVAL = 7;
 
-        document['accountInfo']['email']['value'] = response['userEmail'];
-        document['accountInfo']['password']['value'] = response['userPassword'];
+        document['accountInfo']['email']['value'] = data['userEmail'];
+        document['accountInfo']['password']['value'] = data['userPassword'];
         document['accountInfo']['transactionsRetention']['value'] =
             (transactionsRetention !== '') ? transactionsRetention : TRANSACTION_DEFAULT_RETENTION_INTERVAL;
         document['accountInfo']['transactionDetailsRetention']['value'] =
