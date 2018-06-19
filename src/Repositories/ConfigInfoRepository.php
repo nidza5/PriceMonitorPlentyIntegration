@@ -7,7 +7,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
 use PriceMonitorPlentyIntegration\Models\ConfigInfo;
  
-class ConfigRepository implements ConfigRepositoryContract
+class ConfigInfoRepository implements ConfigRepositoryContract
 {
     public function saveConfig($key, $value)
     {

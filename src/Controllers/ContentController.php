@@ -23,6 +23,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
+
  //todo delete
  use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
@@ -70,20 +73,26 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          * @var ScheduleRepositoryContract
          */
         private $scheduleRepository;
+        
+        /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
 
-       
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;        
         $this->productFilterRepo = $productFilterRepo;   
         $this->scheduleRepository = $scheduleRepository;   
+        $this->configInfoRepo = $configInfoRepo;
     }
     
      public function home(Twig $twig) : string
@@ -158,8 +167,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         // set price monitor credentials
 
-        $this->config->set('email',$credentials['email']);
-        $this->config->set('password',$credentials['password']);
+        $this->configInfoRepo->saveConfig('email',$credentials['email']);
+        $this->configInfoRepo->saveConfig('password',$credentials['password']);
+
 
          $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
