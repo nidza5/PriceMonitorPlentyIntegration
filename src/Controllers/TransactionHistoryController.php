@@ -19,6 +19,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
  /**
   * Class TransactionHistoryController
@@ -58,13 +60,20 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $config;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ContractRepositoryContract $contractRepo,TransactionDetailsRepositoryContract $transactionDetailsRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,ConfigRepository $config)
+         /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ContractRepositoryContract $contractRepo,TransactionDetailsRepositoryContract $transactionDetailsRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;       
         $this->contractRepo = $contractRepo;
         $this->transactionDetailsRepo = $transactionDetailsRepo;
         $this->transactionHistoryRepo = $transactionHistoryRepo;
         $this->config = $config;
+        $this->configInfoRepo = $configInfoRepo;
     }
 
     public function getTransactionHistory(Request $request)
@@ -99,8 +108,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $totalHistoryRecords = $this->transactionHistoryRepo->getTransactionHistoryMasterCount($contract->id,FilterType::EXPORT_PRODUCTS);
         }
 
-        $emailForConfig = $this->config->get('email');
-        $passwordForConfig = $this->config->get('password');
+        $emailObject = $this->configInfoRepo->getConfig('email');
+        $passwordObject = $this->configInfoRepo->getConfig('password');
+
+        $emailForConfig = $emailObject->value;
+        $passwordForConfig = $passwordObject->value;
 
         $transactionHistoryAct =  $this->sdkService->call("getTransHistoryDetails", [
             'masterId' => $masterId,
