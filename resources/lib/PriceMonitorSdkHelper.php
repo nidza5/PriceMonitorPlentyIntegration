@@ -216,7 +216,7 @@
             // }
       }
 
-         return $filteredProducts;
+         return $finalFilteredProduct;
     }
 
 
