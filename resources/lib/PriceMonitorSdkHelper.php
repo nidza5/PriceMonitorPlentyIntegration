@@ -113,14 +113,14 @@
 
     public static function getMappedAttributeCodes($attributeMapping)
     {
-        $mappings = $mappedAttribute->toArray();
+        $mappings = $attributeMapping->toArray();
         $mappingCodes = array_unique(array_column($mappings, 'attributeCode'));
         return $mappingCodes;
     }
 
-    public static function getFilteredVariations($filterType, $pricemonitorId, $filterRepo,$attributeMapping, $allVariations)
+    public static function getFilteredVariations($filterType, $pricemonitorId, $filterRepo,$attributeMapping, $allVariations,$attributesFromPlenty)
     {
-           $mappedAttribute = getMappedAttributeCodes($attributeMapping);
+           $mappedAttribute = self::getMappedAttributeCodes($attributeMapping);
 
             ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
 
@@ -146,13 +146,17 @@
                 );
             }
 
-            // if (!empty($expressions) && !empty($operator)) {
-            //     $productCollection->addFilterByOperator($expressions, $operator, $group->getOperator());
-            //     $emptyExpressions = false;
-            // }
+            if (!empty($expressions)) {
+                $productCollection->addFilterByOperator($expressions, $group->getOperator(),$allVariations,$mappedAttribute,$attributesFromPlenty);
+                $emptyExpressions = false;
+            }
         }
 
-        return $expression;
+    }
+
+    public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$mappedAttribute,$attributesFromPlenty) 
+    {
+        if($expression['attribute'] == "GTIN13")
 
     }
 

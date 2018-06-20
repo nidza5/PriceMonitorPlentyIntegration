@@ -25,6 +25,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
+ use PriceMonitorPlentyIntegration\Services\AttributeService;
 
  //todo delete
  use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
@@ -129,9 +130,25 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password']
             ]);
 
-            echo "response contracts    ";
+            // echo "response contracts    ";
 
-            echo json_encode($reponseContracts);
+            // echo json_encode($reponseContracts);
+
+            $attributeService = pluginApp(AttributeService::class);
+
+            $finalResult = $attributeService->getAllTypeAttributes();
+
+            $attributesIdName = array();
+
+            foreach($finalResult as $key => $value) {
+
+                foreach($value as $v) 
+                    $attributesIdName [$v['Id']] = $v['Name'];                
+
+            }
+
+            echo "Attributes id name";
+            echo json_encode($attributesIdName);
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if(($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message'])) || ($reponseContracts['error'] && $reponseContracts['error_msg']))

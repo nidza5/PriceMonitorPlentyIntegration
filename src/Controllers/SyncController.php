@@ -25,6 +25,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
+ use PriceMonitorPlentyIntegration\Services\AttributeService;
 
  /**
   * Class SyncController
@@ -120,16 +121,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $allVariations = $itemService->getAllVariations();
 
+        $attributeService = pluginApp(AttributeService::class);
+
+        $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+
         $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
             'filterType' => FilterType::EXPORT_PRODUCTS,
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter,
             'attributeMapping' => $attributeMapping,
-            'allVariations' =>  $allVariations            
+            'allVariations' =>  $allVariations,
+            'attributesFromPlenty' => $attributesFromPlenty            
         ]);     
-
-        echo "filtered variation";
-        echo json_encode($filteredVariation);
 
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
