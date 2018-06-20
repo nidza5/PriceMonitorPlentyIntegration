@@ -91,11 +91,11 @@ class ProductFilterService {
                 'barcode' => '555'
             ]);
 
-
             $repository->setSearchParams([
                 'with' => [
                     'variationAttributeValues' => null,
-                    'variationBarcodes' => null
+                    'variationBarcodes' => null,
+                    'item' => null
                 ]
              ]);
 
