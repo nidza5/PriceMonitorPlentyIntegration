@@ -209,14 +209,14 @@
                 }                    
             });
 
-            if($operator == 'AND') {
-                $finalFilteredProduct = $filteredProducts;
-            } else if($operator == 'OR'){
-                 $finalFilteredProduct += $filteredProducts;
-            }
+            // if($operator == 'AND') {
+            //     $finalFilteredProduct = $filteredProducts;
+            // } else if($operator == 'OR'){
+            //      $finalFilteredProduct += $filteredProducts;
+            // }
       }
 
-         return $finalFilteredProduct;
+         return $filteredProducts;
     }
 
 
