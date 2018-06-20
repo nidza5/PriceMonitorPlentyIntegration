@@ -140,8 +140,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $attributesIdName = array();
 
-            foreach($finalResult as $key => $value) {
+            foreach($finalResult['Group'] as $key => $value) {
 
+                echo $key;
                 foreach($value as $v)
                     echo $v;             
 
