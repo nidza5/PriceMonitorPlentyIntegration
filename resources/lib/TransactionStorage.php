@@ -18,7 +18,7 @@ class TransactionStorage implements TransactionHistoryStorage
     private $transactionHistoryRecords;
     private $totalHistoryRecords;
 
-    public function __construct($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords)
+    public function __construct($transactionHistoryDetailsRecord = null,$totalDetailedRecords = 0,$transactionHistoryRecords = null,$totalHistoryRecords = 0)
     {
         $this->transactionHistoryDetailsRecord = $transactionHistoryDetailsRecord;
         $this->totalDetailedRecords = $totalDetailedRecords;
