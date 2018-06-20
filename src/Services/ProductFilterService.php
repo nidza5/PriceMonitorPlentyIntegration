@@ -96,7 +96,7 @@ class ProductFilterService {
 
 		/** @var VariationBaseFilter $variationFilter */
 		$variationFilter = pluginApp(VariationBaseFilter::class);
-		$variationFilter->hasItemId($itemId);
+		$variationFilter->isMain();
 
 		$documentSearch
 			->addFilter($variationFilter);
