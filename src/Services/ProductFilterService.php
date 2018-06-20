@@ -9,6 +9,18 @@ use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 use Plenty\Plugin\Http\Request;
 use Plenty\Modules\Item\Item\Contracts\ItemRepositoryContract;
 use Plenty\Modules\Item\DataLayer\Contracts\ItemDataLayerRepositoryContract;
+use Plenty\Modules\Cloud\ElasticSearch\Lib\ElasticSearch;
+use Plenty\Modules\Cloud\ElasticSearch\Lib\Processor\DocumentProcessor;
+use Plenty\Modules\Cloud\ElasticSearch\Lib\Search\Document\DocumentSearch;
+use Plenty\Modules\Item\Attribute\Contracts\AttributeNameRepositoryContract;
+use Plenty\Modules\Item\Attribute\Contracts\AttributeValueNameRepositoryContract;
+use Plenty\Modules\Item\DataLayer\Models\Record;
+use Plenty\Modules\Item\DataLayer\Models\RecordList;
+use Plenty\Modules\Item\Search\Contracts\VariationElasticSearchSearchRepositoryContract;
+use Plenty\Modules\Item\Search\Filter\CategoryFilter;
+use Plenty\Modules\Item\Search\Filter\ClientFilter;
+use Plenty\Modules\Item\Search\Filter\SearchFilter;
+use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 
 class ProductFilterService {
 
@@ -72,40 +84,24 @@ class ProductFilterService {
         //     throw new \Exception("Mandatory fields must be mapped!");
         // }
 
-        $itemColumns = [
-            'itemDescription' => [
-                'name1',
-                'description'
-            ],
-            'variationBase' => [
-                'id'
-            ],
-            'variationRetailPrice' => [
-                'price'
-            ],
-            'itemPropertyList' => []
-        ];
- 
-        $itemFilter = [
-            'itemBase.isStoreSpecial' => [
-                'shopAction' => [3]
-            ]
-        ];
- 
-        $itemParams = [
-            'language' => 'en'
-        ];
- 
-        $resultItems = $this->itemDataLayerRepo
-            ->search($itemColumns, $itemFilter, $itemParams);
- 
-        $items = array();
-        foreach ($resultItems as $item)
-        {
-            $items[] = $item;
-        }
+        $documentProcessor = pluginApp(DocumentProcessor::class);
+		
+		$documentSearch = pluginApp(DocumentSearch::class, [$documentProcessor]);
 
-          return $items;
+		/** @var VariationElasticSearchSearchRepositoryContract $elasticSearchRepo */
+		$elasticSearchRepo = pluginApp(VariationElasticSearchSearchRepositoryContract::class);
+		$elasticSearchRepo->addSearch($documentSearch);
+		//$elasticSearchRepo->addSearch($attributeSearch);
+
+
+		/** @var VariationBaseFilter $variationFilter */
+		$variationFilter = pluginApp(VariationBaseFilter::class);
+		$variationFilter->hasItemId($itemId);
+
+		$documentSearch
+			->addFilter($variationFilter);
+
+		return $elasticSearchRepo->execute();
     }
 
     // public function hasMandatoryMappings($mappings)
