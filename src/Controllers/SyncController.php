@@ -127,11 +127,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $attributesIdName = array();
 
-            foreach($attributesFromPlenty as $key => $value) {
-                foreach($value as $v => $l)
-                    $attributesIdName[$v] = explode("-",$l)[0];             
+        foreach($attributesFromPlenty as $key => $value) {
+            foreach($value as $v => $l)
+                $attributesIdName[$v] = explode("-",$l)[0];             
 
-            }
+        }
 
         $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
             'filterType' => FilterType::EXPORT_PRODUCTS,
@@ -141,6 +141,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'allVariations' =>  $allVariations,
             'attributesFromPlenty' => $attributesIdName            
         ]);     
+
+        echo json_encode($filteredVariation);
 
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
