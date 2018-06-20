@@ -168,10 +168,10 @@
                 $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
             }
 
-            if($group->getOperator() == 'AND' )
-                $finalProductCollection = $productCollection;
-            else if($group->getOperator() == 'OR')            
-                array_push($finalProductCollection,$productCollection);
+            // if($group->getOperator() == 'AND' )
+            //     $finalProductCollection = $productCollection;
+            // else if($group->getOperator() == 'OR')            
+            //     array_push($finalProductCollection,$productCollection);
         }
 
          return $finalProductCollection;
