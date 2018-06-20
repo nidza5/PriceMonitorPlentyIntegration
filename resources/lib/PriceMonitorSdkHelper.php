@@ -188,7 +188,7 @@
             $attribute = $exp['attribute'];
             $condition = $exp['condition'];
 
-            $filterByColumn = $attributesFromPlenty[$condition['attribute']];
+            $filterByColumn = $attributesFromPlenty[$attribute];
 
             $nameColumnInVariation = self::$_columnNames[$filterByColumn];
 
