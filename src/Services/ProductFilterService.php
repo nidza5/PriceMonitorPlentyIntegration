@@ -22,7 +22,6 @@ use Plenty\Modules\Item\Search\Filter\ClientFilter;
 use Plenty\Modules\Item\Search\Filter\SearchFilter;
 use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
-use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;
 
 class ProductFilterService {
 
@@ -86,77 +85,25 @@ class ProductFilterService {
         //     throw new \Exception("Mandatory fields must be mapped!");
         // }
 
-        // $repository = pluginApp(VariationSearchRepositoryContract::class);
+        $repository = pluginApp(VariationSearchRepositoryContract::class);
             
         // $repository->setFilters([
         //         'barcode' => '555'
         //     ]);
 
-        //     $repository->setSearchParams([
-        //         'with' => [
-        //             'variationAttributeValues' => null,
-        //             'variationBarcodes' => null,
-        //             'item' => null,
-        //             'variationCategories' => null,
-        //             'variationSuppliers'  => null
-        //         ]
-        //      ]);
+            $repository->setSearchParams([
+                'with' => [
+                    'variationAttributeValues' => null,
+                    'variationBarcodes' => null,
+                    'item' => null,
+                    'variationCategories' => null,
+                    'variationSuppliers'  => null
+                ]
+             ]);
 
-        //    $products = $repository->search();
+           $products = $repository->search();
 
-        //    return $products->getResult();
-
-
-        $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
-        $variationRepository = pluginApp(VariationRepositoryContract::class);
-        
-        $itemColumns = [
-            'variationCategoryList' => [],
-            'variationBase' => ['id','active'],
-            'itemDescription'=> [],
-        ];
- 
-        $itemFilter = [
-        ];
- 
-        $itemParams = [
-            //'language' => 'en'
-        ];
- 
-        $resultItems = $itemRepository
-            ->search($itemColumns, $itemFilter, $itemParams);
-        
-        $items = [];
-        $i = 0;
-        
-        foreach ($resultItems as $item)
-        {
-            $i++;
-            
-            $itemVariation = $variationRepository->
-                findById($item['variationBase']['id']);
-                
-                $items[$i]['general'] = $itemVariation;
-                $items[$i]['general']['description'] = $item['itemDescription'];
-                $items[$i]['general']['variationBarcodes'] = $itemVariation->variationBarcodes;
-                $items[$i]['general']['variationSalesPrices'] = $itemVariation->variationSalesPrices;
-                $items[$i]['general']['marketItemNumbers'] = $itemVariation->marketItemNumbers;
-                $items[$i]['general']['variationCategories'] = $itemVariation->variationCategories;
-                $items[$i]['general']['variationClients'] = $itemVariation->variationClients;
-                $items[$i]['general']['variationMarkets'] = $itemVariation->variationMarkets;
-                $items[$i]['general']['variationDefaultCategory'] = $itemVariation->variationDefaultCategory;
-                $items[$i]['general']['variationSuppliers'] = $itemVariation->variationSuppliers;
-                $items[$i]['general']['variationWarehouses'] = $itemVariation->variationWarehouses;
-                $items[$i]['general']['images'] = $itemVariation->images;
-                $items[$i]['general']['unit'] = $itemVariation->unit;
-                $items[$i]['general']['parent'] = $itemVariation->parent;
-                $items[$i]['general']['item'] = $itemVariation->item;
-                
-            
-        }
-
-        return $items;
-
+           return $products->getResult();
     }
 
     // public function hasMandatoryMappings($mappings)
