@@ -21,6 +21,7 @@ use Plenty\Modules\Item\Search\Filter\CategoryFilter;
 use Plenty\Modules\Item\Search\Filter\ClientFilter;
 use Plenty\Modules\Item\Search\Filter\SearchFilter;
 use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
+use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
 
 class ProductFilterService {
 
@@ -84,24 +85,16 @@ class ProductFilterService {
         //     throw new \Exception("Mandatory fields must be mapped!");
         // }
 
-        $documentProcessor = pluginApp(DocumentProcessor::class);
-		
-		$documentSearch = pluginApp(DocumentSearch::class, [$documentProcessor]);
+        $repository = pluginApp(VariationSearchRepositoryContract::class);
+            // $repository->setFilters([
+            //     'itemId' => $itemId,
+            //     'itemName' => $itemId,
+            //     'id' => $variationId,
+            //     'flagOne' => $flagOne,
+            //     'flagTwo' => $flagTwo
+            // ]);
 
-		/** @var VariationElasticSearchSearchRepositoryContract $elasticSearchRepo */
-		$elasticSearchRepo = pluginApp(VariationElasticSearchSearchRepositoryContract::class);
-		$elasticSearchRepo->addSearch($documentSearch);
-		//$elasticSearchRepo->addSearch($attributeSearch);
-
-
-		/** @var VariationBaseFilter $variationFilter */
-		$variationFilter = pluginApp(VariationBaseFilter::class);
-		$variationFilter->isMain();
-
-		// $documentSearch
-		// 	->addFilter($variationFilter);
-
-		return $elasticSearchRepo->execute();
+           return $repository->search();
     }
 
     // public function hasMandatoryMappings($mappings)
