@@ -100,7 +100,9 @@ class ProductFilterService {
                 ]
              ]);
 
-           return $repository->search();
+           $products = $repository->search();
+
+           return $products->toArray();
     }
 
     // public function hasMandatoryMappings($mappings)
