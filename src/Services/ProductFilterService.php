@@ -87,9 +87,9 @@ class ProductFilterService {
 
         $repository = pluginApp(VariationSearchRepositoryContract::class);
             
-        $repository->setFilters([
-                'barcode' => '555'
-            ]);
+        // $repository->setFilters([
+        //         'barcode' => '555'
+        //     ]);
 
             $repository->setSearchParams([
                 'with' => [
