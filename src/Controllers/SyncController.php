@@ -22,6 +22,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
  use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+ use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
+ use PriceMonitorPlentyIntegration\Services\ProductFilterService;
 
  /**
   * Class SyncController
@@ -67,8 +70,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $productFilterRepo;
 
+        /**
+         *
+         * @var AttributesMappingRepositoryContract
+         */
+        private $attributesMappingRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
@@ -76,6 +85,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->config = $config;   
         $this->configInfoRepo = $configInfoRepo;
         $this->productFilterRepo = $productFilterRepo;     
+        $this->attributesMappingRepo = $attributesMappingRepo; 
     }
 
     
@@ -109,6 +119,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter
         ]);
+
+        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
+
+        $itemService = pluginApp(ProductFilterService::class);
+        
+        $finalResult = $itemService->getProducts();
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
