@@ -23,6 +23,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
  
 
  /**
@@ -69,7 +71,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $config;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config)
+        /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
@@ -77,6 +85,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->queueRepo = $queueRepo;
         $this->tokenRepo = $tokenRepo; 
         $this->config = $config;
+        $this->configInfoRepo = $configInfoRepo;   
     }
 
     public function getSchedule(Request $request) :string 
@@ -139,8 +148,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
-        $emailForConfig = $this->config->get('email');
-        $passwordForConfig = $this->config->get('password');
+        $emailObject = $this->configInfoRepo->getConfig('email');
+        $passwordObject = $this->configInfoRepo->getConfig('password');
+
+        $emailForConfig = $emailObject->value;
+        $passwordForConfig = $passwordObject->value;
 
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId,
