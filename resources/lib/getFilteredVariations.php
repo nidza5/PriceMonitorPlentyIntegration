@@ -16,7 +16,7 @@ try {
 
     $attributesFromPlenty = SdkRestApi::getParam('attributesFromPlenty');
   
-    return PriceMonitorSdkHelper::getFilteredVariations($filterType, $pricemonitorId, $filterRepo,$attributeMapping,$allVariations,$attributesFromPlenty);
+    return PriceMonitorSdkHelper::getFilteredVariations($filterType, $priceMonitorId, $productFilterRepo,$attributeMapping,$allVariations,$attributesFromPlenty);
 
 } catch(\Exception $ex) {
     
