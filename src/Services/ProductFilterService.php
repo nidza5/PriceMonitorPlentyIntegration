@@ -98,8 +98,8 @@ class ProductFilterService {
 		$variationFilter = pluginApp(VariationBaseFilter::class);
 		$variationFilter->isMain();
 
-		$documentSearch
-			->addFilter($variationFilter);
+		// $documentSearch
+		// 	->addFilter($variationFilter);
 
 		return $elasticSearchRepo->execute();
     }
