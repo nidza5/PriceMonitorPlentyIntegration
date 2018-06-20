@@ -79,7 +79,7 @@ class ProductFilterService {
         $this->itemDataLayerRepo = $itemDataLayerRepo;
     }
 
-    public function getAllProducts()
+    public function getAllVariations()
     {
         // if(hasMandatoryMappings($mappedAttributes)) {
         //     throw new \Exception("Mandatory fields must be mapped!");

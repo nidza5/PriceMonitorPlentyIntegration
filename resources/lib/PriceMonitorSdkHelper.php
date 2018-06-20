@@ -111,6 +111,52 @@
         }       
     }
 
+    public static function getMappedAttributeCodes($attributeMapping)
+    {
+        $mappings = $mappedAttribute->toArray();
+        $mappingCodes = array_unique(array_column($mappings, 'attributeCode'));
+        return $mappingCodes;
+    }
+
+    public static function getFilteredVariations($filterType, $pricemonitorId, $filterRepo,$attributeMapping, $allVariations)
+    {
+           $mappedAttribute = getMappedAttributeCodes($attributeMapping);
+
+            ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
+
+            $filterRepository = new FilterRepository();
+            $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+
+            foreach ($filter->getExpressions() as $group) {
+                $operator = null;
+                $expressions = array();
+
+             foreach ($group->getExpressions() as $expression) {
+                $condition = $expression->getCondition();
+
+                $field = $expression->getField();
+                $values = $expression->getValues();
+                $operator = $expression->getOperator();
+
+                $expressions[] = array(
+                    'attribute' => $field,
+                    'values' => $values,
+                    'condition' => $condition,
+                    'operator' => $operator
+                );
+            }
+
+            // if (!empty($expressions) && !empty($operator)) {
+            //     $productCollection->addFilterByOperator($expressions, $operator, $group->getOperator());
+            //     $emptyExpressions = false;
+            // }
+        }
+
+        return $expression;
+
+    }
+
+
     public static function getFilter($filterType, $pricemonitorId, $filterRepo)
     {
         try {

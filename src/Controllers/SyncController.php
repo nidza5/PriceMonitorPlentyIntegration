@@ -114,17 +114,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
 
-        $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-            'filterType' => FilterType::EXPORT_PRODUCTS,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter
-        ]);
-
         $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
         $itemService = pluginApp(ProductFilterService::class);
 
-        $finalResult = $itemService->getAllProducts();
+        $allVariations = $itemService->getAllVariations();
+
+        $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'attributeMapping' => $attributeMapping,
+            'allVariations' =>  $allVariations            
+        ]);     
+
+        echo "filtered variation";
+        echo json_encode($filteredVariation);
+
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');

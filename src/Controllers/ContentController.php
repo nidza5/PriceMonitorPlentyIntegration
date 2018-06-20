@@ -218,12 +218,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $contractsIds = array();
 
-        $itemService = pluginApp(ProductFilterService::class);
+        // $itemService = pluginApp(ProductFilterService::class);
 
-        $finalResult = $itemService->getAllProducts();
+        // $finalResult = $itemService->getAllVariations();
 
-        echo "products";
-        echo json_encode($finalResult);
+        // echo "products";
+        // echo json_encode($finalResult);
               
 
         $templateData = array("contracts" => $originalContracts,
