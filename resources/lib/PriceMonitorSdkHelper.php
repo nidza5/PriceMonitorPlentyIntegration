@@ -165,7 +165,7 @@
             }
 
             if (!empty($expressions)) {
-                $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$mappedAttribute,$attributesFromPlenty);
+                $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
             }
 
             if($group->getOperator() == 'AND' )
@@ -177,7 +177,7 @@
          return $finalProductCollection;
     }
 
-    public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$mappedAttribute,$attributesFromPlenty) 
+    public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
     {
         $finalFilteredProduct = array();
 
