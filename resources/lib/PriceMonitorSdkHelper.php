@@ -138,12 +138,12 @@
     {
          //  $mappedAttribute = self::getMappedAttributeCodes($attributeMapping);
 
-            // ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
+            ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
 
-            // $filterRepository = new FilterRepository();
-            // $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+            $filterRepository = new FilterRepository();
+            $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
-            // $finalProductCollection = array();
+            $finalProductCollection = array();
 
             // foreach ($filter->getExpressions() as $group) {
             //     $operator = null;
@@ -172,9 +172,9 @@
             //     $finalProductCollection = $productCollection;
             // else if($group->getOperator() == 'OR')            
             //     array_push($finalProductCollection,$productCollection);
-        // }
+       // }
 
-        //  return $finalProductCollection;
+         return $finalProductCollection;
     }
 
     public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
