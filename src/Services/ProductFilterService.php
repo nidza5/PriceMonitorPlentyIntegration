@@ -94,6 +94,12 @@ class ProductFilterService {
             //     'flagTwo' => $flagTwo
             // ]);
 
+            $repository->setSearchParams([
+                'with' => [
+                    'variationAttributeValues'
+                ]
+             ]);
+
            return $repository->search();
     }
 
