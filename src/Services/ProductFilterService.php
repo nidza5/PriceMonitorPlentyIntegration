@@ -131,34 +131,28 @@ class ProductFilterService {
         
         foreach ($resultItems as $item)
         {
+            $i++;
             
-            if($item['variationBase']['active'] == "true")
-            {
-                if($item['variationCategoryList'][0]['categoryId'] == $id)
-                {
-                    
-                    $i++;
-                    
-                    $itemVariation = $variationRepository->
-                        findById($item['variationBase']['id']);
-                        
-                        $items[$i]['general'] = $itemVariation;
-                        $items[$i]['general']['description'] = $item['itemDescription'];
-                        $items[$i]['general']['variationBarcodes'] = $itemVariation->variationBarcodes;
-                        $items[$i]['general']['variationSalesPrices'] = $itemVariation->variationSalesPrices;
-                        $items[$i]['general']['marketItemNumbers'] = $itemVariation->marketItemNumbers;
-                        $items[$i]['general']['variationCategories'] = $itemVariation->variationCategories;
-                        $items[$i]['general']['variationClients'] = $itemVariation->variationClients;
-                        $items[$i]['general']['variationMarkets'] = $itemVariation->variationMarkets;
-                        $items[$i]['general']['variationDefaultCategory'] = $itemVariation->variationDefaultCategory;
-                        $items[$i]['general']['variationSuppliers'] = $itemVariation->variationSuppliers;
-                        $items[$i]['general']['variationWarehouses'] = $itemVariation->variationWarehouses;
-                        $items[$i]['general']['images'] = $itemVariation->images;
-                        $items[$i]['general']['unit'] = $itemVariation->unit;
-                        $items[$i]['general']['parent'] = $itemVariation->parent;
-                        $items[$i]['general']['item'] = $itemVariation->item;
-                }
-            }
+            $itemVariation = $variationRepository->
+                findById($item['variationBase']['id']);
+                
+                $items[$i]['general'] = $itemVariation;
+                $items[$i]['general']['description'] = $item['itemDescription'];
+                $items[$i]['general']['variationBarcodes'] = $itemVariation->variationBarcodes;
+                $items[$i]['general']['variationSalesPrices'] = $itemVariation->variationSalesPrices;
+                $items[$i]['general']['marketItemNumbers'] = $itemVariation->marketItemNumbers;
+                $items[$i]['general']['variationCategories'] = $itemVariation->variationCategories;
+                $items[$i]['general']['variationClients'] = $itemVariation->variationClients;
+                $items[$i]['general']['variationMarkets'] = $itemVariation->variationMarkets;
+                $items[$i]['general']['variationDefaultCategory'] = $itemVariation->variationDefaultCategory;
+                $items[$i]['general']['variationSuppliers'] = $itemVariation->variationSuppliers;
+                $items[$i]['general']['variationWarehouses'] = $itemVariation->variationWarehouses;
+                $items[$i]['general']['images'] = $itemVariation->images;
+                $items[$i]['general']['unit'] = $itemVariation->unit;
+                $items[$i]['general']['parent'] = $itemVariation->parent;
+                $items[$i]['general']['item'] = $itemVariation->item;
+                
+            
         }
 
         return $items;
