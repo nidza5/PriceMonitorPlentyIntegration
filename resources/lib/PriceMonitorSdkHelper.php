@@ -182,7 +182,7 @@
     {
         $finalFilteredProduct = array();
 
-        foreach($expresion as $exp) {
+        foreach($expresssions as $exp) {
             $operator = $exp['operator'];
             $values = $exp['values'];
             $attribute = $exp['attribute'];
