@@ -129,7 +129,7 @@
 
     public static function getMappedAttributeCodes($attributeMapping)
     {
-        $mappings = $attributeMapping->toArray();
+        $mappings = $attributeMapping;
         $mappingCodes = array_unique(array_column($mappings, 'attributeCode'));
         return $mappingCodes;
     }
