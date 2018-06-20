@@ -149,10 +149,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'passwordForConfig' =>  $passwordForConfig        
         ]); 
 
-        if($enqueAndRun != null && $enqueAndRun['error'])
+        if($enqueAndRun != null && $enqueAndRun['Message'])
         {
             return [
-                'Message' => $enqueAndRun['error']
+                'Message' => $enqueAndRun['Message']
             ];
         }
       
