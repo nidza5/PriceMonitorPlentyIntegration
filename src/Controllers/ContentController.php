@@ -144,8 +144,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
                 echo $key;
                 foreach($value as $v => $l)
-                    echo $v;
-                    echo $l;             
+                    $attributesIdName[$v] = $l;             
 
             }
 
