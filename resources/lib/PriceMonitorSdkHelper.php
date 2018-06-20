@@ -191,22 +191,22 @@
 
             $nameColumnInVariation = self::$_columnNames[$filterByColumn];
 
-            $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
-                if($condition == "equal") {
-                    return $value[$nameColumnInVariation] == $values[0];
-                } else if($condition == "not_equal") {
-                    return $value[$nameColumnInVariation] != $values[0];
-                }
-                else if($condition == "greater_than") {
-                    return $value[$nameColumnInVariation] > $values[0];
-                } else if($condition == "less_than") {
-                    return $value[$nameColumnInVariation] < $values[0];
-                } else if($condition == 'greater_or_equal') {
-                    return $value[$nameColumnInVariation] >= $values[0];
-                } else if($condition == 'less_or_equal') {
-                    return $value[$nameColumnInVariation] <= $values[0];
-                }                    
-            });
+            // $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
+            //     if($condition == "equal") {
+            //         return $value[$nameColumnInVariation] == $values[0];
+            //     } else if($condition == "not_equal") {
+            //         return $value[$nameColumnInVariation] != $values[0];
+            //     }
+            //     else if($condition == "greater_than") {
+            //         return $value[$nameColumnInVariation] > $values[0];
+            //     } else if($condition == "less_than") {
+            //         return $value[$nameColumnInVariation] < $values[0];
+            //     } else if($condition == 'greater_or_equal') {
+            //         return $value[$nameColumnInVariation] >= $values[0];
+            //     } else if($condition == 'less_or_equal') {
+            //         return $value[$nameColumnInVariation] <= $values[0];
+            //     }                    
+            // });
 
             // if($operator == 'AND') {
             //     $finalFilteredProduct = $filteredProducts;
