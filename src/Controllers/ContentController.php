@@ -142,9 +142,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             foreach($finalResult as $key => $value) {
 
-                echo $key;
                 foreach($value as $v => $l)
-                    $attributesIdName[$v] = $l;             
+                    $attributesIdName[$v] = explode("-",$l)[0];             
 
             }
 
