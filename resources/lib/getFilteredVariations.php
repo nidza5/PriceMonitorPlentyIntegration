@@ -15,7 +15,6 @@ try {
     $allVariations = SdkRestApi::getParam('allVariations');
 
     $attributesFromPlenty = SdkRestApi::getParam('attributesFromPlenty');
-    
   
     return PriceMonitorSdkHelper::getFilteredVariations($filterType, $pricemonitorId, $filterRepo,$attributeMapping,$allVariations,$attributesFromPlenty);
 

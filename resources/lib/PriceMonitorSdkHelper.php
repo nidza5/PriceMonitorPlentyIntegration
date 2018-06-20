@@ -4,6 +4,7 @@
  require_once __DIR__ . '/FilterStorage.php';
  require_once __DIR__ . '/TransactionStorage.php';
  require_once __DIR__ . '/ConfigService.php';
+ 
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
@@ -20,6 +21,7 @@
  use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMasterFilter;
  use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistorySortFields;
  use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMaster;
+ use Patagona\Pricemonitor\Core\Sync\Filter\Condition;
 
  class PriceMonitorSdkHelper
  {
@@ -32,6 +34,20 @@
         TransactionHistoryStatus::FINISHED => 'Success',
         TransactionHistoryStatus::IN_PROGRESS => 'In Progress',
         TransactionHistoryStatus::FILTERED_OUT => 'Filtered Out',
+    );
+
+    public static $conditionMap = array(
+        Condition::EQUAL => '=',
+        Condition::NOT_EQUAL => '!=',
+        Condition::GREATER_THAN => '>',
+        Condition::LESS_THAN => '<',
+        Condition::GREATER_OR_EQUAL => '>=',
+        Condition::LESS_OR_EQUAL => '<='
+    );
+
+    protected static $_columnNames = array(
+        "VariationN" => "name",
+        "VariationNo" => 'number'
     );
 
     public static function loginInPriceMonitor($email,$password)
@@ -127,6 +143,8 @@
             $filterRepository = new FilterRepository();
             $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
+            $finalProductCollection = array();
+
             foreach ($filter->getExpressions() as $group) {
                 $operator = null;
                 $expressions = array();
@@ -147,17 +165,58 @@
             }
 
             if (!empty($expressions)) {
-                $productCollection->addFilterByOperator($expressions, $group->getOperator(),$allVariations,$mappedAttribute,$attributesFromPlenty);
+                $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$mappedAttribute,$attributesFromPlenty);
                 $emptyExpressions = false;
             }
+
+            if($group->getOperator() == 'AND' )
+                $finalProductCollection = $productCollection;
+            else if($group->getOperator() == 'OR')            
+                array_push($finalProductCollection,$productCollection);
         }
 
+         return $finalProductCollection;
     }
 
     public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$mappedAttribute,$attributesFromPlenty) 
     {
-        if($expression['attribute'] == "GTIN13")
+        $finalFilteredProduct = array();
 
+        foreach($expresion as $exp) {
+            $operator = $exp['operator'];
+            $values = $exp['values'];
+            $attribute = $exp['attribute'];
+            $condition = $exp['condition'];
+
+            $filterByColumn = $attributesFromPlenty[$condition['attribute']];
+
+            $nameColumnInVariation = self::$_columnNames[$filterByColumn];
+
+            $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
+                if($condition == "equal") {
+                    return $value[$nameColumnInVariation] == $values[0];
+                } else if($condition == "not_equal") {
+                    return $value[$nameColumnInVariation] != $values[0];
+                }
+                else if($condition == "greater_than") {
+                    return $value[$nameColumnInVariation] > $values[0];
+                } else if($condition == "less_than") {
+                    return $value[$nameColumnInVariation] < $values[0];
+                } else if($condition == 'greater_or_equal') {
+                    return $value[$nameColumnInVariation] >= $values[0];
+                } else if($condition == 'less_or_equal') {
+                    return $value[$nameColumnInVariation] <= $values[0];
+                }                    
+            });
+
+            if($operator == 'AND') {
+                $finalFilteredProduct = $filteredProducts;
+            } else if($operator == 'OR'){
+                 $finalFilteredProduct += $filteredProducts;
+            }
+      }
+
+         return $finalFilteredProduct;
     }
 
 
