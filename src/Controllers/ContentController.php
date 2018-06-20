@@ -216,11 +216,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  }                  
               }
 
-              $contractsIds = array();
+        $contractsIds = array();
 
-              $itemService = pluginApp(ProductFilterService::class);
+        $itemService = pluginApp(ProductFilterService::class);
 
-        $finalResult = $itemService->getProducts();
+        $finalResult = $itemService->getAllProducts();
 
         echo "products";
         echo json_encode($finalResult);

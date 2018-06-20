@@ -123,8 +123,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
         $itemService = pluginApp(ProductFilterService::class);
-        
-        $finalResult = $itemService->getProducts();
+
+        $finalResult = $itemService->getAllProducts();
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
