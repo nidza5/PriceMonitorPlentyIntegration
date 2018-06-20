@@ -142,8 +142,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             foreach($finalResult as $key => $value) {
 
-                echo $key;
-                echo $value;               
+                foreach($value as $v)
+                    echo $v;             
 
             }
 
