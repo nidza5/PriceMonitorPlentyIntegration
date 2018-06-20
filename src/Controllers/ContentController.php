@@ -134,21 +134,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             // echo json_encode($reponseContracts);
 
-            $attributeService = pluginApp(AttributeService::class);
-
-            $finalResult = $attributeService->getAllTypeAttributes();
-
-            $attributesIdName = array();
-
-            foreach($finalResult as $key => $value) {
-
-                foreach($value as $v => $l)
-                    $attributesIdName[$v] = explode("-",$l)[0];             
-
-            }
-
-            echo "Attributes id name";
-            echo json_encode($attributesIdName);
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if(($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message'])) || ($reponseContracts['error'] && $reponseContracts['error_msg']))

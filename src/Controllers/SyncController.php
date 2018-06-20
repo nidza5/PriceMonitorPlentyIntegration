@@ -125,13 +125,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $attributesFromPlenty = $attributeService->getAllTypeAttributes();
 
+        $attributesIdName = array();
+
+            foreach($attributesFromPlenty as $key => $value) {
+                foreach($value as $v => $l)
+                    $attributesIdName[$v] = explode("-",$l)[0];             
+
+            }
+
         $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
             'filterType' => FilterType::EXPORT_PRODUCTS,
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter,
             'attributeMapping' => $attributeMapping,
             'allVariations' =>  $allVariations,
-            'attributesFromPlenty' => $attributesFromPlenty            
+            'attributesFromPlenty' => $attributesIdName            
         ]);     
 
 
