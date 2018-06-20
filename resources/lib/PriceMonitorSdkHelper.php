@@ -164,9 +164,9 @@
                 );
             }
 
-            // if (!empty($expressions)) {
-            //     $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
-            // }
+            if (!empty($expressions)) {
+                $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
+            }
 
             // if($group->getOperator() == 'AND' )
             //     $finalProductCollection = $productCollection;
