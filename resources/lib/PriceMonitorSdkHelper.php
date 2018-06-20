@@ -189,7 +189,7 @@
 
             $filterByColumn = $attributesFromPlenty[$attribute];
 
-            $nameColumnInVariation = self::$_columnNames[$filterByColumn];
+            // $nameColumnInVariation = self::$_columnNames[$filterByColumn];
 
             // $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
             //     if($condition == "equal") {
