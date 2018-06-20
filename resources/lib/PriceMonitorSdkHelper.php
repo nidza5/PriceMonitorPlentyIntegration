@@ -174,7 +174,7 @@
             //     array_push($finalProductCollection,$productCollection);
        }
 
-         return $finalProductCollection;
+         return $productCollection;
     }
 
     public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
