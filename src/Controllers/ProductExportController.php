@@ -161,7 +161,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'passwordForConfig' =>  $passwordForConfig        
         ]); 
 
-        return json_encode($enqueAndRun);
+      
 
         if($enqueAndRun != null && $enqueAndRun['Message'])
         {
