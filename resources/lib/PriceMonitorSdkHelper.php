@@ -138,31 +138,31 @@
     {
          //  $mappedAttribute = self::getMappedAttributeCodes($attributeMapping);
 
-            ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
+            // ServiceRegister::registerFilterStorage(new FilterStorage($filterRepo));
 
-            $filterRepository = new FilterRepository();
-            $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
+            // $filterRepository = new FilterRepository();
+            // $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
-            $finalProductCollection = array();
+            // $finalProductCollection = array();
 
-            foreach ($filter->getExpressions() as $group) {
-                $operator = null;
-                $expressions = array();
+            // foreach ($filter->getExpressions() as $group) {
+            //     $operator = null;
+            //     $expressions = array();
 
-             foreach ($group->getExpressions() as $expression) {
-                $condition = $expression->getCondition();
+            //  foreach ($group->getExpressions() as $expression) {
+            //     $condition = $expression->getCondition();
 
-                $field = $expression->getField();
-                $values = $expression->getValues();
-                $operator = $expression->getOperator();
+            //     $field = $expression->getField();
+            //     $values = $expression->getValues();
+            //     $operator = $expression->getOperator();
 
-                $expressions[] = array(
-                    'attribute' => $field,
-                    'values' => $values,
-                    'condition' => $condition,
-                    'operator' => $operator
-                );
-            }
+            //     $expressions[] = array(
+            //         'attribute' => $field,
+            //         'values' => $values,
+            //         'condition' => $condition,
+            //         'operator' => $operator
+            //     );
+            // }
 
             // if (!empty($expressions)) {
             //     $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
@@ -172,9 +172,9 @@
             //     $finalProductCollection = $productCollection;
             // else if($group->getOperator() == 'OR')            
             //     array_push($finalProductCollection,$productCollection);
-        }
+        // }
 
-         return $finalProductCollection;
+        //  return $finalProductCollection;
     }
 
     public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
