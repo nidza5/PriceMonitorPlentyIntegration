@@ -121,7 +121,7 @@ class ProductFilterService {
                 foreach($p['variationBarcodes'] as $bar) {
                    
                   $barCode = $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                  $p[$barCode['name']] = $bar['code'];
+                  $p[$barCode->name] = $bar['code'];
 
                 }
                
