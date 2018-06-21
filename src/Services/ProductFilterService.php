@@ -125,7 +125,7 @@ class ProductFilterService {
 
            foreach($originalProducts as $p) {
                 $i++;
-                foreach($p['variationBarcodes'] as &$bar) {
+                foreach($p['variationBarcodes'] as $bar) {
 
                     $barCode = null;
 
