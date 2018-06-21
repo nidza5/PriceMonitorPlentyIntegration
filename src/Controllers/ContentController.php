@@ -231,7 +231,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $categories =  $prodServ->getCategoryById(18);
 
-         echo json_encode( $categories );
+         echo json_encode( $categories[1]["details"][0]["name"]);
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);
