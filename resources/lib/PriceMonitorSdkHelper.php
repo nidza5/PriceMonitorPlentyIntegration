@@ -218,6 +218,7 @@
                 }
             }
     
+            
              return  $finalFilteredProduct;
 
         } catch (\Exception $ex)

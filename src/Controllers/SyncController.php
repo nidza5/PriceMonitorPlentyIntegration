@@ -142,6 +142,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributesFromPlenty' => $attributesIdName            
         ]);     
 
+        foreach($filteredVariation as $key => $value) {
+            echo $key;
+            echo $value;
+        }
+
         echo json_encode($filteredVariation);
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
