@@ -115,33 +115,35 @@ class ProductFilterService {
 
         $originalProducts = $products->getResult();
 
-        $itemsResults = [];
-        $i = 0;       
+        // $itemsResults = [];
+        // $i = 0;       
 
-        foreach($originalProducts as $p) {
-            $i++;
-            $tempArr = null;
-            foreach($p['variationBarcodes'] as $bar) {
+        // foreach($originalProducts as $p) {
+        //     $i++;
+        //     $tempArr = null;
+        //     foreach($p['variationBarcodes'] as $bar) {
                 
-                $barCode = null;
+        //         $barCode = null;
 
-                $barCode = $authHelper->processUnguarded(
-                    function () use ($barCodeRepo, $barCode,$bar) {
+        //         $barCode = $authHelper->processUnguarded(
+        //             function () use ($barCodeRepo, $barCode,$bar) {
                     
-                        return $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                    }
-                );
+        //                 return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+        //             }
+        //         );
                 
-                $barElement = [$barCode->name => $bar['code']];
+        //         $barElement = [$barCode->name => $bar['code']];
 
-                $arrayForMerge = $tempArr == null ? $p : $tempArr;
-                $merge = array_merge($arrayForMerge,$barElement);  
-                $tempArr = $merge;              
-                $itemsResults[$i] = $merge;
-            }               
-        }
+        //         $arrayForMerge = $tempArr == null ? $p : $tempArr;
+        //         $merge = array_merge($arrayForMerge,$barElement);  
+        //         $tempArr = $merge;              
+        //         $itemsResults[$i] = $merge;
+        //     }               
+        // }
 
-           return $itemsResults;
+        //    return $itemsResults;
+
+        return $originalProducts;
     }
 
     // public function hasMandatoryMappings($mappings)
