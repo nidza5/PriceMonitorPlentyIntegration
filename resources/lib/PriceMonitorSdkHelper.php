@@ -143,7 +143,7 @@
             $filterRepository = new FilterRepository();
             $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
-            $finalProductCollection = array();
+            $finalProductCollection = null;
 
             foreach ($filter->getExpressions() as $group) {
                 $operator = null;
