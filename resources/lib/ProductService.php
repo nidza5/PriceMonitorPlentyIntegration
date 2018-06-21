@@ -1,9 +1,9 @@
 <?php
 
-use Patagona\Pricemonitor\Core\Interfaces\ProductService as ProductServiceInterface;
-use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
+// use Patagona\Pricemonitor\Core\Interfaces\ProductService as ProductServiceInterface;
+// use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
 
-class ProductService implements ProductServiceInterface
+class ProductService 
 {
     
    private $contract;
