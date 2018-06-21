@@ -224,7 +224,8 @@
                     }                    
                 });
 
-               
+                $valuesFilteredProducts = null;
+
                 if($filteredProducts != null) {
                     $valuesFilteredProducts = array_values($filteredProducts);
                 }
