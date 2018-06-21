@@ -96,7 +96,7 @@
 
     public static function registerMapperService($attributesMappings,$contract,$productsForExport,$productAttributes) 
     {
-        ServiceRegister::registerMapperService(new MapperService($attributesMappings,$contract,$productsForExport,$productAttributes));
+        ServiceRegister::registerMapperService(new MapperServices($attributesMappings,$contract,$productsForExport,$productAttributes));
     }
 
     public static function registerProductService($contract,$productForExport) 
