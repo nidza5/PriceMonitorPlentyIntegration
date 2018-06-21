@@ -168,13 +168,13 @@
                 $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
             }
 
-            // if($group->getOperator() == 'AND' )
-            //     $finalProductCollection = $productCollection;
-            // else if($group->getOperator() == 'OR')            
-            //     array_push($finalProductCollection,$productCollection);
+            if($group->getOperator() == 'AND' )
+                $finalProductCollection = $productCollection;
+            else if($group->getOperator() == 'OR')            
+                array_push($finalProductCollection,$productCollection);
        }
 
-         return $productCollection;
+         return $finalProductCollection;
     }
 
     public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
@@ -189,33 +189,33 @@
 
            // $filterByColumn = $attributesFromPlenty[$attribute]; //ispisujuje Variation No
 
-            // $nameColumnInVariation = self::$_columnNames[$filterByColumn];
+             $nameColumnInVariation = self::$_columnNames[$attribute];
 
-            // $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
-            //     if($condition == "equal") {
-            //         return $value[$nameColumnInVariation] == $values[0];
-            //     } else if($condition == "not_equal") {
-            //         return $value[$nameColumnInVariation] != $values[0];
-            //     }
-            //     else if($condition == "greater_than") {
-            //         return $value[$nameColumnInVariation] > $values[0];
-            //     } else if($condition == "less_than") {
-            //         return $value[$nameColumnInVariation] < $values[0];
-            //     } else if($condition == 'greater_or_equal') {
-            //         return $value[$nameColumnInVariation] >= $values[0];
-            //     } else if($condition == 'less_or_equal') {
-            //         return $value[$nameColumnInVariation] <= $values[0];
-            //     }                    
-            // });
+            $filteredProducts = array_filter($variationArray, function($value) use ($nameColumnInVariation,$condition,$values) {
+                if($condition == "equal") {
+                    return $value[$nameColumnInVariation] == $values[0];
+                } else if($condition == "not_equal") {
+                    return $value[$nameColumnInVariation] != $values[0];
+                }
+                else if($condition == "greater_than") {
+                    return $value[$nameColumnInVariation] > $values[0];
+                } else if($condition == "less_than") {
+                    return $value[$nameColumnInVariation] < $values[0];
+                } else if($condition == 'greater_or_equal') {
+                    return $value[$nameColumnInVariation] >= $values[0];
+                } else if($condition == 'less_or_equal') {
+                    return $value[$nameColumnInVariation] <= $values[0];
+                }                    
+            });
 
-            // if($operator == 'AND') {
-            //     $finalFilteredProduct = $filteredProducts;
-            // } else if($operator == 'OR'){
-            //      $finalFilteredProduct += $filteredProducts;
-            // }
+            if($operator == 'AND') {
+                $finalFilteredProduct = $filteredProducts;
+            } else if($operator == 'OR'){
+                 $finalFilteredProduct += $filteredProducts;
+            }
         }
 
-         return  $attribute;
+         return  $finalFilteredProduct;
     }
 
 
