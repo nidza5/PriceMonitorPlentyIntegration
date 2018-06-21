@@ -128,7 +128,7 @@ class ProductFilterService {
                     $barCode = null;
 
                     $salesPrices = $authHelper->processUnguarded(
-                        function () use ($barCodeRepo, $barCode) {
+                        function () use ($barCodeRepo, $barCode,$bar) {
                         
                             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
                         }
