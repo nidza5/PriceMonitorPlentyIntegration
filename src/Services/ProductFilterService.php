@@ -136,7 +136,7 @@ class ProductFilterService {
           
 
                   $p[$barCode->name] = $bar['code'];
-                  $p['Nikola'] = "Vasiljevic"
+                  $p['Nikola'] = "Vasiljevic";
 
                 }
                
