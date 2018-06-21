@@ -116,11 +116,12 @@ class ProductFilterService {
 
         $itemsResults = [];
         $i = 0;
+        $j = 0;
 
         foreach($originalProducts as $p) {
             $i++;
             foreach($p['variationBarcodes'] as $bar) {
-                $i++;
+                $j++;
                 $barCode = null;
 
                 $barCode = $authHelper->processUnguarded(
@@ -133,7 +134,7 @@ class ProductFilterService {
                 $barElement = [$barCode->name => $bar['code']];
 
                 $merge = array_merge($p,$barElement);
-                $itemsResults[$i] = $merge;
+                $itemsResults[$i][$j] = $merge;
             }               
         }
 
