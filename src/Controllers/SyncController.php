@@ -142,6 +142,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributesFromPlenty' => $attributesIdName            
         ]);     
 
+        echo "id";
             echo $filteredVariation['id'];
 
         echo json_encode($filteredVariation);
