@@ -187,7 +187,7 @@
             $attribute = $exp['attribute'];
             $condition = $exp['condition'];
 
-            $filterByColumn = $attributesFromPlenty[$attribute];
+           // $filterByColumn = $attributesFromPlenty[$attribute]; //ispisujuje Variation No
 
             // $nameColumnInVariation = self::$_columnNames[$filterByColumn];
 
@@ -208,14 +208,14 @@
             //     }                    
             // });
 
-            // if($operator == 'AND') {
-            //     $finalFilteredProduct = $filteredProducts;
-            // } else if($operator == 'OR'){
-            //      $finalFilteredProduct += $filteredProducts;
-            // }
+            if($operator == 'AND') {
+                $finalFilteredProduct = $filteredProducts;
+            } else if($operator == 'OR'){
+                 $finalFilteredProduct += $filteredProducts;
+            }
         }
 
-         return  $filterByColumn;
+         return  $attribute;
     }
 
 
