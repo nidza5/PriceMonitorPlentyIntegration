@@ -207,7 +207,8 @@
                 $nameColumnInVariation = null;
                 $filteredProducts = array_filter($variationArray, function($value) use ($filterByColumn,$condition,$values) {
                     if($condition == "equal") {
-                        return $value[$filterByColumn] == $values[0];
+                         if(isset($value[$filterByColumn])) 
+                            return $value[$filterByColumn] == $values[0];
                     } else if($condition == "not_equal") {
                         return $value[$filterByColumn] != $values[0];
                     }
