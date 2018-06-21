@@ -120,10 +120,11 @@ class ProductFilterService {
 
            $originalProducts = $products->getResult();
 
+           $itemsResults = [];
+           $i = 0;
 
-           foreach($originalProducts as &$p) {
-
-            $p['Nikola'] = "Vasiljevic";
+           foreach($originalProducts as $p) {
+                $i++;
                 foreach($p['variationBarcodes'] as &$bar) {
 
                     $barCode = null;
@@ -134,16 +135,17 @@ class ProductFilterService {
                             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
                         }
                     );
-          
+                    
+                    $barElement = [$barCode->name => $bar['code']];
 
-                  $p[$barCode->name] = $bar['code'];
-                  
+                    $merge = array_merge($p,$barElement);
+                    $itemsResults[i] = $merge;
 
                 }
                
            }
 
-           return $originalProducts;
+           return $itemsResults;
           // return $products->getResult();
     }
 
