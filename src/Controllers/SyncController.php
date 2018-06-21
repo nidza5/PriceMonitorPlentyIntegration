@@ -131,53 +131,53 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $allVariations = $itemService->getAllVariations();
 
-        echo "variations";
-        return json_encode($allVariations);
+        // echo "variations";
+        // return json_encode($allVariations);
 
-        // $attributeService = pluginApp(AttributeService::class);
+        $attributeService = pluginApp(AttributeService::class);
 
-        // $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+        $attributesFromPlenty = $attributeService->getAllTypeAttributes();
 
-        // $attributesIdName = array();
+        $attributesIdName = array();
 
-        // foreach($attributesFromPlenty as $key => $value) {
-        //     foreach($value as $v => $l)
-        //         $attributesIdName[$v] = explode("-",$l)[0];            
+        foreach($attributesFromPlenty as $key => $value) {
+            foreach($value as $v => $l)
+                $attributesIdName[$v] = explode("-",$l)[0];            
 
-        // }
+        }
 
-        // $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
-        //     'filterType' => FilterType::EXPORT_PRODUCTS,
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'productFilterRepo' => $filter,
-        //     'attributeMapping' => $attributeMapping,
-        //     'allVariations' =>  $allVariations,
-        //     'attributesFromPlenty' => $attributesIdName            
-        // ]);     
+        $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'attributeMapping' => $attributeMapping,
+            'allVariations' =>  $allVariations,
+            'attributesFromPlenty' => $attributesIdName            
+        ]);     
 
        
-        // echo json_encode($filteredVariation);
+        echo json_encode($filteredVariation);
 
-        // $emailForConfig = $this->configInfoRepo->getConfig('email');
-        // $passwordForConfig = $this->configInfoRepo->getConfig('password');
+        $emailForConfig = $this->configInfoRepo->getConfig('email');
+        $passwordForConfig = $this->configInfoRepo->getConfig('password');
 
-        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        // $syncRun =  $this->sdkService->call("runSync", [
-        //     'queueModel' => $queue,
-        //     'queueName' => $queueName,
-        //     'emailForConfig' =>  $emailForConfig,
-        //     'passwordForConfig' =>  $passwordForConfig,
-        //     'filterType' => FilterType::EXPORT_PRODUCTS,
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'productFilterRepo' => $filter,
-        //     'products' => $filteredVariation,
-        //     'attributesFromPlenty' => $attributesIdName,
-        //     'attributeMapping' => $attributeMapping,
-        //     'contract' => $contract              
-        // ]);   
+        $syncRun =  $this->sdkService->call("runSync", [
+            'queueModel' => $queue,
+            'queueName' => $queueName,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig,
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'products' => $filteredVariation,
+            'attributesFromPlenty' => $attributesIdName,
+            'attributeMapping' => $attributeMapping,
+            'contract' => $contract              
+        ]);   
          
-        // $result = ['successSync' => $syncRun];
-        // return  json_encode($result);
+        $result = ['successSync' => $syncRun];
+        return  json_encode($result);
     }
  }
