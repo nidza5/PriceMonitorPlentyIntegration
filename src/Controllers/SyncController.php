@@ -131,6 +131,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $allVariations = $itemService->getAllVariations();
 
+        echo "variations";
+        echo json_encode($allVariations);
+
         $attributeService = pluginApp(AttributeService::class);
 
         $attributesFromPlenty = $attributeService->getAllTypeAttributes();
