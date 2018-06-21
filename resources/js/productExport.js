@@ -189,9 +189,11 @@
                     return;
                 }
                 
-                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName)
+                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName) {
+                    toastr["success"]("Product export has been started.");
                     callAssyncSync(dataJson);
-                 toastr["success"]("Product export has been started.");
+                }
+                    
             },
             error: function(data)
             {
