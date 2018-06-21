@@ -119,6 +119,7 @@ class ProductFilterService {
 
         foreach($originalProducts as $p) {
             $i++;
+            $tempArr = null;
             foreach($p['variationBarcodes'] as $bar) {
                 
                 $barCode = null;
@@ -133,7 +134,8 @@ class ProductFilterService {
                 $barElement = [$barCode->name => $bar['code']];
 
                 $merge = array_merge($p,$barElement);
-                $itemsResults[$i] = $merge;
+                $tempArr = $merge;
+                $itemsResults[$i] = $tempArr;
             }               
         }
 
