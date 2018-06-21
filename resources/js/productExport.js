@@ -191,7 +191,7 @@
                 
                 if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName)
                     callAssyncSync(dataJson);
-                // toastr["success"]("Product export has been started.");
+                 toastr["success"]("Product export has been started.");
             },
             error: function(data)
             {
@@ -234,7 +234,6 @@
                 //     }
                 // }
                    
-                    toastr["success"]("Product export has been started.");
                     
                 },
                 error: function(data)
