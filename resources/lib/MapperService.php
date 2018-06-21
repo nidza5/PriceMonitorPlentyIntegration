@@ -17,6 +17,14 @@ class MapperServices implements MapperService
         'maxPriceBoundary'
     );
 
+    public static $operands = array(
+        null,
+        'add',
+        'sub',
+        'mul',
+        'div',
+    );
+
     private $attributesMapping;
     private $contract;
     private $productsForExport;
@@ -70,6 +78,33 @@ class MapperServices implements MapperService
         return $mappingCodes;
     }
 
+    public function getCalculatedPrice($shopValue, $calculationValue, $operand)
+    {
+        $result = (double)$shopValue;
+        $value = (double)$calculationValue;
+
+        if (!in_array($operand, self::$operands)) {
+            throw new \Exception('Operand %s is not supported.', $operand);
+        }
+
+        switch ($operand) {
+            case 'add':
+                $result = $shopValue + $value;
+                break;
+            case 'sub':
+                $result = $shopValue - $value;
+                break;
+            case 'mul':
+                $result = $shopValue * $value;
+                break;
+            case 'div':
+                $result = $shopValue / $value;
+                break;
+        }
+
+        return $result;
+    }
+
     public function convertToPricemonitor($contractId, $shopProduct)
     {
         $products = $this->productsForExport;
@@ -81,7 +116,29 @@ class MapperServices implements MapperService
             return array();
         }
 
-        
+        //Attribute from plenty markets
+
+        foreach($mappings as $mapping) {
+            $attributeCode = $mapping['attributeCode'];
+            $priceMonitorCode = $mapping['priceMonitorCode'];
+             
+            $value = $products[$attributeCode];
+
+            if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
+                if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {
+                    $value = $this->_priceCalculator->getCalculatedPrice(
+                        $value,
+                        $mapping['value'],
+                        $mapping['operand']
+                    );
+                }
+            } else {
+                $result['tags'][] = array(
+                    'key' => $pricemonitorCode,
+                    'value' => (string)$value
+                );
+            }        
+        }
 
         return $result;
     }

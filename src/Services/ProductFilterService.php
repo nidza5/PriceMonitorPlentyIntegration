@@ -94,7 +94,7 @@ class ProductFilterService {
             $repository->setSearchParams([
                 'with' => [
                     'variationAttributeValues' => null,
-                    'variationBarcodes' => null,
+                    'variationBarcodes' => 'barcode',
                     'item' => null,
                     'variationCategories' => null,
                     'variationSuppliers'  => null

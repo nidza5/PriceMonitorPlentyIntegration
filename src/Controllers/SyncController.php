@@ -143,7 +143,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
        
-        echo json_encode( $filteredVariation);
+        echo json_encode($filteredVariation);
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
