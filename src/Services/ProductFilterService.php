@@ -124,9 +124,9 @@ class ProductFilterService {
            $i = 0;
 
            foreach($originalProducts as $p) {
-                $i++;
+                
                 foreach($p['variationBarcodes'] as $bar) {
-
+                    $i++;
                     $barCode = null;
 
                     $barCode = $authHelper->processUnguarded(
