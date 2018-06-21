@@ -1,7 +1,7 @@
 <?php
 
 use Patagona\Pricemonitor\Core\Interfaces\ProductService as ProductServiceInterface;
-// use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
+ use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
 
 class ProductService implements ProductServiceInterface
 {
@@ -14,7 +14,7 @@ class ProductService implements ProductServiceInterface
         $this->contract = $contract;
         $this->productForExport = $productForExport;
     }
-
+    
     public function exportProducts($contractId, $filter, array $shopCodes = array())
     {
         return $this->productForExport;
