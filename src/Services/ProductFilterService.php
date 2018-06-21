@@ -123,7 +123,7 @@ class ProductFilterService {
 
            foreach($originalProducts as &$p) {
 
-                foreach($p['variationBarcodes'] as $bar) {
+                foreach($p['variationBarcodes'] as &$bar) {
 
                     $barCode = null;
 
