@@ -139,7 +139,7 @@ class ProductFilterService {
                     $barElement = [$barCode->name => $bar['code']];
 
                     $merge = array_merge($p,$barElement);
-                    $itemsResults[i] = $merge;
+                    $itemsResults[$i] = $merge;
 
                 }
                
