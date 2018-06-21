@@ -133,12 +133,8 @@ class ProductFilterService {
                             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
                         }
                     );
-        
-                   $resultBarCode= $barCode->name;
-
-                   echo $resultBarCode;
-                  
-                //  $p[$barCode->name] = $bar['code'];
+          
+                  $p[$barCode->name] = $bar['code'];
 
                 }
                
