@@ -123,7 +123,7 @@ class ProductFilterService {
             $tempArr = null;
             
             
-            if(empty($p['variationBarcodes'])) {
+            if(!$p['variationBarcodes']) {
                 $itemsResults[$i] = $p;
             } else {
                 foreach($p['variationBarcodes'] as $bar) {
