@@ -122,12 +122,12 @@ class ProductFilterService {
             $i++;
             $tempArr = null;
             
-            if(!$p['variationBarcodes']) {
+            if(!$p['variationBarcodes'] || $p['variationBarcodes'] == null ) {
                 $itemsResults[$i] = $p;
             } else {
                 foreach($p['variationBarcodes'] as $bar) {
                 
-                    if(empty($bar)) {
+                    if(empty($bar) || $bar == null) {
                         $itemsResults[$i] = $p;
                     }
                     else {
@@ -146,7 +146,7 @@ class ProductFilterService {
                         $merge = array_merge($arrayForMerge,$barElement);  
                         $tempArr = $merge;              
                         $itemsResults[$i] = $merge;
-                        $isVariationBarcodesExist = false;   
+                       
                     }                    
                 }
             }          
