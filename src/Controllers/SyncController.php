@@ -129,7 +129,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         foreach($attributesFromPlenty as $key => $value) {
             foreach($value as $v => $l)
-                $attributesIdName[$v] = explode("-",$l)[0];             
+                $attributesIdName[$v] = explode("-",$l)[0];            
 
         }
 
@@ -144,7 +144,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo json_encode($filteredVariation);
 
-
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
 
@@ -152,7 +151,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'queueModel' => $queue,
             'queueName' => $queueName,
             'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig             
+            'passwordForConfig' =>  $passwordForConfig,
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'products' => $filteredVariation             
         ]);   
          
         $result = ['successSync' => $syncRun];

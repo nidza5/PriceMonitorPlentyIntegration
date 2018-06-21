@@ -11,6 +11,12 @@ try {
    $emailForConfig = SdkRestApi::getParam('emailForConfig');
    $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
 
+   $filterType = SdkRestApi::getParam('filterType');
+   $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
+   $productFilterRepo = SdkRestApi::getParam('productFilterRepo');
+
+   $products = SdkRestApi::getParam('productFilterRepo');
+
    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
    $runnerService = new RunnerService($queueModel);
