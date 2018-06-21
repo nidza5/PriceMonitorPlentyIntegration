@@ -194,7 +194,7 @@
     {
         try {
             
-            $finalFilteredProduct = null;
+            $finalFilteredProduct = array();
 
             foreach($expresssions as $exp) {
                 $operator = $exp['operator'];
