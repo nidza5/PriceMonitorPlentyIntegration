@@ -100,53 +100,44 @@ class ProductFilterService {
 
         $authHelper = pluginApp(AuthHelper::class);
 
-           
-            
-        // $repository->setFilters([
-        //         'barcode' => '555'
-        //     ]);
+        $repository->setSearchParams([
+            'with' => [
+                'variationAttributeValues' => null,
+                'variationBarcodes' => 'barcode',
+                'item' => null,
+                'variationCategories' => null,
+                'variationSuppliers'  => null
+            ]
+         ]);
 
-            $repository->setSearchParams([
-                'with' => [
-                    'variationAttributeValues' => null,
-                    'variationBarcodes' => 'barcode',
-                    'item' => null,
-                    'variationCategories' => null,
-                    'variationSuppliers'  => null
-                ]
-             ]);
+        $products = $repository->search();
 
-           $products = $repository->search();
+        $originalProducts = $products->getResult();
 
-           $originalProducts = $products->getResult();
+        $itemsResults = [];
+        $i = 0;
 
-           $itemsResults = [];
-           $i = 0;
-
-           foreach($originalProducts as $p) {
-                
-                foreach($p['variationBarcodes'] as $bar) {
-                    $i++;
-                    $barCode = null;
-
-                    $barCode = $authHelper->processUnguarded(
-                        function () use ($barCodeRepo, $barCode,$bar) {
-                        
-                            return $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                        }
-                    );
-                    
-                    $barElement = [$barCode->name => $bar['code']];
-
-                    $merge = array_merge($p,$barElement);
-                    $itemsResults[$i] = $merge;
-
-                }
+        foreach($originalProducts as $p) {
+            $i++;
+            foreach($p['variationBarcodes'] as $bar) {
                
-           }
+                $barCode = null;
+
+                $barCode = $authHelper->processUnguarded(
+                    function () use ($barCodeRepo, $barCode,$bar) {
+                    
+                        return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                    }
+                );
+                
+                $barElement = [$barCode->name => $bar['code']];
+
+                $merge = array_merge($p,$barElement);
+                $itemsResults[$i] = $merge;
+            }               
+        }
 
            return $itemsResults;
-          // return $products->getResult();
     }
 
     // public function hasMandatoryMappings($mappings)
