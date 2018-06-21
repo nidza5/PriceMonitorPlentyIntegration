@@ -120,35 +120,26 @@ class ProductFilterService {
 
         foreach($originalProducts as $p) {
             $i++;
-            $tempArr = null;
-            
-            if(!$p['variationBarcodes'] || $p['variationBarcodes'] == null ) {
-                $itemsResults[$i] = $p;
-            } else {
-                foreach($p['variationBarcodes'] as $bar) {
+            $tempArr = null;            
+             $itemsResults[$i] = $p;  
+            foreach($p['variationBarcodes'] as $bar) {                
                 
-                    if(empty($bar) || $bar == null) {
-                        $itemsResults[$i] = $p;
-                    }
-                    else {
-                        $barCode = null;
-    
-                        $barCode = $authHelper->processUnguarded(
-                            function () use ($barCodeRepo, $barCode,$bar) {
-                            
-                                return $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                            }
-                        );
+                    $barCode = null;
+
+                    $barCode = $authHelper->processUnguarded(
+                        function () use ($barCodeRepo, $barCode,$bar) {
                         
-                        $barElement = [$barCode->name => $bar['code']];
-        
-                        $arrayForMerge = $tempArr == null ? $p : $tempArr;
-                        $merge = array_merge($arrayForMerge,$barElement);  
-                        $tempArr = $merge;              
-                        $itemsResults[$i] = $merge;
-                       
-                    }                    
-                }
+                            return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                        }
+                    );
+                    
+                    $barElement = [$barCode->name => $bar['code']];
+    
+                    $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                    $merge = array_merge($arrayForMerge,$barElement);  
+                    $tempArr = $merge;              
+                    $itemsResults[$i] = $merge;                     
+            
             }          
         }
 
