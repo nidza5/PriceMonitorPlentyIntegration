@@ -232,7 +232,8 @@
                 if($operator == 'AND') {
                     $finalFilteredProduct = $valuesFilteredProducts;
                 } else if($operator == 'OR'){
-                     $finalFilteredProduct += $valuesFilteredProducts;
+                    array_push($finalFilteredProduct,$valuesFilteredProducts);
+                    // $finalFilteredProduct += $valuesFilteredProducts;
                 }
             }
     
