@@ -23,6 +23,7 @@ use Plenty\Modules\Item\Search\Filter\SearchFilter;
 use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
+use Plenty\Modules\Item\Barcode\Models\Barcode;
 
 class ProductFilterService {
 
