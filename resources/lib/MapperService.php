@@ -28,12 +28,14 @@ class MapperServices implements MapperService
     private $attributesMapping;
     private $contract;
     private $productsForExport;
+    private $productAttributes;
 
-    public function __construct($attributesMappings,$contract,$productsForExport)
+    public function __construct($attributesMappings,$contract,$productsForExport,$productAttributes)
     {
         $this->attributesMapping = $attributesMappings;
         $this->contract = $contract;
-        $this->$productsForExport = $productsForExport;
+        $this->productsForExport = $productsForExport;
+        $this->productAttributes = $productAttributes;
     }
 
     /**
@@ -117,12 +119,15 @@ class MapperServices implements MapperService
         }
 
         //Attribute from plenty markets
+        $productAttributes = $this->productAttributes;
 
         foreach($mappings as $mapping) {
             $attributeCode = $mapping['attributeCode'];
             $priceMonitorCode = $mapping['priceMonitorCode'];
-             
-            $value = $products[$attributeCode];
+            
+            $columnNameInShopProduct = $productAttributes[$attributeCode];
+
+            $value = $products[$columnNameInShopProduct];
 
             if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
                 if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {

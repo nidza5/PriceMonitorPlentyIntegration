@@ -15,9 +15,15 @@ try {
    $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
    $productFilterRepo = SdkRestApi::getParam('productFilterRepo');
 
-   $products = SdkRestApi::getParam('productFilterRepo');
+   $products = SdkRestApi::getParam('products');
 
+   $productsAttributes = SdkRestApi::getParam('attributesFromPlenty');
+   $attributeMapping = SdkRestApi::getParam('attributeMapping');
+   $contract = SdkRestApi::getParam('contract');  
+  
    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+
+   PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
 
    $runnerService = new RunnerService($queueModel);
    return  $runnerService->runSync($queueName);

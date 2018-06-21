@@ -26,6 +26,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
+ use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 
  /**
   * Class SyncController
@@ -77,8 +79,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $attributesMappingRepo;
 
+        /**
+         *
+         * @var ContractRepositoryContract
+         */
+        
+        private $contractRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo)
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
@@ -87,6 +96,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->configInfoRepo = $configInfoRepo;
         $this->productFilterRepo = $productFilterRepo;     
         $this->attributesMappingRepo = $attributesMappingRepo; 
+        $this->contractRepo = $contractRepo;
     }
 
     
@@ -148,6 +158,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');
 
+        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,
             'queueName' => $queueName,
@@ -156,7 +168,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'filterType' => FilterType::EXPORT_PRODUCTS,
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter,
-            'products' => $filteredVariation             
+            'products' => $filteredVariation,
+            'attributesFromPlenty' => $attributesIdName,
+            'attributeMapping' => $attributeMapping,
+            'contract' => $contract              
         ]);   
          
         $result = ['successSync' => $syncRun];

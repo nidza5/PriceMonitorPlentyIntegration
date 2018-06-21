@@ -9,13 +9,11 @@ class ProductServices implements ProductService
 {
     
    private $contract;
-   private $mapperService;
    private $productForExport;
 
-    public function __construct($contract,$mapperService,$productForExport)
+    public function __construct($contract,$productForExport)
     {
         $this->contract = $contract;
-        $this->mapperService = $mapperService;
         $this->productForExport = $productForExport;
     }
 
@@ -31,6 +29,6 @@ class ProductServices implements ProductService
      */
     public function getProductIdentifier()
     {
-        return 'entity_id';
+        return 'id';
     }
 }
