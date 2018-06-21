@@ -67,8 +67,8 @@ class AttributeService {
        $systemAttr = [
             "VariationN" => "name",
             "VariationNo" => "number",
-            "GTIN13" => "GTIN 13 barcode",
-            "GTIN128" => "GTIN 128 barcode",
+            "GTIN13" => "GTIN 13",
+            "GTIN128" => "GTIN 128",
             "UPC" => "UPC barcode",
             "IBBN" => "ISBN barcode"
        ];      

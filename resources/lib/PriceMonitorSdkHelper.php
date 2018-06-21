@@ -202,9 +202,7 @@
                 $attribute = $exp['attribute'];
                 $condition = $exp['condition'];
     
-               $filterByColumn = $attributesFromPlenty[$attribute]; //ispisujuje Variation No
-    
-                // $nameColumnInVariation = self::$_columnNames[$attribute];
+               $filterByColumn = $attributesFromPlenty[$attribute]; 
     
                 $nameColumnInVariation = null;
                 $filteredProducts = array_filter($variationArray, function($value) use ($filterByColumn,$condition,$values) {
