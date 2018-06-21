@@ -1,6 +1,5 @@
 <?php
 
-require_once __DIR__ . '/MapperService.php';
 
 use Patagona\Pricemonitor\Core\Interfaces\ProductService;
 use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
