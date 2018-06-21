@@ -134,9 +134,9 @@ class ProductFilterService {
                         }
                     );
           
-                    $systemAtt = $barCode->getResult();
 
-                  $p[ $systemAtt['name']] = $bar['code'];
+                  $p[$barCode->name] = $bar['code'];
+                  $p['Nikola'] = $bar['Vasilejvic'];
 
                 }
                
