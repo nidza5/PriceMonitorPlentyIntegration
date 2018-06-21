@@ -227,6 +227,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // echo "products";
         // echo json_encode($finalResult);
               
+        $prodServ = pluginApp(ProductFilterService::class);
+
+         $categories =  $prodServ->getCategoryById(18);
+
+         echo json_encode( $categories );
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);

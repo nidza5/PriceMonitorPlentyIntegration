@@ -24,6 +24,7 @@ use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
 use Plenty\Modules\Item\Barcode\Models\Barcode;
+use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;   
 
 class ProductFilterService {
 
@@ -154,6 +155,22 @@ class ProductFilterService {
         $mappingCodes = array_unique(array_column($mappings, 'attribute_code'));
         $mappingCodes[] = 'tax_class_id';
         return $mappingCodes;
+    }
+
+    public function getCategoryById($id) 
+    {
+        $categoriesRepo = pluginApp(CategoryRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $categories = null;
+
+       $category = $categoriesRepo->search($id);
+       
+       $finalCategory = $category->getResult();
+
+        return $finalCategory;
+
     }
 
 }
