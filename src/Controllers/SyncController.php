@@ -156,10 +156,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
        
-        echo json_encode($filteredVariation);
+       // echo json_encode($filteredVariation);
 
-        $emailForConfig = $this->configInfoRepo->getConfig('email');
-        $passwordForConfig = $this->configInfoRepo->getConfig('password');
+        $emailObject = $this->configInfoRepo->getConfig('email');
+        $passwordObject = $this->configInfoRepo->getConfig('password');
+
+        $emailForConfig = $emailObject->value;
+        $passwordForConfig = $passwordObject->value;
 
         $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
