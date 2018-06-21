@@ -15,7 +15,7 @@ class ProductService implements ProductServiceInterface
         $this->productForExport = $productForExport;
     }
     
-    public function exportProducts($contractId, $filter, array $shopCodes = array())
+    public function exportProducts($contractId, Filter $filter, array $shopCodes = array())
     {
         return $this->productForExport;
     }
