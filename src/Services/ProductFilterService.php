@@ -121,32 +121,31 @@ class ProductFilterService {
         foreach($originalProducts as $p) {
             $i++;
             $tempArr = null;
-            $itemsResults[$i] = $p;
-            // $isVariationBarcodesNoExist = true;
-
-            // foreach($p['variationBarcodes'] as $bar) {
-                
-            //     $barCode = null;
-
-            //     $barCode = $authHelper->processUnguarded(
-            //         function () use ($barCodeRepo, $barCode,$bar) {
-                    
-            //             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
-            //         }
-            //     );
-                
-            //     $barElement = [$barCode->name => $bar['code']];
-
-            //     $arrayForMerge = $tempArr == null ? $p : $tempArr;
-            //     $merge = array_merge($arrayForMerge,$barElement);  
-            //     $tempArr = $merge;              
-            //     $itemsResults[$i] = $merge;
-            //     $isVariationBarcodesExist = false;
-            // }
             
-            // if($isVariationBarcodesExist) {
-            //     $itemsResults[$i] = $p;
-            // }
+            
+            if(empty($p['variationBarcodes'])) {
+                $itemsResults[$i] = $p;
+            } else {
+                foreach($p['variationBarcodes'] as $bar) {
+                
+                    $barCode = null;
+    
+                    $barCode = $authHelper->processUnguarded(
+                        function () use ($barCodeRepo, $barCode,$bar) {
+                        
+                            return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                        }
+                    );
+                    
+                    $barElement = [$barCode->name => $bar['code']];
+    
+                    $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                    $merge = array_merge($arrayForMerge,$barElement);  
+                    $tempArr = $merge;              
+                    $itemsResults[$i] = $merge;
+                    $isVariationBarcodesExist = false;
+                }
+            }          
         }
 
            return $itemsResults;
