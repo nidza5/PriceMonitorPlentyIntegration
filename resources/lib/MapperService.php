@@ -131,12 +131,14 @@ class MapperServices implements MapperService
 
             if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
                 if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {
-                    $value = $this->_priceCalculator->getCalculatedPrice(
+                    $value = $this->getCalculatedPrice(
                         $value,
                         $mapping['value'],
                         $mapping['operand']
                     );
                 }
+
+                $result[$pricemonitorCode] = $value;
             } else {
                 $result['tags'][] = array(
                     'key' => $pricemonitorCode,
