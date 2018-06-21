@@ -121,6 +121,9 @@ class ProductFilterService {
         foreach($originalProducts as $p) {
             $i++;
             $tempArr = null;
+            
+            $isVariationBarcodesExist = false;
+
             foreach($p['variationBarcodes'] as $bar) {
                 
                 $barCode = null;
@@ -138,7 +141,12 @@ class ProductFilterService {
                 $merge = array_merge($arrayForMerge,$barElement);  
                 $tempArr = $merge;              
                 $itemsResults[$i] = $merge;
-            }               
+                $isVariationBarcodesExist = true;
+            }
+            
+            if($isVariationBarcodesExist) {
+                $itemsResults[$i] = $p;
+            }
         }
 
            return $itemsResults;
