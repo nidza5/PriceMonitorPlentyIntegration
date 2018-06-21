@@ -24,6 +24,7 @@ try {
    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
+   PriceMonitorSdkHelper::registerProductService($contract,$products); 
 
    $runnerService = new RunnerService($queueModel);
    return  $runnerService->runSync($queueName);

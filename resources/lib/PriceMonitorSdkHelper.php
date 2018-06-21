@@ -5,6 +5,7 @@
  require_once __DIR__ . '/TransactionStorage.php';
  require_once __DIR__ . '/ConfigService.php';
  require_once __DIR__ . '/MapperService.php';
+ require_once __DIR__ . '/ProductService.php';
  
 //  require_once $_SERVER['DOCUMENT_ROOT'] . '/PriceMonitorPlentyIntegration/src/Repositories/ProductFilterRepository.php';
 
@@ -97,10 +98,10 @@
         ServiceRegister::registerMapperService(new MapperService($attributesMappings,$contract,$productsForExport,$productAttributes));
     }
 
-    // public static function registerProductService($contract,$productForExport) 
-    // {
-    //     ServiceRegister::registerProductService(new ProductExporter());
-    // }
+    public static function registerProductService($contract,$productForExport) 
+    {
+        ServiceRegister::registerProductService(new ProductServices($contract,$productForExport));
+    }
 
     public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo,$emailForConfig,$passwordForConfig)
     {
