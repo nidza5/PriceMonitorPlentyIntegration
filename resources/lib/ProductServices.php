@@ -7,8 +7,8 @@ use Patagona\Pricemonitor\Core\Sync\Filter\Filter;
 class ProductServices implements ProductService
 {
     
-   private $contract;
-   private $productForExport;
+//    private $contract;
+//    private $productForExport;
 
     // public function __construct($contract,$productForExport)
     // {
