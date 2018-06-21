@@ -207,8 +207,8 @@
                 $nameColumnInVariation = null;
                 $filteredProducts = array_filter($variationArray, function($value) use ($filterByColumn,$condition,$values) {
                     if($condition == "equal") {
-                         if(isset($value[$filterByColumn])) 
-                            return $value[$filterByColumn] == $values[0];
+                        if(isset($value[$filterByColumn])) 
+                        return $value[$filterByColumn] == $values[0];
                     } else if($condition == "not_equal") {
                         return $value[$filterByColumn] != $values[0];
                     }
@@ -220,6 +220,10 @@
                         return $value[$filterByColumn] >= $values[0];
                     } else if($condition == 'less_or_equal') {
                         return $value[$filterByColumn] <= $values[0];
+                    } else if($condition == 'contains') {
+                        return (stripos($value[$filterByColumn], $values[0]) !== false);
+                    } else if($condition == 'contains_not') {
+                        return (stripos($value[$filterByColumn], $values[0]) === false);
                     }                    
                 });
 
