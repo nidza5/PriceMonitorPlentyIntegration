@@ -122,28 +122,32 @@ class ProductFilterService {
             $i++;
             $tempArr = null;
             
-            
             if(!$p['variationBarcodes']) {
                 $itemsResults[$i] = $p;
             } else {
                 foreach($p['variationBarcodes'] as $bar) {
                 
-                    $barCode = null;
+                    if(empty($bar)) {
+                        $itemsResults[$i] = $p;
+                    }
+                    else {
+                        $barCode = null;
     
-                    $barCode = $authHelper->processUnguarded(
-                        function () use ($barCodeRepo, $barCode,$bar) {
+                        $barCode = $authHelper->processUnguarded(
+                            function () use ($barCodeRepo, $barCode,$bar) {
+                            
+                                return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                            }
+                        );
                         
-                            return $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                        }
-                    );
-                    
-                    $barElement = [$barCode->name => $bar['code']];
-    
-                    $arrayForMerge = $tempArr == null ? $p : $tempArr;
-                    $merge = array_merge($arrayForMerge,$barElement);  
-                    $tempArr = $merge;              
-                    $itemsResults[$i] = $merge;
-                    $isVariationBarcodesExist = false;
+                        $barElement = [$barCode->name => $bar['code']];
+        
+                        $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                        $merge = array_merge($arrayForMerge,$barElement);  
+                        $tempArr = $merge;              
+                        $itemsResults[$i] = $merge;
+                        $isVariationBarcodesExist = false;   
+                    }                    
                 }
             }          
         }
