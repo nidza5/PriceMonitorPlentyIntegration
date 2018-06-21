@@ -173,6 +173,7 @@
             else if($group->getOperator() == 'OR')            
                 array_push($finalProductCollection,$productCollection);
        }
+       
 
          return $finalProductCollection;
     }
@@ -210,11 +211,16 @@
                         return $value['number'] <= $values[0];
                     }                    
                 });
+
+               
+                if($filteredProducts != null) {
+                    $valuesFilteredProducts = array_values($filteredProducts);
+                }
     
                 if($operator == 'AND') {
-                    $finalFilteredProduct = $filteredProducts;
+                    $finalFilteredProduct = $valuesFilteredProducts;
                 } else if($operator == 'OR'){
-                     $finalFilteredProduct += $filteredProducts;
+                     $finalFilteredProduct += $valuesFilteredProducts;
                 }
             }
     

@@ -142,18 +142,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributesFromPlenty' => $attributesIdName            
         ]);     
 
-        $ritit = new RecursiveIteratorIterator(new RecursiveArrayIterator($myArray));
-        $result = array();
-        foreach ($ritit as $leafValue) {
-            $keys = array();
-            foreach (range(0, $ritit->getDepth()) as $depth) {
-                $keys[] = $ritit->getSubIterator($depth)->key();
-            }
-            $result[ join('.', $keys) ] = $leafValue;
-        }
+        
 
         echo $result;
-        echo json_encode( $result);
+        echo json_encode( $filteredVariation);
 
         $emailForConfig = $this->configInfoRepo->getConfig('email');
         $passwordForConfig = $this->configInfoRepo->getConfig('password');

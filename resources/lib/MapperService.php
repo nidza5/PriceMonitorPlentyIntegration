@@ -19,11 +19,13 @@ class MapperServices implements MapperService
 
     private $attributesMapping;
     private $contract;
+    private $productsForExport;
 
-    public function __construct($attributesMappings,$contract)
+    public function __construct($attributesMappings,$contract,$productsForExport)
     {
         $this->attributesMapping = $attributesMappings;
         $this->contract = $contract;
+        $this->$productsForExport = $productsForExport;
     }
 
     /**
@@ -70,7 +72,8 @@ class MapperServices implements MapperService
 
     public function convertToPricemonitor($contractId, $shopProduct)
     {
-        $result = array('productId' => $shopProduct['entity_id']);
+        $products = $this->productsForExport;
+        $result = array('productId' => $products['id']);
         $mappings = $this->attributesMapping;
         $contract = $this->contract;
 
@@ -78,44 +81,7 @@ class MapperServices implements MapperService
             return array();
         }
 
-        $productAttributes = $this->_attributeMapperService->getProductAttributesCodeTypeHashMap($store->getId());
-
-        /** @var Patagona_Pricemonitor_Model_AttributeMapping $mapping */
-        foreach ($mappings as $mapping) {
-            $attributeCode = $mapping->getAttributeCode();
-            $pricemonitorCode = $mapping->getPricemonitorCode();
-
-            if (!array_key_exists($attributeCode, $productAttributes)) {
-                throw new \Exception('Attribute %s is not found in the shop.', $attributeCode);
-            }
-
-            $value = $shopProduct[$attributeCode];
-            if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
-                if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {
-                    $value = $this->_priceCalculator->getCalculatedPrice(
-                        $value,
-                        $mapping->getValue(),
-                        $mapping->getOperand()
-                    );
-                }
-
-                if ($pricemonitorCode === 'referencePrice') {
-                    /**
-                     * Product object must be mocked, because core tax calculation requires an object not an array
-                     * @var $product Mage_Catalog_Model_Product
-                     */
-                    $product = Mage::getModel('catalog/product')->addData($shopProduct);
-                    $value = $this->_priceCalculator->getExportPrice($value, $product, $store);
-                }
-
-                $result[$pricemonitorCode] = $value;
-            } else {
-                $result['tags'][] = array(
-                    'key' => $pricemonitorCode,
-                    'value' => (string)$value
-                );
-            }
-        }
+        
 
         return $result;
     }
