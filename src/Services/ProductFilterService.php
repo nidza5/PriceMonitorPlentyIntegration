@@ -97,6 +97,10 @@ class ProductFilterService {
 
         $repository = pluginApp(VariationSearchRepositoryContract::class);
         $barCodeRepo = pluginApp(BarcodeRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+           
             
         // $repository->setFilters([
         //         'barcode' => '555'
@@ -116,12 +120,25 @@ class ProductFilterService {
 
            $originalProducts = $products->getResult();
 
+
            foreach($originalProducts as &$p) {
 
                 foreach($p['variationBarcodes'] as $bar) {
-                   
-                  $barCode = $barCodeRepo->findBarcodeById($bar['barcodeId']);
-                  $p[$barCode->name] = $bar['code'];
+
+                    $barCode = null;
+
+                    $salesPrices = $authHelper->processUnguarded(
+                        function () use ($barCodeRepo, $barCode) {
+                        
+                            return $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                        }
+                    );
+        
+                   $resultBarCode= $barCode->name;
+
+                   echo $resultBarCode;
+                  
+                //  $p[$barCode->name] = $bar['code'];
 
                 }
                
