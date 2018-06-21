@@ -22,6 +22,7 @@ use Plenty\Modules\Item\Search\Filter\ClientFilter;
 use Plenty\Modules\Item\Search\Filter\SearchFilter;
 use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
+use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
 
 class ProductFilterService {
 
@@ -62,6 +63,13 @@ class ProductFilterService {
      * @var ItemDataLayerRepositoryContract
      */
     private $itemDataLayerRepo;
+
+    /**
+     *
+     * @var BarcodeRepositoryContract
+     */
+    private $barCodeRepository;
+    
     
 
      /**
@@ -71,12 +79,13 @@ class ProductFilterService {
      * @param PropertyRepositoryContract $propRepo
      * @param AttributeRepositoryContract $attributeRepo
      */
-    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository,ItemDataLayerRepositoryContract $itemDataLayerRepo )
+    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository,ItemDataLayerRepositoryContract $itemDataLayerRepo,BarcodeRepositoryContract $barCodeRepository)
     {
         $this->propertyRepository = $propertyRepository;
         $this->attributeRepository = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;
         $this->itemDataLayerRepo = $itemDataLayerRepo;
+        $this->barCodeRepository = $barCodeRepository;
     }
 
     public function getAllVariations()
@@ -86,6 +95,7 @@ class ProductFilterService {
         // }
 
         $repository = pluginApp(VariationSearchRepositoryContract::class);
+        $barCodeRepo = pluginApp(BarcodeRepositoryContract::class);
             
         // $repository->setFilters([
         //         'barcode' => '555'
@@ -103,7 +113,21 @@ class ProductFilterService {
 
            $products = $repository->search();
 
-           return $products->getResult();
+           $originalProducts = $products->getResult();
+
+           foreach($originalProducts as &$p) {
+
+                foreach($p['variationBarcodes'] as $bar) {
+                   
+                  $barCode = $barCodeRepo->findBarcodeById($bar['barcodeId']);
+                  $p[$barCode['name']] = $bar['code'];
+
+                }
+               
+           }
+
+           return $originalProducts;
+          // return $products->getResult();
     }
 
     // public function hasMandatoryMappings($mappings)
