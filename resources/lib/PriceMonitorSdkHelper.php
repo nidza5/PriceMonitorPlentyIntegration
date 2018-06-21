@@ -2,7 +2,7 @@
 
  require_once __DIR__ . '/PriceMonitorHttpClient.php';
  require_once __DIR__ . '/FilterStorage.php';
- require_once __DIR__ . '/ProductService.php';
+//  require_once __DIR__ . '/ProductService.php';
  require_once __DIR__ . '/TransactionStorage.php';
  require_once __DIR__ . '/ConfigService.php';
  require_once __DIR__ . '/MapperService.php';
