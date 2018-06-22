@@ -20,11 +20,18 @@ try {
    $productsAttributes = SdkRestApi::getParam('attributesFromPlenty');
    $attributeMapping = SdkRestApi::getParam('attributeMapping');
    $contract = SdkRestApi::getParam('contract');  
+
+   $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
   
    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
    PriceMonitorSdkHelper::registerProductService($contract,$products); 
+
+   PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
+
+   $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
+   
 
    $runnerService = new RunnerService($queueModel);
    return  $runnerService->runSync($queueName);

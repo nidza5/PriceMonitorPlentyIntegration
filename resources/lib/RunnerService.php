@@ -72,8 +72,8 @@ class RunnerService
         $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
 
         $runner = new Runner($queueName);
-        $runner->run();
-         return true;
+        return $runner->run();
+        
         // $this->runAsync($queueName);
         // if ($queueName === self::DEFAULT_QUEUE_NAME) {
         //     $this->runAsync(self::STATUS_CHECKING_QUEUE_NAME);

@@ -104,6 +104,11 @@
         ServiceRegister::registerProductService(new ProductService($contract,$productForExport));
     }
 
+    public static function registerTransactionHistotyStorage($transactionHistoryDetailsRecord = null,$totalDetailedRecords = 0,$transactionHistoryRecords = null,$totalHistoryRecords = 0,$savedTransactionHistory = null)
+    {
+        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords,$savedTransactionHistory));
+    }
+
     public static function saveFilter($filterData, $filterType, $pricemonitorId,$productFilterRepo,$emailForConfig,$passwordForConfig)
     {
 
@@ -355,7 +360,7 @@
 
     public static function getTransHistoryDetails($pricemonitorId, $masterId, $limit, $offset,$transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords, $totalHistoryRecords)
     {
-        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords));
+        ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage($transactionHistoryDetailsRecord,$totalDetailedRecords,$transactionHistoryRecords,$totalHistoryRecords,null));
        
         $transactionHistory = new TransactionHistory();
 

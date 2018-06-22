@@ -183,24 +183,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
         
-         echo "jos jednom";
-         echo json_encode($savedTransactionMasterHistory);
 
-        // $syncRun =  $this->sdkService->call("runSync", [
-        //     'queueModel' => $queue,
-        //     'queueName' => $queueName,
-        //     'emailForConfig' =>  $emailForConfig,
-        //     'passwordForConfig' =>  $passwordForConfig,
-        //     'filterType' => FilterType::EXPORT_PRODUCTS,
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'productFilterRepo' => $filter,
-        //     'products' => $filteredVariation,
-        //     'attributesFromPlenty' => $attributesIdName,
-        //     'attributeMapping' => $attributeMapping,
-        //     'contract' => $contract              
-        // ]);   
+        //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
+        //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
+        //  ]);
+
+        $syncRun =  $this->sdkService->call("runSync", [
+            'queueModel' => $queue,
+            'queueName' => $queueName,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig,
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'products' => $filteredVariation,
+            'attributesFromPlenty' => $attributesIdName,
+            'attributeMapping' => $attributeMapping,
+            'contract' => $contract,
+            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
+        ]);   
          
-        // $result = ['successSync' => $syncRun];
-        // return  json_encode($result);
+        $result = ['successSync' => $syncRun];
+        return  json_encode($result);
     }
  }

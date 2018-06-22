@@ -19,13 +19,16 @@ class TransactionStorage implements TransactionHistoryStorage
     private $totalDetailedRecords;
     private $transactionHistoryRecords;
     private $totalHistoryRecords;
+    private $savedTransactionHistory;
 
-    public function __construct($transactionHistoryDetailsRecord = null,$totalDetailedRecords = 0,$transactionHistoryRecords = null,$totalHistoryRecords = 0)
+    public function __construct($transactionHistoryDetailsRecord = null,$totalDetailedRecords = 0,$transactionHistoryRecords = null,$totalHistoryRecords = 0,$savedTransactionHistory = null,$savedTransactionHistoryDetail = null)
     {
         $this->transactionHistoryDetailsRecord = $transactionHistoryDetailsRecord;
         $this->totalDetailedRecords = $totalDetailedRecords;
         $this->transactionHistoryRecords = $transactionHistoryRecords;
         $this->totalHistoryRecords = $totalHistoryRecords;
+        $this->savedTransactionHistory = $savedTransactionHistory;
+        $this->savedTransactionHistoryDetail = $savedTransactionHistoryDetail;
     }
 
 
@@ -167,7 +170,10 @@ class TransactionStorage implements TransactionHistoryStorage
 
     public function saveTransactionHistory(TransactionHistoryMaster $transactionMaster, $transactionDetails = array())
     {
+        $savedMasterTransaction =  $this->savedTransactionHistory;
+        $savedTransactionDetails = $this->savedTransactionHistoryDetail; 
 
+        return (new TransactionHistoryStorageDTO($savedMasterTransaction, $savedTransactionDetails)); 
     }
 
 
