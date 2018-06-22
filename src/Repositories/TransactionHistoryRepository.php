@@ -47,7 +47,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
     public function getTransactionHistoryMaster($id,$priceMonitorContractId,$type) 
     {
         $databaseTransactionHistory = pluginApp(TransactionHistory::class);
-        $transactionOriginalCollection = $databaseTransactionHistory->query(TransactionHistory::class)->where('id', '=', $id)->where('uniqueIdentifier', '=', $uniqueIdentifier)->where('$priceMonitorContractId', '=', $priceMonitorContractId)->where('type', '=', $type)->get();
+        $transactionOriginalCollection = $databaseTransactionHistory->query(TransactionHistory::class)->where('id', '=', $id)->where('$priceMonitorContractId', '=', $priceMonitorContractId)->where('type', '=', $type)->get();
         
         return $transactionOriginalCollection;
     }
