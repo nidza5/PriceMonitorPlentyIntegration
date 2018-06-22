@@ -16,7 +16,7 @@ interface TransactionHistoryRepositoryContract
      * @param array $data
      * @return void
      */
-    public function saveTransactionHistory(array $data);
+    public function saveTransactionHistoryMaster(array $data);
 
     public function getAllTransactionHistory();
 

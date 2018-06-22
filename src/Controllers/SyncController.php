@@ -28,6 +28,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
  use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
+ use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
 
  /**
   * Class SyncController
@@ -82,12 +84,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         /**
          *
          * @var ContractRepositoryContract
-         */
-        
+         */        
         private $contractRepo;
 
+        /**
+         *
+         * @var TransactionHistoryRepositoryContract
+         */
+        private $transactionHistoryRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo)
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
@@ -97,6 +103,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->productFilterRepo = $productFilterRepo;     
         $this->attributesMappingRepo = $attributesMappingRepo; 
         $this->contractRepo = $contractRepo;
+        $this->transactionHistoryRepo = $transactionHistoryRepo;  
     }
 
     
@@ -172,23 +179,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'contractId' => $priceMonitorId
         ]);
 
-            echo  json_encode($startTransaction); 
+        $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
 
-        // $syncRun =  $this->sdkService->call("runSync", [
-        //     'queueModel' => $queue,
-        //     'queueName' => $queueName,
-        //     'emailForConfig' =>  $emailForConfig,
-        //     'passwordForConfig' =>  $passwordForConfig,
-        //     'filterType' => FilterType::EXPORT_PRODUCTS,
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'productFilterRepo' => $filter,
-        //     'products' => $filteredVariation,
-        //     'attributesFromPlenty' => $attributesIdName,
-        //     'attributeMapping' => $attributeMapping,
-        //     'contract' => $contract              
-        // ]);   
+        $syncRun =  $this->sdkService->call("runSync", [
+            'queueModel' => $queue,
+            'queueName' => $queueName,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig,
+            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'products' => $filteredVariation,
+            'attributesFromPlenty' => $attributesIdName,
+            'attributeMapping' => $attributeMapping,
+            'contract' => $contract              
+        ]);   
          
-        // $result = ['successSync' => $syncRun];
-        // return  json_encode($result);
+        $result = ['successSync' => $syncRun];
+        return  json_encode($result);
     }
  }

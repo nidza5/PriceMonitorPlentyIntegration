@@ -15,9 +15,32 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
      * @param array $data
      * @return void
      */
-    public function saveTransactionHistory(array $data)
+    public function saveTransactionHistoryMaster(array $data)
     {
+        if($data == null)
+            return;
+
+        $database = pluginApp(DataBase::class);
+        $transactionHistory = $database->query(TransactionHistory::class)->get();
         
+        if($data['uniqueIdentifier'] != null) {
+            $transactionHistory->uniqueIdentifier = $data['uniqueIdentifier'];            
+        }    
+        
+        if($data['time'] != null) {
+            $transactionHistory->time = $data['time']; 
+        }
+
+        $transactionHistory->status = $data['status']; 
+        $transactionHistory->note = $data['note']; 
+        $transactionHistory->totalCount = $data['totalCount']; 
+        $transactionHistory->successCount = $data['successCount']; 
+        $transactionHistory->failedCount = $data['failedCount']; 
+        $transactionHistory->type = $data['type']; 
+        $transactionHistory->priceMonitorContractId = $data['contractId']; 
+
+        $database->save($transactionHistory);
+
     }
 
     public function getAllTransactionHistory() 
