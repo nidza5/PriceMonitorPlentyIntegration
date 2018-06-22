@@ -183,8 +183,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
         
-         echo "saved transaction history master";
-         echo json_encode(  $savedTransactionMasterHistory);
+         
 
         //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
@@ -204,8 +203,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'contract' => $contract,
             "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
         ]);   
+
+        echo "saved transaction history master";
+         echo json_encode(   $syncRun);
          
-        $result = ['successSync' => $syncRun];
-        return  json_encode($result);
+        // $result = ['successSync' => $syncRun];
+        // return  json_encode($result);
     }
  }
