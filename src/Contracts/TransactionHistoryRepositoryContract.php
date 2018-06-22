@@ -26,4 +26,7 @@ interface TransactionHistoryRepositoryContract
 
     public function getTransactionHistoryMaster($id,$priceMonitorContractId,$type);
 
+    public function getTransactionHistoryMasterByCriteria( $contractId,$type, $transactionHistoryMasterId = null, $uniqueIdentifier = null);
+
+    public function updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,$type, $transactionUniqueIdentifier,$allTransactionsDetailsInProgress);
 }

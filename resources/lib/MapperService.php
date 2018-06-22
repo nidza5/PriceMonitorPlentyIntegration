@@ -30,7 +30,7 @@ class MapperServices implements MapperService
     private $productsForExport;
     private $productAttributes;
 
-    public function __construct($attributesMappings,$contract,$productsForExport,$productAttributes)
+    public function __construct($attributesMappings = null,$contract = null,$productsForExport,$productAttributes = null)
     {
         $this->attributesMapping = $attributesMappings;
         $this->contract = $contract;

@@ -20,6 +20,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
+ use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
  use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
  use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
@@ -30,6 +31,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
  use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
+ use  PriceMonitorPlentyIntegration\Contracts\TransactionDetailsRepositoryContract;
+ use  PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
 
  /**
   * Class SyncController
@@ -93,7 +96,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $transactionHistoryRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo)
+       
+        /**
+         *
+         * @var  TransactionDetailsRepositoryContract
+         */
+        private $transactionDetailsHistoryRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,TransactionDetailsRepositoryContract $transactionDetailsHistoryRepo)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
@@ -103,7 +113,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->productFilterRepo = $productFilterRepo;     
         $this->attributesMappingRepo = $attributesMappingRepo; 
         $this->contractRepo = $contractRepo;
-        $this->transactionHistoryRepo = $transactionHistoryRepo;  
+        $this->transactionHistoryRepo = $transactionHistoryRepo; 
+        $this->transactionDetailsHistoryRepo = $transactionDetailsHistoryRepo; 
     }
 
     
@@ -201,7 +212,53 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'contract' => $contract,
             "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
         ]);   
-         
+
+        if( $syncRun != null)
+        {
+            foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
+
+                if($sync != null && $sync != -1) {
+                    
+                    if($savedTransactionMasterHistory['id'] != null) {
+                         $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract["priceMonitorId"],FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
+                         $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
+                         $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
+                    
+                    } else {
+
+                        $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract["priceMonitorId"],FilterType::EXPORT_PRODUCTS,null,$sync);
+                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],null,$sync);
+                        $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],null,$sync,TransactionStatus::IN_PROGRESS);
+                    }
+
+                    $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
+                    $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
+                    
+                    $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
+                        'queueModel' => $queue,
+                        'exportTaskId' => $sync,
+                        'contractId' => $contract["priceMonitorId"]             
+                    ]); 
+
+                    if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
+                    {
+                        return [
+                            'Message' => $enqueueStatusCheckerJob['Message']
+                        ];
+                    } 
+
+                    if($enqueueStatusCheckerJob != null)
+                        $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+                }             
+            }
+
+            foreach($syncRun['dequeus'] as $dequeu) 
+              $this->$queueRepo->deleteQueue($dequeu['QueueName'],$dequeu['StorageModel']);
+
+            foreach($syncRun['release'] as $release)
+                $this->$queueRepo->updateReservationTime($release['QueueName'],$release['StorageModel']);
+        }      
+        
         $result = ['successSync' => $syncRun];
         return  json_encode($result);
     }

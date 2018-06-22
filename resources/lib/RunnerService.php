@@ -9,6 +9,8 @@ use Patagona\Pricemonitor\Core\Sync\PriceImport\Job as PriceImportJob;
 use Patagona\Pricemonitor\Core\Sync\ProductExport\Job as ProductExportJob;
 use Patagona\Pricemonitor\Core\Sync\Queue\Queue;
 use Patagona\Pricemonitor\Core\Sync\Runner\Runner;
+use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryDetail;
+use Patagona\Pricemonitor\Core\Sync\StatusCheck\Job as StatusCheckJob;
 
 class RunnerService
 {
@@ -28,7 +30,7 @@ class RunnerService
      */
     protected static $_debugKey = '';
 
-    public function __construct($queueModel)
+    public function __construct($queueModel=null)
     {
         ServiceRegister::registerQueueStorage(new QueueStorage($queueModel));
         ServiceRegister::registerTransactionHistoryStorage(new TransactionStorage());
@@ -47,6 +49,8 @@ class RunnerService
         return  $queue->enqueue(new ProductExportJob($pricemonitorContractId));
     }
 
+
+
     /**
      * Creates new import price job.
      *
@@ -59,6 +63,12 @@ class RunnerService
         $queue->enqueue(new PriceImportJob($pricemonitorContractId));
     }
 
+    private function enqueueStatusCheckerJob($exportTaskId,$contractId)
+    {
+        $queue = new Queue('StatusChecking');
+        $queue->enqueue(new StatusCheckJob($contractId, $exportTaskId));
+    }
+
     /**
      * Runs sync request.
      *
@@ -67,17 +77,64 @@ class RunnerService
      * @return void
      * @throws Exception
      */
-    public function runSync($queueName = null)
+    public function runSync($queueName = null,$products,$transactionId,$priceMonitorId)
     {
         $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
 
         $runner = new Runner($queueName);
-        return $runner->run();
+        $arraysResultRun =  $runner->run();
+
+        $productsForExport = null;
+        if($products != null) {
+            $mapperService = new MapperServices(null,null,$products,null);
+            $productsForExport =  $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
+        }
+
+        $transactionHistoryDetailsForSaving = createTransactionDetails($transactionId, $productsForExport);
         
+         $returnArray = [
+             "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
+             "transactionHistoryDetailsForSaving" => $transactionHistoryDetailsForSaving,
+             "dequeus" => $arraysResultRun["Dequeu"],
+             "release" => $arraysResultRun["Release"]
+         ];
+
+         return $returnArray 
+         
+         #
         // $this->runAsync($queueName);
         // if ($queueName === self::DEFAULT_QUEUE_NAME) {
         //     $this->runAsync(self::STATUS_CHECKING_QUEUE_NAME);
         // }
+    }
+
+    private function createTransactionDetails($transactionId, $products)
+    {
+        /** @var TransactionHistoryDetail[] $transactionDetails */
+        $transactionDetails = [];
+        
+        foreach ($products as $product) {
+            /** @var TransactionHistoryDetail $transactionDetail */
+            $transactionDetail = new TransactionHistoryDetail(
+                TransactionHistoryStatus::IN_PROGRESS, 
+                new \DateTime(),
+                null,
+                $transactionId, 
+                null,
+                isset($product['productId']) ? $product['productId'] : null,
+                isset($product['gtin']) ? $product['gtin'] : null,
+                isset($product['name']) ? $product['name']: null,
+                isset($product['referencePrice']) ? (float)$product['referencePrice'] : null,
+                isset($product['minPriceBoundary']) ? (float)$product['minPriceBoundary'] : null,
+                isset($product['maxPriceBoundary']) ? (float)$product['maxPriceBoundary'] : null
+            );
+
+            $transactionDetail->setUpdatedInShop(false);
+
+            $transactionDetails[] = $transactionDetail; 
+        }
+
+        return $transactionDetails;
     }
 
     /**

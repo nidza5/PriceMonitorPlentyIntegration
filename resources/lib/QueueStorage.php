@@ -148,16 +148,6 @@ class QueueStorage implements Storage
     protected function unsetStorageModel($queueName, $storageModel)
     {
         
-        // $queueModel = Mage::getModel('pricemonitor/queue');
-        // /** @var Patagona_Pricemonitor_Model_Queue $queue */
-        // $queue = $queueModel->getQueueByIdAndName($storageModel->getId(), $queueName);
-
-        // if (!$queue->getId()) {
-        //     return false;
-        // }
-
-        // $queue->delete();
-        // return true;
     }
 
     /**

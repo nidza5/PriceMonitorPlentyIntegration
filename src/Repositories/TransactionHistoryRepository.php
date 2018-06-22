@@ -6,6 +6,8 @@ use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
 use PriceMonitorPlentyIntegration\Models\TransactionHistory;
+use PriceMonitorPlentyIntegration\Constants\FilterType;
+use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
  
 class TransactionHistoryRepository implements TransactionHistoryRepositoryContract
 {
@@ -80,4 +82,77 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
         return $transactionHistoryCount;
 
     }
+
+    public function getTransactionHistoryMasterByCriteria($contractId,$type, $transactionHistoryMasterId = null, $uniqueIdentifier = null) {
+        $database = pluginApp(DataBase::class);
+
+        if($transactionHistoryMasterId == null) 
+            $transactionHistoryMaster = $database->query(TransactionHistory::class)->where('priceMonitorContractId', '=', $contractId)->where('uniqueIdentifier', '=', $uniqueIdentifier)->where('type', '=', $type)->get();
+        else 
+            $transactionHistoryMaster = $database->query(TransactionHistory::class)->where('priceMonitorContractId', '=', $contractId)->where('uniqueIdentifier', '=', $uniqueIdentifier)->where('type', '=', $type)->where('id', '=', $transactionHistoryMasterId)->get();
+        
+        return $transactionHistoryMaster;
+
+    }
+
+    public function updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,$type, $transactionUniqueIdentifier,$allTransactionsDetailsInProgress)
+    {
+        $failedCountBeforeUpdate = $transactionHistoryMaster["failedCount"];
+        $filteredOutCount = 0;
+
+        $database = pluginApp(DataBase::class);
+
+        foreach ($transactionDetails as $transactionDetail) {
+
+            $master = $this->getTransactionById($transactionDetail["id"]);
+
+            if ($transactionDetail["id"] === null) {
+                $master->totalCount = $transactionHistoryMaster["totalCount"]+ 1;
+                $transactionAlreadyCounted = false;
+            } else {
+                foreach ($allTransactionDetailsInProgress as $savedTransactionDetail) {
+                    if ($savedTransactionDetail->getId() === $transactionDetail->getId()) {
+                        $transactionAlreadyCounted =  false;
+                    }
+                }
+        
+                $transactionAlreadyCounted = true;
+            }
+
+            if ($transactionDetail["status"] === TransactionHistoryStatus::FINISHED &&
+                !$transactionAlreadyCounted
+            ) {
+                $master->successCount = $transactionHistoryMaster["successCount"] + 1;
+            } else if ($transactionDetail["status"] === TransactionHistoryStatus::FAILED &&
+                !$transactionAlreadyCounted
+            ) {
+                $master->failedCount = $transactionHistoryMaster["failedCount"]+ 1;
+            } else if ($transactionDetail["status"]  === TransactionHistoryStatus::FILTERED_OUT &&
+                !$transactionAlreadyCounted
+            ) {
+                $filteredOutCount++;
+            }
+        }
+
+        if ($failedCountBeforeUpdate < $transactionHistoryMaster["failedCount"]) {
+            $transactionEntityName = ($type === FilterType::IMPORT_PRICES) ? 'prices' : 'products';
+            $newNote = $transactionHistoryMaster["failedCount"] . ' of ' .
+                $transactionHistoryMaster["totalCount"] . ' ' . $transactionEntityName  . ' failed.';
+
+              $master->note = $newNote;              
+        }
+
+        if ($filteredOutCount > 0) {
+            $newNote = $filteredOutCount . ' of ' .
+                $transactionHistoryMaster["totalCount"] . ' prices ' . ' filtered out.';
+            $master->note = $newNote;
+        }
+
+        if (!empty($uniqueIdentifier) && $transactionHistoryMaster["uniqueIdentifier"] === null) {
+            $master->uniqueIdentifier = $uniqueIdentifier;
+        }
+
+        $database->save($master);
+    }
+
 }

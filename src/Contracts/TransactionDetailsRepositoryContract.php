@@ -21,4 +21,9 @@ interface TransactionDetailsRepositoryContract
     public function getAllTransactionDetails();
 
     public function getTransactionHistoryDetailsCount($masterId);
+
+    public function getTransactionHistoryDetailsByFilters($contractId,$transactionId,$uniqueIdentifier,$status);
+
+    public function updateTransactionHistoryDetailsState( $transactionDetails, $type,$transactionUniqueIdentifier,$failedItems);
+    
 }

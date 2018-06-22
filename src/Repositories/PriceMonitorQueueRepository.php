@@ -76,4 +76,27 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
             $database->delete($con);
         }
     }
+
+    public function deleteQueue($queueName, array $storageModel)
+    {
+        $database = pluginApp(DataBase::class);
+        
+        $queue = $this->getQueueByIdName($storageModel["id"],$queueName);
+
+        if($queue != null)
+             $database->delete($queue);
+    }
+
+    public function updateReservationTime($queueName, array $storageModel)
+    {
+        $database = pluginApp(DataBase::class);
+        
+        $queue = $this->getQueueByIdName($storageModel["id"],$queueName);
+
+        if($queue != null) {
+            $queue->reservationTime = null;
+            $database->save($queue);
+        }
+
+    }
 }

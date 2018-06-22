@@ -34,7 +34,7 @@ try {
    
 
    $runnerService = new RunnerService($queueModel);
-   return  $runnerService->runSync($queueName);
+   return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'],$contract['priceMonitorId']);
 
 } catch(\Exception $ex) {
     
