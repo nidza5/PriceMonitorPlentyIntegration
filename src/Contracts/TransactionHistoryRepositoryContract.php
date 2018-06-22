@@ -24,6 +24,6 @@ interface TransactionHistoryRepositoryContract
 
     public function getTransactionById($id);
 
-    public function getTransactionHistoryMaster($id,$uniqueIdentifier,$priceMonitorContractId,$type);
+    public function getTransactionHistoryMaster($id,$priceMonitorContractId,$type);
 
 }
