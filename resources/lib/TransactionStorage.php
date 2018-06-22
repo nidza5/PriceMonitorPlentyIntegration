@@ -145,10 +145,22 @@ class TransactionStorage implements TransactionHistoryStorage
             TransactionHistoryType::EXPORT_PRODUCTS,
             TransactionHistoryStatus::IN_PROGRESS,
             null,
-            null
+            null            
         );
 
-        return ['transactionHistoryMaster' => $transactionHistoryMaster];
+        $transactionHistoryModel = [
+            "uniqueIdentifier" =>  $transactionHistoryMaster->getUniqueIdentifier(),
+            "time" => $transactionHistoryMaster->getTime(),
+            "status" => $transactionHistoryMaster->getStatus(),
+            "note" => $transactionHistoryMaster->getNote(),
+            "totalCount" => $transactionHistoryMaster->getTotalCount(),
+            "successCount" => $transactionHistoryMaster->getSuccessCount(),
+            "failedCount" => $transactionHistoryMaster->getFailedCount(),
+            "type" => $transactionHistoryMaster->getType(),
+            "contractId" => $contractId
+        ];
+
+        return ['transactionHistoryMaster' => $transactionHistoryModel];
 
     }
 
