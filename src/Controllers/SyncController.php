@@ -179,9 +179,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'contractId' => $priceMonitorId
         ]);
 
-            echo json_encode($startTransaction);
+           
 
-        // $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+         $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+        
+         echo json_encode($savedTransactionMasterHistory);
 
         // $syncRun =  $this->sdkService->call("runSync", [
         //     'queueModel' => $queue,
