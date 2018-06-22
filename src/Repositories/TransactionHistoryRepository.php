@@ -28,7 +28,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
         }    
         
         if($data['time'] != null) {
-            $transactionHistory->time = $data['time']; 
+            $transactionHistory->time = implode("-",$data['time']); 
         }
 
         $transactionHistory->status = $data['status']; 
