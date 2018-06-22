@@ -179,23 +179,25 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'contractId' => $priceMonitorId
         ]);
 
-        $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+            echo json_encode($startTransaction);
 
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => FilterType::EXPORT_PRODUCTS,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract              
-        ]);   
+        // $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+
+        // $syncRun =  $this->sdkService->call("runSync", [
+        //     'queueModel' => $queue,
+        //     'queueName' => $queueName,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig,
+        //     'filterType' => FilterType::EXPORT_PRODUCTS,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'products' => $filteredVariation,
+        //     'attributesFromPlenty' => $attributesIdName,
+        //     'attributeMapping' => $attributeMapping,
+        //     'contract' => $contract              
+        // ]);   
          
-        $result = ['successSync' => $syncRun];
-        return  json_encode($result);
+        // $result = ['successSync' => $syncRun];
+        // return  json_encode($result);
     }
  }

@@ -39,7 +39,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
         $transactionHistory->type = $data['type']; 
         $transactionHistory->priceMonitorContractId = $data['contractId']; 
 
-        $database->save($transactionHistory);
+       // $database->save($transactionHistory);
 
     }
 
