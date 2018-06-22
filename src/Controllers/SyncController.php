@@ -183,6 +183,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
         
+         echo "jos jednom";
          echo json_encode($savedTransactionMasterHistory);
 
         // $syncRun =  $this->sdkService->call("runSync", [
