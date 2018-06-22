@@ -183,6 +183,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
         
+         echo "saved transaction history master";
+         echo json_encode(  $savedTransactionMasterHistory);
 
         //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
