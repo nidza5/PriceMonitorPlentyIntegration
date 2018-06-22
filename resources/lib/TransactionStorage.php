@@ -149,6 +149,7 @@ class TransactionStorage implements TransactionHistoryStorage
         );
 
         $transactionHistoryModel = [
+            "id" => $transactionHistoryMaster->getId(),
             "uniqueIdentifier" =>  $transactionHistoryMaster->getUniqueIdentifier(),
             "time" => $transactionHistoryMaster->getTime(),
             "status" => $transactionHistoryMaster->getStatus(),
