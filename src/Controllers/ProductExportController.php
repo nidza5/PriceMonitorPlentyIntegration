@@ -148,6 +148,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
+        echo json_encode($queue);
+
         $emailObject = $this->configInfoRepo->getConfig('email');
         $passwordObject = $this->configInfoRepo->getConfig('password');
 
