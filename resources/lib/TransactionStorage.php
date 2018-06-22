@@ -10,6 +10,8 @@ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMaster;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryMasterFilter;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistorySortFields;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStorageDTO;
+use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStatus;
+use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryType;
 
 class TransactionStorage implements TransactionHistoryStorage
 {
@@ -134,10 +136,25 @@ class TransactionStorage implements TransactionHistoryStorage
        return $this->totalDetailedRecords;
     }
 
-  
+    public function startTransactionExport($contractId)
+    {
+          /** @var TransactionHistoryMaster $transactionHistoryMaster */
+          $transactionHistoryMaster = new TransactionHistoryMaster(
+            $contractId,
+            new \DateTime(),
+            TransactionHistoryType::EXPORT_PRODUCTS,
+            TransactionHistoryStatus::IN_PROGRESS,
+            null,
+            null
+        );
+
+        return ['transactionHistoryMaster' => $transactionHistoryMaster];
+
+    }
+
     public function saveTransactionHistory(TransactionHistoryMaster $transactionMaster, $transactionDetails = array())
     {
-       throw new \Exception("SAve transaction history");
+
     }
 
 
@@ -180,6 +197,7 @@ class TransactionStorage implements TransactionHistoryStorage
 
         return $records;
     }
+
 
    
     protected function createTransactions($transactions)
