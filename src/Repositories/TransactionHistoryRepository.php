@@ -21,7 +21,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
             return;
 
         $database = pluginApp(DataBase::class);
-        $transactionHistory = getTransactionById($id);
+        $transactionHistory = $this->getTransactionById($id);
         
         if($data['uniqueIdentifier'] != null) {
             $transactionHistory->uniqueIdentifier = $data['uniqueIdentifier'];            
