@@ -21,7 +21,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
             return;
 
         $database = pluginApp(DataBase::class);
-        $transactionHistory = $database->query(TransactionHistory::class)->get();
+        $transactionHistory = getTransactionById($id);
         
         if($data['uniqueIdentifier'] != null) {
             $transactionHistory->uniqueIdentifier = $data['uniqueIdentifier'];            
@@ -39,8 +39,20 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
         $transactionHistory->type = $data['type']; 
         $transactionHistory->priceMonitorContractId = $data['contractId']; 
 
-       // $database->save($transactionHistory);
+        $database->save($transactionHistory);
 
+    }
+
+    public function getTransactionById($id)
+    {
+        $databaseTransactionHistory = pluginApp(TransactionHistory::class);
+        $transactionOriginal = $databaseTransactionHistory->query(TransactionHistory::class)->where('id', '=', $id)->get();
+
+        if($transactionOriginal == null)
+            return pluginApp(TransactionHistory::class);
+
+      return $transactionOriginal[0];
+      
     }
 
     public function getAllTransactionHistory() 

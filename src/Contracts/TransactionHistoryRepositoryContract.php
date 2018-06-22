@@ -22,4 +22,6 @@ interface TransactionHistoryRepositoryContract
 
     public function getTransactionHistoryMasterCount($contractId,$type);
 
+    public function getTransactionById($id);
+
 }
