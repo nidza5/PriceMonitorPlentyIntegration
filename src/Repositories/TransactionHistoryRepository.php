@@ -54,7 +54,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
 
     public function getTransactionById($id)
     {
-        $databaseTransactionHistory = pluginApp(TransactionHistory::class);
+        $databaseTransactionHistory = pluginApp(DataBase::class);
         $transactionOriginal = $databaseTransactionHistory->query(TransactionHistory::class)->where('id', '=', $id)->get();
 
         if($transactionOriginal == null)
