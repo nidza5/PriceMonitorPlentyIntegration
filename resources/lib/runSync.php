@@ -23,20 +23,18 @@ try {
 
    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
   
-    return ['savedTransaction' => $savedInitialTransaction];
+   PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
-//    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+   PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
+   PriceMonitorSdkHelper::registerProductService($contract,$products); 
 
-//    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
-//    PriceMonitorSdkHelper::registerProductService($contract,$products); 
+    PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
 
-//     PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
-
-//    $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
+   $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
    
 
-//    $runnerService = new RunnerService($queueModel);
-//    return  $runnerService->runSync($queueName);
+   $runnerService = new RunnerService($queueModel);
+   return  $runnerService->runSync($queueName);
 
 } catch(\Exception $ex) {
     

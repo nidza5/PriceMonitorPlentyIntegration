@@ -12,6 +12,7 @@ use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistorySortFie
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStorageDTO;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStatus;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryType;
+use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistory;
 
 class TransactionStorage implements TransactionHistoryStorage
 {
@@ -173,8 +174,14 @@ class TransactionStorage implements TransactionHistoryStorage
         $savedMasterTransaction =  $this->savedTransactionHistory;
         $savedTransactionDetails = $this->savedTransactionHistoryDetail; 
 
+        $transactionHistoryMaster = new TransactionHistoryMaster(
+            $savedMasterTransaction['priceMonitorContractId'],
+            new DateTime(),
+            $savedMasterTransaction['type'],
+            $savedMasterTransaction['status']
+        );
 
-        return (new TransactionHistoryStorageDTO($savedMasterTransaction, array())); 
+        return (new TransactionHistoryStorageDTO($transactionHistoryMaster, array())); 
     }
 
 
