@@ -174,7 +174,7 @@ class TransactionStorage implements TransactionHistoryStorage
         $savedTransactionDetails = $this->savedTransactionHistoryDetail; 
 
 
-      //  return (new TransactionHistoryStorageDTO($savedMasterTransaction, $savedTransactionDetails)); 
+        return (new TransactionHistoryStorageDTO($savedMasterTransaction, array())); 
     }
 
 

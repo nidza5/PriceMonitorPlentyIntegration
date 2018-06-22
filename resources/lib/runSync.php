@@ -28,7 +28,7 @@ try {
    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
    PriceMonitorSdkHelper::registerProductService($contract,$products); 
 
-  // PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
+    PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
 
    $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
    
