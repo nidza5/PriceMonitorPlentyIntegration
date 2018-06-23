@@ -85,6 +85,7 @@ class RunnerService
         $arraysResultRun =  $runner->run();
 
         $productsForExport = null;
+
         if($products != null) {
             $mapperService = new MapperServices(null,null,$products,null);
             $productsForExport =  $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
@@ -99,43 +100,44 @@ class RunnerService
              "release" => $arraysResultRun["Release"]
          ];
 
-         return $returnArray 
-         
+         return $returnArray; 
+     }
          #
         // $this->runAsync($queueName);
         // if ($queueName === self::DEFAULT_QUEUE_NAME) {
         //     $this->runAsync(self::STATUS_CHECKING_QUEUE_NAME);
         // }
-    }
+  
 
-    private function createTransactionDetails($transactionId, $products)
-    {
-        /** @var TransactionHistoryDetail[] $transactionDetails */
-        $transactionDetails = [];
+
+    // public function createTransactionDetails($transactionId, $products)
+    // {
+    //     /** @var TransactionHistoryDetail[] $transactionDetails */
+    //     $transactionDetails = [];
         
-        foreach ($products as $product) {
-            /** @var TransactionHistoryDetail $transactionDetail */
-            $transactionDetail = new TransactionHistoryDetail(
-                TransactionHistoryStatus::IN_PROGRESS, 
-                new \DateTime(),
-                null,
-                $transactionId, 
-                null,
-                isset($product['productId']) ? $product['productId'] : null,
-                isset($product['gtin']) ? $product['gtin'] : null,
-                isset($product['name']) ? $product['name']: null,
-                isset($product['referencePrice']) ? (float)$product['referencePrice'] : null,
-                isset($product['minPriceBoundary']) ? (float)$product['minPriceBoundary'] : null,
-                isset($product['maxPriceBoundary']) ? (float)$product['maxPriceBoundary'] : null
-            );
+    //     foreach ($products as $product) {
+    //         /** @var TransactionHistoryDetail $transactionDetail */
+    //         $transactionDetail = new TransactionHistoryDetail(
+    //             TransactionHistoryStatus::IN_PROGRESS, 
+    //             new \DateTime(),
+    //             null,
+    //             $transactionId, 
+    //             null,
+    //             isset($product['productId']) ? $product['productId'] : null,
+    //             isset($product['gtin']) ? $product['gtin'] : null,
+    //             isset($product['name']) ? $product['name']: null,
+    //             isset($product['referencePrice']) ? (float)$product['referencePrice'] : null,
+    //             isset($product['minPriceBoundary']) ? (float)$product['minPriceBoundary'] : null,
+    //             isset($product['maxPriceBoundary']) ? (float)$product['maxPriceBoundary'] : null
+    //         );
 
-            $transactionDetail->setUpdatedInShop(false);
+    //         $transactionDetail->setUpdatedInShop(false);
 
-            $transactionDetails[] = $transactionDetail; 
-        }
+    //         $transactionDetails[] = $transactionDetail; 
+    //     }
 
-        return $transactionDetails;
-    }
+    //     return $transactionDetails;
+    // }
 
     /**
      * Runs async request.
