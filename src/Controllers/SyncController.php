@@ -188,10 +188,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        try {
         foreach($b as $v) {
            
-            foreach($v as $r){
-              echo json_encode($r['id']) ;
+            echo $v['id'];
+
+            // foreach($v as $r){
+            //   echo json_encode($r['id']) ;
               
-            }
+            // }
         }
 
        } catch(\Exception $ex) {
