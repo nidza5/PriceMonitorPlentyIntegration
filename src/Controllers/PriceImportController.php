@@ -25,10 +25,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
 
  /**
-  * Class ProductImportController
+  * Class PriceImportController
   * @package PriceMonitorPlentyIntegration\Controllers
   */
- class ProductImportController extends Controller
+ class PriceImportController extends Controller
  {
      use Loggable;
    
