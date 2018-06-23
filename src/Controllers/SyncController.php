@@ -184,7 +184,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        $b = json_decode($f);
 
        foreach($b as $v) {
-           echo $v;
+           echo json_encode($v);
        }
 
         
