@@ -177,7 +177,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
 
             foreach( $filteredVariation as $r) {
-                echo  json_encode($r);
+                echo $r["id"];
             }
       
     //     $variationForExport = array();
