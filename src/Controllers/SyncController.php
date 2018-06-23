@@ -178,9 +178,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        
        echo json_encode($filteredVariation);
 
-    //    foreach ($filteredVariation as $shopProduct) {
-    //         echo json_encode($shopProduct);
-    // }
+       foreach ($filteredVariation as $p) {
+            echo json_encode($p);
+    }
 
         // $emailObject = $this->configInfoRepo->getConfig('email');
         // $passwordObject = $this->configInfoRepo->getConfig('password');
