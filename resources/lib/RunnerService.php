@@ -88,7 +88,7 @@ class RunnerService
 
         if($products != null) {
             $mapperService = new MapperServices(null,null,$products,null);
-            $productsForExport =  $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
+            $productsForExport =  $mapperService->convertToPricemonitor($priceMonitorId, $products);
         }
 
         $transactionHistoryDetailsForSaving = createTransactionDetails($transactionId, $productsForExport);
