@@ -9,7 +9,7 @@
 
 $(document).ready(function() {   
     
-    document.getElementById("itemExport").addEventListener("click", initImportForm);
+    document.getElementById("itemImport").addEventListener("click", initImportForm);
 });
 
 function initImportForm()
