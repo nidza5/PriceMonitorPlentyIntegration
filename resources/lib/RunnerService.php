@@ -90,7 +90,7 @@ class RunnerService
             $mapperService = new MapperServices(null,null,$products,null);
 
             foreach ($products as $shopProduct) {
-                $product = $this->mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
+                $product = $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
                 $this->logProductValidationWarnings($product);
                 $productsForExport[] = $product;
             }
