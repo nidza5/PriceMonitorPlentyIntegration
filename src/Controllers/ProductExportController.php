@@ -168,6 +168,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'Message' => $enqueAndRun['Message']
             ];
         }
+
+        echo json_encode($enqueAndRun);
       
         if($enqueAndRun != null)
             $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
