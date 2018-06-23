@@ -81,7 +81,7 @@ class TransactionDetailsRepository implements TransactionDetailsRepositoryContra
             }
 
             if (empty($transactionDetailIdentifier)) {
-                $detail->gtin = 0;
+                $detail->gtin = "0";
             }
 
             foreach ($failedItems as $failedItem) {

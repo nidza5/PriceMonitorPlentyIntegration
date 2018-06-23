@@ -102,7 +102,7 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
 
         $database = pluginApp(DataBase::class);
 
-        foreach ($transactionDetails as $transactionDetail) {
+        foreach ($transactionHistoryDetailsForSaving as $transactionDetail) {
 
             $master = $this->getTransactionById($transactionDetail["id"]);
 
@@ -110,8 +110,8 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
                 $master->totalCount = $transactionHistoryMaster["totalCount"]+ 1;
                 $transactionAlreadyCounted = false;
             } else {
-                foreach ($allTransactionDetailsInProgress as $savedTransactionDetail) {
-                    if ($savedTransactionDetail->getId() === $transactionDetail->getId()) {
+                foreach ($allTransactionsDetailsInProgress as $savedTransactionDetail) {
+                    if ($savedTransactionDetail["id"] === $transactionDetail["id"]) {
                         $transactionAlreadyCounted =  false;
                     }
                 }
