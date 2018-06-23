@@ -175,35 +175,39 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributesFromPlenty' => $attributesIdName            
         ]);     
 
-      
-        $variationForExport = array();
 
-        echo "arrayaaa";
-
-       $f =  json_encode($filteredVariation);
-
-       $b = json_decode($f);
-
-
-       try {
-        foreach($b as $v) {
-           
-            // echo json_encode($v);
-
-            foreach($v as $r){
-                try {
-                 echo $r["id"];
-                } catch(\Exception $ex) {
-                    echo $ex->getMessage();
-    
-           }
+            foreach( $filteredVariation as $r) {
+                echo  $r;
             }
-        }
+      
+    //     $variationForExport = array();
 
-       } catch(\Exception $ex) {
-                echo $ex->getMessage();
+    //     echo "arrayaaa";
 
-       }
+    //    $f =  json_encode($filteredVariation);
+
+    //    $b = json_decode($f);
+
+
+    //    try {
+    //     foreach($b as $v) {
+           
+    //         // echo json_encode($v);
+
+    //         foreach($v as $r){
+    //             try {
+    //              echo $r["id"];
+    //             } catch(\Exception $ex) {
+    //                 echo $ex->getMessage();
+    
+    //        }
+    //         }
+    //     }
+
+    //    } catch(\Exception $ex) {
+    //             echo $ex->getMessage();
+
+    //    }
 
      
 
