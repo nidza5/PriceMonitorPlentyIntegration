@@ -26,6 +26,8 @@ function initImportForm()
      */
     function registerEventListenersPrices()
     {
+        console.log("register event handlers prices");
+
         var importNow = document.getElementById('import-now'),
             saveActionPrices = document.getElementById('pricemonitor-product-import-submit');
 
