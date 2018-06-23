@@ -27,4 +27,6 @@ interface ScheduleRepositoryContract
 
     public function getAllSchedule();
 
+    public function saveImportSchedule();
+
 }

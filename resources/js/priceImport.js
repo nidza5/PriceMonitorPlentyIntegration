@@ -96,6 +96,6 @@ function initExportForm()
         });
     }
 
-    populateScheduleDataPrices(data) {
-
+   function populateScheduleDataPrices(data) {
+        console.log(data);
     }

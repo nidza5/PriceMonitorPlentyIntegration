@@ -83,7 +83,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
-        
+ 
+        $isEnabled = $requestData['enableImport'];
+         
         $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
         if($contract == null)

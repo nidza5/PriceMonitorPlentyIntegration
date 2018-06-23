@@ -43,6 +43,23 @@ class ScheduleRepository implements ScheduleRepositoryContract
 
         $database->save($schedule);
     }
+
+    public function saveImportSchedule($contractId,array $data)
+    { 
+        $database = pluginApp(DataBase::class);
+     
+        $schedule = pluginApp(Schedule::class);
+        
+        if($contractId != null && $contractId != 0)
+            $schedule = $this->getScheduleByContractId($contractId);
+
+         $isEnabled = $requestData['enableImport'];
+         $schedule->enableImport = $isEnabled;
+         $schedule->contractId = $contractId;
+
+        $database->save($schedule);
+
+    }
     
     /**
      *  Schedule
