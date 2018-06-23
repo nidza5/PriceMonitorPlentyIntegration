@@ -23,6 +23,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
+ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
  /**
   * Class PriceImportController
@@ -62,13 +64,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $tokenRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo)
+        /**
+         *
+         * @var ConfigRepository
+         */
+        private $config;
+
+        /**
+         *
+         * @var ConfigRepositoryContract
+         */
+        private $configInfoRepo;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
         $this->contractRepo = $contractRepo;
         $this->queueRepo = $queueRepo;
         $this->tokenRepo = $tokenRepo; 
+        $this->config = $config;
+        $this->configInfoRepo = $configInfoRepo;
     }
 
 
