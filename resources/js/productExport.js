@@ -23,7 +23,7 @@
     function initExportForm()
     {
         intervals = [];
-        registerEventListeners();
+        registerEventListenersExport();
       //  toggleFieldSets(true);
          loadTransactionHistoryMasterData(limit, currentOffset);
        // loadLastExportData();
@@ -45,6 +45,8 @@
             data: dataOption,
             success: function(data)
             {
+                console.log(data);
+
                 populateScheduleData(data);
             },
             error: function(xhr)
@@ -57,7 +59,7 @@
     /**
      * Registers events for export now and save action
      */
-    function registerEventListeners()
+    function registerEventListenersExport()
     {
         var scheduledExport = document.getElementById('enabled-scheduled-export'),
             exportNow = document.getElementById('export-now'),
