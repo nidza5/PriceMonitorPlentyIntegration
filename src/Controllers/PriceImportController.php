@@ -97,4 +97,66 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          return json_encode($scheduleSaved);        
     }
+
+    public function runPriceImport(Request $request) 
+    {
+        $requestData = $request->all();
+
+        if($requestData == null)
+            throw new \Exception("Request data are empty!");
+
+        $priceMonitorId = $requestData['pricemonitorId'];
+
+        if($priceMonitorId === 0 || $priceMonitorId === null)
+            throw new \Exception("PriceMonitorId is empty");
+
+        $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
+
+        $emailObject = $this->configInfoRepo->getConfig('email');
+        $passwordObject = $this->configInfoRepo->getConfig('password');
+
+        $emailForConfig = $emailObject->value;
+        $passwordForConfig = $passwordObject->value;
+
+       
+        $enqueAndRun =  $this->sdkService->call("enqueuePriceImport", [
+            'priceMonitorId' => $priceMonitorId,
+            'queueModel' => $queue,
+            'emailForConfig' =>  $emailForConfig,
+            'passwordForConfig' =>  $passwordForConfig        
+        ]); 
+
+        if($enqueAndRun != null && $enqueAndRun['Message'])
+        {
+            return [
+                'Message' => $enqueAndRun['Message']
+            ];
+        }
+
+        if($enqueAndRun != null)
+            $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+
+        $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
+      
+        if($createToken != null && $createToken['error'])
+           throw new \Exception($createToken['error_msg']);
+        
+        if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
+        {
+           $hashUniqueToken =  StringUtils::getUniqueString(20);    
+
+           $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
+ 
+           $returnValues = [
+               "token" => $savedToken,
+               "queueName" => $enqueAndRun['queueName']
+           ];
+            // call async
+            return json_encode($returnValues);
+        }
+
+        return json_encode("OK");
+
+    }
+
  }

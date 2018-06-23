@@ -137,13 +137,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $priceMonitorId = $requestData['pricemonitorId'];
 
+        $typeOfFilter = $requestData['filterType'];
+
         $this->tokenRepo->deleteToken($token); 
 
      //   $this->queueRepo->deleteAllQueue();
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
-        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
+        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$typeOfFilter);
 
         $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
@@ -167,7 +169,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         }
 
         $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
-            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'filterType' => $typeOfFilter,
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter,
             'attributeMapping' => $attributeMapping,
@@ -182,9 +184,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             //         echo $p["id"];
             
             // }
-      
-   
-
   
 
         $emailObject = $this->configInfoRepo->getConfig('email');
@@ -214,7 +213,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'queueName' => $queueName,
             'emailForConfig' =>  $emailForConfig,
             'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => FilterType::EXPORT_PRODUCTS,
+            'filterType' => $typeOfFilter,
             'priceMonitorId' => $priceMonitorId,
             'productFilterRepo' => $filter,
             'products' => $filteredVariation,

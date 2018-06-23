@@ -209,7 +209,8 @@
             var transferObject = {
                 'queueName' : dataForSync.queueName,
                 'token' : dataForSync.token,
-                'pricemonitorId' : $("#contractId").val()
+                'pricemonitorId' : $("#contractId").val(),
+                'filterType' : 'export_products'
             };
 
             console.log("data for sync transfer");

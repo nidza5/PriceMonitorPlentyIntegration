@@ -51,18 +51,82 @@ function initImportForm()
      */
     function onClickImportNow()
     {
-        // var url = Pricemonitor['config']['urls']['priceImportRunNow'], params = {
-        //     'form_key': document['pricemonitorPriceImport']['form_key'].value,
-        //     'pricemonitorId': Pricemonitor['config']['pricemonitorId']
-        // };
+        console.log("import now");
+        var transferObject = {
+            'pricemonitorId' : $("#contractId").val()
+        };
 
-        // Pricemonitor['utility']['loadingWindow'].open();
-        // Pricemonitor['ajax']['post'](url, {}, importStarted, 'json', true, params);
+        $.ajax({
+            type: "POST",
+            url: "/runPriceImport",
+            data: transferObject,
+            success: function(data)
+            {
+                console.log(data);
+                if(data == null) 
+                    return;
+                
+                var dataJson = jQuery.parseJSON(data);
+                if(dataJson == null) {
+                    console.log("dataJSON is null");
+                    return;
+                }
+                
+                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName) {
+                    toastr["success"]("Product export has been started.");
+                    callAssyncSyncImport(dataJson);
+                }
+                    
+            },
+            error: function(data)
+            {
+                console.log(data);
+            }
+        });
+    }
 
-        function importStarted(response)
-        {
-            //success message
-        }
+    function callAssyncSyncImport(dataForSync)
+    {      
+           var transferObject = {
+               'queueName' : dataForSync.queueName,
+               'token' : dataForSync.token,
+               'pricemonitorId' : $("#contractId").val(),
+               'filterType' : 'import_prices'
+           };
+
+           console.log("data for sync transfer import");
+           console.log(transferObject);
+
+           $.ajax({
+               type: "POST",
+               url: "/run",
+               data: transferObject,
+               async: true,
+               success: function(data)
+               {
+                   console.log(data);
+                   
+                   if(data == null) 
+                       return;
+
+                   var dataSync = jQuery.parseJSON(data);
+
+               //     if(dataSync != null && dataSync == true) {
+               //         callAssyncSync(dataForSync);
+
+               //     if(dataForSync.queueName == "Default") {
+               //         dataForSync.queueName = "StatusChecking";
+               //         callAssyncSync(dataForSync);
+               //     }
+               // }
+                  
+                   
+               },
+               error: function(data)
+               {
+                   console.log(data);
+               }
+           });
     }
 
      /**
