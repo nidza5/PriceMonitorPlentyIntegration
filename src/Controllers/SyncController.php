@@ -139,6 +139,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $this->tokenRepo->deleteToken($token); 
 
+        $this->queueRepo->deleteAllQueue();
+
         $queue = $this->queueRepo->getQueueByName($queueName);
 
         $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,FilterType::EXPORT_PRODUCTS);
