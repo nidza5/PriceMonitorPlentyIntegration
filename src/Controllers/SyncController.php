@@ -184,16 +184,22 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
        $b = json_decode($f);
 
-       foreach($b as $v) {
+
+       try {
+        foreach($b as $v) {
            
-           foreach($v as $r){
-           // echo json_encode($r);
-             foreach($r as $p)
-             {
-                 echo $p['id'];
-             }
-           }
+            foreach($v as $r){
+              echo $r['id'];
+              
+            }
+        }
+
+       } catch(\Exception $ex) {
+                echo $ex->getMessage();
+
        }
+
+     
 
         
 
