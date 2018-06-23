@@ -18,7 +18,7 @@ function initImportForm()
     registerEventListenersPrices();
     // loadTransactionHistoryMasterData(limit, currentOffset);
     // loadLastImportData();
-    // loadScheduledImport();
+     loadScheduledImport();
 }
 
  /**
@@ -98,6 +98,41 @@ function initImportForm()
         });
     }
 
+      /**
+     * Loads schedule data
+     */
+    function loadScheduledImport()
+    {
+
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val()
+        };
+        
+        $.ajax({
+            type: "GET",
+            url: "/getSchedule",
+            data: dataOption,
+            success: function(data)
+            {
+                console.log(data);
+
+                populateScheduleDataPrices(data);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        }); 
+    }
+
    function populateScheduleDataPrices(data) {
         console.log(data);
+
+        if(data == null)
+            return;
+          
+      var response = jQuery.parseJSON(data);
+
+      document['pricemonitorPriceImport']['enableImport'].checked = response.enableExport == 1 ? true : false;
+        
     }
