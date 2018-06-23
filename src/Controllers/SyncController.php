@@ -190,7 +190,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
            // echo json_encode($r);
              foreach($r as $p)
              {
-                 echo $p;
+                 echo $p['id'];
              }
            }
        }
