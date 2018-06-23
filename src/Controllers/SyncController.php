@@ -255,10 +255,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             }
 
             foreach($syncRun['dequeus'] as $deq) 
-              $this->$queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
+              $this->queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
 
             foreach($syncRun['release'] as $rel)
-                $this->$queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
+                $this->queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
         }      
         
         $result = ['successSync' => $syncRun];
