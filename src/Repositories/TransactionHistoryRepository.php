@@ -119,15 +119,15 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
                 $transactionAlreadyCounted = true;
             }
 
-            if ($transactionDetail["status"] === TransactionHistoryStatus::FINISHED &&
+            if ($transactionDetail["status"] === TransactionStatus::FINISHED &&
                 !$transactionAlreadyCounted
             ) {
                 $master->successCount = $transactionHistoryMaster["successCount"] + 1;
-            } else if ($transactionDetail["status"] === TransactionHistoryStatus::FAILED &&
+            } else if ($transactionDetail["status"] === TransactionStatus::FAILED &&
                 !$transactionAlreadyCounted
             ) {
                 $master->failedCount = $transactionHistoryMaster["failedCount"]+ 1;
-            } else if ($transactionDetail["status"]  === TransactionHistoryStatus::FILTERED_OUT &&
+            } else if ($transactionDetail["status"]  === TransactionStatus::FILTERED_OUT &&
                 !$transactionAlreadyCounted
             ) {
                 $filteredOutCount++;
