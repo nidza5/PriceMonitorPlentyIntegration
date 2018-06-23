@@ -1,6 +1,6 @@
 
  var templateNameId = 'pricemonitor-price-import',
- templateForPrice = document.getElementById(templateId),
+ templateForPrice = document.getElementById(templateNameId),
  transactionHistoryMasterDataPrices = {},
  currentMasterIdPrices = null,
  currentOffsetPrices = 0,
