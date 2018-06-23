@@ -53,7 +53,7 @@ class ScheduleRepository implements ScheduleRepositoryContract
         if($contractId != null && $contractId != 0)
             $schedule = $this->getScheduleByContractId($contractId);
 
-         $isEnabled = $requestData['enableImport'];
+         $isEnabled = $data['enableImport'];
          $schedule->enableImport = $isEnabled;
          $schedule->contractId = $contractId;
 
