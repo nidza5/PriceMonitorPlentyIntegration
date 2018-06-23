@@ -9,10 +9,10 @@
 
 $(document).ready(function() {   
     
-    document.getElementById("itemExport").addEventListener("click", initExportForm);
+    document.getElementById("itemExport").addEventListener("click", initImportForm);
 });
 
-function initExportForm()
+function initImportForm()
 {
     intervals = [];
     registerEventListenersPrices();
