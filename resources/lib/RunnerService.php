@@ -95,8 +95,8 @@ class RunnerService
                 $productsForExport[] = $product;
             }
         }
-
-        $transactionHistoryDetailsForSaving = createTransactionDetails($transactionId, $productsForExport);
+        
+        $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
         
          $returnArray = [
              "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
@@ -113,36 +113,34 @@ class RunnerService
         //     $this->runAsync(self::STATUS_CHECKING_QUEUE_NAME);
         // }
   
-
-
-    // public function createTransactionDetails($transactionId, $products)
-    // {
-    //     /** @var TransactionHistoryDetail[] $transactionDetails */
-    //     $transactionDetails = [];
+    public function createTransactionDetails($transactionId, $products)
+    {
+        /** @var TransactionHistoryDetail[] $transactionDetails */
+        $transactionDetails = [];
         
-    //     foreach ($products as $product) {
-    //         /** @var TransactionHistoryDetail $transactionDetail */
-    //         $transactionDetail = new TransactionHistoryDetail(
-    //             TransactionHistoryStatus::IN_PROGRESS, 
-    //             new \DateTime(),
-    //             null,
-    //             $transactionId, 
-    //             null,
-    //             isset($product['productId']) ? $product['productId'] : null,
-    //             isset($product['gtin']) ? $product['gtin'] : null,
-    //             isset($product['name']) ? $product['name']: null,
-    //             isset($product['referencePrice']) ? (float)$product['referencePrice'] : null,
-    //             isset($product['minPriceBoundary']) ? (float)$product['minPriceBoundary'] : null,
-    //             isset($product['maxPriceBoundary']) ? (float)$product['maxPriceBoundary'] : null
-    //         );
+        foreach ($products as $product) {
+            /** @var TransactionHistoryDetail $transactionDetail */
+            $transactionDetail = new TransactionHistoryDetail(
+                TransactionHistoryStatus::IN_PROGRESS, 
+                new \DateTime(),
+                null,
+                $transactionId, 
+                null,
+                isset($product['productId']) ? $product['productId'] : null,
+                isset($product['gtin']) ? $product['gtin'] : null,
+                isset($product['name']) ? $product['name']: null,
+                isset($product['referencePrice']) ? (float)$product['referencePrice'] : null,
+                isset($product['minPriceBoundary']) ? (float)$product['minPriceBoundary'] : null,
+                isset($product['maxPriceBoundary']) ? (float)$product['maxPriceBoundary'] : null
+            );
 
-    //         $transactionDetail->setUpdatedInShop(false);
+            $transactionDetail->setUpdatedInShop(false);
 
-    //         $transactionDetails[] = $transactionDetail; 
-    //     }
+            $transactionDetails[] = $transactionDetail; 
+        }
 
-    //     return $transactionDetails;
-    // }
+        return $transactionDetails;
+    }
 
     /**
      * Runs async request.
