@@ -176,6 +176,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
       
+        $variationForExport = array();
 
         echo "arrayaaa";
 
@@ -184,7 +185,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        $b = json_decode($f);
 
        foreach($b as $v) {
-           echo json_encode($v);
+           
+           foreach($v as $r){
+            echo json_encode($r);
+           }
        }
 
         
