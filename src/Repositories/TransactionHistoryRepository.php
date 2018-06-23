@@ -148,8 +148,9 @@ class TransactionHistoryRepository implements TransactionHistoryRepositoryContra
             $master->note = $newNote;
         }
 
-        if (!empty($uniqueIdentifier) && $transactionHistoryMaster["uniqueIdentifier"] === null) {
-            $master->uniqueIdentifier = $uniqueIdentifier;
+        if (!empty($transactionUniqueIdentifier) && $transactionHistoryMaster["uniqueIdentifier"] === null) {
+            $master->uniqueIdentifier = $transactionUniqueIdentifier;
+            
         }
 
         $database->save($master);
