@@ -11,6 +11,7 @@ use Patagona\Pricemonitor\Core\Sync\Queue\Queue;
 use Patagona\Pricemonitor\Core\Sync\Runner\Runner;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryDetail;
 use Patagona\Pricemonitor\Core\Sync\StatusCheck\Job as StatusCheckJob;
+use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStatus;
 
 class RunnerService
 {
@@ -95,7 +96,7 @@ class RunnerService
                 $productsForExport[] = $product;
             }
         }
-        
+
         $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
         
          $returnArray = [
