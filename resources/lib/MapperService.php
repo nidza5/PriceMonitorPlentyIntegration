@@ -109,43 +109,47 @@ class MapperServices implements MapperService
 
     public function convertToPricemonitor($contractId, $shopProduct)
     {
-        $products = $shopProduct;
-        $result = array('productId' => $products['id']);
-        $mappings = $this->attributesMapping;
-        $contract = $this->contract;
-
-        if (empty($mappings)) {
-            return array();
-        }
-
-        //Attribute from plenty markets
-        $productAttributes = $this->productAttributes;
-
-        foreach($mappings as $mapping) {
-            $attributeCode = $mapping['attributeCode'];
-            $priceMonitorCode = $mapping['priceMonitorCode'];
-            
-            $columnNameInShopProduct = $productAttributes[$attributeCode];
-
-            $value = $products[$columnNameInShopProduct];
-
-            if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
-                if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {
-                    $value = $this->getCalculatedPrice(
-                        $value,
-                        $mapping['value'],
-                        $mapping['operand']
+        
+        foreach($shopProduct as $product)
+        {
+            $result = array('productId' => $product['id']);
+            $mappings = $this->attributesMapping;
+            $contract = $this->contract;
+    
+            if (empty($mappings)) {
+                return array();
+            }
+    
+            //Attribute from plenty markets
+            $productAttributes = $this->productAttributes;
+    
+            foreach($mappings as $mapping) {
+                $attributeCode = $mapping['attributeCode'];
+                $priceMonitorCode = $mapping['priceMonitorCode'];
+                
+                $columnNameInShopProduct = $productAttributes[$attributeCode];
+    
+                $value = $product[$columnNameInShopProduct];
+    
+                if (in_array($pricemonitorCode, self::$mandatoryAttributes)) {
+                    if ($pricemonitorCode === 'minPriceBoundary' || $pricemonitorCode === 'maxPriceBoundary') {
+                        $value = $this->getCalculatedPrice(
+                            $value,
+                            $mapping['value'],
+                            $mapping['operand']
+                        );
+                    }
+    
+                    $result[$pricemonitorCode] = $value;
+                } else {
+                    $result['tags'][] = array(
+                        'key' => $pricemonitorCode,
+                        'value' => (string)$value
                     );
-                }
+                }        
+            }
 
-                $result[$pricemonitorCode] = $value;
-            } else {
-                $result['tags'][] = array(
-                    'key' => $pricemonitorCode,
-                    'value' => (string)$value
-                );
-            }        
-        }
+        }      
 
         return $result;
     }
