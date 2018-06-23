@@ -213,6 +213,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
         ]);   
 
+        echo json_encode($syncRun);
+
         if( $syncRun != null)
         {
             foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
