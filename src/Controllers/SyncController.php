@@ -222,15 +222,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 if($sync != null && $sync != -1) {
                     
                     if($savedTransactionMasterHistory['id'] != null) {
-                         $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract["priceMonitorId"],FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
+                         $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
                          $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
-                         $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
+                         $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
                     
                     } else {
 
-                        $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract["priceMonitorId"],FilterType::EXPORT_PRODUCTS,null,$sync);
-                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],null,$sync);
-                        $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract["priceMonitorId"],null,$sync,TransactionStatus::IN_PROGRESS);
+                        $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
+                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync);
+                        $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
                     }
 
                     $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
