@@ -176,94 +176,94 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
        
-       // echo json_encode($filteredVariation);
+       echo json_encode($filteredVariation);
 
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
+        // $emailObject = $this->configInfoRepo->getConfig('email');
+        // $passwordObject = $this->configInfoRepo->getConfig('password');
 
-        $emailForConfig = $emailObject->value;
-        $passwordForConfig = $passwordObject->value;
+        // $emailForConfig = $emailObject->value;
+        // $passwordForConfig = $passwordObject->value;
 
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        //startTransaction
+        // //startTransaction
 
-        $startTransaction = $this->sdkService->call("startTransaction", [
-            'contractId' => $priceMonitorId
-        ]);
+        // $startTransaction = $this->sdkService->call("startTransaction", [
+        //     'contractId' => $priceMonitorId
+        // ]);
 
-          // echo json_encode($startTransaction['transactionHistoryMaster']);
+        //   // echo json_encode($startTransaction['transactionHistoryMaster']);
 
-         $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+        //  $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
 
-        //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
-        //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
-        //  ]);
+        // //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
+        // //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
+        // //  ]);
 
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => FilterType::EXPORT_PRODUCTS,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
-        ]);   
+        // $syncRun =  $this->sdkService->call("runSync", [
+        //     'queueModel' => $queue,
+        //     'queueName' => $queueName,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig,
+        //     'filterType' => FilterType::EXPORT_PRODUCTS,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'products' => $filteredVariation,
+        //     'attributesFromPlenty' => $attributesIdName,
+        //     'attributeMapping' => $attributeMapping,
+        //     'contract' => $contract,
+        //     "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
+        // ]);   
 
-        echo json_encode($syncRun);
+        // echo json_encode($syncRun);
 
-        if( $syncRun != null)
-        {
-            foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
+        // if( $syncRun != null)
+        // {
+        //     foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
 
-                if($sync != null && $sync != -1) {
+        //         if($sync != null && $sync != -1) {
                     
-                    if($savedTransactionMasterHistory['id'] != null) {
-                         $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
-                         $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
-                         $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
+        //             if($savedTransactionMasterHistory['id'] != null) {
+        //                  $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
+        //                  $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
+        //                  $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
                     
-                    } else {
+        //             } else {
 
-                        $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
-                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
-                        $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
-                    }
+        //                 $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
+        //                 $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
+        //                 $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
+        //             }
 
-                    $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
-                    $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
+        //             $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
+        //             $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
                     
-                    $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
-                        'queueModel' => $queue,
-                        'exportTaskId' => $sync,
-                        'contractId' => $contract->priceMonitorId             
-                    ]); 
+        //             $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
+        //                 'queueModel' => $queue,
+        //                 'exportTaskId' => $sync,
+        //                 'contractId' => $contract->priceMonitorId             
+        //             ]); 
 
-                    if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
-                    {
-                        return [
-                            'Message' => $enqueueStatusCheckerJob['Message']
-                        ];
-                    } 
+        //             if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
+        //             {
+        //                 return [
+        //                     'Message' => $enqueueStatusCheckerJob['Message']
+        //                 ];
+        //             } 
 
-                    if($enqueueStatusCheckerJob != null)
-                        $this->queueRepo->savePriceMonitorQueue($enqueueStatusCheckerJob['queueName'],$enqueueStatusCheckerJob['storageModel']);
-                }             
-            }
+        //             if($enqueueStatusCheckerJob != null)
+        //                 $this->queueRepo->savePriceMonitorQueue($enqueueStatusCheckerJob['queueName'],$enqueueStatusCheckerJob['storageModel']);
+        //         }             
+        //     }
 
-            foreach($syncRun['dequeus'] as $deq) 
-              $this->queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
+        //     foreach($syncRun['dequeus'] as $deq) 
+        //       $this->queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
 
-            foreach($syncRun['release'] as $rel)
-                $this->queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
-        }      
+        //     foreach($syncRun['release'] as $rel)
+        //         $this->queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
+        // }      
         
-        $result = ['successSync' => $syncRun];
-        return  json_encode($result);
+        // $result = ['successSync' => $syncRun];
+        // return  json_encode($result);
     }
  }

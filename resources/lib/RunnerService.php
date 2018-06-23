@@ -79,35 +79,33 @@ class RunnerService
      */
     public function runSync($queueName = null,$products,$transactionId,$priceMonitorId)
     {
+        $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
 
-        return $products;
-        // $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
+        $runner = new Runner($queueName);
+        $arraysResultRun =  $runner->run();
 
-        // $runner = new Runner($queueName);
-        // $arraysResultRun =  $runner->run();
+        $productsForExport = null;
 
-        // $productsForExport = null;
+        if($products != null) {
+            $mapperService = new MapperServices(null,null,$products,null);
 
-        // if($products != null) {
-        //     $mapperService = new MapperServices(null,null,$products,null);
+            foreach ($products as $shopProduct) {
+                $product = $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
+                $this->logProductValidationWarnings($product);
+                $productsForExport[] = $product;
+            }
+        }
 
-        //     foreach ($products as $shopProduct) {
-        //         $product = $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
-        //         $this->logProductValidationWarnings($product);
-        //         $productsForExport[] = $product;
-        //     }
-        // }
-
-        // $transactionHistoryDetailsForSaving = createTransactionDetails($transactionId, $productsForExport);
+        $transactionHistoryDetailsForSaving = createTransactionDetails($transactionId, $productsForExport);
         
-        //  $returnArray = [
-        //      "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
-        //      "transactionHistoryDetailsForSaving" => $transactionHistoryDetailsForSaving,
-        //      "dequeus" => $arraysResultRun["Dequeu"],
-        //      "release" => $arraysResultRun["Release"]
-        //  ];
+         $returnArray = [
+             "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
+             "transactionHistoryDetailsForSaving" => $transactionHistoryDetailsForSaving,
+             "dequeus" => $arraysResultRun["Dequeu"],
+             "release" => $arraysResultRun["Release"]
+         ];
 
-        //  return $returnArray; 
+         return $returnArray; 
      }
          #
         // $this->runAsync($queueName);
