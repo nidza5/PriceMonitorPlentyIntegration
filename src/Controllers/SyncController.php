@@ -229,7 +229,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                     } else {
 
                         $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
-                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync);
+                        $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
                         $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
                     }
 
@@ -239,7 +239,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                     $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
                         'queueModel' => $queue,
                         'exportTaskId' => $sync,
-                        'contractId' => $contract["priceMonitorId"]             
+                        'contractId' => $contract->priceMonitorId             
                     ]); 
 
                     if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
@@ -250,7 +250,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                     } 
 
                     if($enqueueStatusCheckerJob != null)
-                        $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+                        $this->queueRepo->savePriceMonitorQueue($enqueueStatusCheckerJob['queueName'],$enqueueStatusCheckerJob['storageModel']);
                 }             
             }
 
