@@ -27,6 +27,6 @@ interface ScheduleRepositoryContract
 
     public function getAllSchedule();
 
-    public function saveImportSchedule();
+    public function saveImportSchedule($contractId,array $data);
 
 }

@@ -91,7 +91,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($contract == null)
             throw new \Exception("Contract is empty");
 
-         $this->scheduleRepo->saveSchedule($contract->id,$requestData);
+         $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
 
          $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
 
