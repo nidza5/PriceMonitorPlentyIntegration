@@ -179,9 +179,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo "arrayaaa";
 
-       echo json_encode($filteredVariation);
+       $f =  json_encode($filteredVariation);
 
-       $b = json_decode($filteredVariation);
+       $b = json_decode($f);
 
        foreach($b as $v) {
            echo $v;
