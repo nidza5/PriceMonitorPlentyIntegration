@@ -109,7 +109,7 @@ class MapperServices implements MapperService
 
     public function convertToPricemonitor($contractId, $shopProduct)
     {
-        $products = $this->productsForExport;
+        $products = $shopProduct;
         $result = array('productId' => $products['id']);
         $mappings = $this->attributesMapping;
         $contract = $this->contract;
