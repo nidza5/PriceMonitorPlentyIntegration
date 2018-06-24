@@ -158,14 +158,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $emailForConfig = $emailObject->value;
         $passwordForConfig = $passwordObject->value;
 
-       
+       echo "iznad enqueu";
         $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
             'priceMonitorId' => $priceMonitorId,
             'queueModel' => $queue,
             'emailForConfig' =>  $emailForConfig,
             'passwordForConfig' =>  $passwordForConfig        
         ]); 
-
+        echo "ispod enqueu";
+        
         echo json_encode($enqueAndRun);
         
         // if($enqueAndRun != null && $enqueAndRun['Message'])
