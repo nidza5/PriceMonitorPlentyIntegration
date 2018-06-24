@@ -208,22 +208,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
         //  ]);
 
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => $typeOfFilter,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
-        ]);   
+        echo json_encode($savedTransactionMasterHistory);
 
-        echo json_encode($syncRun);
+        // $syncRun =  $this->sdkService->call("runSync", [
+        //     'queueModel' => $queue,
+        //     'queueName' => $queueName,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig,
+        //     'filterType' => $typeOfFilter,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'products' => $filteredVariation,
+        //     'attributesFromPlenty' => $attributesIdName,
+        //     'attributeMapping' => $attributeMapping,
+        //     'contract' => $contract,
+        //     "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
+        // ]);   
+
+        // echo json_encode($syncRun);
 
         // if( $syncRun != null)
         // {
