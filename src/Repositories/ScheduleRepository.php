@@ -17,7 +17,7 @@ class ScheduleRepository implements ScheduleRepositoryContract
      * @param array $data
      * @return void
      */
-    public function saveSchedule($contractId,array $data,CronContainer $cronContainer ) 
+    public function saveSchedule($contractId,array $data,$cronContainer ) 
     {
         $database = pluginApp(DataBase::class);
      
