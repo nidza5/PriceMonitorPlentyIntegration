@@ -61,7 +61,7 @@ class RunnerService
     public function enqueuePriceImportJob($pricemonitorContractId)
     {
         $queue = new Queue();
-        $queue->enqueue(new PriceImportJob($pricemonitorContractId));
+        return $queue->enqueue(new PriceImportJob($pricemonitorContractId));
     }
 
     private function enqueueStatusCheckerJob($exportTaskId,$contractId)
