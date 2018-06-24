@@ -100,7 +100,7 @@ class QueueStorage implements Storage
         // $reservationTime = $queueItem["reservationTime"] === null ? "" :
         //     DateTime::createFromFormat('Y-m-d H:i:s', $queueItem["reservationTime"]);
 
-        return new StorageModel(
+        $storageModel = new StorageModel(
             array(
                 'id' => $queueItem['id'],
                 'reservationTime' => $reservationTime,
@@ -108,6 +108,16 @@ class QueueStorage implements Storage
                 'payload' => $queueItem['payload']
             )
         );
+       return $storageModel = ["storageModel" =>  $storageModel];
+
+        // return new StorageModel(
+        //     array(
+        //         'id' => $queueItem['id'],
+        //         'reservationTime' => $reservationTime,
+        //         'attempts' => $queueItem['attempts'],
+        //         'payload' => $queueItem['payload']
+        //     )
+        // );
     }
 
     /**
