@@ -176,6 +176,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
 
+        echo "token for send";
+        echo $tokenForSend;
+
          $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password']
