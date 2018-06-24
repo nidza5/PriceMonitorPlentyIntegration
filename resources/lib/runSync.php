@@ -34,7 +34,6 @@ try {
    
 
    $runnerService = new RunnerService($queueModel);
-   $runnerService->enqueueProductExportJob($priceMonitorId);
    return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'], $priceMonitorId);
 
 } catch(\Exception $ex) {
