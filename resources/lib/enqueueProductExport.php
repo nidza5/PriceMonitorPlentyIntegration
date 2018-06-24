@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/RunnerService.php';
 require_once __DIR__ . '/PriceMonitorSdkHelper.php';
+require_once __DIR__ . '/QueueStorage.php';
 
 try {
 
@@ -9,9 +10,11 @@ try {
 
     $queueModel = SdkRestApi::getParam('queueModel');
 
-    return ["queueModel" =>  $queueModel];
+    $runnerService = new RunnerService($queueModel);
 
-    // $runnerService = new RunnerService($queueModel);
+    $queueStorage = new QueueStorage($queueModel);
+
+    return ["peek" =>$queueStorage->peek("Default")];
 
     // $emailForConfig = SdkRestApi::getParam('emailForConfig');
 

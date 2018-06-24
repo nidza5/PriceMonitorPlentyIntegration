@@ -167,7 +167,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]); 
 
         echo json_encode($enqueAndRun);
-
         // if($enqueAndRun != null && $enqueAndRun['Message'])
         // {
         //     return [
