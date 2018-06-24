@@ -138,6 +138,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          return json_encode($scheduleSaved);        
     }
 
+
     public function runProductExport(Request $request)
     {
         $requestData = $request->all();

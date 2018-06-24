@@ -25,6 +25,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
+ use Plenty\Modules\Helper\Services\WebstoreHelper;
+ use PriceMonitorPlentyIntegration\Constants\ApiResponse;
 
  /**
   * Class PriceImportController
@@ -76,7 +78,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $configInfoRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
+     /**
+     *
+     * @var WebstoreHelper
+     */
+     private $webstoreHelper; 
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,WebstoreHelper $webstoreHelper)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
@@ -85,6 +93,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->tokenRepo = $tokenRepo; 
         $this->config = $config;
         $this->configInfoRepo = $configInfoRepo;
+        $this->webstoreHelper = $webstoreHelper;
     }
 
 
@@ -106,6 +115,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         if($contract == null)
             throw new \Exception("Contract is empty");
+
+        if ($isEnabled && !$this->registerCallbacks($contract)) {
+            throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
+        }    
 
          $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
 
@@ -173,6 +186,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         return json_encode("OK");
 
+    }
+
+    public function registerCallbacks($contract)
+    {
+        $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
+        $tokenForSend = $webHookToken->value;
+
+        $webstoreHelper = pluginApp(\Plenty\Modules\Helper\Services\WebstoreHelper::class);
+        /** @var \Plenty\Modules\System\Models\WebstoreConfiguration $webstoreConfig */
+        $webstoreConfig = $webstoreHelper->getCurrentWebstoreConfiguration();
+        $callBackPrices =  $this->sdkService->call('registerCallBackForPrices', [
+            'token' => $tokenForSend,
+            'url' => $webstoreConfig->domainSsl . '/refreshPrices',
+            'contract_Id' => $contract->id
+        ]);
+        
+        return $callBackPrices;
     }
 
  }
