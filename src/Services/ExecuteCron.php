@@ -107,7 +107,7 @@ class ExecuteCron extends CronHandler
            
             $scheduleSaved =  $this->scheduleRepository->getScheduleByContractId($contract->id);
 
-            if (!$scheduleSaved->getEnableExport()) {
+            if (!$scheduleSaved->enableExport) {
                 continue;
             }
             
