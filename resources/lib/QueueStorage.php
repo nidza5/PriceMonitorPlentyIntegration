@@ -108,12 +108,7 @@ class QueueStorage implements Storage
                 'payload' => $queueItem['payload']
             )
         );
-       return $storageModel = ["storageModel" =>  array(
-        'id' => $queueItem['id'],
-        'reservationTime' => $reservationTime,
-        'attempts' => $queueItem['attempts'],
-        'payload' => $queueItem['payload']
-    )];
+       return $storageModel = ["storageModel" => serialize($storageModel) ];
 
         // return new StorageModel(
         //     array(
