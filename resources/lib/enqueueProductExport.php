@@ -14,15 +14,15 @@ try {
 
     $queueStorage = new QueueStorage($queueModel);
 
-    return ["peek" =>$queueStorage->peek("Default")];
 
-    // $emailForConfig = SdkRestApi::getParam('emailForConfig');
+    $emailForConfig = SdkRestApi::getParam('emailForConfig');
 
-    // $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+    $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
 
-    // PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
-    // return $runnerService->enqueueProductExportJob($priceMonitorId);
+    $resultEnqueu = $runnerService->enqueueProductExportJob($priceMonitorId);
+    return unserialize($resultEnqueu);
     
   //  return  $runnerService->runAsync();
 
