@@ -6,6 +6,8 @@ use Plenty\Exceptions\ValidationException;
 use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
 use PriceMonitorPlentyIntegration\Models\Schedule;
+use Plenty\Modules\Cron\Services\CronContainer;
+use PriceMonitorPlentyIntegration\Services\ExecuteCron;
  
 class ScheduleRepository implements ScheduleRepositoryContract
 {
@@ -35,6 +37,7 @@ class ScheduleRepository implements ScheduleRepositoryContract
             $schedule->exportStart = $startAt;
             $schedule->nextStart = $startAt;
             $schedule->exportInterval = $exportInterval;
+            $cronContainer->add((int)$exportInterval, ExecuteCron::class);
         } else {
             $schedule->exportStart = null;
             $schedule->nextStart = null;

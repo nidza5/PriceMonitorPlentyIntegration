@@ -18,6 +18,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
+ 
 
 
  /**
