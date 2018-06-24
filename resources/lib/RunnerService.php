@@ -159,17 +159,19 @@ class RunnerService
         // check queue first. If queue is empty run is complete, just skip.
         $queue = ServiceRegister::getQueueStorage()->peek($queueName);
 
-        if (!empty($queue)) {
-           // $runnerToken = $this->createRunnerToken();
-            //$this->callAsyncRequest($runnerToken->getToken(), $queueName);
+        return ["queue" =>  $queue];
 
-            return ['isCreateRunnerToken' => true,
-                    'queueName' => $queueName ];
-        }
-        else {
-            return ['isCreateRunnerToken' => false,
-                    'queueName' => $queueName ];
-        }
+        // if (!empty($queue)) {
+        //    // $runnerToken = $this->createRunnerToken();
+        //     //$this->callAsyncRequest($runnerToken->getToken(), $queueName);
+
+        //     return ['isCreateRunnerToken' => true,
+        //             'queueName' => $queueName ];
+        // }
+        // else {
+        //     return ['isCreateRunnerToken' => false,
+        //             'queueName' => $queueName ];
+        // }
     }
 
     /**

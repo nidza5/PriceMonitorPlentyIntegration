@@ -180,24 +180,26 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
       
-        if($createToken != null && $createToken['error'])
-           throw new \Exception($createToken['error_msg']);
+        echo json_encode( $createToken);
+
+        // if($createToken != null && $createToken['error'])
+        //    throw new \Exception($createToken['error_msg']);
         
-        if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
-        {
-           $hashUniqueToken =  StringUtils::getUniqueString(20);    
+        // if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
+        // {
+        //    $hashUniqueToken =  StringUtils::getUniqueString(20);    
 
-           $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
+        //    $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
  
-           $returnValues = [
-               "token" => $savedToken,
-               "queueName" => $enqueAndRun['queueName']
-           ];
-            // call async
-            return json_encode($returnValues);
-        }
+        //    $returnValues = [
+        //        "token" => $savedToken,
+        //        "queueName" => $enqueAndRun['queueName']
+        //    ];
+        //     // call async
+        //     return json_encode($returnValues);
+        // }
 
-        return json_encode("OK");
+        // return json_encode("OK");
       
     }
  }
