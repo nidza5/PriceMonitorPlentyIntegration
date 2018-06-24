@@ -22,7 +22,7 @@ try {
     PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
     $resultEnqueu = $runnerService->enqueueProductExportJob($priceMonitorId);
-    return unserialize($resultEnqueu);
+    return $resultEnqueu;
     
   //  return  $runnerService->runAsync();
 
