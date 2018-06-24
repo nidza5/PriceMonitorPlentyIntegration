@@ -9,15 +9,17 @@ try {
 
     $queueModel = SdkRestApi::getParam('queueModel');
 
-    $runnerService = new RunnerService($queueModel);
+    return ["queueModel" =>  $queueModel];
 
-    $emailForConfig = SdkRestApi::getParam('emailForConfig');
+    // $runnerService = new RunnerService($queueModel);
 
-    $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
+    // $emailForConfig = SdkRestApi::getParam('emailForConfig');
 
-    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+    // $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
 
-    return $runnerService->enqueueProductExportJob($priceMonitorId);
+    // PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+
+    // return $runnerService->enqueueProductExportJob($priceMonitorId);
     
   //  return  $runnerService->runAsync();
 
