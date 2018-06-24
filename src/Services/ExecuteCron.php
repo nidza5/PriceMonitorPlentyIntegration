@@ -23,6 +23,10 @@ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
 use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
+use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
+use PriceMonitorPlentyIntegration\Contracts\TransactionHistoryRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
 
 class ExecuteCron extends CronHandler
 {
@@ -65,7 +69,19 @@ class ExecuteCron extends CronHandler
          */
         private $attributesMappingRepo;
 
-    public function __construct(ScheduleRepositoryContract $scheduleRepository,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepositoryContract $configInfoRepo,AttributesMappingRepositoryContract $attributesMappingRepo,PriceMonitorSdkService $sdkService)
+        /**
+         *
+         * @var ProductFilterRepository
+         */
+        private $productFilterRepo;
+
+         /**
+         *
+         * @var TransactionHistoryRepositoryContract
+         */
+        private $transactionHistoryRepo;
+
+    public function __construct(ScheduleRepositoryContract $scheduleRepository,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepositoryContract $configInfoRepo,AttributesMappingRepositoryContract $attributesMappingRepo,PriceMonitorSdkService $sdkService,ProductFilterRepository $productFilterRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo)
     {
         $this->scheduleRepository = $scheduleRepository;
         $this->contractRepo = $contractRepo;
@@ -73,6 +89,8 @@ class ExecuteCron extends CronHandler
         $this->configInfoRepo = $configInfoRepo; 
         $this->attributesMappingRepo = $attributesMappingRepo; 
         $this->sdkService = $sdkService;
+        $this->productFilterRepo = $productFilterRepo;
+        $this->transactionHistoryRepo = $transactionHistoryRepo;
     }
 
     /**
@@ -83,11 +101,11 @@ class ExecuteCron extends CronHandler
         
         $queueName = "Default";
 
-        $contracts = $contractRepo->getContracts(); 
+        $contracts = $this->contractRepo->getContracts(); 
 
         foreach($contracts as $contract) {
            
-            $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+            $scheduleSaved =  $this->scheduleRepository->getScheduleByContractId($contract->id);
 
             if (!$scheduleSaved->getEnableExport()) {
                 continue;
