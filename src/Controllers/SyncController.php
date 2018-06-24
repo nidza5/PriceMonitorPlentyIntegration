@@ -204,26 +204,29 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
 
+            echo "PRICE MONITOR ID";
+            echo $priceMonitorId;
+
         //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
         //  ]);
 
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => $typeOfFilter,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
-        ]);   
+        // $syncRun =  $this->sdkService->call("runSync", [
+        //     'queueModel' => $queue,
+        //     'queueName' => $queueName,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig,
+        //     'filterType' => $typeOfFilter,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'products' => $filteredVariation,
+        //     'attributesFromPlenty' => $attributesIdName,
+        //     'attributeMapping' => $attributeMapping,
+        //     'contract' => $contract,
+        //     "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
+        // ]);   
 
-        echo json_encode($syncRun);
+        // echo json_encode($syncRun);
 
         // if( $syncRun != null)
         // {
