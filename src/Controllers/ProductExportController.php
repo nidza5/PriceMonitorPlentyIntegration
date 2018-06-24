@@ -25,6 +25,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
+ use Plenty\Modules\Cron\Services\CronContainer;
  
 
  /**
@@ -77,7 +78,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $configInfoRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
+        private $cronContainer;
+
+    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,CronContainer $cronContainer)
     {
         $this->sdkService = $sdkService;       
         $this->scheduleRepo = $scheduleRepo;      
@@ -86,6 +89,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->tokenRepo = $tokenRepo; 
         $this->config = $config;
         $this->configInfoRepo = $configInfoRepo;   
+        $this->cronContainer= $cronContainer;
     }
 
     public function getSchedule(Request $request) :string 
@@ -127,7 +131,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($contract == null)
             throw new \Exception("Contract is empty");
 
-         $this->scheduleRepo->saveSchedule($contract->id,$requestData);
+         $this->scheduleRepo->saveSchedule($contract->id,$requestData,$this->cronContainer);
 
          $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
 
