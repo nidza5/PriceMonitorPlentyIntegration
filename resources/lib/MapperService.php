@@ -110,8 +110,8 @@ class MapperServices implements MapperService
     public function convertToPricemonitor($contractId, $shopProduct)
     {
         
-        foreach($shopProduct as $product)
-        {   
+        // foreach($shopProduct as $product)
+        // {   
             $result = array('productId' => $product['id']);
             $mappings = $this->attributesMapping;
             $contract = $this->contract;
@@ -149,7 +149,7 @@ class MapperServices implements MapperService
                 }        
             }
 
-        }      
+        // }      
 
         return $result;
     }
