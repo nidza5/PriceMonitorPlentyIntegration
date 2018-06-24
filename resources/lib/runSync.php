@@ -13,29 +13,31 @@ try {
 
    $filterType = SdkRestApi::getParam('filterType');
    $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
-   $productFilterRepo = SdkRestApi::getParam('productFilterRepo');
 
-   $products = SdkRestApi::getParam('products');
+    return $priceMonitorId;
+//    $productFilterRepo = SdkRestApi::getParam('productFilterRepo');
 
-   $productsAttributes = SdkRestApi::getParam('attributesFromPlenty');
-   $attributeMapping = SdkRestApi::getParam('attributeMapping');
-   $contract = SdkRestApi::getParam('contract');  
+//    $products = SdkRestApi::getParam('products');
 
-   $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
+//    $productsAttributes = SdkRestApi::getParam('attributesFromPlenty');
+//    $attributeMapping = SdkRestApi::getParam('attributeMapping');
+//    $contract = SdkRestApi::getParam('contract');  
+
+//    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
   
-   PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+//    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
-   PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
-   PriceMonitorSdkHelper::registerProductService($contract,$products); 
+//    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
+//    PriceMonitorSdkHelper::registerProductService($contract,$products); 
 
-    PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
+//     PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
 
-   $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
+//    $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
    
 
-   $runnerService = new RunnerService($queueModel);
-   $runnerService->enqueueProductExportJob( $priceMonitorId);
-   return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'], $priceMonitorId);
+//    $runnerService = new RunnerService($queueModel);
+//    $runnerService->enqueueProductExportJob($priceMonitorId);
+//    return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'], $priceMonitorId);
 
 } catch(\Exception $ex) {
     
