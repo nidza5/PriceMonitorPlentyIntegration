@@ -23,6 +23,7 @@ use PriceMonitorPlentyIntegration\Contracts\TransactionDetailsRepositoryContract
 use PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
+use PriceMonitorPlentyIntegration\Helper\StringUtils;
 
 
 /**
@@ -49,12 +50,16 @@ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
          $this->getApplication()->bind(ConfigRepositoryContract::class, ConfigInfoRepository::class);
      }
 
-     public function boot(ReferenceContainer $referenceContainer)
+     public function boot(ReferenceContainer $referenceContainer, ConfigRepositoryContract $configRepo)
     {
         // Register reference types for logs.
         try
         {
             $referenceContainer->add([ 'ContractId' => 'ContractId' ]);
+
+            $configRepo->saveConfig('webhook_token', StringUtils::getUniqueString(20));
+            
+
         }
         catch(ReferenceTypeException $ex)
         {
