@@ -111,7 +111,7 @@ class MapperServices implements MapperService
     {
         
         foreach($shopProduct as $product)
-        {
+        {   
             $result = array('productId' => $product['id']);
             $mappings = $this->attributesMapping;
             $contract = $this->contract;
