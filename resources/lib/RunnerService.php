@@ -97,7 +97,9 @@ class RunnerService
             }
         }
 
-        $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
+        $transactionHistoryDetailsForSaving = null;
+
+        // $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
         
          $returnArray = [
              "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
