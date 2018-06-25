@@ -190,10 +190,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         echo "token for send";
         echo $tokenForSend;
 
+        $configServiceInstance = pluginApp(ConfigService::class);
+
         $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password'],
-            'configService' => $this->configService
+            'configService' => $configServiceInstance
         ]);
 
         $allSchedule = $this->scheduleRepository->getAllSchedule();
