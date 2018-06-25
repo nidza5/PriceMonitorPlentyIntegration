@@ -238,7 +238,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $itemService = pluginApp(ProductFilterService::class);
 
-        $finalResult = $itemService->getAllVariations();
+        $finalResult = $itemService-> getCategoryById(18);
 
         echo "products";
         echo json_encode($finalResult);
