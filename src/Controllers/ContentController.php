@@ -240,11 +240,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
 
-        $paymentService =  pluginApp(PaymentService::class);
-        $allpayments = $paymentService->getAllPayment();
+        $itemService = pluginApp(ProductFilterService::class);
 
-        echo "payments";
-        echo json_encode($allpayments );
+         $finalResult = $itemService-getVariationById(1030);
+
+         echo "variation";
+         echo json_encode($finalResult);
+        
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);

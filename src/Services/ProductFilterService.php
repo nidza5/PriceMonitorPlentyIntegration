@@ -24,7 +24,8 @@ use Plenty\Modules\Item\Search\Filter\VariationBaseFilter;
 use Plenty\Modules\Item\Variation\Contracts\VariationSearchRepositoryContract;
 use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
 use Plenty\Modules\Item\Barcode\Models\Barcode;
-use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;   
+use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
+use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;   
 
 class ProductFilterService {
 
@@ -177,6 +178,23 @@ class ProductFilterService {
 
     }
 
+    public function getVariationById($id) {
+
+        $repository = pluginApp(VariationRepositoryContract::class);       
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $variation = null;
+
+        $variation = $authHelper->processUnguarded(
+            function () use ($repository, $variation,$id) {
+            
+                return $repository->findById($id);
+            }
+        );
+
+        return $variation;        
+    }
 }
 
 ?>
