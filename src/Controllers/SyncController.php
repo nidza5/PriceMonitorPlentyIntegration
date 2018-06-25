@@ -376,7 +376,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $results = array();
         foreach($batchPrices as $batchPrice) {
 
-            $returnProducts = array_filter($inputVariations, function($value) {
+            $returnProducts = array_filter($inputVariations, function($value) use ($batchPrice) {
                     return $value["id"] == $batchPrice["id"];                 
             });
 
