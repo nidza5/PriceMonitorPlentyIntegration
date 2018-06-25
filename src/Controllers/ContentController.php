@@ -32,7 +32,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
- use Wallee\Services\PaymentService;
+
 
  /**
   * Class ContentController
