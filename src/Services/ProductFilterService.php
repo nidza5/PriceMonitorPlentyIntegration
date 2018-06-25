@@ -180,20 +180,38 @@ class ProductFilterService {
 
     public function getVariationById($id) {
 
-        $repository = pluginApp(VariationRepositoryContract::class);       
+        // $repository = pluginApp(VariationRepositoryContract::class);       
+
+        // $authHelper = pluginApp(AuthHelper::class);
+
+        // $variation = null;
+
+        // $variation = $authHelper->processUnguarded(
+        //     function () use ($repository, $variation,$id) {
+            
+        //         return $repository->findById($id);
+        //     }
+        // );
+
+        // return $variation;        
+    
+        $repository = pluginApp(VariationSearchRepositoryContract::class);
+        $repository->setFilters([
+            'id' => $id
+        ]);
 
         $authHelper = pluginApp(AuthHelper::class);
 
-        $variation = null;
+        $repository->setSearchParams([
+            'with' => [
+                'variationSalesPrices' => null
+            ]
+         ]);
 
-        $variation = $authHelper->processUnguarded(
-            function () use ($repository, $variation,$id) {
-            
-                return $repository->findById($id);
-            }
-        );
+        $variation = $repository->search();
 
-        return $variation;        
+        $originalVariation = $variation->getResult();
+        return $originalVariation;
     }
 }
 
