@@ -39,15 +39,8 @@ class PriceMonitorHttpClient
      */
     public function request($method, $url, array $headers = [], $body = '')
     {
-        
+        echo "DA probamo";
 
-        // echo "DA probamo";
-
-        $this
-             ->getLogger('ContentController_createToDo')
-             ->setReferenceType('toDoId') // optional
-             ->setReferenceValue($newToDo->id) // optional
-             ->info('ToDoList::migration.createToDoInformation', ['userId' => $newToDo->userId ]);
         // $request = $this->client->createRequest(
         //     $method,
         //     $url,
