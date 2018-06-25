@@ -242,7 +242,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $itemService = pluginApp(ProductFilterService::class);
 
-         $finalResult = $itemService-getVariationById(1030);
+         $finalResult = $itemService->getVariationById(1030);
 
          echo "variation";
          echo json_encode($finalResult);
