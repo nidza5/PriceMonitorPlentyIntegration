@@ -9,6 +9,7 @@ $configService = SdkRestApi::getParam('configService');
 
 PriceMonitorSdkHelper::registerConfigService($email,$password,$configService);
 
-return PriceMonitorSdkHelper::setUpCredentials($email,$password,$configService);
+ PriceMonitorSdkHelper::setUpCredentials($email,$password,$configService);
 
+ return true;
 ?>

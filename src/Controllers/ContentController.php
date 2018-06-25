@@ -190,7 +190,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         echo "token for send";
         echo $tokenForSend;
 
-         $this->sdkService->call("setUpPriceMonitorCredentials", [
+        $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password'],
             'configService' => $this->configService
