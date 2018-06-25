@@ -1,11 +1,14 @@
 <?php
 
 // use GuzzleHttp\ClientInterface;
+use Plenty\Plugin\Log\Loggable;
 namespace PriceMonitorPlentyIntegration\Services;
 
 
 class PriceMonitorHttpClient
 {
+
+    use Loggable;
     /**
      * @var client
      * 
@@ -35,8 +38,11 @@ class PriceMonitorHttpClient
      */
     public function request($method, $url, array $headers = [], $body = '')
     {
+        
 
         echo "DA probamo";
+
+        $this->getLogger("CreateToDoTable_run")->info('nesto da izadje');
         // $request = $this->client->createRequest(
         //     $method,
         //     $url,
