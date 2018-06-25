@@ -133,8 +133,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
-                'password' => $credentials['password'],
-                 'httpClient' => $this->httpClient
+                'password' => $credentials['password']
+                //  'httpClient' => $this->httpClient
             ]);
 
             // echo "response contracts    ";

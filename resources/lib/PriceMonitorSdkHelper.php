@@ -53,13 +53,13 @@
         "VariationNo" => 'number'
     );
 
-    public static function loginInPriceMonitor($email,$password,$httpClient)
+    public static function loginInPriceMonitor($email,$password)
     { 
         try {
             new ServiceRegister();
 
-           // $client = new PriceMonitorHttpClient();
-            ServiceRegister::registerHttpClient($httpClient);
+            $client = new PriceMonitorHttpClient();
+            ServiceRegister::registerHttpClient($client);
 
             $proxy = Proxy::createFor($email,$password);      
             $contracts = $proxy->getContracts();

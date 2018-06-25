@@ -41,9 +41,13 @@ class PriceMonitorHttpClient
     {
         
 
-        echo "DA probamo";
+        // echo "DA probamo";
 
-        $this->getLogger("CreateToDoTable_run")->info('nesto da izadje');
+        $this
+             ->getLogger('ContentController_createToDo')
+             ->setReferenceType('toDoId') // optional
+             ->setReferenceValue($newToDo->id) // optional
+             ->info('ToDoList::migration.createToDoInformation', ['userId' => $newToDo->userId ]);
         // $request = $this->client->createRequest(
         //     $method,
         //     $url,
