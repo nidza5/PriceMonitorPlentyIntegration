@@ -13,9 +13,14 @@ class ConfigService
      */
     private $configInfoRepo;
 
-    public function __construct(ConfigRepositoryContract $configInfoRepo)
+    // public function __construct(ConfigRepositoryContract $configInfoRepo)
+    // {
+    //     $this->configInfoRepo = $configInfoRepo;
+    // }
+
+    public function __construct()
     {
-        $this->configInfoRepo = $configInfoRepo;
+        
     }
 
     public function getCredentials()
