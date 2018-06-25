@@ -37,8 +37,8 @@ class ConfigService
      */
     public function setCredentials($email, $password)
     {
-        $this->configInfoRepo->saveConfig('email',$credentials['email']);
-        $this->configInfoRepo->saveConfig('password',$credentials['password']);
+        $this->configInfoRepo->saveConfig('email',$email);
+        $this->configInfoRepo->saveConfig('password',$password);
     }
 
      public function getComponentName() {
