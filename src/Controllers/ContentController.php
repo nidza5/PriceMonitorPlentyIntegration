@@ -31,6 +31,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
+ use PriceMonitorPlentyIntegration\Services\PaymentService;
+ use Wallee\Services\PaymentService;
 
  /**
   * Class ContentController
@@ -237,6 +239,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //  $categories =  $prodServ->getCategoryById(18);
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
+
+        $paymentService =  pluginApp(PaymentService::class);
+        $allpayments = $paymentService->getAllPayment();
+
+        echo "payments";
+        echo json_encode($allpayments );
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);

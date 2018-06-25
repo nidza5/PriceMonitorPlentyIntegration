@@ -12,6 +12,7 @@ use Patagona\Pricemonitor\Core\Sync\Runner\Runner;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryDetail;
 use Patagona\Pricemonitor\Core\Sync\StatusCheck\Job as StatusCheckJob;
 use Patagona\Pricemonitor\Core\Sync\TransactionHistory\TransactionHistoryStatus;
+use PriceMonitorPlentyIntegration\Constants\FilterType;
 
 class RunnerService
 {
@@ -78,36 +79,41 @@ class RunnerService
      * @return void
      * @throws Exception
      */
-    public function runSync($queueName = null,$products,$transactionId,$priceMonitorId)
+    public function runSync($queueName = null,$products,$transactionId,$priceMonitorId,$filterType)
     {
         $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
 
         $runner = new Runner($queueName);
         $arraysResultRun =  $runner->run();
 
-        $productsForExport = null;
+        if($filterType == FilterType::EXPORT_PRODUCTS) 
+        {
+            $productsForExport = null;
 
-        if($products != null) {
-            $mapperService = new MapperServices(null,null,$products,null);
+            if($products != null) {
+                $mapperService = new MapperServices(null,null,$products,null);
 
-            foreach ($products as $shopProduct) {
-                $product = $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
-               // $this->logProductValidationWarnings($product);
-                $productsForExport[] = $product;
+                foreach ($products as $shopProduct) {
+                    $product = $mapperService->convertToPricemonitor($priceMonitorId, $shopProduct);
+                // $this->logProductValidationWarnings($product);
+                    $productsForExport[] = $product;
+                }
             }
-        }
-        
 
-        $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
+            $transactionHistoryDetailsForSaving = $this->createTransactionDetails($transactionId, $productsForExport);
         
-         $returnArray = [
-             "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
-             "transactionHistoryDetailsForSaving" => $transactionHistoryDetailsForSaving,
-             "dequeus" => $arraysResultRun["Dequeu"],
-             "release" => $arraysResultRun["Release"]
-         ];
+        } else if($filterType == FilterType::IMPORT_PRICES) {
+            $transactionHistoryDetailsForSaving = $this->createImportDetailsBasedOnPrices($arraysResultRun["UniqueIdentifiers"],$transactionId);
+        }      
 
-         return $returnArray; 
+        $returnArray = [
+            "arrayUniqueIdentifier"  => $arraysResultRun["UniqueIdentifiers"],
+            "transactionHistoryDetailsForSaving" => $transactionHistoryDetailsForSaving,
+            "dequeus" => $arraysResultRun["Dequeu"],
+            "release" => $arraysResultRun["Release"]
+        ];
+
+        return $returnArray;         
      }
          #
         // $this->runAsync($queueName);
@@ -142,6 +148,28 @@ class RunnerService
         }
 
         return $transactionDetails;
+    }
+
+    private function createImportDetailsBasedOnPrices($prices, $transactionId)
+    {
+        $importDetails = [];
+
+        foreach ($prices as $price) {
+            $importDetail = new TransactionHistoryDetail(
+                TransactionHistoryStatus::IN_PROGRESS,
+                new \DateTime(),
+                null,
+                $transactionId,
+                null,
+                $price['identifier'],
+                $price['gtin']
+            );
+
+            $importDetail->setUpdatedInShop(false);
+            $importDetails[] = $importDetail;
+        }
+
+        return $importDetails;
     }
 
     /**

@@ -66,6 +66,8 @@ class TransactionDetailsRepository implements TransactionDetailsRepositoryContra
     {
         $database = pluginApp(DataBase::class);
         
+        $savedDetails = array();
+
         foreach($transactionDetails as $transactionDetail) {
             $detail = $this->getTransactionHistoryDetailById($transactionDetail["id"]);
             $importFailed = false;  
@@ -100,6 +102,9 @@ class TransactionDetailsRepository implements TransactionDetailsRepositoryContra
             }
 
             $database->save($detail);
+            array_push($savedDetails,$detail);  
         }
+
+        return $savedDetails;
     }
 }

@@ -33,6 +33,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\TransactionHistoryRepository;
  use  PriceMonitorPlentyIntegration\Contracts\TransactionDetailsRepositoryContract;
  use  PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
+ use PriceMonitorPlentyIntegration\Constants\ProductConst;
+ use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 
  /**
   * Class SyncController
@@ -228,53 +230,180 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         echo json_encode($syncRun);
 
-        // if( $syncRun != null)
-        // {
-        //     foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
+        if( $syncRun != null)
+        {
+            if($typeOfFilter == FilterType::EXPORT_PRODUCTS) {
 
-        //         if($sync != null && $sync != -1) {
+                foreach($syncRun['arrayUniqueIdentifier'] as $sync) {
                     
-        //             if($savedTransactionMasterHistory['id'] != null) {
-        //                  $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
-        //                  $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
-        //                  $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
-                    
-        //             } else {
+                    if($sync != null && $sync != -1) {
+                        
+                        $this->updateTransactionHistoryBasedOnFilterType($typeOfFilter,$contract,$savedTransactionMasterHistory['id'],$syncRun['transactionHistoryDetailsForSaving'],$sync); 
+                        // if($savedTransactionMasterHistory['id'] != null) {
+                        //      $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
+                        //      $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
+                        //      $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
+                        
+                        // } else {
 
-        //                 $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
-        //                 $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
-        //                 $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
-        //             }
+                        //     $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
+                        //     $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
+                        //     $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
+                        // }
 
-        //             $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
-        //             $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
-                    
-        //             $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
-        //                 'queueModel' => $queue,
-        //                 'exportTaskId' => $sync,
-        //                 'contractId' => $contract->priceMonitorId             
-        //             ]); 
+                        // $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
+                        // $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
+                        
+                        $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
+                            'queueModel' => $queue,
+                            'exportTaskId' => $sync,
+                            'contractId' => $contract->priceMonitorId             
+                        ]); 
 
-        //             if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
-        //             {
-        //                 return [
-        //                     'Message' => $enqueueStatusCheckerJob['Message']
-        //                 ];
-        //             } 
+                        if($enqueueStatusCheckerJob != null && $enqueueStatusCheckerJob['Message'])
+                        {
+                            return [
+                                'Message' => $enqueueStatusCheckerJob['Message']
+                            ];
+                        } 
 
-        //             if($enqueueStatusCheckerJob != null)
-        //                 $this->queueRepo->savePriceMonitorQueue($enqueueStatusCheckerJob['queueName'],$enqueueStatusCheckerJob['storageModel']);
-        //         }             
-        //     }
+                        if($enqueueStatusCheckerJob != null)
+                            $this->queueRepo->savePriceMonitorQueue($enqueueStatusCheckerJob['queueName'],$enqueueStatusCheckerJob['storageModel']);
+                    }
+                }  
+            } else if($typeOfFilter == FilterType::IMPORT_PRICES) {
+                $transactionDetails = $this->updateTransactionHistoryBasedOnFilterType($typeOfFilter,$contract,$savedTransactionMasterHistory['id'],$syncRun['transactionHistoryDetailsForSaving'],null); 
+                $batchNotImportedPrices = $this->createNotImportedPrices($syncRun['arrayUniqueIdentifier'], $transactionDetails,$filteredVariation,$allVariations,$typeOfFilter,$priceMonitorId,$attributesIdName,$attributeMapping);
+            }  
 
-        //     foreach($syncRun['dequeus'] as $deq) 
-        //       $this->queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
+            foreach($syncRun['dequeus'] as $deq) 
+              $this->queueRepo->deleteQueue($deq['QueueName'],$deq['StorageModel']);
 
-        //     foreach($syncRun['release'] as $rel)
-        //         $this->queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
-        // }      
+            foreach($syncRun['release'] as $rel)
+                $this->queueRepo->updateReservationTime($rel['QueueName'],$rel['StorageModel']);
+        }      
         
-        // $result = ['successSync' => $syncRun];
-        // return  json_encode($result);
+        $result = ['successSync' => $syncRun];
+        return  json_encode($result);
+    }
+
+    public function createNotImportedPrices($prices, &$transactionDetails,$filteredVariation,$allVariations,$typeOfFilter,$priceMonitorId,$attributesIdName,$attributeMapping)
+    {
+        $filterPricesStart = 0;
+        $filterPricesBatchSize = 10;
+        $notImportedPrices = [];
+        $productIdentifierCode = ProductConst::PRODUCT_IDENTIFIER;
+
+        do {
+            $batchPrices = array_slice($prices, $filterPricesStart, $filterPricesBatchSize);
+            $filteredShopProducts = [];
+
+            $filteredShopProducts = $this->getVariationsFromCollection($filteredVariation, $batchPrices); 
+            
+            $allProducts = $this->getVariationsFromCollection($allVariations, $batchPrices); 
+
+            $batchPrices =  $this->sdkService->call("fillBatchPricesEmptyFields", [
+                'allProducts' => $allProducts,
+                'batchPrices' => $batchPrices,
+                'filterType' => $typeOfFilter,
+                'priceMonitorId' => $priceMonitorId,
+                'attributesFromPlenty' => $attributesIdName,
+                'attributeMapping' => $attributeMapping        
+            ]); 
+
+            if (count($filteredShopProducts) === 0) {
+                foreach ($batchPrices as $batchPrice) {
+                    $notImportedPrices[] = [
+                        'productId' => $batchPrice['identifier'],
+                        'errors' => [],
+                        'name' => $batchPrice['name'],
+                        'status' => TransactionStatus::FILTERED_OUT
+                    ];
+                }
+            } else {
+
+                $notImportedFilteredPrices = $this->sdkService->call("createNotImportedFilteredPrices", [
+                    'filteredShopProducts' => $filteredShopProducts,
+                    'transactionDetails' => $transactionDetails,
+                    'batchPrices' => $batchPrices,
+                    'filterType' => $typeOfFilter,
+                    'priceMonitorId' => $priceMonitorId,
+                    'attributesFromPlenty' => $attributesIdName,
+                    'attributeMapping' => $attributeMapping        
+                ]); 
+
+                $notImportedPrices = array_merge(
+                    $notImportedPrices,
+                    $notImportedFilteredPrices
+                );
+            }
+
+            $batchPrices = $this->removeFilteredPricesFromBatch($batchPrices, $notImportedPrices);
+
+            $notImportedPrices = array_merge(
+                $notImportedPrices,
+                $this->updatePrices($priceMonitorId, $batchPrices)
+            );
+            $filterPricesStart += $filterPricesBatchSize;
+
+        } while ($filterPricesStart < count($prices));
+
+        return $notImportedPrices;
+
+    }
+
+    private function updatePrices($contractId, $batchPrices) {
+
+
+    }
+
+    private function removeFilteredPricesFromBatch($batchPrices, $notImportedPrices)
+    {
+        foreach ($batchPrices as $batchPriceIndex => $batchPrice) {
+            foreach ($notImportedPrices as $notImportedPrice) {
+                if ($batchPrice['identifier'] == $notImportedPrice['productId']) {
+                    unset($batchPrices[$batchPriceIndex]);
+                    break;
+                }
+            }
+        }
+
+        return $batchPrices;
+    }
+
+    public function getVariationsFromCollection($inputVariations, $batchPrices) 
+    {
+        $results = array();
+        foreach($batchPrices as $batchPrice) {
+
+            $returnProducts = array_filter($inputVariations, function($value) {
+                    return $value["id"] == $batchPrice["id"];                 
+            });
+
+            array_push($results,$returnProducts);
+
+        }
+
+        return  $results;
+    }
+
+    public function updateTransactionHistoryBasedOnFilterType($filterType,$contract,$transactionId,$transactionHistoryDetails,$uniqueIdentifier) 
+    {
+        if($transactionId != null) {
+            $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,$filterType,$transactionId);
+            $transactionHistoryDetailsForSaving = $transactionHistoryDetails;
+            $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$transactionId,null,TransactionStatus::IN_PROGRESS);
+       
+       } else {
+
+           $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,$filterType,null,$uniqueIdentifier);
+           $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$uniqueIdentifier,null);
+           $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$uniqueIdentifier,TransactionStatus::IN_PROGRESS);
+       }
+
+        $transactionDetails =  $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, $filterType,$uniqueIdentifier,null);
+       $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,$filterType,$uniqueIdentifier,$allTransactionsDetailsInProgress);
+   
+       return $transactionDetails;
     }
  }
