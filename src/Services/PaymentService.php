@@ -39,9 +39,9 @@ class PaymentService {
             }
         );
 
-         $resultPayments = $payments->getResult();
+    
 
-        return $resultPayments;
+        return $payments;
      
     }
 }
