@@ -187,8 +187,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
 
-        echo "token for send";
-        echo $tokenForSend;
+    
 
         $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
@@ -237,12 +236,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $contractsIds = array();
 
-        // $itemService = pluginApp(ProductFilterService::class);
+        $itemService = pluginApp(ProductFilterService::class);
 
-        // $finalResult = $itemService->getAllVariations();
+        $finalResult = $itemService->getAllVariations();
 
-        // echo "products";
-        // echo json_encode($finalResult);
+        echo "products";
+        echo json_encode($finalResult);
               
         // $prodServ = pluginApp(ProductFilterService::class);
 
