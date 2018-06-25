@@ -39,8 +39,6 @@ class PaymentService {
             }
         );
 
-    
-
         return $payments;
      
     }

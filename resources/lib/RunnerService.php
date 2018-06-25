@@ -84,7 +84,7 @@ class RunnerService
         $queueName = $queueName === null ? self::DEFAULT_QUEUE_NAME : $queueName;
 
         $runner = new Runner($queueName);
-        $arraysResultRun =  $runner->run();
+        $arraysResultRun =  $runner->run(true);
 
         if($filterType == FilterType::EXPORT_PRODUCTS) 
         {

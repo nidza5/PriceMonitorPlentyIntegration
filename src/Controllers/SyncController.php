@@ -35,6 +35,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use  PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
  use PriceMonitorPlentyIntegration\Constants\ProductConst;
  use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
+ use PriceMonitorPlentyIntegration\Services\PaymentService;
 
  /**
   * Class SyncController
@@ -353,8 +354,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     }
 
     private function updatePrices($contractId, $batchPrices) {
+        
+        $systemCurrency = "EUR";
+        $paymentService =  pluginApp(PaymentService::class);
+        $allpayments = $paymentService->getAllPayment();
 
+        if($allpayments != null) {
+            if($allpayments[0] != null)
+               $systemCurrency = $allpayments[0]['currency'];
+        }
 
+        foreach($batchPrices as $price) {
+            if($price['currency'] ==  $systemCurrency) {
+                
+            }
+        }
     }
 
     private function removeFilteredPricesFromBatch($batchPrices, $notImportedPrices)
