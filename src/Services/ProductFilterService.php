@@ -155,7 +155,7 @@ class ProductFilterService {
             }
             
             foreach($p['variationAttributeValues'] as $attrinute) {
-                $attributeName =  $attrinute[0]["attribute"]["backendName"];
+                $attributeName =  $attrinute[0]["attribute"]->backendName;
                 $attributeValue =  $attrinute[0]["attributeValue"]["backendName"];
             
                 $attributeElement = [$attributeName => $attributeValue];
