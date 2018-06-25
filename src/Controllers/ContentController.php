@@ -32,7 +32,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
- use  PriceMonitorPlentyIntegration\Services\PriceMonitorHttpClient;
+ use PriceMonitorPlentyIntegration\Services\PriceMonitorHttpClient;
 
 
  /**
