@@ -218,8 +218,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
         //  ]);
 
-        $configServiceInstance = pluginApp(ConfigService::class);
-
+        
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,
             'queueName' => $queueName,
@@ -233,7 +232,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributeMapping' => $attributeMapping,
             'contract' => $contract,
             "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
-            "configService" => $configServiceInstance              
+            "configService" => $this->configService              
         ]);   
 
         echo json_encode($syncRun);
