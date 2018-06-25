@@ -15,7 +15,7 @@ try {
 
     $passwordForConfig = SdkRestApi::getParam('passwordForConfig');
 
-    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+    //PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
     return $runnerService->enqueuePriceImportJob($priceMonitorId);
     
