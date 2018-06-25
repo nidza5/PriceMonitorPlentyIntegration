@@ -1,9 +1,10 @@
 <?php
 
 // use GuzzleHttp\ClientInterface;
-use Plenty\Plugin\Log\Loggable;
+
 namespace PriceMonitorPlentyIntegration\Services;
 
+use Plenty\Plugin\Log\Loggable;
 
 class PriceMonitorHttpClient
 {
