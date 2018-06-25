@@ -23,7 +23,7 @@ try {
 
    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
   
-   PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+//    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
 
    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
    PriceMonitorSdkHelper::registerProductService($contract,$products); 
