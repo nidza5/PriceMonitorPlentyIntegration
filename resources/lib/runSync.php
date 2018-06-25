@@ -22,8 +22,10 @@ try {
    $contract = SdkRestApi::getParam('contract');  
 
    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
+   $configService = SdkRestApi::getParam('configService');    
   
-//    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig);
+   
+    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig,$configService);
 
    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
    PriceMonitorSdkHelper::registerProductService($contract,$products); 

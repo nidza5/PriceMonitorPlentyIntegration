@@ -37,7 +37,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
  use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
-
+ use PriceMonitorPlentyIntegration\Services\ConfigService;
  /**
   * Class SyncController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -107,7 +107,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $transactionDetailsHistoryRepo;
 
-    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,TransactionDetailsRepositoryContract $transactionDetailsHistoryRepo)
+        private $configService;
+
+    public function __construct(PriceMonitorSdkService $sdkService,RunnerTokenRepositoryContract $tokenRepo,PriceMonitorQueueRepositoryContract $queueRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo,TransactionHistoryRepositoryContract $transactionHistoryRepo,TransactionDetailsRepositoryContract $transactionDetailsHistoryRepo,ConfigService $configService)
     {
         $this->sdkService = $sdkService;
         $this->tokenRepo = $tokenRepo;  
@@ -119,6 +121,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->contractRepo = $contractRepo;
         $this->transactionHistoryRepo = $transactionHistoryRepo; 
         $this->transactionDetailsHistoryRepo = $transactionDetailsHistoryRepo; 
+        $this->configService = $configService;
     }
 
     
@@ -227,7 +230,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'attributesFromPlenty' => $attributesIdName,
             'attributeMapping' => $attributeMapping,
             'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory              
+            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
+            "configService" => $this->configService              
         ]);   
 
         echo json_encode($syncRun);
