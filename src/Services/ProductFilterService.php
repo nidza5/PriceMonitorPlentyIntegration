@@ -141,7 +141,18 @@ class ProductFilterService {
                     $tempArr = $merge;              
                     $itemsResults[$i] = $merge;                     
             
-            }          
+            }
+            
+            foreach($p['variationCategories'] as $category){
+                $categoryOriginal = $this->getCategoryById($categoryid["categoryId"]);
+                $categoryName =  $categoryOriginal != null ? $categoryOriginal[0]['details'][0]['name'] : "";
+
+                $categoryElement = [$categoryName => $categoryName];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$categoryElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }
         }
 
            return $itemsResults;
