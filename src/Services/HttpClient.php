@@ -18,6 +18,9 @@ class PriceMonitorHttpClient
         // $this->client = new \GuzzleHttp\Client();
      }
 
+     public static function  getInstance() {
+        return new self();
+     }
     /**
      * Sends HTTP request to specified URL with using given request method, headers and body
      *
