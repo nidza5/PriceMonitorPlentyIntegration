@@ -170,7 +170,7 @@ class ProductFilterService {
 
         $categories = null;
 
-       $category = $categoriesRepo->search($id,null,null,[" details" => null]);
+       $category = $categoriesRepo->search($id,1,50,["details" => null]);
        
        $finalCategory = $category->getResult();
 
