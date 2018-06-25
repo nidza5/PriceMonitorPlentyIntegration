@@ -144,7 +144,7 @@ class ProductFilterService {
             }
             
             foreach($p['variationCategories'] as $category){
-                $categoryOriginal = $this->getCategoryById($categoryid["categoryId"]);
+                $categoryOriginal = $this->getCategoryById($category["categoryId"]);
                 $categoryName =  $categoryOriginal != null ? $categoryOriginal[0]['details'][0]['name'] : "";
 
                 $categoryElement = [$categoryName => $categoryName];
