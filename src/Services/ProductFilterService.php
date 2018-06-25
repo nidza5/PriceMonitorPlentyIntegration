@@ -143,13 +143,24 @@ class ProductFilterService {
             
             }
             
-            foreach($p['variationCategories'] as $category){
+            foreach($p['variationCategories'] as $category) {
                 $categoryOriginal = $this->getCategoryById($category["categoryId"]);
                 $categoryName =  $categoryOriginal != null ? $categoryOriginal[0]['details'][0]['name'] : "";
 
                 $categoryElement = [$categoryName => $categoryName];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$categoryElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }
+            
+            foreach($p['variationAttributeValues'] as $attrinute) {
+                $attributeName = $attrinute != null ? $attrinute[0]["attribute"]["backendName"] : "";
+                $attributeValue = $attrinute != null ? $attrinute[0]["attributeValue"]["backendName"] : "";
+            
+                $attributeElement = [$attributeName => $attributeValue];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$attributeElement);  
                 $tempArr = $merge;              
                 $itemsResults[$i] = $merge;
             }
