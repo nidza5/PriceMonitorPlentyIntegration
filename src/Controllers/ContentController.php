@@ -33,6 +33,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorHttpClient;
+ use PriceMonitorPlentyIntegration\Services\ConfigService;
 
 
  /**
@@ -87,12 +88,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         private $httpClient;
 
+        private $configService;
+
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo,PriceMonitorHttpClient $httpClient)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo,PriceMonitorHttpClient $httpClient,ConfigService $configService)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
@@ -101,6 +104,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->scheduleRepository = $scheduleRepository;   
         $this->configInfoRepo = $configInfoRepo;
         $this->httpClient = $httpClient;
+        $this->configService = $configService;
     }
     
      public function home(Twig $twig) : string
@@ -177,8 +181,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         // set price monitor credentials
 
-        $this->configInfoRepo->saveConfig('email',$credentials['email']);
-        $this->configInfoRepo->saveConfig('password',$credentials['password']);
+        // $this->configInfoRepo->saveConfig('email',$credentials['email']);
+        // $this->configInfoRepo->saveConfig('password',$credentials['password']);
 
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
@@ -188,7 +192,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
          $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
-            'password' => $credentials['password']
+            'password' => $credentials['password'],
+            'configService' => $this->configService
         ]);
 
         $allSchedule = $this->scheduleRepository->getAllSchedule();

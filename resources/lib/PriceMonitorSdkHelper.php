@@ -83,9 +83,10 @@
         ServiceRegister::getConfigService()->setCredentials($email, $password);
     }
 
-    public static function registerConfigService($email,$password)
+    public static function registerConfigService($email,$password,$configService)
     {
-        ServiceRegister::registerConfigService(new ConfigService($email,$password));
+       // ServiceRegister::registerConfigService(new ConfigService($email,$password));
+       ServiceRegister::registerConfigService($configService);
     }
 
     public static function registerHttpService()
