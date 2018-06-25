@@ -156,7 +156,7 @@ class ProductFilterService {
             
             foreach($p['variationAttributeValues'] as $attrinute) {
                 $attributeName =  $attrinute[0]->attribute->backendName;
-                $attributeValue =  $attrinute[0]["attributeValue"]["backendName"];
+                $attributeValue =  $attrinute[0]["attributeValue"][0]["backendName"];
             
                 $attributeElement = [$attributeName => $attributeValue];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
