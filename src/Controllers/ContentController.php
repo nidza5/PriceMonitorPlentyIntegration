@@ -85,12 +85,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $configInfoRepo;
 
+        private $httpClient;
+
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo,PriceMonitorHttpClient $httpClient)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
@@ -98,6 +100,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->productFilterRepo = $productFilterRepo;   
         $this->scheduleRepository = $scheduleRepository;   
         $this->configInfoRepo = $configInfoRepo;
+        $this->httpClient = $httpClient;
     }
     
      public function home(Twig $twig) : string
@@ -131,7 +134,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
                 'password' => $credentials['password'],
-                 'httpClient' => PriceMonitorHttpClient::getInstance()
+                 'httpClient' => $this->httpClient
             ]);
 
             // echo "response contracts    ";
