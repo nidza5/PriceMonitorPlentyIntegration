@@ -32,6 +32,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
+ use  PriceMonitorPlentyIntegration\Services\PriceMonitorHttpClient;
 
 
  /**
@@ -129,7 +130,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
-                'password' => $credentials['password']
+                'password' => $credentials['password'],
+                 'httpClient' => new PriceMonitorHttpClient()
             ]);
 
             // echo "response contracts    ";
@@ -239,14 +241,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //  $categories =  $prodServ->getCategoryById(18);
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
-
-        $itemService = pluginApp(ProductFilterService::class);
-
-         $finalResult = $itemService->getVariationById(1030);
-
-         echo "variation";
-         echo json_encode($finalResult);
-        
 
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);

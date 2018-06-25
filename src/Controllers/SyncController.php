@@ -36,6 +36,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Constants\ProductConst;
  use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
+ use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
 
  /**
   * Class SyncController
@@ -240,20 +241,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                     if($sync != null && $sync != -1) {
                         
                         $this->updateTransactionHistoryBasedOnFilterType($typeOfFilter,$contract,$savedTransactionMasterHistory['id'],$syncRun['transactionHistoryDetailsForSaving'],$sync); 
-                        // if($savedTransactionMasterHistory['id'] != null) {
-                        //      $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,$savedTransactionMasterHistory['id']);
-                        //      $transactionHistoryDetailsForSaving = $syncRun['transactionHistoryDetailsForSaving'];
-                        //      $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,$savedTransactionMasterHistory['id'],null,TransactionStatus::IN_PROGRESS);
-                        
-                        // } else {
-
-                        //     $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,FilterType::EXPORT_PRODUCTS,null,$sync);
-                        //     $transactionHistoryDetailsForSaving = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,null);
-                        //     $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$sync,TransactionStatus::IN_PROGRESS);
-                        // }
-
-                        // $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, FilterType::EXPORT_PRODUCTS,$sync,null);
-                        // $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,FilterType::EXPORT_PRODUCTS,$sync,$allTransactionsDetailsInProgress);
                         
                         $enqueueStatusCheckerJob =  $this->sdkService->call("enqueueStatusCheckerJob", [
                             'queueModel' => $queue,
@@ -275,6 +262,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             } else if($typeOfFilter == FilterType::IMPORT_PRICES) {
                 $transactionDetails = $this->updateTransactionHistoryBasedOnFilterType($typeOfFilter,$contract,$savedTransactionMasterHistory['id'],$syncRun['transactionHistoryDetailsForSaving'],null); 
                 $batchNotImportedPrices = $this->createNotImportedPrices($syncRun['arrayUniqueIdentifier'], $transactionDetails,$filteredVariation,$allVariations,$typeOfFilter,$priceMonitorId,$attributesIdName,$attributeMapping);
+                $failedItems = $this->getFailedItems($notImportPrices);
+                $this->updateTransactionHistoryBasedOnFilterType($typeOfFilter,$contract,$savedTransactionMasterHistory['id'],$syncRun['transactionHistoryDetailsForSaving'],null,$failedItems); 
             }  
 
             foreach($syncRun['dequeus'] as $deq) 
@@ -286,6 +275,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         
         $result = ['successSync' => $syncRun];
         return  json_encode($result);
+    }
+
+    public function getFailedItems($notImportPrices)
+    {
+        $failedPrices =  $this->sdkService->call("createFailedItems", [
+            'notImportPrices' =>  $notImportPrices           
+        ]);
+
+        return  $failedPrices;
     }
 
     public function createNotImportedPrices($prices, &$transactionDetails,$filteredVariation,$allVariations,$typeOfFilter,$priceMonitorId,$attributesIdName,$attributeMapping)
@@ -354,7 +352,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     }
 
     private function updatePrices($contractId, $batchPrices) {
-        
         $systemCurrency = "EUR";
         $paymentService =  pluginApp(PaymentService::class);
         $allpayments = $paymentService->getAllPayment();
@@ -364,11 +361,144 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                $systemCurrency = $allpayments[0]['currency'];
         }
 
+        $failedItems = [];
+
         foreach($batchPrices as $price) {
             if($price['currency'] ==  $systemCurrency) {
+               
+                if(empty($price['identifier']))
+                    continue;
+
+                $itemService = pluginApp(ProductFilterService::class);
+                $originalVariation = $itemService->getVariationById($price['identifier']);
+
+                $variation = null;
+                if(!empty($originalVariation)) {
+                    $variation = $originalVariation[0];
+                    $variationSalesPrices = $variation["variationSalesPrices"];
+                    $contractInformation =  $this->contractRepo->getContractByPriceMonitorId($contractId);
+                    $savedSalesPriceInContract = $contractInformation->salesPricesImport;
+                   
+                    //sales price which related to variation
+                    $salesPriceRelatedToVariation = $this->getSalesPricesForImport($savedSalesPriceInContract, $variationSalesPrices);
                 
+                    //sales price which not related to variation
+                    $salesPricesNotRelatedToVariation = $this->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
+
+                    try{
+                        //update sales price that related to variation
+                        $this->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                    } catch(\Exception $ex)
+                    {
+                        $failedItems[] = array(
+                            'productId' => $price['identifier'],
+                            'name' => isset($price['name']) ? $price['name'] : '',
+                            'errors' => array('Unable to update product price.'),
+                            'status' => TransactionHistoryStatus::FAILED
+                        );
+                    }                    
+                    
+                    if($contractInformation->isInsertSalesPrice && $salesPricesNotRelatedToVariation != null ) {
+                        
+                        try {
+                            insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                        } catch(\Exception $ex) {
+                            $failedItems[] = array(
+                                'productId' => $price['identifier'],
+                                'name' => isset($price['name']) ? $price['name'] : '',
+                                'errors' => array('Unable to insert product price.'),
+                                'status' => TransactionHistoryStatus::FAILED
+                            );
+                        }
+                        
+                    }
+                    else if(!$contractInformation->isInsertSalesPrice && $salesPricesNotRelatedToVariation != null) {
+                        // insert  to transaction history, transactionDetails
+                        $failedItems [] = [
+                            "productId" => $price['identifier'],   
+                            "name" => isset($price['name']) ? $price['name'] : '',
+                            "errors" => array("Sales prices which is selected to account info tab not related to variation and field is insert salesPrice selected as NO!"),
+                            "status" => TransactionStatus::FAILED
+                        ];                        
+                    }
+                }        
+            } else {
+                // enter to transactionHistory prices that don't have same currency 
+                $failedItems [] = [
+                    "productId" => $price['identifier'],   
+                    "name" => isset($price['name']) ? $price['name'] : '',
+                    "errors" => array("Sales prices which is selected to account info tab not related to variation and field is insert salesPrice selected as NO!"),
+                    "status" => TransactionStatus::FAILED
+                ];                
             }
         }
+
+        return $failedItems;
+    }
+
+    private function insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$variationId,$recommendedPrice)
+    {
+            foreach($salesPricesNotRelatedToVariation as $notRelatedPrice) {
+                $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+
+                $authHelper = pluginApp(AuthHelper::class);
+        
+                $insertedSalesPrice = null;
+    
+                $dataForInsert = ["variationId" => $variationId,
+                                  "salesPriceId" => $notRelatedPrice,
+                                  "recommendedPrice" => $recommendedPrice];
+        
+                $insertedSalesPrice = $authHelper->processUnguarded(
+                    function () use ($repositoryVariationSalesPrices, $insertedSalesPrice) {
+                        return $repositoryVariationSalesPrices->create($dataForInsert);
+                    }
+                );
+            }
+    }
+
+    private function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)
+    {
+        foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {
+            
+            $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+
+            $authHelper = pluginApp(AuthHelper::class);
+    
+            $updatedSalesPrice = null;
+
+            $dataForUpdate = ["variationId" => $variationId,
+                              "salesPriceId" => $relatedSalesPrice,
+                              "recommendedPrice" => $recommendedPrice];
+    
+            $updatedSalesPrice = $authHelper->processUnguarded(
+                function () use ($repositoryVariationSalesPrices, $updatedSalesPrice) {
+                    return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
+                }
+            );
+        }
+    }
+
+    private function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
+    {
+        $matchPrices = [];
+        foreach($variationSalesPrices as $variationPrice) {
+            if( !in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
+                $matchPrices[] = $variationPrice["salesPriceId"];
+        }
+
+        return $matchPrices;
+    }
+
+    private function getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) {
+
+        $matchPrices = [];
+        foreach($variationSalesPrices as $variationPrice) {
+            if( in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
+                $matchPrices[] = $variationPrice["salesPriceId"];
+        }
+
+        return $matchPrices;
     }
 
     private function removeFilteredPricesFromBatch($batchPrices, $notImportedPrices)
@@ -401,7 +531,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return  $results;
     }
 
-    public function updateTransactionHistoryBasedOnFilterType($filterType,$contract,$transactionId,$transactionHistoryDetails,$uniqueIdentifier) 
+    public function updateTransactionHistoryBasedOnFilterType($filterType,$contract,$transactionId,$transactionHistoryDetails,$uniqueIdentifier,$failedItems = null) 
     {
         if($transactionId != null) {
             $transactionHistoryMaster =  $this->transactionHistoryRepo->getTransactionHistoryMasterByCriteria($contract->priceMonitorId,$filterType,$transactionId);
@@ -415,7 +545,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
            $allTransactionsDetailsInProgress = $this->transactionDetailsHistoryRepo->getTransactionHistoryDetailsByFilters($contract->priceMonitorId,null,$uniqueIdentifier,TransactionStatus::IN_PROGRESS);
        }
 
-        $transactionDetails =  $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, $filterType,$uniqueIdentifier,null);
+        $transactionDetails =  $this->transactionDetailsHistoryRepo->updateTransactionHistoryDetailsState($transactionHistoryDetailsForSaving, $filterType,$uniqueIdentifier,$failedItems);
        $this->transactionHistoryRepo->updateTransactionHistoryMasterState($transactionHistoryMaster,$transactionHistoryDetailsForSaving,$filterType,$uniqueIdentifier,$allTransactionsDetailsInProgress);
    
        return $transactionDetails;
