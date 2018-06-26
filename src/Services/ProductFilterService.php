@@ -107,7 +107,7 @@ class ProductFilterService {
             'with' => [
                 'variationAttributeValues' => null,
                 'variationBarcodes' => 'barcode',
-                'item' => null,
+                'item' => 'itemProperties',
                 'variationCategories' => null,
                 'variationSuppliers'  => null
             ]
