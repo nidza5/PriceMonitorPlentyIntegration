@@ -187,7 +187,8 @@ class ProductFilterService {
 
     public function getItemWithPropertiesById($id)
     {
-
+        $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
+        
         $itemColumns = [
             'itemDescription' => [
                 'name1',
