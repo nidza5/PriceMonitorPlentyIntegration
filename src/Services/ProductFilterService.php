@@ -195,7 +195,7 @@ class ProductFilterService {
 
         $item = null;
 
-       $item = $itemRepo->show( $id, ['id'],"de",["itemProperties" => null]);
+       $item = $itemRepo->show($id);
        
        $finalItem= $item->getResult();
 
