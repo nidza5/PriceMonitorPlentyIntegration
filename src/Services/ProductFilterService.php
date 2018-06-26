@@ -197,12 +197,19 @@ class ProductFilterService {
             'variationBase' => [
                 'id'
             ],
-            'itemPropertyList' => null,
-           
+            'variationRetailPrice' => [
+                'price'
+            ],
+            'variationImageList' => [
+                'path',
+                'cleanImageName'
+            ]
         ];
  
         $itemFilter = [
-            'id' => $id
+            'itemBase.isStoreSpecial' => [
+                'shopAction' => [3]
+            ]
         ];
  
         $itemParams = [
