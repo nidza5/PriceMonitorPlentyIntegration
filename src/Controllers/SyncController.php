@@ -218,6 +218,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
         //  ]);
 
+        echo "config service";
+        echo json_encode($this->configService);
         
         $syncRun =  $this->sdkService->call("runSync", [
             'queueModel' => $queue,
@@ -235,6 +237,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             "configService" => $this->configService              
         ]);   
 
+        echo "nakon run sync";
         echo json_encode($syncRun);
 
         // if( $syncRun != null)

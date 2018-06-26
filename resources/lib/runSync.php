@@ -24,19 +24,20 @@ try {
    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
    $configService = SdkRestApi::getParam('configService');    
   
+   return $configService;
    
-    PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig,$configService);
+//     PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig,$configService);
 
-   PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
-   PriceMonitorSdkHelper::registerProductService($contract,$products); 
+//    PriceMonitorSdkHelper::registerMapperService($attributeMapping,$contract,$products,$productsAttributes); 
+//    PriceMonitorSdkHelper::registerProductService($contract,$products); 
 
-    PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
+//     PriceMonitorSdkHelper::registerTransactionHistotyStorage(null,0,null,0,$savedInitialTransaction);
 
-   $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
+//    $savedMasterTransactionHistory = SdkRestApi::getParam('savedTransactionMasterRecord');
    
 
-   $runnerService = new RunnerService($queueModel);
-   return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'], $priceMonitorId,$filterType);
+//    $runnerService = new RunnerService($queueModel);
+//    return  $runnerService->runSync($queueName,$products,$savedInitialTransaction['id'], $priceMonitorId,$filterType);
 
 } catch(\Exception $ex) {
     
