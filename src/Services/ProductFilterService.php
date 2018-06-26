@@ -168,11 +168,17 @@ class ProductFilterService {
 
             $itemWithProperties = $this->getItemWithPropertiesById($p["itemId"]);
             
-             foreach($itemWithProperties["itemProperties"] as $properties) {
-                
-
-             }
+            foreach($itemWithProperties["itemProperties"] as $properties) {
             
+                $propertyId = $properties["propertyId"];
+                $properyValue  = $properties["valueTexts"][0]["value"];
+
+                $propertyElement = [$propertyId => $properyValue];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$propertyElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }            
         }
 
            return $itemsResults;
