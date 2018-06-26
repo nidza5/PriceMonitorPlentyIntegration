@@ -165,6 +165,13 @@ class ProductFilterService {
                 $tempArr = $merge;              
                 $itemsResults[$i] = $merge;
             }
+
+            $itemWithProperties = $this->getItemWithPropertiesById($p["itemId"]);
+            
+             foreach($itemWithProperties as $properties) {
+                 
+             }
+            
         }
 
            return $itemsResults;
