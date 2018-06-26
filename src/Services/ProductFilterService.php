@@ -172,12 +172,12 @@ class ProductFilterService {
             
                 $propertyId = $properties["propertyId"];
                 $properyValue  = $properties["valueTexts"][0]["value"];
-                if($propertyValue == null) {
+                if($properyValue == null) {
                     if($properties["valueInt"] != null) 
-                        $propertyValue = $properties["valueInt"];
+                        $properyValue = $properties["valueInt"];
                         
-                    if($propertyValue == null && $properties["valueFloat"] != null)
-                        $propertyValue = $properties["valueFloat"];                           
+                    if($properyValue == null && $properties["valueFloat"] != null)
+                        $properyValue = $properties["valueFloat"];                           
                 }
 
                 $propertyElement = [$propertyId => $properyValue];
