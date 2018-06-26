@@ -148,7 +148,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $this->tokenRepo->deleteToken($token); 
 
-    //    $this->queueRepo->deleteAllQueue();
+        $this->queueRepo->deleteAllQueue();
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
