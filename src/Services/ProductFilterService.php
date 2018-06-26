@@ -172,6 +172,13 @@ class ProductFilterService {
             
                 $propertyId = $properties["propertyId"];
                 $properyValue  = $properties["valueTexts"][0]["value"];
+                if($propertyValue == null) {
+                    if($properties["valueInt"] != null) 
+                        $propertyValue = $properties["valueInt"];
+                        
+                    if($propertyValue == null && $properties["valueFloat"] != null)
+                        $propertyValue = $properties["valueFloat"];                           
+                }
 
                 $propertyElement = [$propertyId => $properyValue];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
