@@ -152,95 +152,95 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $queue = $this->queueRepo->getQueueByName($queueName);
 
-        // echo "queue";
-        // echo json_encode( $queue);
+        echo "queue";
+        echo json_encode( $queue);
 
-        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$typeOfFilter);
+        // $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$typeOfFilter);
 
-        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
+        // $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
-        $itemService = pluginApp(ProductFilterService::class);
+        // $itemService = pluginApp(ProductFilterService::class);
 
-        $allVariations = $itemService->getAllVariations();
+        // $allVariations = $itemService->getAllVariations();
 
-        // echo "variations";
-        // return json_encode($allVariations);
+        // // echo "variations";
+        // // return json_encode($allVariations);
 
-        $attributeService = pluginApp(AttributeService::class);
+        // $attributeService = pluginApp(AttributeService::class);
 
-        $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+        // $attributesFromPlenty = $attributeService->getAllTypeAttributes();
 
-        $attributesIdName = array();
+        // $attributesIdName = array();
 
-        foreach($attributesFromPlenty as $key => $value) {
-            foreach($value as $v => $l)
-                $attributesIdName[$v] = explode("-",$l)[0];            
+        // foreach($attributesFromPlenty as $key => $value) {
+        //     foreach($value as $v => $l)
+        //         $attributesIdName[$v] = explode("-",$l)[0];            
 
-        }
+        // }
 
-        $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
-            'filterType' => $typeOfFilter,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'attributeMapping' => $attributeMapping,
-            'allVariations' =>  $allVariations,
-            'attributesFromPlenty' => $attributesIdName            
-        ]);     
+        // $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+        //     'filterType' => $typeOfFilter,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'attributeMapping' => $attributeMapping,
+        //     'allVariations' =>  $allVariations,
+        //     'attributesFromPlenty' => $attributesIdName            
+        // ]);     
 
 
-            // foreach( $filteredVariation as $r) {
+        //     // foreach( $filteredVariation as $r) {
             
-            //     foreach($r as $p)
-            //         echo $p["id"];
+        //     //     foreach($r as $p)
+        //     //         echo $p["id"];
             
-            // }
+        //     // }
   
 
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
+        // $emailObject = $this->configInfoRepo->getConfig('email');
+        // $passwordObject = $this->configInfoRepo->getConfig('password');
 
-        $emailForConfig = $emailObject->value;
-        $passwordForConfig = $passwordObject->value;
+        // $emailForConfig = $emailObject->value;
+        // $passwordForConfig = $passwordObject->value;
 
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        //startTransaction
+        // //startTransaction
 
-        $startTransaction = $this->sdkService->call("startTransaction", [
-            'contractId' => $priceMonitorId
-        ]);
+        // $startTransaction = $this->sdkService->call("startTransaction", [
+        //     'contractId' => $priceMonitorId
+        // ]);
 
-          // echo json_encode($startTransaction['transactionHistoryMaster']);
+        //   // echo json_encode($startTransaction['transactionHistoryMaster']);
 
-         $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+        //  $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
 
-        //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
-        //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
-        //  ]);
+        // //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
+        // //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
+        // //  ]);
 
-        echo "config service";
-        echo json_encode($this->configService);
+        // echo "config service";
+        // echo json_encode($this->configService);
         
-        for ($i = 1; $i <= 2; $i++) {
-            $syncRun =  $this->sdkService->call("runSync", [
-                'queueModel' => $queue,
-                'queueName' => $queueName,
-                'emailForConfig' =>  $emailForConfig,
-                'passwordForConfig' =>  $passwordForConfig,
-                'filterType' => $typeOfFilter,
-                'priceMonitorId' => $priceMonitorId,
-                'productFilterRepo' => $filter,
-                'products' => $filteredVariation,
-                'attributesFromPlenty' => $attributesIdName,
-                'attributeMapping' => $attributeMapping,
-                'contract' => $contract,
-                "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
-                "configService" => $this->configService              
-            ]);   
+        // for ($i = 1; $i <= 2; $i++) {
+        //     $syncRun =  $this->sdkService->call("runSync", [
+        //         'queueModel' => $queue,
+        //         'queueName' => $queueName,
+        //         'emailForConfig' =>  $emailForConfig,
+        //         'passwordForConfig' =>  $passwordForConfig,
+        //         'filterType' => $typeOfFilter,
+        //         'priceMonitorId' => $priceMonitorId,
+        //         'productFilterRepo' => $filter,
+        //         'products' => $filteredVariation,
+        //         'attributesFromPlenty' => $attributesIdName,
+        //         'attributeMapping' => $attributeMapping,
+        //         'contract' => $contract,
+        //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
+        //         "configService" => $this->configService              
+        //     ]);   
     
-            echo "nakon run sync";
-            echo json_encode($syncRun);
-        }
+        //     echo "nakon run sync";
+        //     echo json_encode($syncRun);
+        // }
 
      
 
