@@ -203,7 +203,8 @@ class ProductFilterService {
             'variationImageList' => [
                 'path',
                 'cleanImageName'
-            ]
+            ],
+            "itemPropertyList" => null
         ];
  
         $itemFilter = [
