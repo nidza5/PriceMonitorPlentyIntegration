@@ -107,7 +107,7 @@ class ProductFilterService {
             'with' => [
                 'variationAttributeValues' => null,
                 'variationBarcodes' => 'barcode',
-                'item' => ['itemProperties' => null],
+                'item' => ['itemProperties'],
                 'variationCategories' => null,
                 'variationSuppliers'  => null
             ]
@@ -190,9 +190,7 @@ class ProductFilterService {
         $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
         
         $itemColumns = [
-            'itemDescription' => [
-                'name1'
-            ],
+        
             'variationBase' => [
                 'id'
             ],
