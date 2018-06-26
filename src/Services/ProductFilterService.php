@@ -211,8 +211,8 @@ class ProductFilterService {
         ];
  
         $itemFilter = [
-            'itemBase.isStoreSpecial' => [
-                'shopAction' => [3]
+            'id' => [
+                $id
             ]
         ];
  
