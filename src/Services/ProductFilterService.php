@@ -187,17 +187,17 @@ class ProductFilterService {
 
     public function getItemWithPropertiesById($id)
     {
-        $itemRepo = pluginApp(ItemRepositoryContract::class);
+    //     $itemRepo = pluginApp(ItemRepositoryContract::class);
 
-        $authHelper = pluginApp(AuthHelper::class);
+    //     $authHelper = pluginApp(AuthHelper::class);
 
-        $item = null;
+    //     $item = null;
 
-       $item = $itemRepo->show( $id, [],"de",["itemProperties" => null]);
+    //    $item = $itemRepo->show( $id, [],"de",["itemProperties" => null]);
        
-       $finalItem= $item->getResult();
+    //    $finalItem= $item->getResult();
 
-        return $finalItem;
+    //     return $finalItem;
     }
 
     public function getCategoryById($id) 
