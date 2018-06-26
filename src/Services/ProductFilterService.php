@@ -204,7 +204,10 @@ class ProductFilterService {
                 'path',
                 'cleanImageName'
             ],
-            "itemPropertyList" => null
+            "itemPropertyList" => [
+                "itemPropertyId",
+                "propertyValue"
+            ]
         ];
  
         $itemFilter = [
