@@ -187,6 +187,31 @@ class ProductFilterService {
 
     public function getItemWithPropertiesById($id)
     {
+
+        $itemColumns = [
+            'itemDescription' => [
+                'name1',
+                'description'
+            ],
+            'variationBase' => [
+                'id'
+            ],
+            'itemPropertyList' => null,
+           
+        ];
+ 
+        $itemFilter = [
+            'id' => $id
+        ];
+ 
+        $itemParams = [
+            'language' => 'en'
+        ];
+ 
+        $resultItems = $itemRepository
+            ->search($itemColumns, $itemFilter, $itemParams);
+
+     return  $resultItems->toArray();
     //     $itemRepo = pluginApp(ItemRepositoryContract::class);
 
     //     $authHelper = pluginApp(AuthHelper::class);
