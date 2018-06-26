@@ -13,6 +13,7 @@ class ConfigService
      */
     private $configInfoRepo;
 
+    
     // public function __construct(ConfigRepositoryContract $configInfoRepo)
     // {
     //     $this->configInfoRepo = $configInfoRepo;
@@ -20,8 +21,10 @@ class ConfigService
 
     public function __construct()
     {
-        
+        $this->date = "sync,sync";
     }
+
+    public $date;
 
     public function getCredentials()
     {
