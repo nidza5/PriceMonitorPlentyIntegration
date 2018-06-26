@@ -191,8 +191,7 @@ class ProductFilterService {
         
         $itemColumns = [
             'itemDescription' => [
-                'name1',
-                'description'
+                'name1'
             ],
             'variationBase' => [
                 'id'
@@ -211,7 +210,7 @@ class ProductFilterService {
         ];
  
         $itemFilter = [
-           
+            'id' => $id
         ];
  
         $itemParams = [
