@@ -27,6 +27,7 @@ use Plenty\Modules\Item\Barcode\Models\Barcode;
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;   
 
+
 class ProductFilterService {
 
       /**
@@ -182,6 +183,21 @@ class ProductFilterService {
         $mappingCodes = array_unique(array_column($mappings, 'attribute_code'));
         $mappingCodes[] = 'tax_class_id';
         return $mappingCodes;
+    }
+
+    public function getItemWithPropertiesById($id)
+    {
+        $itemRepo = pluginApp(ItemRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $item = null;
+
+       $item = $itemRepo->show( $id, ["itemProperties"],"de",["itemProperties" => null]);
+       
+       $finalItem= $item->getResult();
+
+        return $finalItem;
     }
 
     public function getCategoryById($id) 
