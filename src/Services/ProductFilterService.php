@@ -169,7 +169,7 @@ class ProductFilterService {
             $itemWithProperties = $this->getItemWithPropertiesById($p["itemId"]);
             
              foreach($itemWithProperties["itemProperties"] as $properties) {
-                 $propertyId
+                
 
              }
             
