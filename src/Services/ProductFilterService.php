@@ -211,13 +211,12 @@ class ProductFilterService {
         ];
  
         $itemFilter = [
-            'id' => [
-                $id
-            ]
+           
         ];
  
         $itemParams = [
-            'language' => 'en'
+            'language' => 'en',
+            'id' => $id
         ];
  
         $resultItems = $itemRepository
