@@ -221,24 +221,28 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         echo "config service";
         echo json_encode($this->configService);
         
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => $typeOfFilter,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
-            "configService" => $this->configService              
-        ]);   
+        for ($i = 1; $i <= 2; $i++) {
+            $syncRun =  $this->sdkService->call("runSync", [
+                'queueModel' => $queue,
+                'queueName' => $queueName,
+                'emailForConfig' =>  $emailForConfig,
+                'passwordForConfig' =>  $passwordForConfig,
+                'filterType' => $typeOfFilter,
+                'priceMonitorId' => $priceMonitorId,
+                'productFilterRepo' => $filter,
+                'products' => $filteredVariation,
+                'attributesFromPlenty' => $attributesIdName,
+                'attributeMapping' => $attributeMapping,
+                'contract' => $contract,
+                "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
+                "configService" => $this->configService              
+            ]);   
+    
+            echo "nakon run sync";
+            echo json_encode($syncRun);
+        }
 
-        echo "nakon run sync";
-        echo json_encode($syncRun);
+     
 
         // if( $syncRun != null)
         // {
