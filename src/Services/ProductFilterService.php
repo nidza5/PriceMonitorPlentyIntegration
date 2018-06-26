@@ -187,50 +187,19 @@ class ProductFilterService {
 
     public function getItemWithPropertiesById($id)
     {
-        $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
+       // $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
         
-        $itemColumns = [
-        
-            'variationBase' => [
-                'id'
-            ],
-            'variationRetailPrice' => [
-                'price'
-            ],
-            'variationImageList' => [
-                'path',
-                'cleanImageName'
-            ],
-            "itemPropertyList" => [
-                "itemPropertyId",
-                "propertyValue"
-            ]
-        ];
- 
-        $itemFilter = [
-            'id' => $id
-        ];
- 
-        $itemParams = [
-            'language' => 'en',
-            'id' => $id
-        ];
- 
-        $resultItems = $itemRepository
-            ->search($itemColumns, $itemFilter, $itemParams);
+        $itemRepo = pluginApp(ItemRepositoryContract::class);
 
-     return  $resultItems->toArray();
-    //     $itemRepo = pluginApp(ItemRepositoryContract::class);
+        $authHelper = pluginApp(AuthHelper::class);
 
-    //     $authHelper = pluginApp(AuthHelper::class);
+        $item = null;
 
-    //     $item = null;
-
-    //    $item = $itemRepo->show( $id, [],"de",["itemProperties" => null]);
+       $item = $itemRepo->show( $id, ['id'],"de",["itemProperties" => null]);
        
-    //    $finalItem= $item->getResult();
+       $finalItem= $item->getResult();
 
-    //     return $finalItem;
+        return $finalItem;
     }
 
     public function getCategoryById($id) 
