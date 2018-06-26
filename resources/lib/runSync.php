@@ -24,7 +24,7 @@ try {
    $savedInitialTransaction = SdkRestApi::getParam('savedTransactionMasterRecord');    
    $configService = SdkRestApi::getParam('configService');    
   
-   return $configService;
+   return  get_class($configService);
    
 //     PriceMonitorSdkHelper::registerConfigService($emailForConfig,$passwordForConfig,$configService);
 

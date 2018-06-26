@@ -6,6 +6,7 @@ class ConfigService implements ConfigServiceInterface
 {
     private $email;
     private $password;
+    
 
     public function __construct($email,$password)
     {
