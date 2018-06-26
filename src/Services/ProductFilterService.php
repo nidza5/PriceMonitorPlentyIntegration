@@ -197,9 +197,9 @@ class ProductFilterService {
 
        $item = $itemRepo->show($id);
        
-       $finalItem= $item->getResult();
+      // $finalItem= $item->getResult();
 
-        return $finalItem;
+        return $item;
     }
 
     public function getCategoryById($id) 
