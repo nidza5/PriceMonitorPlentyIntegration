@@ -216,6 +216,9 @@
                     case "Category" :
                         $filterByColumn = "category-" + $values[0];
                     break;
+                    case "Manufacturer" :
+                         $filterByColumn = "manufacturer-" + $values[0];
+                    break;
 
                     default :
                         $filterByColumn = $attributesFromPlenty[$attribute]; 
