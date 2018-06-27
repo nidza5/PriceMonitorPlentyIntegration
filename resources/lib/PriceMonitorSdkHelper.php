@@ -208,8 +208,18 @@
                 $values = $exp['values'];
                 $attribute = $exp['attribute'];
                 $condition = $exp['condition'];
-    
-               $filterByColumn = $attributesFromPlenty[$attribute]; 
+
+                $filterByColumn = $attributesFromPlenty[$attribute]; 
+
+                switch($attribute) {
+
+                    case "Category" :
+                        $filterByColumn = "category-" + $values[0];
+                    break;
+
+                    default :
+                        $filterByColumn = $attributesFromPlenty[$attribute]; 
+                }
     
                 $nameColumnInVariation = null;
 
@@ -268,7 +278,7 @@
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions) {
                  
-                 $condition = null;
+                $condition = null;
 
                 foreach($filterVAriationByConditions as $variationCondition) {
 
