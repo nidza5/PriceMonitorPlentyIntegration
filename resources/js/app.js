@@ -1208,9 +1208,34 @@ function showTabContent(evt, tabName) {
         createFieldValueForExpressionsAttributeType(expression, groupIndex, expressionIndex,inputWrapperNode,valueFieldName);
     }
 
+    function checkFormIsValid(groupsForSave) {
+
+        for (var i = 0; i < groupsForSave.length; i++) { 
+            expression = groupsForSave[i]['expressions'];
+
+            for(j = 0; j < expression.length; j++) {
+                if(expression[j]['code'] == null || expression[j]['code'] == "")
+                    return true;
+                if(expression[j]['condition'] == null || expression[j]['condition'] == "") 
+                    return false;
+                if(expression[j]['type'] == null || expression[j]['type'] == "") 
+                    return false;
+                if(expression[j]['value'] == null || expression[j]['value'] == "") 
+                    return false;
+            }
+        }
+        
+        return true;
+    }
+
     function saveFilter() {
 
         var filters = createFiltersForRequest();
+
+        if(!checkFormIsValid(filters)) {
+            alert("All fields are mandatory");
+            return false;
+        }
 
         console.log("filters type");
         console.log(filterQueryParams.filterType);
