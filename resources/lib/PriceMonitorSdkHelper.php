@@ -298,7 +298,7 @@
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions) {
                  
-                // $condition = null;
+                 $condition = null;
 
                 foreach($filterVAriationByConditions as $variationCondition) {
 
@@ -308,7 +308,7 @@
 
                         case "=" :
                          if(isset($value[$variationCondition["filterByColumn"]])) 
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                            $condition =  $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                         break;
                         case "!=" :
                             $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
