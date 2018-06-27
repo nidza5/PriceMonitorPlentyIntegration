@@ -1217,8 +1217,11 @@ function showTabContent(evt, tabName) {
             console.log("expression");
             console.log(expression);
             for(j = 0; j < expression.length; j++) {
-                if(expression[j]['code'] == null || expression[j]['code'] == "")
+                if(expression[j]['code'] == null || expression[j]['code'] == "") {
+                    console.log("code je prazan");
                     return false;
+                }
+                    
                 if(expression[j]['condition'] == null || expression[j]['condition'] == "") 
                     return false;
                 if(expression[j]['type'] == null || expression[j]['type'] == "") 
@@ -1228,6 +1231,7 @@ function showTabContent(evt, tabName) {
             }
         }
         
+        console.log("rezultat");
         return true;
     }
 
