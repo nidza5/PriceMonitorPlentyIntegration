@@ -192,7 +192,7 @@ class ProductFilterService {
             $originalManufacturer = $this->getManufacturerById($manufacturerId);
 
             if($originalManufacturer != null) {
-                $manufacturerElement = [ "manufacturer-".$originalManufacturer["name"] => $originalManufacturer["name"]];
+                $manufacturerElement = [ "manufacturer-".$originalManufacturer->name => $originalManufacturer->name];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$manufacturerElement);  
                 $tempArr = $merge;              
