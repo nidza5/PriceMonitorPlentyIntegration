@@ -338,7 +338,7 @@
                     
             });
     
-             return  $filteredProducts;
+             return  $condition;
 
         } catch (\Exception $ex)
         {
