@@ -307,7 +307,7 @@
                     switch($filterByCondition) {
 
                         case "=" :
-                           $condition = $condition &&  $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                           $condition = $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                         break;
                         case "!=" :
                             $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
@@ -338,7 +338,7 @@
                     
             });
     
-             return  $filterVAriationByConditions;
+             return  $filteredProducts;
 
         } catch (\Exception $ex)
         {
