@@ -307,7 +307,8 @@
                     switch($filterByCondition) {
 
                         case "=" :
-                           $condition = $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                         if($value[$variationCondition["filterByColumn"]]) 
+                            $condition = $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                         break;
                         case "!=" :
                             $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
