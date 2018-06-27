@@ -1051,9 +1051,11 @@ function showTabContent(evt, tabName) {
 
         var addNewExpressionBtnId = parentTemplateId + 'AddExpression_' + groupIndex + '-' + 0,
             addNewGroupBtnId = parentTemplateId +'addNewGroup_' + allGroups.length;
+            addNewGroupRemoveBtn = parentTemplateId + 'RemoveExpression_' + groupIndex + '-' + 0;
 
         document.getElementById(addNewExpressionBtnId).addEventListener('click', addNewExpression);
         document.getElementById(addNewGroupBtnId).addEventListener('click', addNewGroup);
+        document.getElementById(addNewGroupRemoveBtn).addEventListener('click', removeExpression);
         appendCallbacksOnRemoveGroupButtons();
     }
 
