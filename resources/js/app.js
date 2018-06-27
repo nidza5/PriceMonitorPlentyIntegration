@@ -780,6 +780,9 @@ function showTabContent(evt, tabName) {
 
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
     {
+
+        console.log("DEBUG 1");
+
         var type = 'text';
 
         if (expression['type'] === 'int' || expression['type'] === 'float' || expression['type'] === 'price' ) {
@@ -1210,17 +1213,13 @@ function showTabContent(evt, tabName) {
 
     function checkFormIsValid(groupsForSave) {
 
-        console.log("uso u check form");
+        
         for (var i = 0; i < groupsForSave.length; i++) { 
            var expression = groupsForSave[i]['expressions'];
 
-            console.log("expression");
-            console.log(expression);
             for(j = 0; j < expression.length; j++) {
-                if(expression[j]['code'] == null || expression[j]['code'] == "") {
-                    console.log("code je prazan");
-                    return false;
-                }
+                if(expression[j]['code'] == null || expression[j]['code'] == "")                  
+                    return false;               
                     
                 if(expression[j]['condition'] == null || expression[j]['condition'] == "") 
                     return false;
@@ -1230,8 +1229,7 @@ function showTabContent(evt, tabName) {
                     return false;
             }
         }
-        
-        console.log("rezultat");
+      
         return true;
     }
 
