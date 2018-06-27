@@ -148,7 +148,7 @@ class ProductFilterService {
                 $categoryOriginal = $this->getCategoryById($category["categoryId"]);
                 $categoryName =  $categoryOriginal != null ? $categoryOriginal[0]['details'][0]['name'] : "";
 
-                $categoryElement = ["category-" + $categoryName => $categoryName];
+                $categoryElement = [$categoryName => $categoryName];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$categoryElement);  
                 $tempArr = $merge;              
