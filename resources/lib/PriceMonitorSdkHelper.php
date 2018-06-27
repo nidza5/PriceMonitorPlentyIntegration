@@ -306,29 +306,51 @@
 
                         case "=" :
                          if(isset($value[$variationCondition["filterByColumn"]])) 
-                            $condition =  $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
-                        break;
+                            if($condition)
+                                $condition = $condition && $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                            else
+                                $condition = $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                         break;
                         case "!=" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                        break;
+                            if($condition)
+                                $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
+                            else
+                                $condition = $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
+                         break;
                         case ">" :
-                             $condition = $condition && $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
+                           if($condition)
+                                $condition = $condition && $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
+                            else
+                                $condition =  $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
                         break;
                         case "<" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
-                        break;
+                          if($condition)
+                                 $condition = $condition && $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
+                           else
+                                 $condition = $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
+                            break;
                         case ">=" :
                             $condition = $condition && $value[$variationCondition["filterByColumn"]] >= $variationCondition["value"];
                         break;
                         case "<=" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
-                        break;
+                            if($condition)
+                                $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
+                            else
+                                $condition = $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
+
+                            break;
                         case "stripos!=" :
-                             $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) !== false);
-                        break;
+                            if($condition)
+                                $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                            else
+                                $condition = (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                             break;
                         case "stripos==" :
-                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) === false);
-                        break;
+                            if($condition)
+                                $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                            else
+                                $condition =  (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                            break;
 
                     }
                 }
