@@ -26,6 +26,7 @@ use Plenty\Modules\Item\Barcode\Contracts\BarcodeRepositoryContract;
 use Plenty\Modules\Item\Barcode\Models\Barcode;
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;   
+use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
 
 
 class ProductFilterService {
@@ -185,7 +186,11 @@ class ProductFilterService {
                 $merge = array_merge($arrayForMerge,$propertyElement);  
                 $tempArr = $merge;              
                 $itemsResults[$i] = $merge;
-            }            
+            }
+            
+            $manufacturerId = $p["item"]["manufacturerId"];
+            
+            
         }
 
            return $itemsResults;
@@ -196,6 +201,19 @@ class ProductFilterService {
         $mappingCodes = array_unique(array_column($mappings, 'attribute_code'));
         $mappingCodes[] = 'tax_class_id';
         return $mappingCodes;
+    }
+
+    public function getManufacturerById($id) 
+    {
+        $manufacturerRepo = pluginApp(ManufacturerRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $manufactures = null;
+
+       $manufactures = $manufacturerRepo->findById($id);
+
+        return $manufactures;
     }
 
     public function getItemWithPropertiesById($id)
