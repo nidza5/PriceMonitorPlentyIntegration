@@ -528,7 +528,7 @@ function showTabContent(evt, tabName) {
             groupExpressions.length + '">' +
             '+' +
             '</button>' +
-            '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
+            '<button style="height:33px;margin-left:1%;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
             'id="' + buttonRemoveIdd + '">' +
             'x' +
             '</button>' +            
@@ -968,7 +968,7 @@ function showTabContent(evt, tabName) {
             'id="' + addNewExpressionBtnId + '">' +
             '+' +
             '</button>' +
-            '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
+            '<button style="height:33px;margin-left:1%;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
             'id="' + buttonRemoveId + '">' +
             'x' +
             '</button>';
