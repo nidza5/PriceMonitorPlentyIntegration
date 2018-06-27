@@ -189,8 +189,15 @@ class ProductFilterService {
             }
             
             $manufacturerId = $p["item"]["manufacturerId"];
-            
-            
+            $originalManufacturer = $this->getManufacturerById($manufacturerId);
+
+            if($originalManufacturer != null) {
+                $manufacturerElement = [ "manufacturer-".$originalManufacturer["name"] => $originalManufacturer["name"]];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$manufacturerElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }        
         }
 
            return $itemsResults;
