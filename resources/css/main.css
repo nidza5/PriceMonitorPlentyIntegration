@@ -146,10 +146,11 @@ html, body { height: 100%; width: 100%; margin: 0; }
 .pricemonitor-hidden {
     display: none;
 }
-.pricemonitor-filter-groups-wrapper .pricemonitor-price-selection-single-group-wrapper:first-child > .form-row select,
+.pricemonitor-filter-groups-wrapper-price  .pricemonitor-price-selection-single-group-wrapper:first-child > .form-row select,
 .pricemonitor-filter-groups-wrapper .pricemonitor-product-selection-single-group-wrapper:first-child > .form-row select,
-.pricemonitor-filter-groups-wrapper .form-row:first-child + .pricemonitor-price-selection-single-group-wrapper > .form-row select,
-.pricemonitor-filter-groups-wrapper .form-row:first-child + .pricemonitor-product-selection-single-group-wrapper > .form-row select {
+.pricemonitor-filter-groups-wrapper-price  .form-row:first-child + .pricemonitor-price-selection-single-group-wrapper > .form-row select,
+.pricemonitor-filter-groups-wrapper .form-row:first-child + .pricemonitor-product-selection-single-group-wrapper > .form-row select,
+ {
     pointer-events: none;
     visibility: hidden;
     padding: 0;
@@ -286,6 +287,12 @@ section.pricemonitor-attributes-mapping .form-row .input-wrapper.filterable-drop
 }
 
 .pricemonitor-filter-groups-wrapper > .form-row:last-child {
+    justify-content: flex-end;
+    margin-left: -15px;
+    margin-right: 0;
+}
+
+.pricemonitor-filter-groups-wrapper-price  > .form-row:last-child {
     justify-content: flex-end;
     margin-left: -15px;
     margin-right: 0;
