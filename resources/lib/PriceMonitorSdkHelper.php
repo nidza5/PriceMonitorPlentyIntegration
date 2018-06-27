@@ -308,7 +308,7 @@
 
                         case "=" :
                          if( isset($value[$variationCondition["filterByColumn"]])) 
-                            $condition = $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                         break;
                         case "!=" :
                             $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
