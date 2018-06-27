@@ -944,6 +944,8 @@ function showTabContent(evt, tabName) {
 
     function createSavedExpressionRowHTML(expression, groupIndex, expressionIndex, removeButtonId)
     {
+        console.log("create savedExpression row htmls");
+
         return createFilterRow(expression, groupIndex, expressionIndex) +
             '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
             'id="' + removeButtonId + '">' +
