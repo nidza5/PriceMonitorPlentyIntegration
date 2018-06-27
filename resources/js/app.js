@@ -531,7 +531,7 @@ function showTabContent(evt, tabName) {
             '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
             'id="' + buttonRemoveId + '">' +
             'x' +
-            '</button>';            
+            '</button>' +            
             '</div>' +
             '</div>';
     }
@@ -958,6 +958,8 @@ function showTabContent(evt, tabName) {
             },
             addNewExpressionBtnId = parentTemplateId + 'AddExpression_' + groupIndex + '-' +
                 (expressionIndex + 1);
+                
+        var buttonRemoveId = parentTemplateId + 'RemoveExpression_' + groupIndex + '-' + (expressionIndex + 1);
 
         addNewExpressionRow.classList.add('form-row');
         addNewExpressionRow.innerHTML =
@@ -965,6 +967,10 @@ function showTabContent(evt, tabName) {
             '<button style="height:33px;" class="' + parentTemplateId +'-add-expression btn btn-success " ' +
             'id="' + addNewExpressionBtnId + '">' +
             '+' +
+            '</button>' +
+            '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
+            'id="' + buttonRemoveId + '">' +
+            'x' +
             '</button>';
 
         filterRowParent.appendChild(addNewExpressionRow);
