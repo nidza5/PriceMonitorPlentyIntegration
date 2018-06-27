@@ -519,6 +519,8 @@ function showTabContent(evt, tabName) {
             'condition': 'equal'
         };
 
+        var buttonRemoveId = parentTemplateId + 'RemoveExpression_' + groupIndex + '-' + groupExpressions.length;
+
         return '<div class="form-row">' +
             createFilterRow(emptyExpression, groupIndex, groupExpressions.length) +
             '<button style="height:33px;" class="' + parentTemplateId +'-add-expression  btn btn-success" ' +
@@ -526,6 +528,10 @@ function showTabContent(evt, tabName) {
             groupExpressions.length + '">' +
             '+' +
             '</button>' +
+            '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
+            'id="' + buttonRemoveId + '">' +
+            'x' +
+            '</button>';            
             '</div>' +
             '</div>';
     }
