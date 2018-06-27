@@ -188,6 +188,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
 
+            echo "filtered variations";
+            echo json_encode($filteredVariation);
+
             // foreach( $filteredVariation as $r) {
             
             //     foreach($r as $p)
@@ -196,50 +199,50 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             // }
   
 
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
+        // $emailObject = $this->configInfoRepo->getConfig('email');
+        // $passwordObject = $this->configInfoRepo->getConfig('password');
 
-        $emailForConfig = $emailObject->value;
-        $passwordForConfig = $passwordObject->value;
+        // $emailForConfig = $emailObject->value;
+        // $passwordForConfig = $passwordObject->value;
 
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        //startTransaction
+        // //startTransaction
 
-        $startTransaction = $this->sdkService->call("startTransaction", [
-            'contractId' => $priceMonitorId
-        ]);
+        // $startTransaction = $this->sdkService->call("startTransaction", [
+        //     'contractId' => $priceMonitorId
+        // ]);
 
-          // echo json_encode($startTransaction['transactionHistoryMaster']);
+        //   // echo json_encode($startTransaction['transactionHistoryMaster']);
 
-         $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
+        //  $savedTransactionMasterHistory =  $this->transactionHistoryRepo->saveTransactionHistoryMaster($startTransaction['transactionHistoryMaster']); 
 
-        //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
-        //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
-        //  ]);
+        // //  $injectSaveTransactionHistory = $this->sdkService->call("injectSaveTransactionHistory", [ 
+        // //         "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory
+        // //  ]);
 
-        echo "config service";
-        echo json_encode($this->configService);
+        // echo "config service";
+        // echo json_encode($this->configService);
         
         
-        $syncRun =  $this->sdkService->call("runSync", [
-            'queueModel' => $queue,
-            'queueName' => $queueName,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig,
-            'filterType' => $typeOfFilter,
-            'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'products' => $filteredVariation,
-            'attributesFromPlenty' => $attributesIdName,
-            'attributeMapping' => $attributeMapping,
-            'contract' => $contract,
-            "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
-            "configService" => $this->configService              
-        ]);   
+        // $syncRun =  $this->sdkService->call("runSync", [
+        //     'queueModel' => $queue,
+        //     'queueName' => $queueName,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig,
+        //     'filterType' => $typeOfFilter,
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'productFilterRepo' => $filter,
+        //     'products' => $filteredVariation,
+        //     'attributesFromPlenty' => $attributesIdName,
+        //     'attributeMapping' => $attributeMapping,
+        //     'contract' => $contract,
+        //     "savedTransactionMasterRecord" =>  $savedTransactionMasterHistory,
+        //     "configService" => $this->configService              
+        // ]);   
 
-        echo "nakon run sync";
-        echo json_encode($syncRun);
+        // echo "nakon run sync";
+        // echo json_encode($syncRun);
         
 
      

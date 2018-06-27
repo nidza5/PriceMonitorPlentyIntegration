@@ -189,15 +189,7 @@ class ProductFilterService {
         }
 
            return $itemsResults;
-
-        //return $originalProducts;
     }
-
-    // public function hasMandatoryMappings($mappings)
-    // {
-    //     $diff = array_diff(self::$mandatoryAttributes, array_column($mappings, 'priceMonitorCode'));
-    //     return empty($diff);
-    // }
 
     public function getMappedAttributesCode($mappedAttribute) {
         $mappings = $mappedAttribute->toArray();
@@ -207,9 +199,7 @@ class ProductFilterService {
     }
 
     public function getItemWithPropertiesById($id)
-    {
-       // $itemRepository = pluginApp(ItemDataLayerRepositoryContract::class);
-        
+    {        
         $itemRepo = pluginApp(ItemRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
@@ -218,8 +208,6 @@ class ProductFilterService {
 
        $item = $itemRepo->show($id,["id","position"],"en",['itemProperties']);
        
-      // $finalItem= $item->getResult();
-
         return $item;
     }
 

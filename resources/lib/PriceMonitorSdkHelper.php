@@ -211,44 +211,134 @@
                $filterByColumn = $attributesFromPlenty[$attribute]; 
     
                 $nameColumnInVariation = null;
-                $filteredProducts = array_filter($variationArray, function($value) use ($filterByColumn,$condition,$values) {
-                    if($condition == "equal") {
-                        if(isset($value[$filterByColumn])) 
-                        return $value[$filterByColumn] == $values[0];
-                    } else if($condition == "not_equal") {
-                        return $value[$filterByColumn] != $values[0];
-                    }
-                    else if($condition == "greater_than") {
-                        return $value[$filterByColumn] > $values[0];
-                    } else if($condition == "less_than") {
-                        return $value[$filterByColumn] < $values[0];
-                    } else if($condition == 'greater_or_equal') {
-                        return $value[$filterByColumn] >= $values[0];
-                    } else if($condition == 'less_or_equal') {
-                        return $value[$filterByColumn] <= $values[0];
-                    } else if($condition == 'contains') {
-                        return (stripos($value[$filterByColumn], $values[0]) !== false);
-                    } else if($condition == 'contains_not') {
-                        return (stripos($value[$filterByColumn], $values[0]) === false);
-                    }                    
-                });
 
-                $valuesFilteredProducts = null;
+                $filterVAriationByConditions = [];
 
-                if($filteredProducts != null) {
-                    $valuesFilteredProducts = array_values($filteredProducts);
+
+                switch($condition) {
+
+                    case "equal" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                             "condition" => "="];
+                    break;
+                    case "not_equal" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => "!="];
+                    break;
+                    case "greater_than" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => ">"];
+                    break;
+                    case "less_than" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => "<"];
+                    break;
+                    case "greater_or_equal" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => ">="];
+                    break;
+                    case "less_or_equal" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => "<="];
+                    break;
+                    case "contains" :
+                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => "stripos!="];
+                    break;
+                    case "contains_not" :
+                    $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                            "value" => $values[0],
+                                                            "condition" => "stripos=="];
+                    break;
                 }
+
+
+                // $filteredProducts = array_filter($variationArray, function($value) use ($filterByColumn,$condition,$values) {
+                //     if($condition == "equal") {
+                //       if(isset($value[$filterByColumn])) 
+                //         return $value[$filterByColumn] == $values[0];
+                //     } else if($condition == "not_equal") {
+                //         return $value[$filterByColumn] != $values[0];
+                //     }
+                //     else if($condition == "greater_than") {
+                //         return $value[$filterByColumn] > $values[0];
+                //     } else if($condition == "less_than") {
+                //         return $value[$filterByColumn] < $values[0];
+                //     } else if($condition == 'greater_or_equal') {
+                //         return $value[$filterByColumn] >= $values[0];
+                //     } else if($condition == 'less_or_equal') {
+                //         return $value[$filterByColumn] <= $values[0];
+                //     } else if($condition == 'contains') {
+                //         return (stripos($value[$filterByColumn], $values[0]) !== false);
+                //     } else if($condition == 'contains_not') {
+                //         return (stripos($value[$filterByColumn], $values[0]) === false);
+                //     }                    
+                // });
+
+                // $valuesFilteredProducts = null;
+
+                // if($filteredProducts != null) {
+                //     $valuesFilteredProducts = array_values($filteredProducts);
+                // }
     
-                if($operator == 'AND') {
-                    $finalFilteredProduct = $valuesFilteredProducts;
-                } else if($operator == 'OR'){
-                    array_push($finalFilteredProduct,$valuesFilteredProducts);
-                    // $finalFilteredProduct += $valuesFilteredProducts;
-                }
+                // if($operator == 'AND') {
+                //     $finalFilteredProduct = $valuesFilteredProducts;
+                // } else if($operator == 'OR'){
+                //     array_push($finalFilteredProduct,$valuesFilteredProducts);
+                //     // $finalFilteredProduct += $valuesFilteredProducts;
+                // }
             }
+
+            $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions) {
+                 
+                $condition = null;
+
+                foreach($filterVAriationByConditions as $variationCondition) {
+
+                    $filterByCondition = $variationCondition["condition"];
+                    
+                    switch($filterByCondition) {
+
+                        case "=" :
+                           $condition = $condition &&  $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                        break;
+                        case "!=" :
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] != $values[0];
+                        break;
+                        case ">" :
+                             $condition = $condition && $value[$variationCondition["filterByColumn"]] > $values[0];
+                        break;
+                        case "<" :
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] < $values[0];
+                        break;
+                        case ">=" :
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] >= $values[0];
+                        break;
+                        case "<=" :
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $values[0];
+                        break;
+                        case "stripos!=" :
+                             $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                        break;
+                        case "stripos==" :
+                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                        break;
+
+                    }
+                }
+
+                    return  $condition;
+                    
+            });
     
-            
-             return  $finalFilteredProduct;
+             return  $filteredProducts;
 
         } catch (\Exception $ex)
         {
