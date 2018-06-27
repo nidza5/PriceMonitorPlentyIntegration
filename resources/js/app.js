@@ -1211,8 +1211,10 @@ function showTabContent(evt, tabName) {
     function checkFormIsValid(groupsForSave) {
 
         for (var i = 0; i < groupsForSave.length; i++) { 
-            expression = groupsForSave[i]['expressions'];
+           var expression = groupsForSave[i]['expressions'];
 
+            console.log("expression");
+            console.log(expression);
             for(j = 0; j < expression.length; j++) {
                 if(expression[j]['code'] == null || expression[j]['code'] == "")
                     return true;
