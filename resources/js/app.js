@@ -781,7 +781,8 @@ function showTabContent(evt, tabName) {
     function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
     {
 
-        console.log("DEBUG 1");
+        console.log("DEBUG 1 expression");
+        console.log(expression);
 
         var type = 'text';
 
