@@ -201,6 +201,7 @@
         try {
             
             $finalFilteredProduct = array();
+            $filterVAriationByConditions = [];
 
             foreach($expresssions as $exp) {
                 $operator = $exp['operator'];
@@ -211,9 +212,6 @@
                $filterByColumn = $attributesFromPlenty[$attribute]; 
     
                 $nameColumnInVariation = null;
-
-                $filterVAriationByConditions = [];
-
 
                 switch($condition) {
 
