@@ -981,6 +981,7 @@ function showTabContent(evt, tabName) {
 
         filterRowParent.appendChild(addNewExpressionRow);
         document.getElementById(addNewExpressionBtnId).addEventListener('click', addNewExpression);
+        document.getElementById(buttonRemoveId).addEventListener('click', removeExpression);
     }
 
     function initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex)
