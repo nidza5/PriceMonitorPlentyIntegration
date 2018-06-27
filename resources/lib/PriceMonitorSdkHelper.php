@@ -338,7 +338,7 @@
                     
             });
     
-             return  $condition;
+             return  $filterVAriationByConditions;
 
         } catch (\Exception $ex)
         {
