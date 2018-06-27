@@ -310,19 +310,19 @@
                            $condition = $condition &&  $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                         break;
                         case "!=" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] != $values[0];
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
                         break;
                         case ">" :
-                             $condition = $condition && $value[$variationCondition["filterByColumn"]] > $values[0];
+                             $condition = $condition && $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
                         break;
                         case "<" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] < $values[0];
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
                         break;
                         case ">=" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] >= $values[0];
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] >= $variationCondition["value"];
                         break;
                         case "<=" :
-                            $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $values[0];
+                            $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
                         break;
                         case "stripos!=" :
                              $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) !== false);
