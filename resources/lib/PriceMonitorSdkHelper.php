@@ -297,11 +297,10 @@
             } 
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
-                 
-                $condition = null;
 
                 foreach($parentFilteredGroup as $filterGroup) 
                 {
+                    $condition = null;
                     foreach($filterGroup["expressionFilter"] as $variationCondition) {
 
                         $filterByCondition = $variationCondition["condition"];
