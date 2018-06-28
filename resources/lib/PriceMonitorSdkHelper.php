@@ -299,7 +299,7 @@
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
 
-                    return $value["number"] == 132 &&  $value["name"] == "varijacija nova";
+                    return $value["number"] == 132 ||  $value["name"] == "varijacija nova";
                 // $groupCondition = null;
                 // foreach($parentFilteredGroup as $filterGroup) 
                 // {
