@@ -75,6 +75,9 @@ function setListOptionsForTextAttributes() {
  */
 function appendListOptionsOnSelectBoxes(optionsWrapperClassName, optionsHTML)
 {
+    console.log("options html");
+    console.log(optionsHTML);
+
     var optionsWrappers = document.getElementsByClassName(optionsWrapperClassName);
     for (var i = 0; i < optionsWrappers.length; i++) {
         optionsWrappers[i].innerHTML = optionsHTML;
