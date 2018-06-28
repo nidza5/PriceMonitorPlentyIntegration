@@ -208,10 +208,11 @@
         try {
             
             $finalFilteredProduct = array();
-            $filterVAriationByConditions = [];
-
+          
             foreach($parentGroup as $group)
             {
+               $filterVAriationByConditions = [];
+
                 foreach($group["expressions"] as $exp) {
                     $operator = $exp['operator'];
                     $values = $exp['values'];
