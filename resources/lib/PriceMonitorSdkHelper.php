@@ -298,6 +298,7 @@
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
 
+                $groupCondition = null;
                 foreach($parentFilteredGroup as $filterGroup) 
                 {
                     $condition = null;
@@ -382,9 +383,11 @@
                                 break;
                         }
                     }
+
+                    $groupCondition == null ? $condition : ($groupCondition) && ($condition);
                 }                
 
-                return $condition;                    
+                return $groupCondition;                    
             });
     
              return  $filteredProducts;
