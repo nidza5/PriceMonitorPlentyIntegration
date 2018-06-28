@@ -297,8 +297,6 @@
                 array_push($parentFilteredGroup,$filteredGroup);   
             } 
 
-            $finalFilterCondition = null;
-
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
 
                 $groupCondition = null;
@@ -397,11 +395,10 @@
 
                 }                
 
-                $finalFilterCondition = $groupCondition;
                 return $groupCondition;                    
             });
     
-             return  $finalFilterCondition;
+             return  $filteredProducts;
 
         } catch (\Exception $ex)
         {
