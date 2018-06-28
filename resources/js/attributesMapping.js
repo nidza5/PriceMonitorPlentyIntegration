@@ -68,6 +68,15 @@ function setListOptionsForTextAttributes() {
     }
 
     appendListOptionsOnSelectBoxes('attributes-mapping-text-attributes', textAttrsInnerHtml);
+    deleteEmptyOptGroup();
+}
+
+function deleteEmptyOptGroup() {
+    $(".attributes-mapping-text-attributes optgroup").each(function (el,inx) {
+       
+        if($(inx).find('option').length == 0)
+            $(inx).remove();        
+    });
 }
 
  /**
