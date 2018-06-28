@@ -211,7 +211,7 @@
           
             $parentFilteredGroup = [];
             $filteredGroup = [];
-
+            $groupCondition = null;
             foreach($parentGroup as $group)
             {
                $filterVAriationByConditions = [];
@@ -297,7 +297,7 @@
                 array_push($parentFilteredGroup,$filteredGroup);   
             } 
 
-            $groupCondition = null;
+           
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
 
                 
