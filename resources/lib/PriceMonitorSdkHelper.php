@@ -162,6 +162,8 @@
             $filter = $filterRepository->getFilter($pricemonitorId, $filterType);
 
             $finalProductCollection = null;
+            $parentGroup = [];
+            $groupFilter = [];
 
             foreach ($filter->getExpressions() as $group) {
                 $operator = null;
@@ -182,102 +184,110 @@
                     );
                 }
 
-                if (!empty($expressions)) {
-                    $productCollection = self::addFilterByOperator($expressions, $group->getOperator(),$allVariations,$attributesFromPlenty);
-                }
+                $groupFilter['expressions'] =  $expressions;
+                $groupFilter['operator'] =  $group->getOperator();
 
-                if($group->getOperator() == 'AND')
-                    $finalProductCollection = $productCollection;
-                else if($group->getOperator() == 'OR')            
-                    array_push($finalProductCollection,$productCollection);
+                array_push($parentGroup,$groupFilter);
+              
+
+                // if($group->getOperator() == 'AND')
+                //     $finalProductCollection = $productCollection;
+                // else if($group->getOperator() == 'OR')            
+                //     array_push($finalProductCollection,$productCollection);
        }
        
+        if (!empty($parentGroup)) {
+            $productCollection = self::addFilterByOperator($parentGroup, $group->getOperator(),$allVariations,$attributesFromPlenty);
+        }
 
-         return $finalProductCollection;
+         return $productCollection;
     }
 
-    public static function addFilterByOperator($expresssions,$groupOperator,$variationArray,$attributesFromPlenty) 
+    public static function addFilterByOperator($parentGroup,$groupOperator,$variationArray,$attributesFromPlenty) 
     {
         try {
             
             $finalFilteredProduct = array();
             $filterVAriationByConditions = [];
 
-            foreach($expresssions as $exp) {
-                $operator = $exp['operator'];
-                $values = $exp['values'];
-                $attribute = $exp['attribute'];
-                $condition = $exp['condition'];
-
-                $filterByColumn = $attributesFromPlenty[$attribute]; 
-
-                switch($attribute) {
-
-                    case "Category" :
-                        $filterByColumn = "category-" + $values[0];
-                    break;
-                    case "Manufacturer" :
-                         $filterByColumn = "manufacturer-" + $values[0];
-                    break;
-
-                    default :
-                        $filterByColumn = $attributesFromPlenty[$attribute]; 
-                }
+            foreach($parentGroup as $group)
+            {
+                foreach($parentGroup["expressions"] as $exp) {
+                    $operator = $exp['operator'];
+                    $values = $exp['values'];
+                    $attribute = $exp['attribute'];
+                    $condition = $exp['condition'];
     
-                $nameColumnInVariation = null;
-
-                switch($condition) {
-
-                    case "equal" :
+                    $filterByColumn = $attributesFromPlenty[$attribute]; 
+    
+                    switch($attribute) {
+    
+                        case "Category" :
+                            $filterByColumn = "category-" + $values[0];
+                        break;
+                        case "Manufacturer" :
+                             $filterByColumn = "manufacturer-" + $values[0];
+                        break;
+    
+                        default :
+                            $filterByColumn = $attributesFromPlenty[$attribute]; 
+                    }
+        
+                    $nameColumnInVariation = null;
+    
+                    switch($condition) {
+    
+                        case "equal" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => "=",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "not_equal" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => "!=",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "greater_than" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => ">",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "less_than" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => "<",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "greater_or_equal" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => ">=",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "less_or_equal" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => "<=",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "contains" :
+                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
+                                                                "value" => $values[0],
+                                                                "condition" => "stripos!=",
+                                                                "operator" =>  $operator];
+                        break;
+                        case "contains_not" :
                         $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
                                                             "value" => $values[0],
-                                                            "condition" => "=",
+                                                            "condition" => "stripos==",
                                                             "operator" =>  $operator];
-                    break;
-                    case "not_equal" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => "!=",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "greater_than" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => ">",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "less_than" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => "<",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "greater_or_equal" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => ">=",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "less_or_equal" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => "<=",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "contains" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => "stripos!=",
-                                                            "operator" =>  $operator];
-                    break;
-                    case "contains_not" :
-                    $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                        "value" => $values[0],
-                                                        "condition" => "stripos==",
-                                                        "operator" =>  $operator];
-                    break;
+                        break;
+                    }
                 }
-            }
+            } 
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions) {
                  
