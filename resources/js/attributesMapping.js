@@ -72,11 +72,12 @@ function setListOptionsForTextAttributes() {
 }
 
 function deleteEmptyOptGroup() {
-    $(".attributes-mapping-text-attributes optgroup").each(function (el,inx) {
+    $(".attributes-mapping-text-attributes optgroup, .attributes-mapping-custom-attributes optgroup").each(function (el,inx) {
        
         if($(inx).find('option').length == 0)
             $(inx).remove();        
     });
+    
 }
 
  /**
