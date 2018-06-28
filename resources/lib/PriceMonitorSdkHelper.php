@@ -300,10 +300,9 @@
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
 
                 $groupCondition = null;
-                $condition = null;
                 foreach($parentFilteredGroup as $filterGroup) 
                 {
-                    
+                    $condition = null;
                     foreach($filterGroup["expressionFilter"] as $variationCondition) {
 
                         $filterByCondition = $variationCondition["condition"];
@@ -313,7 +312,7 @@
                             case "=" :
                              if(isset($value[$variationCondition["filterByColumn"]])) 
                              {
-                                if($condition) {
+                                if($condition !== null) {
                                     if($variationCondition["operator"] === "AND")
                                         $condition = $condition && ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
                                     else if($variationCondition["operator"] === "OR")
@@ -396,7 +395,7 @@
 
                 }                
 
-                return $condition;                    
+                return $groupCondition;                    
             });
     
              return  $filteredProducts;
