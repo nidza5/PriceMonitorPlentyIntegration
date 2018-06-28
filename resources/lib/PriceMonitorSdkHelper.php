@@ -209,6 +209,7 @@
             
             $finalFilteredProduct = array();
           
+            $parentFilteredGroup = [];
             $filteredGroup = [];
 
             foreach($parentGroup as $group)
@@ -292,13 +293,14 @@
                 }
 
                 $filteredGroup['expressionFilter'] =  $filterVAriationByConditions;
+                array_push($parentFilteredGroup,$filteredGroup);   
             } 
 
-            $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $filteredGroup) {
+            $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
                  
                 $condition = null;
 
-                foreach($filteredGroup as $filterGroup) 
+                foreach($parentFilteredGroup as $filterGroup) 
                 {
                     foreach($filterGroup["expressionFilter"] as $variationCondition) {
 
