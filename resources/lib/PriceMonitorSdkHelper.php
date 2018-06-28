@@ -212,7 +212,7 @@
 
             foreach($parentGroup as $group)
             {
-                foreach($parentGroup["expressions"] as $exp) {
+                foreach($group["expressions"] as $exp) {
                     $operator = $exp['operator'];
                     $values = $exp['values'];
                     $attribute = $exp['attribute'];
