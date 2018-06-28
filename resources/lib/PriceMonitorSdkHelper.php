@@ -383,9 +383,9 @@
                                 break;
                         }
                     }
-                    $groupCondition = $condition;
+                    //$groupCondition = $condition;
 
-                   // $groupCondition == null ? $condition : ($groupCondition) && ($condition);
+                    $groupCondition = $groupCondition === null ? $condition : ($groupCondition) && ($condition);
                 }                
 
                 return $groupCondition;                    
