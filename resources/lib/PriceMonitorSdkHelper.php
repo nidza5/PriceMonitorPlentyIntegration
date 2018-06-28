@@ -314,11 +314,11 @@
                              {
                                 if($condition) {
                                     if($variationCondition["operator"] === "AND")
-                                        $condition = $condition && $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
+                                        $condition = $condition && ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
                                     else if($variationCondition["operator"] === "OR")
                                         $condition = $condition || $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
                                 } else
-                                    $condition = $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
+                                    $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
                              }
                                break;
                             case "!=" :
