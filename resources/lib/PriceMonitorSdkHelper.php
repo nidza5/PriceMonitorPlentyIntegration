@@ -293,6 +293,7 @@
                 }
 
                 $filteredGroup['expressionFilter'] =  $filterVAriationByConditions;
+                $filteredGroup['operator'] = $group["operator"];
                 array_push($parentFilteredGroup,$filteredGroup);   
             } 
 
@@ -383,9 +384,13 @@
                                 break;
                         }
                     }
-                    //$groupCondition = $condition;
+                   
+                    $operatorGroup = $filterGroup["operator"];
+                    if($operatorGroup == "AND")
+                        $groupCondition = $groupCondition === null ? ($condition) : $groupCondition && ($condition);
+                    else if($operatorGroup == "OR")
+                        $groupCondition = $groupCondition === null ? ($condition) : $groupCondition || ($condition);
 
-                    $groupCondition = $groupCondition === null ? $condition : ($groupCondition) && ($condition);
                 }                
 
                 return $groupCondition;                    
