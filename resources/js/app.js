@@ -1374,6 +1374,8 @@ function showTabContent(evt, tabName) {
                     result = jQuery.parseJSON(data);
                     console.log("result parse result");
                     console.log(result);
+
+                    populateProductPreviewTable(result);
                 }
                     
             },
