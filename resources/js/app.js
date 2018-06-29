@@ -1368,6 +1368,14 @@ function showTabContent(evt, tabName) {
                 console.log("data filter preview");
                 console.log(data);
 
+                var result = null;
+
+                if(data != null) {
+                    result = jQuery.parseJSON(data);
+                    console.log("result parse result");
+                    console.log(result);
+                }
+                    
             },
             error: function(data)
             {
