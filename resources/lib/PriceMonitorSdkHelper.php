@@ -320,7 +320,10 @@
                                     } else
                                         $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
                                 } else {
-                                       $condition = $condition && false;
+                                        if($condition !== null)
+                                            $condition = $condition && false;
+                                        else
+                                            $condition = false;
                                 }
                                break;
                             case "!=" :
