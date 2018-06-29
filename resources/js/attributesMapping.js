@@ -62,6 +62,9 @@ function setListOptionsForTextAttributes() {
                 if (allMappingsAtttribute[k].hasOwnProperty(n)) {
                     var splitedAttr = allMappingsAtttribute[k][n].split('-');
                      
+                    console.log("attribute type");
+                    console.log(splitedAttr[1]);
+
                     if(splitedAttr[1] === "string")
                         textAttrsInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
                  }
@@ -111,7 +114,7 @@ function createAttributeOptionsBasedOnSource(sourceAttributes)
 
             if(k === "Other")
                 continue;
-                
+
             dropdownInnerHtml += "<optgroup label= "+k+">";
 
             for(var n in sourceAttributes[k])
