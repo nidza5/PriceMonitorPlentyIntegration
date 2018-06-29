@@ -52,6 +52,9 @@ function setListOptionsForTextAttributes() {
     for (var k in allMappingsAtttribute){
         if (allMappingsAtttribute.hasOwnProperty(k)) {
 
+            if(k === "Other")
+                continue;
+                
             textAttrsInnerHtml += "<optgroup label= "+k+">";
 
             for(var n in allMappingsAtttribute[k])
