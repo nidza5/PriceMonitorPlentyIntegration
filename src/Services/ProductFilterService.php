@@ -139,7 +139,6 @@ class ProductFilterService {
                     $itemsResults[$i] = $merge; 
                 }
 
-
                 foreach($p['variationBarcodes'] as $bar) {                
                 
                     $barCode = null;
@@ -160,10 +159,7 @@ class ProductFilterService {
             
                     }
 
-            } else {
-               
-            }
-           
+            }            
             
             foreach($p['variationCategories'] as $category) {
                 $categoryOriginal = $this->getCategoryById($category["categoryId"]);
