@@ -20,6 +20,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
+ use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
  
 
  /**
@@ -48,16 +50,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $productFilterRepo;
 
+        /**
+         *
+         * @var AttributesMappingRepositoryContract
+         */
+        private $attributesMappingRepo;
+
 
     public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,ProductFilterRepositoryContract $productFilterRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;       
-        $this->productFilterRepo = $productFilterRepo;      
+        $this->productFilterRepo = $productFilterRepo;   
+        $this->attributesMappingRepo = $attributesMappingRepo;    
     }
     
 
-      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
+      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo) : string
       {
 
         //  $productFilterRepo->deleteAllProductFilter();
@@ -131,7 +140,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($priceMonitorId == null || $filterType == null)
             throw new \Exception("Price monitor id or filter type is null");
 
-            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$typeOfFilter);
+            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
 
             $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
     
