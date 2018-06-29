@@ -790,7 +790,7 @@ function showTabContent(evt, tabName) {
             type = 'number';
         }
 
-        return '<input style="height:67%;" name="' + valueFieldName +'" ' +
+        return '<input style="height:65%;" name="' + valueFieldName +'" ' +
             'id="' + valueFieldName + '" '+
             'class=" pricemonitor-form-field' + ' form-control" ' +
             'value="' + (expression.value[0] ? expression.value[0] : '')  +'" ' +
@@ -819,7 +819,7 @@ function showTabContent(evt, tabName) {
     {
         var selectInnerHtml = '';
 
-        selectInnerHtml += '<select style= "width:100% !important; height:67%;" ' +
+        selectInnerHtml += '<select style= "width:100% !important; height:65%;padding-top:3px; " ' +
             'name="' + valueFieldName + '" ' +
             'class="pricemonitor-form-field' + ' form-control " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
