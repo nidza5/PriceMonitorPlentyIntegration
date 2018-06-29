@@ -1188,7 +1188,7 @@ function showTabContent(evt, tabName) {
                 parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex,
             inputWrapperNode = document[formName][conditionFieldName].parentNode,
             inputWrapperConditionsInnerHtml =
-                '<select  class="form-control"' +
+                '<select style="height:67%;"  class="form-control custom-select custom-select-sm"' +
                 'name="' +
                 parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '">' +
                 createConditionOptionsForExpressionsAttributeType(expression) +
