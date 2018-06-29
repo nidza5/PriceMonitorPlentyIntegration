@@ -1385,6 +1385,18 @@ function showTabContent(evt, tabName) {
         });
     }
 
+    function populateProductPreviewTable(data)
+    {
+        if(data == null)
+          return;
+
+        for(i = 0; i < data.length; i++) {
+            console.log("variationName");
+            console.log(data[i].name);
+        }
+
+    }
+
 
     /*********************************** ACCOUNT FORM ***************************************/
 

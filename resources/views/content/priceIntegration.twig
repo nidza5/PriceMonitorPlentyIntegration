@@ -30,6 +30,36 @@
 </head>
  
 <body>
+
+    <div id="previewModal" class="modal fade" role="dialog">
+    <div class="">
+        <div class="modal-content">
+            <div class="modal-header" id="myHeader">
+                <h2 class="modal-title" style="text-align:center;">Filtered products</h2>
+                <input type="hidden" name="hidden" id="hidden" />
+            </div>
+            <div class="modal-body" id="myModalBody">
+                <div class="form-group">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Product name</th>
+                                <th> Product number</th>
+                                <th> IsException</th>
+                            <tr />
+                        </thead>
+                        <tbody id="bodyPreviewData"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" id="myFooter">
+                <button type="button" class="btn btn-default" data-dismiss="modal" data-localized="ButtonClose">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
    <div class="priceMonitorPrestaMain">
    <div class="tabprestaprice">
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard',this)" id="defaultOpen">Global Dashboard</button>
