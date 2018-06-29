@@ -31,12 +31,14 @@
  
 <body>
 
-    <div id="previewModal" class="modal fade" role="dialog">
-    <div class="">
+    <div id="previewModal" class="modal" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" id="myHeader">
                 <h2 class="modal-title" style="text-align:center;">Filtered products</h2>
-                <input type="hidden" name="hidden" id="hidden" />
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
             </div>
             <div class="modal-body" id="myModalBody">
                 <div class="form-group">
@@ -52,7 +54,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="myFooter">
-                <button type="button" class="btn btn-default" data-dismiss="modal" data-localized="ButtonClose">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
