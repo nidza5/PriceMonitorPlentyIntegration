@@ -240,7 +240,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $finalResult = $itemService->getAllVariations();
        // $finalResult = $itemService->getManufacturerById(2);
-         $finalResult = $itemService->getItemWithPropertiesById(135);
+         //$finalResult = $itemService->getItemWithPropertiesById(135);
        
 
         echo "products";

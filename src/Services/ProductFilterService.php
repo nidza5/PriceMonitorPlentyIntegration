@@ -168,6 +168,18 @@ class ProductFilterService {
             }
 
             $itemWithProperties = $this->getItemWithPropertiesById($p["itemId"]);
+
+            //add item text to main columns
+            $itemText = "";
+            if($itemWithProperties != null)                 
+                $itemText = $itemWithProperties["texts"][0]['name1'];
+            
+            $itemTextElement = ["itemText" => $itemText];
+            $arrayForMerge = $tempArr == null ? $p : $tempArr;
+            $merge = array_merge($arrayForMerge,$itemTextElement);  
+            $tempArr = $merge;              
+            $itemsResults[$i] = $merge;    
+           
             
             foreach($itemWithProperties["itemProperties"] as $properties) {
             
