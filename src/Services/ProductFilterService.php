@@ -126,7 +126,7 @@ class ProductFilterService {
             $tempArr = null;            
             $itemsResults[$i] = $p;  
 
-            if($p['variationBarcodes'] !== null) {
+            if(!empty($p['variationBarcodes'])) {
                 foreach($p['variationBarcodes'] as $bar) {                
                 
                     $barCode = null;
