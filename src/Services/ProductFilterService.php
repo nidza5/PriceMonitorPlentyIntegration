@@ -157,7 +157,7 @@ class ProductFilterService {
                     $tempArr = $merge;              
                     $itemsResults[$i] = $merge;                 
             
-                    }
+                }
 
             }            
             
