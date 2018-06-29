@@ -54,7 +54,7 @@ function setListOptionsForTextAttributes() {
 
             if(k === "Other")
                 continue;
-                
+
             textAttrsInnerHtml += "<optgroup label= "+k+">";
 
             for(var n in allMappingsAtttribute[k])
@@ -109,6 +109,9 @@ function createAttributeOptionsBasedOnSource(sourceAttributes)
     for (var k in sourceAttributes){
         if (sourceAttributes.hasOwnProperty(k)) {
 
+            if(k === "Other")
+                continue;
+                
             dropdownInnerHtml += "<optgroup label= "+k+">";
 
             for(var n in sourceAttributes[k])
