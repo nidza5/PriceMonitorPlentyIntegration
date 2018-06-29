@@ -325,8 +325,12 @@
                                             else 
                                                 $condition = $condition ||  false;
                                         }
-                                    } else
-                                        $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
+                                    } else {
+                                        if(isset($value[$variationCondition["filterByColumn"]])) 
+                                            $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
+                                        else 
+                                            $condition = false;   
+                                    }
                                  
                                break;
                             case "!=" :
