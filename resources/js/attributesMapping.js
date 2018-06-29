@@ -61,11 +61,8 @@ function setListOptionsForTextAttributes() {
             {
                 if (allMappingsAtttribute[k].hasOwnProperty(n)) {
                     var splitedAttr = allMappingsAtttribute[k][n].split('-');
-                     
-                    console.log("attribute type");
-                    console.log(splitedAttr[1]);
-
-                    if(splitedAttr[1] === "string")
+                  
+                    if(splitedAttr[1] === "string" || splitedAttr[1] === "text")
                         textAttrsInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
                  }
              }
@@ -122,7 +119,7 @@ function createAttributeOptionsBasedOnSource(sourceAttributes)
                 if (sourceAttributes[k].hasOwnProperty(n)) {
                     var splitedAttr = sourceAttributes[k][n].split('-');
                      
-                    if(splitedAttr[1] === "string")
+                    if(splitedAttr[1] === "string" || splitedAttr[1] === "text")
                         dropdownInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
                  }
              }
