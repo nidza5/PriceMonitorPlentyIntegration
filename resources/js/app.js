@@ -594,7 +594,7 @@ function showTabContent(evt, tabName) {
                     '</ul>' +
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
-                    '<select style="height:67%;" class="pricemonitor-form-field ' + ' form-control custom-select custom-select-sm" ' +
+                    '<select style="height:65%;padding-top:3px;" class="pricemonitor-form-field ' + ' form-control" ' +
                         'name="' +
                          parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
                          ' required ' +
@@ -1188,7 +1188,7 @@ function showTabContent(evt, tabName) {
                 parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex,
             inputWrapperNode = document[formName][conditionFieldName].parentNode,
             inputWrapperConditionsInnerHtml =
-                '<select style="height:67%;"  class="form-control custom-select custom-select-sm"' +
+                '<select style="height:65%;padding-top:3px;"  class="form-control"' +
                 'name="' +
                 parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '">' +
                 createConditionOptionsForExpressionsAttributeType(expression) +
