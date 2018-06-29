@@ -18,8 +18,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Services\ProductFilterService;
+ use PriceMonitorPlentyIntegration\Services\AttributeService;
  
-
 
  /**
   * Class FilterController
@@ -112,5 +113,55 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
           //return "OK";
       }
-      
+
+      public function filterPreview(Request $request) {
+
+        $requestData = $request->all();
+        $priceMonitorId = 0;
+
+        if($requestData == null)
+            return;
+
+        $priceMonitorId = $requestData['pricemonitorId'];
+        $filterType = $requestData['type'];
+        $filterData = $requestData['filters'];
+        $limit = $requestData['limit'];
+        $offset = $requestData['offset'];
+
+        if($priceMonitorId == null || $filterType == null)
+            throw new \Exception("Price monitor id or filter type is null");
+
+            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$typeOfFilter);
+
+            $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
+    
+            $itemService = pluginApp(ProductFilterService::class);
+    
+            $allVariations = $itemService->getAllVariations();
+    
+            $attributeService = pluginApp(AttributeService::class);
+    
+            $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+    
+            $attributesIdName = array();
+    
+            foreach($attributesFromPlenty as $key => $value) {
+                foreach($value as $v => $l)
+                    $attributesIdName[$v] = explode("-",$l)[0];            
+    
+            }
+
+            $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+                'filterType' => $filterType,
+                'priceMonitorId' => $priceMonitorId,
+                'productFilterRepo' => $filter,
+                'attributeMapping' => $attributeMapping,
+                'allVariations' =>  $allVariations,
+                'attributesFromPlenty' => $attributesIdName            
+            ]);  
+
+            echo "preview filtered variation";
+            echo json_encode($filteredVariation);
+        
+      }      
  }

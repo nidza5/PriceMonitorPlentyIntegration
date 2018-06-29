@@ -29,6 +29,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
         $router->post('updateContractInfo', 'PriceMonitorPlentyIntegration\Controllers\ContentController@updateContractInfo');
         $router->get('getFilters', 'PriceMonitorPlentyIntegration\Controllers\FilterController@getFilters');
         $router->post('saveFilter', 'PriceMonitorPlentyIntegration\Controllers\FilterController@saveFilter');
+        $router->post('filterPreview', 'PriceMonitorPlentyIntegration\Controllers\FilterController@filterPreview');        
         $router->get('getAttributes', 'PriceMonitorPlentyIntegration\Controllers\AttributesController@getAttributes');
         $router->get('getAttributeValueByAttrId', 'PriceMonitorPlentyIntegration\Controllers\AttributesController@getAttributeValueByAttrId');
         $router->get('getMappedAttributes', 'PriceMonitorPlentyIntegration\Controllers\AttributesMappingController@getMappedAttributes');

@@ -1343,6 +1343,41 @@ function showTabContent(evt, tabName) {
     }
 
 
+    function preview() {
+        loadProductPreviewData(10,0);
+    }
+
+    function loadProductPreviewData(limit,offset) {
+
+        var filters = createFiltersForRequest();
+
+        var data = {
+            'pricemonitorId': $("#contractId").val(),
+            'type': filterQueryParams.filterType,
+            'filters': filters,
+            'limit' : limit,
+            'offset': offset
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/filterPreview",
+            data: data,
+            success: function(data)
+            {
+                console.log("data filter preview");
+                console.log(data);
+
+            },
+            error: function(data)
+            {
+                console.log("u error");
+                console.log(data);
+            }
+        });
+    }
+
+
     /*********************************** ACCOUNT FORM ***************************************/
 
     function getAccountInformation() {
