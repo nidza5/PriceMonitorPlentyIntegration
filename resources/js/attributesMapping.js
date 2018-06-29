@@ -76,8 +76,7 @@ function deleteEmptyOptGroup() {
        
         if($(inx).find('option').length == 0)
             $(inx).remove();        
-    });
-    
+    });   
 }
 
  /**
@@ -296,6 +295,7 @@ function setSavedValuesOnView(response) {
 
             // Appends handler when add new tag is clicked. Displaying and validation is handled here.
             document.getElementById('add-custom-tag').addEventListener('click', addTag);
+            deleteEmptyOptGroup();
         }
 
         function addTag(event)
