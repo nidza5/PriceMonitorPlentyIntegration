@@ -419,7 +419,7 @@
                 return $groupCondition;                    
             });
     
-             return  $filteredProducts;
+             return  array_values($filteredProducts);
 
         } catch (\Exception $ex)
         {
