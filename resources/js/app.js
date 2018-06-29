@@ -1397,10 +1397,12 @@ function showTabContent(evt, tabName) {
           return;
 
         for(i = 0; i < data.length; i++) {
-            console.log("variationName");
-            console.log(data[i].name);
+            
+            var tableData = '<tr> <td>' + data[i].name + ' </td>  <td>' + data[i].number + ' </td> </tr>';
+            $('#bodyPreviewData').append(tableData);
         }
 
+        $('#previewModal').modal('show');  
     }
 
 
