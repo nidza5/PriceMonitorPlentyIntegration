@@ -309,22 +309,25 @@
                         
                         switch($filterByCondition) {
     
-                            case "=" :
-                                if(isset($value[$variationCondition["filterByColumn"]])) 
-                                {
+                            case "=" :                               
                                     if($condition !== null) {
                                         if($variationCondition["operator"] === "AND")
-                                            $condition = $condition && ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
+                                        {
+                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                                $condition = $condition && ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
+                                            else 
+                                                $condition = $condition &&  false;
+                                        }
                                         else if($variationCondition["operator"] === "OR")
-                                            $condition = $condition || $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
+                                        {
+                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                                $condition = $condition || $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
+                                            else 
+                                                $condition = $condition ||  false;
+                                        }
                                     } else
                                         $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
-                                } else {
-                                        if($condition !== null)
-                                            $condition = $condition || false;
-                                        else
-                                            $condition = false;
-                                }
+                                 
                                break;
                             case "!=" :
                               if(isset($value[$variationCondition["filterByColumn"]])) 
