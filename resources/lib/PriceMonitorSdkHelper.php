@@ -310,8 +310,8 @@
                         switch($filterByCondition) {
     
                             case "=" :
-                               // if(isset($value[$variationCondition["filterByColumn"]])) 
-                              //  {
+                                if(isset($value[$variationCondition["filterByColumn"]])) 
+                                {
                                     if($condition !== null) {
                                         if($variationCondition["operator"] === "AND")
                                             $condition = $condition && ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
@@ -319,7 +319,9 @@
                                             $condition = $condition || $value[$variationCondition["filterByColumn"]] === $variationCondition["value"];
                                     } else
                                         $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
-                               // }
+                                } else {
+                                       $condition = $condition && false;
+                                }
                                break;
                             case "!=" :
                               if(isset($value[$variationCondition["filterByColumn"]])) 
