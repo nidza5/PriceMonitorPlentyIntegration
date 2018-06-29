@@ -127,6 +127,19 @@ class ProductFilterService {
             $itemsResults[$i] = $p;  
 
             if(!empty($p['variationBarcodes'])) {
+
+                $barCodesArray = ["GTIN 13" => "", "GTIN 128" => "","UPC" => "","ISBN" => ""];
+
+                foreach($barCodesArray as $arrayCodesKey => $barCodesValue) {
+                    $barElement = [$arrayCodesKey => $barCodesValue];
+    
+                    $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                    $merge = array_merge($arrayForMerge,$barElement);  
+                    $tempArr = $merge;              
+                    $itemsResults[$i] = $merge; 
+                }
+
+
                 foreach($p['variationBarcodes'] as $bar) {                
                 
                     $barCode = null;
@@ -148,16 +161,7 @@ class ProductFilterService {
                     }
 
             } else {
-                $barCodesArray = ["GTIN 13" => "", "GTIN 128" => "","UPC" => "","ISBN" => ""];
-
-                foreach($barCodesArray as $arrayCodesKey => $barCodesValue) {
-                    $barElement = [$arrayCodesKey => $barCodesValue];
-    
-                    $arrayForMerge = $tempArr == null ? $p : $tempArr;
-                    $merge = array_merge($arrayForMerge,$barElement);  
-                    $tempArr = $merge;              
-                    $itemsResults[$i] = $merge; 
-                }
+               
             }
            
             
