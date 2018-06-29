@@ -819,7 +819,7 @@ function showTabContent(evt, tabName) {
     {
         var selectInnerHtml = '';
 
-        selectInnerHtml += '<select style= width:100% !important; height:67%; ' +
+        selectInnerHtml += '<select style= "width:100% !important; height:67%;" ' +
             'name="' + valueFieldName + '" ' +
             'class="pricemonitor-form-field' + ' form-control " ' +
             (expression.value.length > 0 ? " disabled" : "") + '>';
