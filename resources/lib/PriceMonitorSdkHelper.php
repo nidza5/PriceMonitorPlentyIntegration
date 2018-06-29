@@ -321,7 +321,7 @@
                                         $condition = ($value[$variationCondition["filterByColumn"]] === $variationCondition["value"]);
                                 } else {
                                         if($condition !== null)
-                                            $condition = $condition && false;
+                                            $condition = $condition || false;
                                         else
                                             $condition = false;
                                 }
