@@ -57,7 +57,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         private $attributesMappingRepo;
 
 
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,ProductFilterRepositoryContract $productFilterRepo)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;       
@@ -66,7 +66,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     }
     
 
-      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo) : string
+      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
       {
 
         //  $productFilterRepo->deleteAllProductFilter();
@@ -84,8 +84,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'passwordForConfig' => $passwordForConfig
         ]);
 
-        echo json_encode($filterForSave) ; 
-    
         if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
             throw new \Exception("some parameters of product filter are null");
             
