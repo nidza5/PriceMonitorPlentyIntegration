@@ -1393,8 +1393,11 @@ function showTabContent(evt, tabName) {
 
         console.log("result u populate funkciji");
         console.log(data);
+        
         if(data == null)
           return;
+
+        $('#bodyPreviewData').html("");
 
         for(i = 0; i < data.length; i++) {
             
