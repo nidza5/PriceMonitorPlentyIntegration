@@ -594,7 +594,7 @@ function showTabContent(evt, tabName) {
                     '</ul>' +
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
-                    '<select class="pricemonitor-form-field ' + ' form-control" ' +
+                    '<select style="height:67%;" class="pricemonitor-form-field ' + ' form-control custom-select custom-select-sm" ' +
                         'name="' +
                          parentTemplateId + 'ExpressionCondition_' + groupIndex + '-' + expressionIndex + '"' +
                          ' required ' +
