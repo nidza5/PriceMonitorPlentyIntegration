@@ -1389,6 +1389,8 @@ function showTabContent(evt, tabName) {
 
     function populateProductPreviewTable(data)
     {
+        console.log("populate product preview table");
+
         if(data == null)
           return;
 
