@@ -917,7 +917,7 @@ function showTabContent(evt, tabName) {
 
                removeValidationErrors();
     
-                if (!expressionAttrCode || expressionAttrCode === '') {
+                if (expressionAttrCode === '') {
                     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
                     return false;
                 }
