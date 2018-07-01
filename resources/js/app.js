@@ -874,7 +874,7 @@ function showTabContent(evt, tabName) {
             expressionCondition = document[formName][expressionConditionFieldName ].value;
 
         if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)) {
-           console.log("vratilo false");
+            event.preventDefault();
             return;
         }
 
@@ -915,7 +915,7 @@ function showTabContent(evt, tabName) {
 
                 console.log("proslo sve logove");
 
-                return true;
+                return false;
     
               //  removeValidationErrors();
     
