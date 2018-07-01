@@ -912,6 +912,8 @@ function showTabContent(evt, tabName) {
                 console.log(expressionAttrValueFieldName);
                 console.log(expressionConditionFieldName);
                 console.log(expressionValueFieldName);
+
+                console.log("proslo sve logove");
     
               //  removeValidationErrors();
     
