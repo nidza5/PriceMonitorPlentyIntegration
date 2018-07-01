@@ -875,7 +875,7 @@ function showTabContent(evt, tabName) {
 
         if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)) {
            console.log("vratilo false");
-            return false;
+            return;
         }
 
         var newExpression = {
@@ -915,7 +915,7 @@ function showTabContent(evt, tabName) {
 
                 console.log("proslo sve logove");
 
-                return false;
+                return true;
     
               //  removeValidationErrors();
     
