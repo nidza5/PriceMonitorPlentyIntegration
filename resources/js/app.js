@@ -873,7 +873,7 @@ function showTabContent(evt, tabName) {
             expressionValue = [document[formName][expressionValueFieldName].value],
             expressionCondition = document[formName][expressionConditionFieldName ].value;
 
-        if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition)) {
+        if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)) {
             return;
         }
 
@@ -899,7 +899,7 @@ function showTabContent(evt, tabName) {
         initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex);
         document.getElementById(removeButtonId).addEventListener('click', removeExpression);
 
-        function isValidForm(expressionAttrCode, expressionValue, expressionCondition)
+        function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
         {
 
             try {
