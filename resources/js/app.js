@@ -916,6 +916,9 @@ function showTabContent(evt, tabName) {
                 return false;
             }
 
+            console.log("expression value");
+            console.log(expressionValue);
+
             if (expressionValue.length === 0 || expressionValue[0] === "") {
                 document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
                 return false;
