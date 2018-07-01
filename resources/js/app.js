@@ -899,7 +899,7 @@ function showTabContent(evt, tabName) {
         initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex);
         document.getElementById(removeButtonId).addEventListener('click', removeExpression);
 
-        function isValidForm()
+        function isValidForm(expressionAttrCode, expressionValue, expressionCondition)
         {
 
             console.log("IS VALID FORM");
