@@ -903,8 +903,14 @@ function showTabContent(evt, tabName) {
         {
 
             console.log("IS VALID FORM");
+            console.log(expressionAttrCode);
+            console.log(expressionCondition);
+            console.log(expressionValue);
+            console.log(expressionAttrValueFieldName);
+            console.log(expressionConditionFieldName);
+            console.log(expressionValueFieldName);
 
-            removeValidationErrors();
+          //  removeValidationErrors();
 
             if (!expressionAttrCode || expressionAttrCode === '') {
                 document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
