@@ -919,6 +919,7 @@ function showTabContent(evt, tabName) {
     
                 if (expressionAttrCode === '') {
                     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+                   $('form[name="'+formName+'"]'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
                     return false;
                 }
     
