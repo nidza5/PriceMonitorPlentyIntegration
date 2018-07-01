@@ -873,9 +873,9 @@ function showTabContent(evt, tabName) {
             expressionValue = [document[formName][expressionValueFieldName].value],
             expressionCondition = document[formName][expressionConditionFieldName ].value;
 
-        // if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition)) {
-        //     return;
-        // }
+        if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition)) {
+            return;
+        }
 
         var newExpression = {
                 'code': expressionAttrCode,

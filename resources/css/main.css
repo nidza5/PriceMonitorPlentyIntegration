@@ -520,3 +520,9 @@ legend.scheduler-border {
 .adjustRows {
     padding-top: 1%;
 }
+
+.pricemonitor-invalid {
+    border-color: #ff0033 !important;
+    border-width: 1px;
+    border-style: solid;
+}
