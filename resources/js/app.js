@@ -874,6 +874,7 @@ function showTabContent(evt, tabName) {
             expressionCondition = document[formName][expressionConditionFieldName ].value;
 
         if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)) {
+           console.log("vratilo false");
             return;
         }
 
