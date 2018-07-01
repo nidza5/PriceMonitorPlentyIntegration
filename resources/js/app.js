@@ -875,7 +875,7 @@ function showTabContent(evt, tabName) {
 
         if (!isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)) {
            console.log("vratilo false");
-            return;
+            return false;
         }
 
         var newExpression = {
