@@ -902,35 +902,44 @@ function showTabContent(evt, tabName) {
         function isValidForm(expressionAttrCode, expressionValue, expressionCondition)
         {
 
-            console.log("IS VALID FORM");
-            console.log(expressionAttrCode);
-            console.log(expressionCondition);
-            console.log(expressionValue);
-            console.log(expressionAttrValueFieldName);
-            console.log(expressionConditionFieldName);
-            console.log(expressionValueFieldName);
+            try {
 
-          //  removeValidationErrors();
+                console.log("IS VALID FORM");
+                console.log(expressionAttrCode);
+                console.log(expressionCondition);
+                console.log(expressionValue);
+                console.log(expressionAttrValueFieldName);
+                console.log(expressionConditionFieldName);
+                console.log(expressionValueFieldName);
+    
+              //  removeValidationErrors();
+    
+                if (!expressionAttrCode || expressionAttrCode === '') {
+                    document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
+    
+                if (!expressionCondition || expressionCondition === '') {
+                    document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
+    
+                console.log("expression value");
+                console.log(expressionValue);
+    
+                if (expressionValue.length === 0 || expressionValue[0] === "") {
+                    document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
+    
+                return true;
 
-            if (!expressionAttrCode || expressionAttrCode === '') {
-                document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
-                return false;
+            } catch(err) {
+                console.log("error");
+                console.log(err.message);
             }
 
-            if (!expressionCondition || expressionCondition === '') {
-                document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
-                return false;
-            }
-
-            console.log("expression value");
-            console.log(expressionValue);
-
-            if (expressionValue.length === 0 || expressionValue[0] === "") {
-                document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
-                return false;
-            }
-
-            return true;
+          
         }
 
         function removeValidationErrors()
