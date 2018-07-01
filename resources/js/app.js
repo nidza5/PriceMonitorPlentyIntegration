@@ -901,6 +901,9 @@ function showTabContent(evt, tabName) {
 
         function isValidForm()
         {
+
+            console.log("IS VALID FORM");
+
             removeValidationErrors();
 
             if (!expressionAttrCode || expressionAttrCode === '') {
