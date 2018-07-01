@@ -916,9 +916,7 @@ function showTabContent(evt, tabName) {
                 return false;
             }
 
-            if (expressionValue.length === 0 ||
-                !isValidValueForExpressionAttrType(expressionAttrCode, expressionValue)
-            ) {
+            if (expressionValue.length === 0 || expressionValue[0] === "") {
                 document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
                 return false;
             }
