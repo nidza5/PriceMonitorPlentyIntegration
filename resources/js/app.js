@@ -915,36 +915,32 @@ function showTabContent(evt, tabName) {
 
                 console.log("proslo sve logove");
 
-                return false;
+               removeValidationErrors();
     
-              //  removeValidationErrors();
+                if (!expressionAttrCode || expressionAttrCode === '') {
+                    document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
     
-                // if (!expressionAttrCode || expressionAttrCode === '') {
-                //     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
-                //     return false;
-                // }
+                if (!expressionCondition || expressionCondition === '') {
+                    document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
     
-                // if (!expressionCondition || expressionCondition === '') {
-                //     document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
-                //     return false;
-                // }
+                console.log("expression value");
+                console.log(expressionValue);
     
-                // console.log("expression value");
-                // console.log(expressionValue);
+                if (expressionValue.length === 0 || expressionValue[0] === "") {
+                    document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
     
-                // if (expressionValue.length === 0 || expressionValue[0] === "") {
-                //     document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
-                //     return false;
-                // }
-    
-                // return true;
+                return true;
 
             } catch(err) {
                 console.log("error");
                 console.log(err.message);
-            }
-
-          
+            }          
         }
 
         function removeValidationErrors()
