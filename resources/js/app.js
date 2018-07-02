@@ -157,8 +157,10 @@ $(document).ready(function() {
 
       $('#tableModal').DataTable({
         "ordering": false,
-        'searching': false,
-        'paging': true
+        "searching": false,
+        "pagingType": "full_numbers",
+        "paging": true,
+        "lengthMenu": [10, 25, 50, 75, 100]
 
       });      
   });
