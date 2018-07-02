@@ -1238,6 +1238,16 @@ function showTabContent(evt, tabName) {
            var expression = groupsForSave[i]['expressions'];
 
             for(j = 0; j < expression.length; j++) {
+
+                console.log("save code");
+                console.log(expression[j]['code']);
+                console.log("save condition");
+                console.log(expression[j]['condition']);
+                console.log("save type");
+                console.log(expression[j]['type']);
+                console.log("save value");
+                console.log(expression[j]['value']);
+
                 if(expression[j]['code'] == null || expression[j]['code'] == "")                  
                     return false;               
                     
