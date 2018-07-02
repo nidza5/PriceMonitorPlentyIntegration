@@ -1506,12 +1506,7 @@ function showTabContent(evt, tabName) {
     }
 
     function populateProductPreviewTable(data)
-    {
-        console.log("populate product preview table");
-
-        console.log("result u populate funkciji");
-        console.log(data);
-        
+    {        
         if(data == null)
           return;
 
