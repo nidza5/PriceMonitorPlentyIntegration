@@ -937,14 +937,14 @@ function showTabContent(evt, tabName) {
         //     }          
         // }
 
-        function removeValidationErrors()
-        {
-            document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
-            $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
-            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
-            document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
-            document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
-        }
+        // function removeValidationErrors()
+        // {
+        //     document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
+        //     $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
+        //     $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
+        //     document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
+        //     document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
+        // }
     }
 
     function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
@@ -980,6 +980,15 @@ function showTabContent(evt, tabName) {
                 console.log("error");
                 console.log(err.message);
             }          
+        }
+
+        function removeValidationErrors()
+        {
+            document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
+            $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
+            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
+            document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
+            document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
         }
 
     function getGroupAndExpressionIndex(fieldIdentifier)
