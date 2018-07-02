@@ -902,12 +902,57 @@ function showTabContent(evt, tabName) {
         initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex);
         document.getElementById(removeButtonId).addEventListener('click', removeExpression);
 
-        function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
+        // function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
+        // {
+
+        //     try {
+
+        //        removeValidationErrors();
+    
+        //         if (expressionAttrCode === '') {
+        //             document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+        //            $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
+        //            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').show();
+                   
+        //            return false;
+        //         }
+    
+        //         if (!expressionCondition || expressionCondition === '') {
+        //             document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
+        //             return false;
+        //         }
+        
+        //         if (expressionValue.length === 0 || expressionValue[0] === "") {
+        //             document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+        //             $("#" + expressionValueFieldName).next('span').show();
+                    
+        //             return false;
+        //         }
+    
+        //         return true;
+
+        //     } catch(err) {
+        //         console.log("error");
+        //         console.log(err.message);
+        //     }          
+        // }
+
+        function removeValidationErrors()
+        {
+            document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
+            $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
+            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
+            document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
+            document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
+        }
+    }
+
+    function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
         {
 
             try {
 
-               removeValidationErrors();
+               removeValidationErrors(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName);
     
                 if (expressionAttrCode === '') {
                     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
@@ -936,16 +981,6 @@ function showTabContent(evt, tabName) {
                 console.log(err.message);
             }          
         }
-
-        function removeValidationErrors()
-        {
-            document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
-            $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
-            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
-            document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
-            document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
-        }
-    }
 
     function getGroupAndExpressionIndex(fieldIdentifier)
     {
