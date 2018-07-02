@@ -606,7 +606,6 @@ function showTabContent(evt, tabName) {
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
                     createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
-                    '<span class="invalid-feedback"> This field is required! </span>' +
                  '</div>'
     }
 
@@ -799,7 +798,8 @@ function showTabContent(evt, tabName) {
             'type="' + type + '"' +
             ' autocomplete="off" ' +
             (expression.type === "int" ? 'step="0.1" ' : '') +
-            (expression.value.length > 0 ? " readonly disabled" : "") + '>';
+            (expression.value.length > 0 ? " readonly disabled" : "") + '>'
+            '<span class="invalid-feedback"> This field is required! </span>';
     }
 
     function createDateForView(dateISOString)
@@ -835,7 +835,7 @@ function showTabContent(evt, tabName) {
                 '</option>';
         }
 
-        selectInnerHtml += '</select>';
+        selectInnerHtml += '</select>' + '<span class="invalid-feedback"> This field is required! </span>';
 
         return selectInnerHtml;
     }
