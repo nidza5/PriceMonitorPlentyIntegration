@@ -157,7 +157,8 @@ $(document).ready(function() {
 
       $('#tableModal').DataTable({
         "ordering": false,
-        'searching': false
+        'searching': false,
+        'paging': true
 
       });      
   });
