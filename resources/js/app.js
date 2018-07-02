@@ -155,7 +155,7 @@ $(document).ready(function() {
       document.getElementById("tabItemSelection").addEventListener("click", getFilter);
       document.getElementById("tabPriceSelection").addEventListener("click", getFilter);
 
-      $('#example').DataTable();      
+      $('#tableModal').DataTable();      
   });
 
 function expandCollapseMenu(el) {
@@ -1523,6 +1523,7 @@ function showTabContent(evt, tabName) {
             $('#bodyPreviewData').append(tableData);
         }
 
+        $('#tableModal').DataTable();  
         $('#previewModal').modal('show');  
     }
 
