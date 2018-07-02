@@ -341,7 +341,7 @@ function showTabContent(evt, tabName) {
 
 
     function generateAllAttributesCacheAndDropdownInnerHtml(allAttributes) {
-        var dropdownInnerHtml = '';
+        var dropdownInnerHtml = '<option disabled selected>Please choose values</option>';
 
         for (var k in allAttributes){
             if (allAttributes.hasOwnProperty(k)) {
@@ -905,21 +905,11 @@ function showTabContent(evt, tabName) {
 
             try {
 
-                console.log("IS VALID FORM");
-                console.log(expressionAttrCode);
-                console.log(expressionCondition);
-                console.log(expressionValue);
-                console.log(expressionAttrValueFieldName);
-                console.log(expressionConditionFieldName);
-                console.log(expressionValueFieldName);
-
-                console.log("proslo sve logove");
-
                removeValidationErrors();
     
                 if (expressionAttrCode === '') {
                     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
-                   $('form[name="'+formName+'"]'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
+                   $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
                     return false;
                 }
     
@@ -927,10 +917,7 @@ function showTabContent(evt, tabName) {
                     document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
                     return false;
                 }
-    
-                console.log("expression value");
-                console.log(expressionValue);
-    
+        
                 if (expressionValue.length === 0 || expressionValue[0] === "") {
                     document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
                     return false;
