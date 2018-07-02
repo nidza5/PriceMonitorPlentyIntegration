@@ -154,6 +154,8 @@ $(document).ready(function() {
 
       document.getElementById("tabItemSelection").addEventListener("click", getFilter);
       document.getElementById("tabPriceSelection").addEventListener("click", getFilter);
+
+      $('#tableModal').DataTable();
       
   });
 
