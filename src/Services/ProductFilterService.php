@@ -27,6 +27,7 @@ use Plenty\Modules\Item\Barcode\Models\Barcode;
 use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;   
 use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
+use Plenty\Modules\Item\VariationSupplier\Contracts\VariationSupplierRepositoryContract;
 
 
 class ProductFilterService {
@@ -249,6 +250,20 @@ class ProductFilterService {
        $manufactures = $manufacturerRepo->findById($id);
 
         return $manufactures;
+    }
+
+    public function getSuppliers() {
+        
+
+        $suppliersRepo = pluginApp(VariationSupplierRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $suppliers = null;
+
+       $suppliers = $suppliersRepo->findByVariationId(1033);
+   
+        return $suppliers;
     }
 
     public function getItemWithPropertiesById($id)
