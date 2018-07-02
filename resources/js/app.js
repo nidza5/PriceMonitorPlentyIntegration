@@ -160,7 +160,7 @@ $(document).ready(function() {
         "searching": false,
         "pagingType": "full_numbers",
         "paging": true,
-        "lengthMenu": [10, 25, 50, 75, 100]
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 
       });      
   });
