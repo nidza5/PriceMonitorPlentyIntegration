@@ -1519,7 +1519,7 @@ function showTabContent(evt, tabName) {
 
         for(i = 0; i < data.length; i++) {
             
-            var tableData = '<tr><td>' + data[i].id + ' </td> <td>' + data[i].name + ' </td>  <td>' + data[i].number + ' </td><td>' + data[i].itemText + ' </td> </tr>';
+            var tableData = '<tr><td>' + data[i].id + '</td> <td>' + data[i].name + '</td>  <td>' + data[i].number + '</td><td>' + data[i].itemText + '</td> </tr>';
             $('#bodyPreviewData').append(tableData);
         }
 
