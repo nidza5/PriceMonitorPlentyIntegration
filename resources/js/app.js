@@ -155,14 +155,7 @@ $(document).ready(function() {
       document.getElementById("tabItemSelection").addEventListener("click", getFilter);
       document.getElementById("tabPriceSelection").addEventListener("click", getFilter);
 
-      $('#tableModal').DataTable({
-        "ordering": false,
-        "searching": false,
-        "pagingType": "full_numbers",
-        "paging": true,
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-
-      });      
+      $('#tableModal').DataTable();      
   });
 
 function expandCollapseMenu(el) {
