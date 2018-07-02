@@ -982,7 +982,7 @@ function showTabContent(evt, tabName) {
             }          
         }
 
-        function removeValidationErrors()
+        function removeValidationErrors(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
         {
             document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
             $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
