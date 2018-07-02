@@ -606,7 +606,8 @@ function showTabContent(evt, tabName) {
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
                     createValueFieldForExpressionsAttributeType(expression, groupIndex, expressionIndex) +
-                '</div>'
+                    '<span class="invalid-feedback"> This field is required! </span>' +
+                 '</div>'
     }
 
       /**
@@ -923,6 +924,8 @@ function showTabContent(evt, tabName) {
         
                 if (expressionValue.length === 0 || expressionValue[0] === "") {
                     document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+                    $("#" + expressionValueFieldName).next('span').show();
+                    
                     return false;
                 }
     
