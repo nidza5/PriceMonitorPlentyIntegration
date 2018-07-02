@@ -938,6 +938,7 @@ function showTabContent(evt, tabName) {
         {
             document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
             $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
+            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
             document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
             document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
         }
