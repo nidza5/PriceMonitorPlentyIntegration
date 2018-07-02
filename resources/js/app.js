@@ -1510,7 +1510,8 @@ function showTabContent(evt, tabName) {
         if(data == null)
           return;
 
-        $('#bodyPreviewData').html("");
+       // $('#bodyPreviewData').html("");
+       $("#tableModal").DataTable().clear().draw();
 
         for(i = 0; i < data.length; i++) {
             
