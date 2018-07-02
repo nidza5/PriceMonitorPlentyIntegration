@@ -157,9 +157,8 @@ $(document).ready(function() {
 
       $('#tableModal').DataTable({
         "ordering": false,
-        "info": false,
-        'searching': false,
-        "lengthChange": false
+        'searching': false
+
       });      
   });
 
