@@ -1455,6 +1455,8 @@ function showTabContent(evt, tabName) {
                 return false;
         }       
     }
+
+    return true;
 }
 
 
