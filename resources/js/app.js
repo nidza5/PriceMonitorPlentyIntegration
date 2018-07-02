@@ -592,6 +592,7 @@ function showTabContent(evt, tabName) {
                     '<ul class="pricemonitor-filterable-list ' + parentTemplateId + '-all-attributes">' +
                        
                     '</ul>' +
+                    '<span class="invalid-feedback"> This field is required! </span>' +
                 '</div>' +
                 '<div class="input-wrapper col-sm-3">' +
                     '<select style="height:65%;padding-top:3px;" class="pricemonitor-form-field ' + ' form-control" ' +
@@ -910,7 +911,9 @@ function showTabContent(evt, tabName) {
                 if (expressionAttrCode === '') {
                     document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
                    $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
-                    return false;
+                   $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').show();
+                   
+                   return false;
                 }
     
                 if (!expressionCondition || expressionCondition === '') {
