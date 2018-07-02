@@ -798,7 +798,7 @@ function showTabContent(evt, tabName) {
             'type="' + type + '"' +
             ' autocomplete="off" ' +
             (expression.type === "int" ? 'step="0.1" ' : '') +
-            (expression.value.length > 0 ? " readonly disabled" : "") + '>'
+            (expression.value.length > 0 ? " readonly disabled" : "") + '>' +
             '<span class="invalid-feedback"> This field is required! </span>';
     }
 
