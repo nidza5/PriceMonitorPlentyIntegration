@@ -1267,10 +1267,17 @@ function showTabContent(evt, tabName) {
 
         var filters = createFiltersForRequest();
 
-        if(!checkFormIsValid(filters)) {
-            alert("All fields are mandatory");
+        // if(!checkFormIsValid(filters)) {
+        //     alert("All fields are mandatory");
+        //     return false;
+        // }
+
+
+        if(!validateWholeFormOnSave()) {
+            console.log("Forma nije validna");
             return false;
         }
+       
 
         console.log("filters type");
         console.log(filterQueryParams.filterType);
@@ -1338,19 +1345,10 @@ function showTabContent(evt, tabName) {
 
                 var value = [document[formName][valueFieldName].value];
 
-                // if (attributesCache.hasOwnProperty(groupFields[j].value) &&
-                //     attributesCache[groupFields[j].value].type === 'DateTime'
-                // ) {
-                //     value = [createDateObject(value[0]).toISOString().split('T')[0]];
-                // }
-
                 var dataTypeFilter = groupFields[j].dataset.type;
 
                 var typeDatas = getMappedDataTypes();
                 var filterTypeData = typeDatas[dataTypeFilter];
-
-                console.log("filterTypeData");
-                console.log(filterTypeData);
 
                 group['expressions'].push(
                     {
@@ -1367,6 +1365,53 @@ function showTabContent(evt, tabName) {
 
         return groups;
     }
+
+
+    function validateWholeFormOnSave() {
+        var allGroupElements = parentTemplate.getElementsByClassName(
+            parentTemplateId + '-single-group-wrapper'
+        ),
+        groups = [];
+
+    for (var i = 0; i < allGroupElements.length; i++) {
+        var groupIndex = getGroupAndExpressionIndex(allGroupElements[i].id)['groupIndex'],
+            group = {
+                'name': 'Group' + ' ' + (i + 1),
+                'groupOperator':
+                document[formName][parentTemplateId + 'GroupOperator_'+ groupIndex].value,
+                'operator':
+                document[formName][parentTemplateId + 'Operator_'+ groupIndex].value,
+                'expressions': []
+            },
+            attributeCodeSelector = '.pricemonitor-form-field[name^=' + parentTemplateId +
+                'ExpressionAttrCode_' + groupIndex,
+            groupFields = allGroupElements[i].querySelectorAll(attributeCodeSelector);
+
+        for (var j = 0; j < groupFields.length; j++) {
+            var expressionIndex =
+                    getGroupAndExpressionIndex(groupFields[j]['name'])['expressionIndex'],
+             
+              codeFieldName = 
+                    parentTemplateId + 'ExpressionAttrCode_' + groupIndex + '-' + expressionIndex,
+             expressionAttrValueFieldName =
+                    parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,     
+              conditionFieldName =
+                    parentTemplateId +'ExpressionCondition_' + groupIndex +'-'+ expressionIndex,
+                valueFieldName =
+                    parentTemplateId +'ExpressionValue_' + groupIndex + '-' + expressionIndex;
+
+            var value = [document[formName][valueFieldName].value];
+
+            var dataTypeFilter = groupFields[j].dataset.type;
+
+            var typeDatas = getMappedDataTypes();
+            var filterTypeData = typeDatas[dataTypeFilter];
+
+            if(!isValidForm(groupFields[j].value,value,document[formName][conditionFieldName].value,expressionAttrValueFieldName,conditionFieldName,valueFieldName))
+                return false;
+        }       
+    }
+}
 
 
     function preview() {
