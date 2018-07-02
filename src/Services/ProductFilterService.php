@@ -261,7 +261,12 @@ class ProductFilterService {
 
         $suppliers = null;
 
-       $suppliers = $suppliersRepo->findByVariationId(1033);
+        $suppliers = $authHelper->processUnguarded(
+            function () use ($suppliersRepo, $suppliers) {
+            
+                return $suppliersRepo->findByVariationId(1033);
+            }
+        );
    
         return $suppliers;
     }
