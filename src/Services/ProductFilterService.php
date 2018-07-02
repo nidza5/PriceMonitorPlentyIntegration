@@ -28,6 +28,7 @@ use Plenty\Modules\Category\Contracts\CategoryRepositoryContract;
 use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;   
 use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
 use Plenty\Modules\Item\VariationSupplier\Contracts\VariationSupplierRepositoryContract;
+use Plenty\Modules\Account\Contact\Contracts\ContactRepositoryContract;
 
 
 class ProductFilterService {
@@ -255,7 +256,7 @@ class ProductFilterService {
     public function getSuppliers() {
         
 
-        $suppliersRepo = pluginApp(VariationSupplierRepositoryContract::class);
+        $suppliersRepo = pluginApp(ContactRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 
@@ -264,7 +265,7 @@ class ProductFilterService {
         $suppliers = $authHelper->processUnguarded(
             function () use ($suppliersRepo, $suppliers) {
             
-                return $suppliersRepo->findByVariationId(1033);
+                return $suppliersRepo->findContactById(103);
             }
         );
    
