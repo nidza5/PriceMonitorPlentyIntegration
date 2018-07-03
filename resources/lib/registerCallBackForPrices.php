@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/RunnerService.php';
 require_once __DIR__ . '/PriceMonitorSdkHelper.php';
+require_once __DIR__ . '/PriceMonitorHttpClient.php';
 
 use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
 use Patagona\Pricemonitor\Core\Sync\Callbacks\CallbackDTO;
