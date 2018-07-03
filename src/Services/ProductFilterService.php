@@ -260,14 +260,14 @@ class ProductFilterService {
 
         $authHelper = pluginApp(AuthHelper::class);
 
-        $account =  $accountRepo->findAccount(2,103);
+        $account = null;
 
-        // $account = $authHelper->processUnguarded(
-        //     function () use ($accountRepo, $account) {
+        $account = $authHelper->processUnguarded(
+            function () use ($accountRepo, $account) {
             
-        //         return $accountRepo->findAccount(2,103);
-        //     }
-        // );
+                return $accountRepo->findAccount(2,103);
+            }
+        );
    
         return $account;
 
