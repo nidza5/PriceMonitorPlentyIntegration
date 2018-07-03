@@ -256,22 +256,18 @@ class ProductFilterService {
 
     public function getSuppliers() {        
 
-
-        
-
-
         $accountRepo = pluginApp(ContactAccountRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 
-        $account = null;
+        $account =  $accountRepo->findAccount(2,103);
 
-        $account = $authHelper->processUnguarded(
-            function () use ($accountRepo, $account) {
+        // $account = $authHelper->processUnguarded(
+        //     function () use ($accountRepo, $account) {
             
-                return $accountRepo->findAccount(2,103);
-            }
-        );
+        //         return $accountRepo->findAccount(2,103);
+        //     }
+        // );
    
         return $account;
 
