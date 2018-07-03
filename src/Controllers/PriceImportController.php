@@ -205,4 +205,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $callBackPrices;
     }
 
+    public function refreshPrices() {
+
+        echo "Uslo u refresh Prices";
+
+        throw new \Exception("Nikola Vasiljevic - izvestaj da je uslo u metodu!");
+    }
+
  }

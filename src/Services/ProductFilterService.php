@@ -131,17 +131,6 @@ class ProductFilterService {
 
             if(!empty($p['variationBarcodes'])) {
 
-                // $barCodesArray = ["GTIN 13" => "", "GTIN 128" => "","UPC" => "","ISBN" => ""];
-
-                // foreach($barCodesArray as $arrayCodesKey => $barCodesValue) {
-                //     $barElement = [$arrayCodesKey => $barCodesValue];
-    
-                //     $arrayForMerge = $tempArr == null ? $p : $tempArr;
-                //     $merge = array_merge($arrayForMerge,$barElement);  
-                //     $tempArr = $merge;              
-                //     $itemsResults[$i] = $merge; 
-                // }
-
                 foreach($p['variationBarcodes'] as $bar) {                
                 
                     $barCode = null;
@@ -152,16 +141,14 @@ class ProductFilterService {
                             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
                         }
                     );
-                    
+
                     $barElement = [$barCode->name => $bar['code']];
     
                     $arrayForMerge = $tempArr == null ? $p : $tempArr;
                     $merge = array_merge($arrayForMerge,$barElement);  
                     $tempArr = $merge;              
                     $itemsResults[$i] = $merge;                 
-            
                 }
-
             }            
             
             foreach($p['variationCategories'] as $category) {
@@ -220,7 +207,6 @@ class ProductFilterService {
             $tempArr = $merge;              
             $itemsResults[$i] = $merge;    
            
-            
             foreach($itemWithProperties["itemProperties"] as $properties) {
             
                 $propertyId = $properties["propertyId"];
@@ -322,22 +308,7 @@ class ProductFilterService {
 
     }
 
-    public function getVariationById($id) {
-
-        // $repository = pluginApp(VariationRepositoryContract::class);       
-
-        // $authHelper = pluginApp(AuthHelper::class);
-
-        // $variation = null;
-
-        // $variation = $authHelper->processUnguarded(
-        //     function () use ($repository, $variation,$id) {
-            
-        //         return $repository->findById($id);
-        //     }
-        // );
-
-        // return $variation;        
+    public function getVariationById($id) {     
     
         $repository = pluginApp(VariationSearchRepositoryContract::class);
         $repository->setFilters([
