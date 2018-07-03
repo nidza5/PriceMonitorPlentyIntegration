@@ -29,6 +29,7 @@ use Plenty\Modules\Item\Variation\Contracts\VariationRepositoryContract;
 use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
 use Plenty\Modules\Item\VariationSupplier\Contracts\VariationSupplierRepositoryContract;
 use Plenty\Modules\Account\Contact\Contracts\ContactRepositoryContract;
+use Plenty\Modules\Account\Contracts\AccountRepositoryContract;
 
 
 class ProductFilterService {
@@ -255,20 +256,40 @@ class ProductFilterService {
 
     public function getSuppliers() {        
 
-        $suppliersRepo = pluginApp(ContactRepositoryContract::class);
+
+        
+
+
+        $accountRepo = pluginApp(AccountRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 
-        $suppliers = null;
+        $account = null;
 
-        $suppliers = $authHelper->processUnguarded(
-            function () use ($suppliersRepo, $suppliers) {
+        $account = $authHelper->processUnguarded(
+            function () use ($accountRepo, $account) {
             
-                return $suppliersRepo->findContactById(103);
+                return $accountRepo->findAccountById(2);
             }
         );
    
-        return $suppliers;
+        return $account;
+
+
+        // $suppliersRepo = pluginApp(ContactRepositoryContract::class);
+
+        // $authHelper = pluginApp(AuthHelper::class);
+
+        // $suppliers = null;
+
+        // $suppliers = $authHelper->processUnguarded(
+        //     function () use ($suppliersRepo, $suppliers) {
+            
+        //         return $suppliersRepo->findContactById(103);
+        //     }
+        // );
+   
+        // return $suppliers;
     }
 
     public function getItemWithPropertiesById($id)
