@@ -186,8 +186,8 @@ class ProductFilterService {
                 else 
                     $supplierIdentifier = $supplierOriginal != null ? $supplierOriginal['fullName'] : "";
 
-                //  if($supplierIdentifier === null ||  $supplierIdentifier === "")   
-                //     continue;
+                 if($supplierIdentifier === null ||  $supplierIdentifier === "")   
+                    continue;
 
                 $supplierElement = ["supplier-".$supplierIdentifier => $supplierIdentifier];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
