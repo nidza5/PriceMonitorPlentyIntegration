@@ -120,6 +120,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
         }    
 
+        throw new \Exception("Nikola Vasiljevic - izvestaj da je uslo u metodu!");
+
          $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
 
          $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
