@@ -181,7 +181,7 @@ class ProductFilterService {
                 $supplierIdentifier = "";
                 $supplierCompany = $supplierOriginal != null ? $supplierOriginal['accounts'][0]['companyName'] : "";
 
-                if($supplierCompany !== null ||  $supplierCompany !== "")
+                if($supplierCompany !== null &&  $supplierCompany !== "")
                     $supplierIdentifier = $supplierCompany;
                 else 
                     $supplierIdentifier = $supplierOriginal != null ? $supplierOriginal['fullName'] : "";
