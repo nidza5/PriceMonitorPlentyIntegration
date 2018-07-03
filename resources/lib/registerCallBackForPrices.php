@@ -32,9 +32,9 @@ $url = SdkRestApi::getParam('url');
 
 $client = new PriceMonitorHttpClient();
 
-$client->request("POST", $url);
+return $client->request("POST", $url);
 
- return true;
+//  return true;
 
 } catch(\Exception $ex) {
     

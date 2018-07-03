@@ -116,15 +116,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($contract == null)
             throw new \Exception("Contract is empty");
 
-        if ($isEnabled && !$this->registerCallbacks($contract)) {
-            throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
-        }    
+        echo "register callbacksss";
+        echo json_encode($this->registerCallbacks($contract));
 
-         $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
+        // if ($isEnabled && !$this->registerCallbacks($contract)) {
+        //     throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
+        // }    
 
-         $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+        //  $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
 
-         return json_encode($scheduleSaved);        
+        //  $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+
+        //  return json_encode($scheduleSaved);        
     }
 
     public function runPriceImport(Request $request) 
