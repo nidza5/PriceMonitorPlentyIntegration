@@ -284,7 +284,7 @@ class ProductFilterService {
         $suppliers = null;
 
         $suppliers = $authHelper->processUnguarded(
-            function () use ($suppliersRepo, $suppliers) {
+            function () use ($suppliersRepo, $suppliers,$id) {
             
                 return $suppliersRepo->findContactById($id);
             }
