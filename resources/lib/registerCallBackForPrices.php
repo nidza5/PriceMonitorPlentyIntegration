@@ -32,7 +32,9 @@ $url = SdkRestApi::getParam('url');
 
 $client = new PriceMonitorHttpClient();
 
-return $client->request("POST", $url);
+$data= $client->request("POST", $url);
+
+return ['data' => $data];
 
 //  return true;
 
