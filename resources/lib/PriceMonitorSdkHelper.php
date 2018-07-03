@@ -227,13 +227,13 @@
                     switch($attribute) {
     
                         case "Category" :
-                            $filterByColumn = "category-" + $values[0];
+                            $filterByColumn = "category-".$values[0];
                         break;
                         case "Manufacturer" :
-                             $filterByColumn = "manufacturer-" + $values[0];
+                             $filterByColumn = "manufacturer-".$values[0];
                         break;
                         case "Supplier" :
-                              $filterByColumn = "supplier-" + $values[0];
+                              $filterByColumn = "supplier-".$values[0];
                         break;
     
                         default :
