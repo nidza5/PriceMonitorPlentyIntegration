@@ -256,36 +256,20 @@ class ProductFilterService {
 
     public function getSuppliers() {        
 
-        $accountRepo = pluginApp(ContactAccountRepositoryContract::class);
+        $suppliersRepo = pluginApp(ContactRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 
-        $account = null;
+        $suppliers = null;
 
-        $account = $authHelper->processUnguarded(
-            function () use ($accountRepo, $account) {
+        $suppliers = $authHelper->processUnguarded(
+            function () use ($suppliersRepo, $suppliers) {
             
-                return $accountRepo->findAccount(2,103);
+                return $suppliersRepo->findContactById(105);
             }
         );
    
-        return $account;
-
-
-        // $suppliersRepo = pluginApp(ContactRepositoryContract::class);
-
-        // $authHelper = pluginApp(AuthHelper::class);
-
-        // $suppliers = null;
-
-        // $suppliers = $authHelper->processUnguarded(
-        //     function () use ($suppliersRepo, $suppliers) {
-            
-        //         return $suppliersRepo->findContactById(103);
-        //     }
-        // );
-   
-        // return $suppliers;
+        return $suppliers;
     }
 
     public function getItemWithPropertiesById($id)
