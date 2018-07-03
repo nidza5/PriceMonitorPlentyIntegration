@@ -174,6 +174,27 @@ class ProductFilterService {
                 $tempArr = $merge;              
                 $itemsResults[$i] = $merge;
             }
+
+            foreach($p['variationSuppliers'] as $supplier) {
+                $supplierOriginal = $this->getSupplierById($supplier["supplierId"]);
+                
+                $supplierIdentifier = "";
+                $supplierCompany = $supplierOriginal != null ? $supplierOriginal['accounts'][0]['companyName'] : "";
+
+                if($supplierCompany !== null ||  $supplierCompany !== "")
+                    $supplierIdentifier = $supplierCompany;
+                else 
+                    $supplierIdentifier = $supplierOriginal != null ? $supplierOriginal['fullName'] : "";
+
+                 if($supplierIdentifier === null ||  $supplierIdentifier === "")   
+                    continue;
+
+                $supplierElement = ["supplier-".$supplierIdentifier => $supplierIdentifier];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$supplierElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }
             
             foreach($p['variationAttributeValues'] as $attrinute) {
                 $attributeName =  $attrinute["attribute"]["backendName"];
@@ -254,7 +275,7 @@ class ProductFilterService {
         return $manufactures;
     }
 
-    public function getSuppliers() {        
+    public function getSupplierById($id) {        
 
         $suppliersRepo = pluginApp(ContactRepositoryContract::class);
 
@@ -265,7 +286,7 @@ class ProductFilterService {
         $suppliers = $authHelper->processUnguarded(
             function () use ($suppliersRepo, $suppliers) {
             
-                return $suppliersRepo->findContactById(105);
+                return $suppliersRepo->findContactById($id);
             }
         );
    

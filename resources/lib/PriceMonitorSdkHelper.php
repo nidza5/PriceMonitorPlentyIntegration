@@ -232,6 +232,9 @@
                         case "Manufacturer" :
                              $filterByColumn = "manufacturer-" + $values[0];
                         break;
+                        case "Supplier" :
+                              $filterByColumn = "supplier-" + $values[0];
+                        break;
     
                         default :
                             $filterByColumn = $attributesFromPlenty[$attribute]; 
