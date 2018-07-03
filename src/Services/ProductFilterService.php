@@ -253,8 +253,7 @@ class ProductFilterService {
         return $manufactures;
     }
 
-    public function getSuppliers() {
-        
+    public function getSuppliers() {        
 
         $suppliersRepo = pluginApp(ContactRepositoryContract::class);
 

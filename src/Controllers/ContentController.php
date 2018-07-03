@@ -187,15 +187,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
 
-    
-
         $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
             'email' => $credentials['email'],
             'password' => $credentials['password'],
             'configService' => $this->configService
         ]);
 
-        $allSchedule = $this->scheduleRepository->getAllSchedule();
+      //  $allSchedule = $this->scheduleRepository->getAllSchedule();
 
         // echo json_encode($allSchedule);
  
@@ -241,10 +239,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        //$finalResult = $itemService->getAllVariations();
        // $finalResult = $itemService->getManufacturerById(2);
          //$finalResult = $itemService->getItemWithPropertiesById(135);
-     //  $finalResult = $itemService->getSuppliers();
+        $finalResult = $itemService->getSuppliers();
 
-        // echo "products";
-        // echo json_encode($finalResult);
+        echo "products";
+        echo json_encode($finalResult);
               
         // $prodServ = pluginApp(ProductFilterService::class);
 
