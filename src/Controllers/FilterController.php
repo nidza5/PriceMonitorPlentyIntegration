@@ -158,6 +158,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     
             }
 
+            echo "attributesIdName";
+            echo json_encode($attributesIdName );
+
             $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
                 'filterType' => $filterType,
                 'priceMonitorId' => $priceMonitorId,
