@@ -44,7 +44,7 @@ class PriceMonitorQueueRepository implements PriceMonitorQueueRepositoryContract
     public function getQueueByName($queueName)
     {
         $databaseQueue = pluginApp(DataBase::class);
-        $queueOriginal = $databaseQueue->query(PriceMonitorQueue::class)->where('queueName', '=', $queueName)->orderBy("id","desc")->get();
+        $queueOriginal = $databaseQueue->query(PriceMonitorQueue::class)->where('queueName', '=', $queueName)->orderBy("id","asc")->get();
 
         if($queueOriginal == null)
         return pluginApp(PriceMonitorQueue::class);

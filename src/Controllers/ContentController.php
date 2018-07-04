@@ -34,7 +34,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorHttpClient;
  use PriceMonitorPlentyIntegration\Services\ConfigService;
-
+ use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
+ use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
 
  /**
   * Class ContentController
@@ -90,12 +91,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         private $configService;
 
+        /**
+         *
+         * @var PriceMonitorQueueRepositoryContract
+         */
+        private $queueRepo;
+
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo,PriceMonitorHttpClient $httpClient,ConfigService $configService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ProductFilterRepositoryContract $productFilterRepo,ScheduleRepositoryContract $scheduleRepository,ConfigRepositoryContract $configInfoRepo,PriceMonitorHttpClient $httpClient,ConfigService $configService,PriceMonitorQueueRepositoryContract $queueRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
@@ -105,6 +112,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->configInfoRepo = $configInfoRepo;
         $this->httpClient = $httpClient;
         $this->configService = $configService;
+        $this->queueRepo = $queueRepo;
     }
     
      public function home(Twig $twig) : string
@@ -184,6 +192,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // $this->configInfoRepo->saveConfig('email',$credentials['email']);
         // $this->configInfoRepo->saveConfig('password',$credentials['password']);
 
+        $this->queueRepo->deleteAllQueue();
+
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
 
@@ -192,16 +202,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'password' => $credentials['password'],
             'configService' => $this->configService
         ]);
-
-      //  $allSchedule = $this->scheduleRepository->getAllSchedule();
-
-        // echo json_encode($allSchedule);
- 
-          //  echo json_encode($stores);
-
-        //   $originalfilter = $this->productFilterRepo->getAllFilters();
-        //   echo "filters";
-        //   echo json_encode($originalfilter);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
