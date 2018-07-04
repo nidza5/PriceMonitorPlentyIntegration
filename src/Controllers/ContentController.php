@@ -37,6 +37,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
 
+
  /**
   * Class ContentController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -193,6 +194,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // $this->configInfoRepo->saveConfig('password',$credentials['password']);
 
         // $this->queueRepo->deleteAllQueue();
+
+        $this
+             ->getLogger('ContentController_login')
+             ->info('ContentController logging', ['email' => $credentials['email'] ]);
 
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
