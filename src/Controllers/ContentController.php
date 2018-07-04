@@ -192,7 +192,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // $this->configInfoRepo->saveConfig('email',$credentials['email']);
         // $this->configInfoRepo->saveConfig('password',$credentials['password']);
 
-        $this->queueRepo->deleteAllQueue();
+        // $this->queueRepo->deleteAllQueue();
 
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
