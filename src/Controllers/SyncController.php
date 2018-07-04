@@ -188,8 +188,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         ]);     
 
 
-            echo "filtered variations";
-            echo json_encode($filteredVariation);
+            // echo "filtered variations";
+            // echo json_encode($filteredVariation);
 
 
             foreach( $filteredVariation as $r) {
