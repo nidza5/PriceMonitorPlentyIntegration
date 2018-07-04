@@ -191,12 +191,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             echo "filtered variations";
             echo json_encode($filteredVariation);
 
-            // foreach( $filteredVariation as $r) {
-            
-            //     foreach($r as $p)
-            //         echo $p["id"];
-            
-            // }
+
+            foreach( $filteredVariation as $r) {
+                echo "R";
+                echo json_encode($r);
+            }
   
 
         // $emailObject = $this->configInfoRepo->getConfig('email');
