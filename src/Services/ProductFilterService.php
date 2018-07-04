@@ -209,9 +209,9 @@ class ProductFilterService {
            
             foreach($itemWithProperties["itemProperties"] as $properties) {
             
-                $propertyId = $properties["propertyId"];
+                $propertyId = $properties["id"];
                 $properyValue  = $properties["valueTexts"][0]["value"];
-                if($properyValue == null) {
+                if($properyValue == null)   {
                     if($properties["valueInt"] != null) 
                         $properyValue = $properties["valueInt"];
                         
