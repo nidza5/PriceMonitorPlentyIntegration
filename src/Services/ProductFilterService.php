@@ -219,7 +219,7 @@ class ProductFilterService {
                         $properyValue = $properties["valueFloat"];                           
                 }
 
-                $propertyElement = [$propertyId => $properyValue];
+                $propertyElement = [$propertyValue => $properyValue];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$propertyElement);  
                 $tempArr = $merge;              
