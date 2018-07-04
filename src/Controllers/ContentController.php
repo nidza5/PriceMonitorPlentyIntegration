@@ -196,7 +196,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // $this->queueRepo->deleteAllQueue();
 
         $this
-             ->getLogger('ContentController_login')
+             ->getLogger('Nikola')
              ->info('PriceMonitorPlentyIntegration::migration.successMessage', ['email' => $credentials['email'], 'password' => $credentials['password'] ]);
 
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
