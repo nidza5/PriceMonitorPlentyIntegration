@@ -114,7 +114,7 @@ class AttributeService {
          foreach($resultProperties['entries'] as $prop) 
          {
              $arrProperties = array(
-                  "Id" => $prop['backendName'],
+                  "Id" => $prop['id'],
                   "Group" => "Properties",
                   "Name" => $prop['backendName'].'-'.$prop['valueType']
              );
