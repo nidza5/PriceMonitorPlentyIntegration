@@ -210,7 +210,7 @@ class ProductFilterService {
             foreach($itemWithProperties["itemProperties"] as $properties) {
             
                // $propertyId = $properties["id"];
-               $propertyId = 3;
+              
                 $properyValue  = $properties["valueTexts"][0]["value"];
                 if($properyValue == null)   {
                     if($properties["valueInt"] != null) 
@@ -220,6 +220,7 @@ class ProductFilterService {
                         $properyValue = $properties["valueFloat"];                           
                 }
 
+                $propertyId = 3;
                 $propertyElement = [$propertyId => $properyValue];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$propertyElement);  
