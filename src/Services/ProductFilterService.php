@@ -221,7 +221,7 @@ class ProductFilterService {
                 }
 
                 $propertyId = 3;
-                $propertyElement = [$propertyId => $properyValue];
+                $propertyElement = ['property' => $properyValue];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$propertyElement);  
                 $tempArr = $merge;              
