@@ -197,7 +197,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $this
              ->getLogger('ContentController_login')
-             ->info('ContentController logging', ['email' => $credentials['email'] ]);
+             ->info('PriceMonitorPlentyIntegration::migration.successMessage', ['email' => $credentials['email'] ]);
 
         $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
         $tokenForSend = $webHookToken->value;
