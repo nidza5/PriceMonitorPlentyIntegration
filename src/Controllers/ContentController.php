@@ -241,9 +241,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $itemService = pluginApp(ProductFilterService::class);
 
-         $finalResult = $itemService->getAllVariations();
+         //$finalResult = $itemService->getAllVariations();
        // $finalResult = $itemService->getManufacturerById(2);
-        // $finalResult = $itemService->getItemWithPropertiesById(135);
+         $finalResult = $itemService->getItemWithPropertiesById(135);
      
         echo "products";
         echo json_encode($finalResult);
