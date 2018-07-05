@@ -6,7 +6,7 @@ require_once __DIR__ . '/PriceMonitorHttpClient.php';
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    'https://jsonplaceholder.typicode.com/posts/1'
+    'http://127.0.0.1:8012/articles'
 );
  
 /** @return array */
