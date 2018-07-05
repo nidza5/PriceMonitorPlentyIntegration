@@ -257,6 +257,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $templateData = array("contracts" => $originalContracts,
                             "salesPrices" => $salesPricesEnglish);
 
+
+        $articlesLaravel = $this->sdkService->call("callTestApiLaravel", [
+        ]);             
+        
+        echo "articles laravel";
+        echo json_encode($articlesLaravel);
+
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
 
