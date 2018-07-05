@@ -155,8 +155,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             foreach($attributesFromPlenty as $key => $value) {
                 foreach($value as $v => $l)
                 {
-                    echo "attr id name";
-                    echo explode("-",$l)[0];
                     $attributesIdName[$v] = explode("-",$l)[0];            
                 }
                     
@@ -165,15 +163,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             echo "attributesIdName";
             echo json_encode($attributesIdName );
 
-            $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
-                'filterType' => $filterType,
-                'priceMonitorId' => $priceMonitorId,
-                'productFilterRepo' => $filter,
-                'attributeMapping' => $attributeMapping,
-                'allVariations' =>  $allVariations,
-                'attributesFromPlenty' => $attributesIdName            
-            ]);  
+        //     $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+        //         'filterType' => $filterType,
+        //         'priceMonitorId' => $priceMonitorId,
+        //         'productFilterRepo' => $filter,
+        //         'attributeMapping' => $attributeMapping,
+        //         'allVariations' =>  $allVariations,
+        //         'attributesFromPlenty' => $attributesIdName            
+        //     ]);  
 
-           return json_encode($filteredVariation);        
+        //    return json_encode($filteredVariation);        
       }      
  }
