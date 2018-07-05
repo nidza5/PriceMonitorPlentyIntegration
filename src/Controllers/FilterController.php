@@ -154,8 +154,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     
             foreach($attributesFromPlenty as $key => $value) {
                 foreach($value as $v => $l)
+                {
+                    echo "attr id name";
+                    echo explode("-",$l)[0];
                     $attributesIdName[$v] = explode("-",$l)[0];            
-    
+                }
+                    
             }
 
             echo "attributesIdName";
