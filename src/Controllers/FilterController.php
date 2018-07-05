@@ -151,17 +151,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $attributesFromPlenty = $attributeService->getAllTypeAttributes();
     
             $attributesIdName = array();
-    
-            foreach($attributesFromPlenty as $key => $value) {
-                foreach($value as $v => $l)
-                {
-                    $attributesIdName[$v] = explode("-",$l)[0];            
-                }
-                    
-            }
 
-            echo "attributesIdName";
-            echo json_encode($attributesIdName );
+
+            echo "attributes from plenty";
+            echo json_encode($attributesFromPlenty);
+    
+            // foreach($attributesFromPlenty as $key => $value) {
+            //     foreach($value as $v => $l)
+            //     {
+            //         $attributesIdName[$v] = explode("-",$l)[0];            
+            //     }
+                    
+            // }
+
+            // echo "attributesIdName";
+            // echo json_encode($attributesIdName );
 
         //     $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
         //         'filterType' => $filterType,
