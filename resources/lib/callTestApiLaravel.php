@@ -6,7 +6,7 @@ require_once __DIR__ . '/PriceMonitorHttpClient.php';
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    'https://plentymiddleware.000webhostapp.com/articles'
+    'http://232c6c12.ngrok.io/api/login?email=goran.stamenkovski@logeecom.com&password=Goran'
 );
  
 /** @return array */

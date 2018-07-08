@@ -147,7 +147,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
-                //  'httpClient' => $this->httpClient
+                
             ]);
 
             // echo "response contracts    ";
@@ -171,10 +171,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             }  
             
           // if contracts get successfully save them to DB
-            else if($reponseContracts != null) 
-              $contractRepo->saveContracts($reponseContracts);   
+            // else if($reponseContracts != null) 
+            //   $contractRepo->saveContracts($reponseContracts);   
             
-            $originalContracts = $contractRepo->getContracts(); 
+            // $originalContracts = $contractRepo->getContracts(); 
 
             // echo json_encode($originalContracts);
 
@@ -199,14 +199,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //      ->getLogger('ContentController_login')
         //      ->info('PriceMonitorPlentyIntegration::migration.successMessage', ['email' => $credentials['email'], 'password' => $credentials['password'] ]);
 
-        $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
-        $tokenForSend = $webHookToken->value;
+        // $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
+        // $tokenForSend = $webHookToken->value;
 
-        $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
-            'email' => $credentials['email'],
-            'password' => $credentials['password'],
-            'configService' => $this->configService
-        ]);
+        // $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
+        //     'email' => $credentials['email'],
+        //     'password' => $credentials['password'],
+        //    // 'configService' => 
+        //    // this->configService
+        // ]);
 
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
