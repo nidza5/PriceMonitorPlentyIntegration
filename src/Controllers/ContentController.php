@@ -140,8 +140,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-        //   $contractRepo->deleteAllContracts();
-
         try {
 
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
@@ -257,13 +255,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $templateData = array("contracts" => $reponseContracts,
                             "salesPrices" => $salesPricesEnglish);
-
-
-        $articlesLaravel = $this->sdkService->call("callTestApiLaravel", [
-        ]);             
-        
-        echo "articles laravel";
-        echo json_encode($articlesLaravel);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }

@@ -18,6 +18,8 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
+var urlMiddleware = "http://6ec15927.ngrok.io/api/";
+
 function showTabContentContent(evt, nameTab,el) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontentprestaprice");
@@ -225,7 +227,7 @@ function showTabContent(evt, tabName) {
 
         $.ajax({
             type: "POST",
-            url: "/updateContractInfo",
+            url: "urlMiddleware" + "updateContractInfo",
             data: data,
             success: function(data)
             {
