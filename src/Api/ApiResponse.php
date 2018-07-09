@@ -46,24 +46,15 @@ class ApiResponse
      * @var null|Response
      */
     private $response = null;
-    /**
-     * @var NotificationService
-     */
-    private $notificationService;
+    
     /**
      * ApiResponse constructor.
      * @param Dispatcher $dispatcher
      * @param Response $response
      */
-	public function __construct(
-        Response $response
-    )
+	public function __construct(Response $response)
 	{
-
-        $this->response             = $response;
-      
-		// Register basket events
-        
+        $this->response = $response;   
 	}
     /**
      * @deprecated
@@ -74,7 +65,6 @@ class ApiResponse
      */
 	public function error(int $code, $message = null):ApiResponse
 	{
-		//$this->notificationService->error( $message, $code );
 		return $this;
 	}
     /**
@@ -86,7 +76,6 @@ class ApiResponse
      */
 	public function success(int $code, $message = null):ApiResponse
 	{
-		//$this->notificationService->success( $message, $code );
 		return $this;
 	}
     /**
@@ -98,7 +87,6 @@ class ApiResponse
      */
 	public function info(int $code, $message = null):ApiResponse
 	{
-		//$this->notificationService->info( $message, $code );
 		return $this;
 	}
     /**
@@ -123,42 +111,8 @@ class ApiResponse
 		{
 			$this->header($key, $value);
 		}
-		// $responseData = $this->appendNotifications();
-		// $responseData["events"] = $this->eventData;
 	
 		$responseData["data"]   = $data;
         return $this->response->make(json_encode($responseData), $code, $this->headers);
 	}
-	// private function appendNotifications( $data = null, $type = null, $notifications = null )
-    // {
-    //     if ( is_null($data) )
-    //     {
-    //         $data = [];
-    //     }
-    //     if ( is_null($notifications) )
-    //     {
-    //         $notifications = $this->notificationService->getNotifications();
-    //     }
-    //     if ( !is_null($notifications[LogLevel::ERROR]) )
-    //     {
-    //         $data[LogLevel::ERROR] = $notifications[LogLevel::ERROR];
-    //     }
-    //     if ( !is_null($notifications[LogLevel::WARN]) )
-    //     {
-    //         $data[LogLevel::WARN] = $notifications[LogLevel::WARN];
-    //     }
-    //     if ( !is_null($notifications[LogLevel::INFO]) )
-    //     {
-    //         $data[LogLevel::INFO] = $notifications[LogLevel::INFO];
-    //     }
-    //     if ( !is_null($notifications[LogLevel::SUCCESS]) )
-    //     {
-    //         $data[LogLevel::SUCCESS] = $notifications[LogLevel::SUCCESS];
-    //     }
-    //     if ( !is_null($notifications[LogLevel::ERROR]) )
-    //     {
-    //         $data[LogLevel::LOG] = $notifications[LogLevel::LOG];
-    //     }
-    //     return $data;
-    // }
 }
