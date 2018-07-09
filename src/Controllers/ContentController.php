@@ -266,13 +266,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       */
       public function updateContractInfo(Request $request, Twig $twig,ContractRepositoryContract $contractRepo): string
       {
-         $updateContractInfo = $contractRepo->updateContract($request->all());
+        $requestData = $request->all();
+
+        $updateContract = $this->sdkService->call("updateContractInfo", [
+            'idContract' => $requestData['id'],
+            'priceMonitorId' => $requestData['priceMonitorId'],
+            'salesPriceImportIn' => $requestData['salesPricesImport'],
+            'isInsertSalesPrice' => $requestData['isInsertSalesPrice']            
+        ]);
+
+        return json_encode($updateContract);
+
+        //  $updateContractInfo = $contractRepo->updateContract($request->all());
         
-         $contractInfo = null;
+        //  $contractInfo = null;
 
-         if(($updateContractInfo != null) && ($updateContractInfo->id != 0) && ($updateContractInfo->id != null))
-            $contractInfo = $contractRepo->getContractById($updateContractInfo->id);
+        //  if(($updateContractInfo != null) && ($updateContractInfo->id != 0) && ($updateContractInfo->id != null))
+        //     $contractInfo = $contractRepo->getContractById($updateContractInfo->id);
 
-         return json_encode($contractInfo); 
+        //  return json_encode($contractInfo); 
       }
  }
