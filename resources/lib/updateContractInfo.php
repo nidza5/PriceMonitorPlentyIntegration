@@ -12,15 +12,14 @@ $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
     'http://6ec15927.ngrok.io/api/updateContractInfo',
-    array(
-        'body' => array(
+    [
+        'form_params' => [
             'idContract' => $idContract,
             'priceMonitorId' => $priceMonitorId,
             'salesPriceImportIn' => $salesPriceImportIn,
             'isInsertSalesPrice' => $isInsertSalesPrice
-        )
-    )
-);
+        ]
+    ]);
  
 /** @return array */
 return json_decode($res->getBody(), true);
