@@ -268,6 +268,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
         $requestData = $request->all();
 
+
+        echo "reuest data";
+        echo json_encode($requestData);
+
         $updateContract = $this->sdkService->call("updateContractInfo", [
             'idContract' => $requestData['id'],
             'priceMonitorId' => $requestData['priceMonitorId'],
