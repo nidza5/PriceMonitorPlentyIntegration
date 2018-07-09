@@ -39,13 +39,4 @@ class VariationResource extends ApiResource
 
 		return $this->response->create($allVariations, ResponseCode::OK);
 	}
-
-    /**
-     * Create an order
-     * @return Response
-     */
-	public function store():Response
-	{
-	
-	}
 }
