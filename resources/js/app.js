@@ -227,7 +227,7 @@ function showTabContent(evt, tabName) {
 
         $.ajax({
             type: "POST",
-            url: "urlMiddleware" + "updateContractInfo",
+            url: urlMiddleware + "updateContractInfo",
             data: data,
             success: function(data)
             {
