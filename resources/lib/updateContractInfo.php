@@ -15,9 +15,9 @@ $res = $client->request(
     [
     ],
     [
-        'idContract' => $idContract,
+        'id' => $idContract,
         'priceMonitorId' => $priceMonitorId,
-        'salesPriceImportIn' => $salesPriceImportIn,
+        'salesPricesImport' => $salesPriceImportIn,
         'isInsertSalesPrice' => $isInsertSalesPrice
     ]
 );
