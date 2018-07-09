@@ -13,13 +13,14 @@ $res = $client->request(
     'POST',
     'http://6ec15927.ngrok.io/api/updateContractInfo',
     [
-        'form_params' => [
-            'idContract' => $idContract,
-            'priceMonitorId' => $priceMonitorId,
-            'salesPriceImportIn' => $salesPriceImportIn,
-            'isInsertSalesPrice' => $isInsertSalesPrice
-        ]
-    ]);
+    ],
+    json_encode([
+        'idContract' => $idContract,
+        'priceMonitorId' => $priceMonitorId,
+        'salesPriceImportIn' => $salesPriceImportIn,
+        'isInsertSalesPrice' => $isInsertSalesPrice
+       ])
+    );
  
 /** @return array */
 return json_decode($res->getBody(), true);
