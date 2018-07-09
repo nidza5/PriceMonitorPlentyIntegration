@@ -242,6 +242,9 @@ function showTabContent(evt, tabName) {
                 {
                   var insertPricesValue = data.isInsertSalesPrice == "1" ? "true" : "false";
 
+                  if(data.salesPricesImport != null && data.salesPricesImport != "")
+                     data.salesPricesImport = data.salesPricesImport.split(',');
+                    
                    setDataContractInfo(data.id,data.priceMonitorId,data.name,insertPricesValue,data.salesPricesImport);
                    updateDataAttributeContractInfo(data.id,data.priceMonitorId,data.name,data.isInsertSalesPrice,data.salesPricesImport)
 
