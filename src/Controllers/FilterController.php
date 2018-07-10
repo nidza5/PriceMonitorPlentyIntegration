@@ -93,10 +93,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'type' => $requestData['type'],
             'priceMonitorId' => $requestData['pricemonitorId']
         ]);
-
-        echo "filter for saveeee";
-        echo json_encode($filterSave);
-
+        
         return  json_encode($filterSave);
         
        // return json_encode($filterForSave['filter']);
