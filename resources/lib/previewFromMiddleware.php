@@ -15,7 +15,7 @@ $attributesFromPlenty = SdkRestApi::getParam('attributesFromPlenty');
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    $middlewareBaseUrl.'/api/preview?filterType='.$filterType.'&priceMonitorId='.$priceMonitorId.'&allVariations='.$allVariations.'&attributesFromPlenty='.$attributesFromPlenty
+    $middlewareBaseUrl.'/api/preview?filterType='.$filterType.'&priceMonitorId='.$priceMonitorId.'&allVariations[]='.$allVariations.'&attributesFromPlenty[]='.$attributesFromPlenty
 );
  
 /** @return array */
