@@ -61,24 +61,26 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
     public function getAccountInfo()
     {
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
-        $transactionsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
-        $transactionDetailsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
+        // $emailObject = $this->configInfoRepo->getConfig('email');
+        // $passwordObject = $this->configInfoRepo->getConfig('password');
+        // $transactionsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
+        // $transactionDetailsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
     
-        $email = $emailObject->value;
-        $password = $passwordObject->value;
-        $transactionsRetentionInterval = $transactionsRetentionIntervalObject->value;
-        $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject->value;
+        // $email = $emailObject->value;
+        // $password = $passwordObject->value;
+        // $transactionsRetentionInterval = $transactionsRetentionIntervalObject->value;
+        // $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject->value;
 
-        $data = array(
-            'userEmail' =>   $email,
-            'userPassword' => $password,
-            'transactionsRetentionInterval' => $transactionsRetentionInterval,
-            'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval
-        );
+        // $data = array(
+        //     'userEmail' =>   $email,
+        //     'userPassword' => $password,
+        //     'transactionsRetentionInterval' => $transactionsRetentionInterval,
+        //     'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval
+        // );
 
-        return json_encode($data);
+        $accountInfo = $this->sdkService->call("getAccountInfoFromMiddleware", []);
+
+        return json_encode($accountInfo);
     }
 
     public function saveAccountInfo(Request $request) 
@@ -93,28 +95,47 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $transactionsRetentionInterval = $requestData['transactionsRetentionInterval'];
         $transactionDetailsRetentionInterval = $requestData['transactionDetailsRetentionInterval'];
 
-        $contracts = $this->sdkService->call("getLoginAndContracts", [
+        $saveAccountInfoToMiddleware = $this->sdkService->call("saveAccountInfoToMiddleware", [
             'email' => $email,
-            'password' => $password
+            'password' => $password,
+            'transactionsRetentionInterval' => $transactionsRetentionInterval,
+            'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval 
         ]);
 
-        if($contracts == null || $contracts['error']) 
-            throw new \Exception("Contracts doesn't exist or some error occurred!");
-            
-        $emailFromConfig = $this->configInfoRepo->getConfig('email');
-        $passwordFromConfig = $this->configInfoRepo->getConfig('password');
-        $transactionsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
-        $transactionDetailsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
-        
-        if ($email !== $emailFromConfig) {
-            $this->contractRepo->saveContracts($contracts);
+        if( $saveAccountInfoToMiddleware != null &&  isset($reponseContracts['error']))
+        {
+              $errorReponse = [
+                'Code' => $reponseContracts['Code'],
+                'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
+            ];
+
+            return  $errorReponse;
         }
+            
+        return "Account information saved successfully!";
 
-        $this->configInfoRepo->saveConfig('email',$email);
-        $this->configInfoRepo->saveConfig('password',$password);
-        $this->configInfoRepo->saveConfig('transactionsRetentionInterval',$transactionsRetentionInterval);
-        $this->configInfoRepo->saveConfig('transactionDetailsRetentionInterval',$transactionDetailsRetentionInterval);
+        // $contracts = $this->sdkService->call("getLoginAndContracts", [
+        //     'email' => $email,
+        //     'password' => $password
+        // ]);
 
-        return "Account information saved successfully";
+        // if($contracts == null || $contracts['error']) 
+        //     throw new \Exception("Contracts doesn't exist or some error occurred!");
+            
+        // $emailFromConfig = $this->configInfoRepo->getConfig('email');
+        // $passwordFromConfig = $this->configInfoRepo->getConfig('password');
+        // $transactionsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
+        // $transactionDetailsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
+        
+        // if ($email !== $emailFromConfig) {
+        //     $this->contractRepo->saveContracts($contracts);
+        // }
+
+        // $this->configInfoRepo->saveConfig('email',$email);
+        // $this->configInfoRepo->saveConfig('password',$password);
+        // $this->configInfoRepo->saveConfig('transactionsRetentionInterval',$transactionsRetentionInterval);
+        // $this->configInfoRepo->saveConfig('transactionDetailsRetentionInterval',$transactionDetailsRetentionInterval);
+
+        // return "Account information saved successfully";
     }
  }
