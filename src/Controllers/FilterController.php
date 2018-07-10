@@ -70,33 +70,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
           $requestData = $request->all();
 
-        //   $emailForConfig = $this->config->get('email');
-        //   $passwordForConfig = $this->config->get('password');
-       
-        //  $filterForSave =  $this->sdkService->call("saveFilter", [
-        //     'filterData' => $requestData['filters'],
-        //     'filterType' => $requestData['type'],
-        //     'priceMonitorId' => $requestData['pricemonitorId'],
-        //     'productFilterRepositoryParam' => $productFilterRepo,
-        //     'emailForConfig' => $emailForConfig,
-        //     'passwordForConfig' => $passwordForConfig
-        // ]);
+          $filterSave = $this->sdkService->call("filterSaveMiddleware", [
+             'filters' => $requestData['filters'],
+             'type' => $requestData['type'],
+             'priceMonitorId' => $requestData['pricemonitorId']
+          ]);
 
-        // if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
-        //     throw new \Exception("some parameters of product filter are null");
-            
-         
-        // $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
-
-        $filterSave = $this->sdkService->call("filterSaveMiddleware", [
-            'filters' => $requestData['filters'],
-            'type' => $requestData['type'],
-            'priceMonitorId' => $requestData['pricemonitorId']
-        ]);
-        
         return  json_encode($filterSave);
         
-       // return json_encode($filterForSave['filter']);
       }
 
       public function getFilters(Request $request) :string 
@@ -112,15 +93,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             if($priceMonitorId == null || $filterType == null)
                 throw new \Exception("Price monitor id or filter type is null");
-
-            // $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
-
-            // $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-            //     'filterType' => $filterType,
-            //     'priceMonitorId' => $priceMonitorId,
-            //     'productFilterRepo' => $filter
-            // ]);  
-            
             
             $filters =  $this->sdkService->call("getFilterFromMiddleware", [
                 'filterType' =>  $filterType,
@@ -128,7 +100,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             ]);
 
            return json_encode($filters);  
-         //return $filters;
       }
 
       public function filterPreview(Request $request) {
@@ -168,14 +139,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     
             }
 
-            $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+            // $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
+            //     'filterType' => $filterType,
+            //     'priceMonitorId' => $priceMonitorId,
+            //     'productFilterRepo' => $filter,
+            //     'attributeMapping' => $attributeMapping,
+            //     'allVariations' =>  $allVariations,
+            //     'attributesFromPlenty' => $attributesIdName            
+            // ]);  
+
+
+            $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
                 'filterType' => $filterType,
                 'priceMonitorId' => $priceMonitorId,
                 'productFilterRepo' => $filter,
                 'attributeMapping' => $attributeMapping,
                 'allVariations' =>  $allVariations,
                 'attributesFromPlenty' => $attributesIdName            
-            ]);  
+            ]);
 
            return json_encode($filteredVariation);        
       }      
