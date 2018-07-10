@@ -60,9 +60,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($requestData != null)
             $priceMonitorId = $requestData['priceMonitorContractId'];
 
-        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
+     //   $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
-        return json_encode($attributeMapping);     
+        $getMappedAttributesFromMiddleware = $this->sdkService->call("getMappedAttributesFromMiddleware", [
+            'priceMonitorContractId' => $priceMonitorId        
+        ]);  
+
+        return json_encode($getMappedAttributesFromMiddleware);     
     }
 
     public function saveAttributesMapping(Request $request)
@@ -82,12 +86,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($mappings == null)
             throw new \Exception("Mappings is empty");
         
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        if($contract == null)
-            throw new \Exception("Contract is empty");
+        // if($contract == null)
+        //     throw new \Exception("Contract is empty");
 
-         $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
+         
+        $saveAttributesMappingToMiddleware =  $this->sdkService->call("saveAttributesMappingToMiddleware", [
+            'priceMonitorId' => $priceMonitorId,
+            'mappings' => $mappings         
+        ]);    
+
+       //  $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
 
          return "OK";        
     }

@@ -136,20 +136,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             foreach($attributesFromPlenty as $key => $value) {
                 foreach($value as $v => $l)
                     $attributesIdName[$v] = explode("-",$l)[0];            
-    
             }
-
-            // $filteredVariation =  $this->sdkService->call("getFilteredVariations", [
-            //     'filterType' => $filterType,
-            //     'priceMonitorId' => $priceMonitorId,
-            //     'productFilterRepo' => $filter,
-            //     'attributeMapping' => $attributeMapping,
-            //     'allVariations' =>  $allVariations,
-            //     'attributesFromPlenty' => $attributesIdName            
-            // ]);  
-
-         
-
+            
             $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
                 'filterType' => $filterType,
                 'priceMonitorId' => $priceMonitorId,
