@@ -12,7 +12,7 @@ $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
-    $middlewareBaseUrl + '/api/saveFilter',
+    $middlewareBaseUrl.'/api/saveFilter',
     [],
     [
         'filters' => $filters,
