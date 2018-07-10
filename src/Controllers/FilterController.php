@@ -127,6 +127,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'priceMonitorId' =>  $priceMonitorId
             ]);
 
+            echo "filtersss";
+
+            echo json_encode($filters);
+
          // return json_encode($filters);  
          return $filters;
       }
