@@ -148,9 +148,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 
             ]);
 
-            // echo "response contracts    ";
+            echo "response contracts    ";
 
-            // echo json_encode($reponseContracts);
+            echo  $reponseContracts;
+
+           // echo json_encode($reponseContracts);
 
             
             //Handling errors when ocuurs in getLoggingAndContracts

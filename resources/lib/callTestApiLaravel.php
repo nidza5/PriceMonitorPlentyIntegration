@@ -4,6 +4,7 @@ require_once __DIR__ . '/PriceMonitorHttpClient.php';
  
 $middlewareBaseUrl = SdkRestApi::getParam('gatewayBasePath');
 
+
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
