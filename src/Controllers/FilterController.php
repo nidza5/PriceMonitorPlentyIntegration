@@ -68,34 +68,39 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
       public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
       {
-
-        //  $productFilterRepo->deleteAllProductFilter();
           $requestData = $request->all();
 
-          $emailForConfig = $this->config->get('email');
-          $passwordForConfig = $this->config->get('password');
+        //   $emailForConfig = $this->config->get('email');
+        //   $passwordForConfig = $this->config->get('password');
        
-         $filterForSave =  $this->sdkService->call("saveFilter", [
-            'filterData' => $requestData['filters'],
-            'filterType' => $requestData['type'],
-            'priceMonitorId' => $requestData['pricemonitorId'],
-            'productFilterRepositoryParam' => $productFilterRepo,
-            'emailForConfig' => $emailForConfig,
-            'passwordForConfig' => $passwordForConfig
-        ]);
+        //  $filterForSave =  $this->sdkService->call("saveFilter", [
+        //     'filterData' => $requestData['filters'],
+        //     'filterType' => $requestData['type'],
+        //     'priceMonitorId' => $requestData['pricemonitorId'],
+        //     'productFilterRepositoryParam' => $productFilterRepo,
+        //     'emailForConfig' => $emailForConfig,
+        //     'passwordForConfig' => $passwordForConfig
+        // ]);
 
-        if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
-            throw new \Exception("some parameters of product filter are null");
+        // if($filterForSave['contractId'] == null || $filterForSave['filterType'] == null || $filterForSave['filter'] == null)  
+        //     throw new \Exception("some parameters of product filter are null");
             
          
-        $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
+        // $resultFilter = $productFilterRepo->saveProductFilter($filterForSave);
+
+        $filterSave = $this->sdkService->call("filterSaveMiddleware", [
+            'filters' => $requestData['filters'],
+            'type' => $requestData['type'],
+            'priceMonitorId' => $requestData['pricemonitorId']
+        ]);
+
+        return $filterSave;
         
-        return json_encode($filterForSave['filter']);
+       // return json_encode($filterForSave['filter']);
       }
 
-      public function getFilters(Request $request,ProductFilterRepositoryContract $productFilterRepo) :string 
-      {
-            // $productFilterRepo->deleteAllProductFilter();
+      public function getFilters(Request $request) :string 
+      {    
             $requestData = $request->all();
             $priceMonitorId = 0;
 
@@ -108,17 +113,22 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             if($priceMonitorId == null || $filterType == null)
                 throw new \Exception("Price monitor id or filter type is null");
 
-            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
+            // $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
 
-            $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
-                'filterType' => $filterType,
-                'priceMonitorId' => $priceMonitorId,
-                'productFilterRepo' => $filter
-            ]);    
+            // $filters = $this->sdkService->call("getFilterByTypeAndPriceMonitorId", [
+            //     'filterType' => $filterType,
+            //     'priceMonitorId' => $priceMonitorId,
+            //     'productFilterRepo' => $filter
+            // ]);  
+            
+            
+            $filters =  $this->sdkService->call("getFilterFromMiddleware", [
+                'filterType' => $requestData['type'],
+                'priceMonitorId' => $requestData['pricemonitorId']
+            ]);
 
-          return json_encode($filters);  
-
-          //return "OK";
+         // return json_encode($filters);  
+         return $filters;
       }
 
       public function filterPreview(Request $request) {

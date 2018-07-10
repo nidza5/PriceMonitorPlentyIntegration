@@ -6,6 +6,9 @@ use Plenty\Plugin\ConfigRepository;
 
 class PriceMonitorSdkService
 {
+
+    const GATEWAY_BASE_PATH = 'http://1b4dd1fa.ngrok.io';
+
     /**
      *
      * @var LibraryCallContract
@@ -37,6 +40,7 @@ class PriceMonitorSdkService
      */
     public function call(string $method, array $parameters)
     {
+        $parameters['gatewayBasePath'] = self::GATEWAY_BASE_PATH;
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }
 
