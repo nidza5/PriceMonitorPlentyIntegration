@@ -25,7 +25,7 @@ $res = $client->request(
     [
         'filterType' => $filterType,
         'priceMonitorId' => $priceMonitorId,
-        'allVariations' => $allVariations,
+        'allVariations' => json_encode($allVariations),
         'attributesFromPlenty' => $attributesFromPlenty
     ]
 );
