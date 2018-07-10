@@ -148,9 +148,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             //     'attributesFromPlenty' => $attributesIdName            
             // ]);  
 
-            echo "attributes id name";
-            echo json_encode($attributesIdName);
-
+         
 
             $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
                 'filterType' => $filterType,
