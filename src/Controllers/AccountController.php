@@ -102,12 +102,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval 
         ]);
 
-        if( $saveAccountInfoToMiddleware != null &&  isset($reponseContracts['error']))
+        if( $saveAccountInfoToMiddleware != null &&  isset($saveAccountInfoToMiddleware['error']))
         {
               $errorReponse = [
-                'Code' => $reponseContracts['Code'],
-                'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
-            ];
+                'Message' => $saveAccountInfoToMiddleware['error']
+             ];
 
             return  $errorReponse;
         }
