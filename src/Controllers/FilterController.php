@@ -123,8 +123,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
             
             $filters =  $this->sdkService->call("getFilterFromMiddleware", [
-                'filterType' => $requestData['type'],
-                'priceMonitorId' => $requestData['pricemonitorId']
+                'filterType' =>  $filterType,
+                'priceMonitorId' =>  $priceMonitorId
             ]);
 
          // return json_encode($filters);  
