@@ -13,7 +13,7 @@ $isInsertSalesPrice = SdkRestApi::getParam('isInsertSalesPrice');
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
-    $middlewareBaseUrl +'/api/updateContractInfo',
+    $middlewareBaseUrl.'/api/updateContractInfo',
     [
     ],
     [
