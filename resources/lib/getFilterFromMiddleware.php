@@ -11,7 +11,7 @@ $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    $middlewareBaseUrl.'/api/getFilters?priceMonitorId='.$priceMonitorId.'&filterType='.$filterType;
+    $middlewareBaseUrl.'/api/getFilters?priceMonitorId='.$priceMonitorId.'&filterType='.$filterType
 );
  
 /** @return array */
