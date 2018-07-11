@@ -135,7 +135,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
           $exportInterval = $requestData['exportInterval'];
 
           $saveScheduleMiddleware =  $this->sdkService->call("saveScheduleToMiddleware", [
-            'priceMonitorId' => $priceMonitorId,
+            'pricemonitorId' => $priceMonitorId,
             'startAt' => $startAt,
             'enableExport' =>  $enableExport,
             'exportInterval' =>  $exportInterval        
