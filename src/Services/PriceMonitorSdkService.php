@@ -7,7 +7,7 @@ use Plenty\Plugin\ConfigRepository;
 class PriceMonitorSdkService
 {
 
-    const GATEWAY_BASE_PATH = 'http://bb78c34e.ngrok.io';
+    const GATEWAY_BASE_PATH = 'http://e042c519.ngrok.io';
 
     /**
      *
