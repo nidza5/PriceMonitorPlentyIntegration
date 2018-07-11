@@ -103,14 +103,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
 
-         /**
-         * @var ScheduleExportService $scheduleExportService
-         */
-        $scheduleExportService = pluginApp(ScheduleExportService::class);
+        $getScheduleMiddleware =  $this->sdkService->call("getScheduleFromMiddleware", [
+            'pricemonitorId' => $priceMonitorId,     
+        ]); 
 
-        $scheduleSaved = $scheduleExportService->getAdequateScheduleByContract($priceMonitorId);
+        //  /**
+        //  * @var ScheduleExportService $scheduleExportService
+        //  */
+        // $scheduleExportService = pluginApp(ScheduleExportService::class);
 
-        return json_encode($scheduleSaved);  
+        // $scheduleSaved = $scheduleExportService->getAdequateScheduleByContract($priceMonitorId);
+
+        return json_encode($getScheduleMiddleware);  
    
     }
 
@@ -125,17 +129,28 @@ namespace PriceMonitorPlentyIntegration\Controllers;
        
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
+
+          $startAt = $requestData['startAt'];
+          $enableExport = $requestData['enableExport'];
+          $exportInterval = $requestData['exportInterval'];
+
+          $saveScheduleMiddleware =  $this->sdkService->call("saveScheduleToMiddleware", [
+            'priceMonitorId' => $priceMonitorId,
+            'startAt' => $startAt,
+            'enableExport' =>  $enableExport,
+            'exportInterval' =>  $exportInterval        
+          ]); 
         
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        if($contract == null)
-            throw new \Exception("Contract is empty");
+        // if($contract == null)
+        //     throw new \Exception("Contract is empty");
 
-         $this->scheduleRepo->saveSchedule($contract->id,$requestData,$this->cronContainer);
+        //  $this->scheduleRepo->saveSchedule($contract->id,$requestData,$this->cronContainer);
 
-         $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+        //  $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
 
-         return json_encode($scheduleSaved);        
+         return json_encode($saveScheduleMiddleware);        
     }
 
 
