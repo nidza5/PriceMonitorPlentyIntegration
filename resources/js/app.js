@@ -112,7 +112,7 @@ function adjustOptionPrices(insertSalesPriceValue,idSelect) {
         
         allPossibileValuesSalesPrices.push(salesOption);
 
-     if (!isInArray(selectobject.options[i].value, insertSalesPriceValue)) {
+     if (!isInArray(selectobject.options[i].value.split('-')[0], insertSalesPriceValue)) {
             selectobject.remove(i);
      }       
   }
@@ -122,10 +122,10 @@ function addOptionToSelectIfNotExist(insertSalesPriceValue,idSelect) {
 
     var selectobject=document.getElementById(idSelect);
     for (var i=0; i<insertSalesPriceValue.length; i++) { 
-        if ($("#" + idSelect).find('option[value="'+insertSalesPriceValue[i] +'"]').length == 0) {
+        if ($("#" + idSelect).find('option[value="'+insertSalesPriceValue[i] +'-price"]').length == 0) {
 
             var optonsForAdd = allPossibileValuesSalesPrices.filter(function( obj ) {
-                return obj.Value == insertSalesPriceValue[i] ;
+                return obj.Value == insertSalesPriceValue[i] + "-price" ;
             });
 
             if(optonsForAdd != null) {
