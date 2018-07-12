@@ -99,6 +99,9 @@
     function loadTransactionHistoryMasterData(limit, offset)
     {
 
+        console.log("limiiit je ");
+        console.log(limit);
+
         var dataOption = {
             'pricemonitorId' : $("#contractId").val(),
             'limit' : limit,
