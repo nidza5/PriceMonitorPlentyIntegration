@@ -113,7 +113,8 @@ class ProductFilterService {
                 'variationBarcodes' => 'barcode',
                 'item' => ['itemProperties'],
                 'variationCategories' => null,
-                'variationSuppliers'  => null
+                'variationSuppliers'  => null,
+                'variationSalesPrices' => null
             ]
          ]);
 
