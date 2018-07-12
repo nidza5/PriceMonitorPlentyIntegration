@@ -87,7 +87,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $pricemonitorId = $requestData['pricemonitorId'];
         $limit = $requestData['limit'];
         $offset = $requestData['offset'];
-        $type = $requestData['type']
+        $type = $requestData['type'];
         
         
         $transaction =  $this->sdkService->call("getTransactionHistoryFromMiddleware", [
