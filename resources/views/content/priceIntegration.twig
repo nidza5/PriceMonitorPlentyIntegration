@@ -254,7 +254,7 @@
                                                 <select class="form-control pricemonitor-filterable-list attributes-mapping-price-attributes" onchange="updateCodeValuesOnInput(this)" name="attribute-referencePrice" id="attribute-ref-price">
                                                     {% if salesPrices is not null %}
                                                         {% for salePrice in salesPrices %}                
-                                                         <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>                                                           
+                                                         <option value={{salePrice.salesPriceId ~ "-price"}}>{{salePrice.nameInternal}}</option>                                                           
                                                         {% endfor %}
                                                     {% endif %}
                                                 </select>
@@ -282,7 +282,7 @@
                                                          <select class="form-control pricemonitor-filterable-list attributes-mapping-price-attributes" onchange="updateCodeValuesOnInput(this)" name="attribute-minPriceBoundary" id="attribute-min-price">
                                                             {% if salesPrices is not null %}
                                                                 {% for salePrice in salesPrices %}
-                                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                                        <option value={{salePrice.salesPriceId ~ "-price"}}>{{salePrice.nameInternal}}</option>
                                                                 {% endfor %}
                                                             {% endif %}
                                                         </select>
@@ -332,7 +332,7 @@
                                                     <select class="form-control pricemonitor-filterable-list attributes-mapping-price-attributes" name="attribute-maxPriceBoundary" onchange="updateCodeValuesOnInput(this)" id="attribute-max-price">
                                                             {% if salesPrices is not null %}
                                                                 {% for salePrice in salesPrices %}
-                                                                        <option value={{salePrice.salesPriceId}}>{{salePrice.nameInternal}}</option>
+                                                                        <option value={{salePrice.salesPriceId ~ "-price"}}>{{salePrice.nameInternal}}</option>
                                                                 {% endfor %}
                                                             {% endif %}
                                                         </select>
