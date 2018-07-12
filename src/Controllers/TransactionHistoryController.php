@@ -87,51 +87,17 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $pricemonitorId = $requestData['pricemonitorId'];
         $limit = $requestData['limit'];
         $offset = $requestData['offset'];
+        $type = $requestData['type']
         
-        $detailed = $masterId !== null;
-
-        $contract = $this->contractRepo->getContractByPriceMonitorId($pricemonitorId);
-
-        if(!$contract)
-            throw new \Exception("Contract is null");
-
-        $transactionHistoryDetailsRecords = null;
-        $totalDetailedRecords = 0;
-        $transactionHistoryRecords = null;
-        $totalHistoryRecords = 0;
-
-        if($detailed) {
-            $transactionHistoryDetailsRecords  = $this->transactionDetailsRepo->getAllTransactionDetails();
-            $totalDetailedRecords = $this->transactionDetailsRepo->getTransactionHistoryDetailsCount($masterId);
-        } else {
-            $transactionHistoryRecords = $this->transactionHistoryRepo->getAllTransactionHistory();
-            $totalHistoryRecords = $this->transactionHistoryRepo->getTransactionHistoryMasterCount($contract->id,FilterType::EXPORT_PRODUCTS);
-        }
-
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
-
-        $emailForConfig = $emailObject->value;
-        $passwordForConfig = $passwordObject->value;
-
-        $transactionHistoryAct =  $this->sdkService->call("getTransHistoryDetails", [
-            'masterId' => $masterId,
+        
+        $transactionFromMiddleware =  $this->sdkService->call("getTransactionHistoryFromMiddleware", [
             'pricemonitorId' => $pricemonitorId,
+            'masterId' => $masterId,
+            'type' => $type,
             'limit' => $limit,
-            'offset' =>  $offset,
-            'transactionHistoryDetailsRecord' => $transactionHistoryDetailsRecords,
-            'totalDetailedRecords' => $totalDetailedRecords,
-            'transactionHistoryRecords' => $transactionHistoryRecords,
-            'totalHistoryRecords' => $totalHistoryRecords,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig
-        ]);   
+            'offset' =>  $offset          
+        ]);
 
-        echo json_encode( $transactionHistoryAct);
-        
-        if($transactionHistoryAct != null && $transactionHistoryAct['error'])
-           throw new \Exception($transactionHistoryAct['error_msg']);
-
-        return json_encode($transactionHistoryAct);   
+        return json_encode($transactionFromMiddleware);   
     }
  }
