@@ -13,7 +13,7 @@ $offset = SdkRestApi::getParam('offset');
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    $middlewareBaseUrl.'/api/getTransactionHistory?pricemonitorId='.$priceMonitorId.'&masterId='.$masterId.'&type='.$type.'&limit='.$limit.'&offset='.$offset 
+    $middlewareBaseUrl.'/api/getTransactionHistory?pricemonitorId='.$pricemonitorId.'&masterId='.$masterId.'&type='.$type.'&limit='.$limit.'&offset='.$offset 
 );
  
 /** @return array */
