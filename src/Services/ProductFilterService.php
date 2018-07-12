@@ -195,6 +195,18 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
 
+            foreach($p['variationSalesPrices'] as $salesPrice) 
+            {
+                $priceId = $salesPrice['salesPriceId'];
+                $priceValue = $salesPrice['price'];
+
+                $priceElement = [$priceId.'-price' => $priceValue];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$priceElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }
+
             $itemWithProperties = $this->getItemWithPropertiesById($p["itemId"]);
 
             //add item text to main columns
