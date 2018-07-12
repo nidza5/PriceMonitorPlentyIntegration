@@ -101,7 +101,7 @@
 
         var dataOption = {
             'pricemonitorId' : $("#contractId").val(),
-            'limmit' : limit,
+            'limit' : limit,
             'offset' : offset
         };
         
