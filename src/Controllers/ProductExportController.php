@@ -171,7 +171,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'pricemonitorId' => $priceMonitorId      
         ]);     
 
-        return json_encode($runProductExport);
+        return $runProductExport;
 
         // $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
