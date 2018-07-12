@@ -185,16 +185,12 @@
                 if(data == null) 
                     return;
                 
-                var dataJson = jQuery.parseJSON(data);
-                if(dataJson == null) {
-                    console.log("dataJSON is null");
-                    return;
-                }
+                toastr["success"]("Product export has been started.");
                 
-                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName) {
-                    toastr["success"]("Product export has been started.");
-                    callAssyncSync(dataJson);
-                }
+                // if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName) {
+                //     toastr["success"]("Product export has been started.");
+                //     callAssyncSync(dataJson);
+                // }
                     
             },
             error: function(data)
@@ -204,49 +200,49 @@
         });
      }
 
-     function callAssyncSync(dataForSync)
-     {      
-            var transferObject = {
-                'queueName' : dataForSync.queueName,
-                'token' : dataForSync.token,
-                'pricemonitorId' : $("#contractId").val(),
-                'filterType' : 'export_products'
-            };
+    //  function callAssyncSync(dataForSync)
+    //  {      
+    //         var transferObject = {
+    //             'queueName' : dataForSync.queueName,
+    //             'token' : dataForSync.token,
+    //             'pricemonitorId' : $("#contractId").val(),
+    //             'filterType' : 'export_products'
+    //         };
 
-            console.log("data for sync transfer");
-            console.log(transferObject);
+    //         console.log("data for sync transfer");
+    //         console.log(transferObject);
 
-            $.ajax({
-                type: "POST",
-                url: "/run",
-                data: transferObject,
-                async: true,
-                success: function(data)
-                {
-                    console.log(data);
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/run",
+    //             data: transferObject,
+    //             async: true,
+    //             success: function(data)
+    //             {
+    //                 console.log(data);
                     
-                    if(data == null) 
-                        return;
+    //                 if(data == null) 
+    //                     return;
 
-                    var dataSync = jQuery.parseJSON(data);
+    //                 var dataSync = jQuery.parseJSON(data);
 
-                //     if(dataSync != null && dataSync == true) {
-                //         callAssyncSync(dataForSync);
+    //             //     if(dataSync != null && dataSync == true) {
+    //             //         callAssyncSync(dataForSync);
 
-                //     if(dataForSync.queueName == "Default") {
-                //         dataForSync.queueName = "StatusChecking";
-                //         callAssyncSync(dataForSync);
-                //     }
-                // }
+    //             //     if(dataForSync.queueName == "Default") {
+    //             //         dataForSync.queueName = "StatusChecking";
+    //             //         callAssyncSync(dataForSync);
+    //             //     }
+    //             // }
                    
                     
-                },
-                error: function(data)
-                {
-                    console.log(data);
-                }
-            });
-     }
+    //             },
+    //             error: function(data)
+    //             {
+    //                 console.log(data);
+    //             }
+    //         });
+    //  }
 
       /**
      * Save all form elements
