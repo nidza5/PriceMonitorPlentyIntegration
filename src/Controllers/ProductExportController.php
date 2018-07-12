@@ -171,58 +171,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'pricemonitorId' => $priceMonitorId      
         ]);     
 
-        return $runProductExport;
-
-        // $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
-
-        // $emailObject = $this->configInfoRepo->getConfig('email');
-        // $passwordObject = $this->configInfoRepo->getConfig('password');
-
-        // $emailForConfig = $emailObject->value;
-        // $passwordForConfig = $passwordObject->value;
-
-    
-        // $enqueAndRun =  $this->sdkService->call("enqueueProductExport", [
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'queueModel' => $queue,
-        //     'emailForConfig' =>  $emailForConfig,
-        //     'passwordForConfig' =>  $passwordForConfig        
-        // ]); 
-
-        // echo "enqueue and run";
-        // echo json_encode($enqueAndRun);
-        
-        // if($enqueAndRun != null && $enqueAndRun['Message'])
-        // {
-        //     return [
-        //         'Message' => $enqueAndRun['Message']
-        //     ];
-        // }
-
-        
-        // if($enqueAndRun != null)
-        //     $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
-
-        // $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
-      
-        // if($createToken != null && $createToken['error'])
-        //    throw new \Exception($createToken['error_msg']);
-        
-        // if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
-        // {
-        //    $hashUniqueToken =  StringUtils::getUniqueString(20);    
-
-        //    $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
- 
-        //    $returnValues = [
-        //        "token" => $savedToken,
-        //        "queueName" => $enqueAndRun['queueName']
-        //    ];
-        //     // call async
-        //     return json_encode($returnValues);
-        // }
-
-        // return json_encode("OK");
-      
+        return $runProductExport;      
     }
  }

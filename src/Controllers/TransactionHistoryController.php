@@ -90,14 +90,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $type = $requestData['type']
         
         
-        $transactionFromMiddleware =  $this->sdkService->call("getTransactionHistoryFromMiddleware", [
+        $transaction =  $this->sdkService->call("getTransactionHistoryFromMiddleware", [
             'pricemonitorId' => $pricemonitorId,
             'masterId' => $masterId,
             'type' => $type,
             'limit' => $limit,
-            'offset' =>  $offset          
+            'offset' => $offset          
         ]);
 
-        return json_encode($transactionFromMiddleware);   
+        return json_encode($transaction);   
     }
  }
