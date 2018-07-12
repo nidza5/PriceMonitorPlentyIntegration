@@ -37,6 +37,13 @@ class AttributeResource extends ApiResource
     
         $attributes = $attributeService->getAllTypeAttributes();
 
-		return $this->response->create($attributes, ResponseCode::OK);
+        $attributesIdName = array();
+    
+            foreach($attributesFromPlenty as $key => $value) {
+                foreach($value as $v => $l)
+                    $attributesIdName[$v] = explode("-",$l)[0];            
+            }
+
+		return $this->response->create($attributesIdName, ResponseCode::OK);
 	}
 }
