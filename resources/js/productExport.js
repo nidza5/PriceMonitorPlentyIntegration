@@ -385,7 +385,7 @@
 
         div.classList.add('pricemonitor-transaction-history-details');
         div.setAttribute('data-id', data.id);
-       // div.addEventListener('click', onDetailClick);
+        div.addEventListener('click', onDetailClick);
 
         row.insertCell().innerHTML = index;
         row.insertCell().innerHTML = data.exportTime;
@@ -401,6 +401,16 @@
         }
 
         transactionHistoryMasterData[data.id] = data;
+    }
+
+
+    function onDetailClick()
+    {
+        // var masterId = this.getAttribute('data-id');
+
+        // if (masterId) {
+        //     loadTransactionHistoryDetailData(limit, 0, masterId);
+        // }
     }
 
     function populateTable(response, table, limit, offset, createRow, loadRecords)
@@ -428,19 +438,49 @@
         pagination.innerHTML = '';
         totalElement.innerHTML = response.count;
 
-        // pageCount = Math.ceil(response.count / limit);
-        // pagination.setAttribute('data-page-count', pageCount);
-        // pagination.setAttribute('data-limit', limit);
+        pageCount = Math.ceil(response.count / limit);
+        pagination.setAttribute('data-page-count', pageCount);
+        pagination.setAttribute('data-limit', limit);
 
-        // if (response.count > limit) {
-        //     initPaginationButtons(pagination, pageCount, currentPage, loadRecords);
-        // }
+        if (response.count > limit) {
+            initPaginationButtons(pagination, pageCount, currentPage, loadRecords);
+        }
 
-        // showNoDataMessage(table, response.count === 0);
+        showNoDataMessage(table, response.count === 0);
 
-        // if (response.count > 0) {
-        //     registerTooltips(tableBody);
-        // }
+        if (response.count > 0) {
+            registerTooltips(tableBody);
+        }
+    }
+
+    function showNoDataMessage(table, show)
+    {
+        var element = table.querySelector('.pricemonitor-no-data');
+
+        if (show) {
+            element.classList.remove('hidden');
+        } else {
+            element.classList.add('hidden');
+        }
+    }
+
+    function registerTooltips(tableBody)
+    {
+        var tooltips = tableBody.querySelectorAll('td');
+
+        for (var i = 0; i < tooltips.length; i++) {
+            tooltips[i].addEventListener('mouseenter', showTableTooltip);
+        }
+    }
+
+    /**
+     * Shows long text in title attribute if text in td is too long
+     */
+    function showTableTooltip()
+    {
+        if(!this.getAttribute('title') && !this.firstElementChild) {
+            this.setAttribute('title', this.innerHTML);
+        }
     }
 
     function initPaginationButtons(pagination, pageCount, currentPage, loadRecords)
@@ -505,4 +545,18 @@
         }
 
         pagination.appendChild(button);
+    }
+
+    function goToPage(page, pagination, loadRecords)
+    {
+        var pageCount = parseInt(pagination.getAttribute('data-page-count')),
+            limit = parseInt(pagination.getAttribute('data-limit')),
+            offset = getOffset(page, limit);
+
+        if (page <= 0 || offset < 0 || page > pageCount) {
+            return;
+        }
+
+        pagination.setAttribute('data-current-page', page);
+        loadRecords(limit, offset);
     }
