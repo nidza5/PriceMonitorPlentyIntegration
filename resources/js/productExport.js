@@ -134,7 +134,7 @@
         if(response == null)
             return;
                      
-        var data = jQuery.parseJSON(data);
+        var data = jQuery.parseJSON(response);
 
         populateTable(response, wrapper, limit, offset,
             createTransactionHistoryMasterRow,
