@@ -136,7 +136,7 @@
                      
         var data = jQuery.parseJSON(response);
 
-        populateTable(response, wrapper, limit, offset,
+        populateTable(data, wrapper, limit, offset,
             createTransactionHistoryMasterRow,
             loadTransactionHistoryMasterData)
     
