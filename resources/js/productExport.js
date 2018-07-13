@@ -124,21 +124,6 @@
                 console.log(xhr);
             }
         }); 
-
-        // var url = Pricemonitor['config']['urls']['transactionHistory'],
-        //     params = {
-        //         'pricemonitorId': Pricemonitor['config']['pricemonitorId'],
-        //         'limit': limit,
-        //         'offset': offset
-        //     };
-
-        // currentOffset = offset;
-        // transactionHistoryMasterData = {};
-        // Pricemonitor['ajax']['get'](
-        //     url, params, function (response) {
-        //         populateTransactionHistoryMasterTable(response, limit, offset)
-        //     }, 'json', true
-        // );
     }
 
     
@@ -151,9 +136,9 @@
                      
         var data = jQuery.parseJSON(data);
 
-       console.log(data);
-       console.log(limit);
-       console.log(offset);
+        populateTable(response, wrapper, limit, offset,
+            createTransactionHistoryMasterRow,
+            loadTransactionHistoryMasterData)
     
    }
 
@@ -363,4 +348,161 @@
         }
 
         return parts[0] + ' ' + parts[1].split('.')[0];
+    }
+
+    /**
+     * Creates one row for transaction history detail data
+     *
+     * @param data
+     * @param index
+     * @param table
+     * @return {string}
+     */
+    function createTransactionHistoryDetailRow(data, index, table)
+    {
+        var row = table.insertRow();
+        row.insertCell().innerHTML = index;
+        row.insertCell().innerHTML = data.status;
+        row.insertCell().innerHTML = data.gtin;
+        row.insertCell().innerHTML = data.name;
+        row.insertCell().innerHTML = data.refPrice;
+        row.insertCell().innerHTML = data.minPrice;
+        row.insertCell().innerHTML = data.maxPrice;
+        row.insertCell().innerHTML = data.note;
+    }
+
+    /**
+     * Creates one row for transaction history master data
+     *
+     * @param data
+     * @param index
+     * @param table
+     * @return {string}
+     */
+    function createTransactionHistoryMasterRow(data, index, table)
+    {
+        var div = document.createElement('div'), row = table.insertRow();
+
+        div.classList.add('pricemonitor-transaction-history-details');
+        div.setAttribute('data-id', data.id);
+        div.addEventListener('click', onDetailClick);
+
+        row.insertCell().innerHTML = index;
+        row.insertCell().innerHTML = data.exportTime;
+        row.insertCell().innerHTML = data.status;
+        row.insertCell().innerHTML = data.successCount;
+        row.insertCell().innerHTML = data.failedCount;
+        row.insertCell().innerHTML = data.note;
+
+        if (data.inProgress) {
+            row.insertCell();
+        } else {
+            row.insertCell().appendChild(div);
+        }
+
+        transactionHistoryMasterData[data.id] = data;
+    }
+
+    function populateTable(response, table, limit, offset, createRow, loadRecords)
+    {
+        var pageCount, rows = '',
+            totalElement = table.querySelector('.pricemonitor-total'),
+            pagination = table.querySelector('.pricemonitor-pagination'),
+            tableBody = table.querySelector('tbody'),
+            currentPage = pagination.getAttribute('data-current-page'),
+            counter = offset;
+
+        if (response.data === undefined || response.count === undefined) {
+            return console.warn('Response must have data and count fields');
+        }
+
+        currentPage = parseInt((currentPage && offset !== 0) ? currentPage : 1);
+        tableBody.innerHTML = '';
+
+        var tableDataRows = response.data;
+
+        for (var i = 0; i < tableDataRows.length; i++) {
+            rows += createRow(tableDataRows[i], ++counter, tableBody);
+        }
+
+        pagination.innerHTML = '';
+        totalElement.innerHTML = response.count;
+
+        // pageCount = Math.ceil(response.count / limit);
+        // pagination.setAttribute('data-page-count', pageCount);
+        // pagination.setAttribute('data-limit', limit);
+
+        // if (response.count > limit) {
+        //     initPaginationButtons(pagination, pageCount, currentPage, loadRecords);
+        // }
+
+        // showNoDataMessage(table, response.count === 0);
+
+        // if (response.count > 0) {
+        //     registerTooltips(tableBody);
+        // }
+    }
+
+    function initPaginationButtons(pagination, pageCount, currentPage, loadRecords)
+    {
+        var i, nextPage, previousPage, pagesToShow = [];
+
+        nextPage = parseInt(currentPage) + 1;
+        previousPage = parseInt(currentPage) - 1;
+
+        createPaginationButton(pagination, '<', previousPage, false, loadRecords);
+
+        if (pageCount > 6) {
+            pagesToShow.push(1);
+
+            if (currentPage > 2) {
+                pagesToShow.push(currentPage - 1);
+            }
+
+            if (currentPage !== 1 && currentPage !== pageCount) {
+                pagesToShow.push(currentPage);
+            }
+
+            if (currentPage < pageCount - 1) {
+                pagesToShow.push(currentPage + 1);
+            }
+
+            pagesToShow.push(pageCount);
+        } else {
+            for (i = 1; i <= pageCount; i++) {
+                pagesToShow.push(i);
+            }
+        }
+
+        for (i = 0; i < pagesToShow.length; i++) {
+            createPaginationButton(
+                pagination,
+                pagesToShow[i],
+                pagesToShow[i],
+                pagesToShow[i] === currentPage,
+                loadRecords
+            )
+        }
+
+        createPaginationButton(pagination, '>', nextPage, false, loadRecords);
+    }
+
+
+    function createPaginationButton(pagination, text, page, isCurrent, loadRecords)
+    {
+        var button = document.createElement('button');
+        button.appendChild(document.createTextNode(text));
+        button.setAttribute('data-page', page);
+        button.addEventListener(
+            'click',
+            function () {
+                goToPage(this.getAttribute('data-page'), pagination, loadRecords);
+            }
+        );
+
+        if (isCurrent) {
+            button.classList.add('back');
+        }
+
+        pagination.appendChild(button);
     }
