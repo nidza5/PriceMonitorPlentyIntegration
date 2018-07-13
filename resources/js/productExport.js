@@ -385,7 +385,7 @@
 
         div.classList.add('pricemonitor-transaction-history-details');
         div.setAttribute('data-id', data.id);
-        div.addEventListener('click', onDetailClick);
+       // div.addEventListener('click', onDetailClick);
 
         row.insertCell().innerHTML = index;
         row.insertCell().innerHTML = data.exportTime;
