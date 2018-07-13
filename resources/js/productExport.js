@@ -138,7 +138,7 @@
 
         populateTable(data, wrapper, limit, offset,
             createTransactionHistoryMasterRow,
-            loadTransactionHistoryMasterData)
+            loadTransactionHistoryMasterData);
     
    }
 
@@ -406,12 +406,58 @@
 
     function onDetailClick()
     {
-        // var masterId = this.getAttribute('data-id');
+        var masterId = this.getAttribute('data-id');
 
-        // if (masterId) {
-        //     loadTransactionHistoryDetailData(limit, 0, masterId);
-        // }
+        if (masterId) {
+            loadTransactionHistoryDetailData(limit, 0, masterId);
+        }
     }
+
+    function loadTransactionHistoryDetailData(limit, offset, masterId)
+    {
+       var masterData = transactionHistoryMasterData[masterId];
+
+        if (masterData) {
+            currentMasterId = masterId;
+            document.getElementById('pricemonitor-export-time').innerHTML = masterData.exportTime;
+            document.getElementById('pricemonitor-export-status').innerHTML = masterData.status;
+            document.getElementById('pricemonitor-export-note').innerHTML = masterData.note;
+        }
+
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val(),
+            'limit' : limit,
+            'offset' : offset,
+            'masterId': currentMasterId
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "/getTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
+                populateTransactionHistoryDetailTable(data, limit, offset);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        }); 
+    }
+
+    function populateTransactionHistoryDetailTable(response, limit, offset)
+    {
+        var wrapper = document.getElementById('transaction-history-export-detail');
+           // modal = document.getElementById('pricemonitor-transaction-history-export-detail-modal');
+
+        populateTable(response, wrapper, limit, offset,
+            createTransactionHistoryDetailRow,
+            loadTransactionHistoryDetailData);
+
+       //(new Pricemonitor['modal']['HtmlModalConstructor'](modal, 'xxl')).open();
+    }
+
 
     function populateTable(response, table, limit, offset, createRow, loadRecords)
     {
