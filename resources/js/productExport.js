@@ -108,6 +108,9 @@
             'offset' : offset
         };
         
+        currentOffset = offset;
+        transactionHistoryMasterData = {};
+
         $.ajax({
             type: "GET",
             url: "/getTransactionHistory",
@@ -143,15 +146,15 @@
    {
        var wrapper = document.getElementById('transaction-history-export-master');
 
-       console.log(response);
+        if(response == null)
+            return;
+                     
+        var data = jQuery.parseJSON(data);
+
+       console.log(data);
        console.log(limit);
        console.log(offset);
-    //    Pricemonitor['contracts']['utility'].populateTable(
-    //        response, wrapper, limit, offset,
-    //        createTransactionHistoryMasterRow,
-    //        loadTransactionHistoryMasterData
-    //    );
-    //    Pricemonitor['utility']['loadingWindow'].close();
+    
    }
 
       /**
