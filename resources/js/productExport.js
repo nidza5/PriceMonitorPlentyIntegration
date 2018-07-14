@@ -381,8 +381,10 @@
      */
     function createTransactionHistoryMasterRow(data, index, table)
     {
-        var div = document.createElement('div'), row = table.insertRow();
+        var div = document.createElement('a'), row = table.insertRow();
 
+        var linkText = document.createTextNode("details");
+        div.appendChild(linkText);
         div.classList.add('pricemonitor-transaction-history-details');
         div.setAttribute('data-id', data.id);
         div.addEventListener('click', onDetailClick);
