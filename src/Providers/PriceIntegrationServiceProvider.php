@@ -24,6 +24,10 @@ use PriceMonitorPlentyIntegration\Repositories\TransactionDetailsRepository;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 use PriceMonitorPlentyIntegration\Helper\StringUtils;
+use Plenty\Modules\Cron\Services\CronContainer;
+use PriceMonitorPlentyIntegration\Services\CronScheduleUpdate;
+use PriceMonitorPlentyIntegration\Services\CronSyncRun;
+use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
 
 
 /**
@@ -50,16 +54,14 @@ use PriceMonitorPlentyIntegration\Helper\StringUtils;
          $this->getApplication()->bind(ConfigRepositoryContract::class, ConfigInfoRepository::class);
      }
 
-     public function boot(ReferenceContainer $referenceContainer, ConfigRepositoryContract $configRepo)
+     public function boot(ReferenceContainer $referenceContainer, CronContainer $cronContainer)
     {
-        // Register reference types for logs.
         try
         {
             $referenceContainer->add([ 'ContractId' => 'ContractId' ]);
-
-            $configRepo->saveConfig('webhook_token', StringUtils::getUniqueString(20));
-            
-
+            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronScheduleUpdate::class);
+            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronSyncRun::class);
+            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronRefreshStatus::class);
         }
         catch(ReferenceTypeException $ex)
         {
