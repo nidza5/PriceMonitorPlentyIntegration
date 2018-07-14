@@ -116,22 +116,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'enableImport' => $isEnabled      
         ]); 
 
-        return json_encode($savePriceSchedule);
-
-        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
-
-        // if($contract == null)
-        //     throw new \Exception("Contract is empty");
-
-        // if ($isEnabled && !$this->registerCallbacks($contract)) {
-        //     throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
-        // }    
-        
-        //  $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
-
-        //  $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
-
-        //  return json_encode($scheduleSaved);        
+        return json_encode($savePriceSchedule);       
     }
 
     public function runPriceImport(Request $request) 
@@ -146,52 +131,56 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if($priceMonitorId === 0 || $priceMonitorId === null)
             throw new \Exception("PriceMonitorId is empty");
 
-        $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
-
-        $emailObject = $this->configInfoRepo->getConfig('email');
-        $passwordObject = $this->configInfoRepo->getConfig('password');
-
-        $emailForConfig = $emailObject->value;
-        $passwordForConfig = $passwordObject->value;
-
-       
-        $enqueAndRun =  $this->sdkService->call("enqueuePriceImport", [
-            'priceMonitorId' => $priceMonitorId,
-            'queueModel' => $queue,
-            'emailForConfig' =>  $emailForConfig,
-            'passwordForConfig' =>  $passwordForConfig        
+        $runProductImport =  $this->sdkService->call("runPriceImportMiddleware", [
+            'pricemonitorId' => $priceMonitorId      
         ]); 
 
-        if($enqueAndRun != null && $enqueAndRun['Message'])
-        {
-            return [
-                'Message' => $enqueAndRun['Message']
-            ];
-        }
+        // $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
 
-        if($enqueAndRun != null)
-            $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+        // $emailObject = $this->configInfoRepo->getConfig('email');
+        // $passwordObject = $this->configInfoRepo->getConfig('password');
 
-        $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
+        // $emailForConfig = $emailObject->value;
+        // $passwordForConfig = $passwordObject->value;
+
+       
+        // $enqueAndRun =  $this->sdkService->call("enqueuePriceImport", [
+        //     'priceMonitorId' => $priceMonitorId,
+        //     'queueModel' => $queue,
+        //     'emailForConfig' =>  $emailForConfig,
+        //     'passwordForConfig' =>  $passwordForConfig        
+        // ]); 
+
+        // if($enqueAndRun != null && $enqueAndRun['Message'])
+        // {
+        //     return [
+        //         'Message' => $enqueAndRun['Message']
+        //     ];
+        // }
+
+        // if($enqueAndRun != null)
+        //     $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
+
+        // $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
       
-        if($createToken != null && $createToken['error'])
-           throw new \Exception($createToken['error_msg']);
+        // if($createToken != null && $createToken['error'])
+        //    throw new \Exception($createToken['error_msg']);
         
-        if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
-        {
-           $hashUniqueToken =  StringUtils::getUniqueString(20);    
+        // if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
+        // {
+        //    $hashUniqueToken =  StringUtils::getUniqueString(20);    
 
-           $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
+        //    $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
  
-           $returnValues = [
-               "token" => $savedToken,
-               "queueName" => $enqueAndRun['queueName']
-           ];
-            // call async
-            return json_encode($returnValues);
-        }
+        //    $returnValues = [
+        //        "token" => $savedToken,
+        //        "queueName" => $enqueAndRun['queueName']
+        //    ];
+        //     // call async
+        //     return json_encode($returnValues);
+        // }
 
-        return json_encode("OK");
+        // return json_encode("OK");
 
     }
 

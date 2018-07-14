@@ -107,13 +107,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'pricemonitorId' => $priceMonitorId,     
         ]); 
 
-        //  /**
-        //  * @var ScheduleExportService $scheduleExportService
-        //  */
-        // $scheduleExportService = pluginApp(ScheduleExportService::class);
-
-        // $scheduleSaved = $scheduleExportService->getAdequateScheduleByContract($priceMonitorId);
-
         return json_encode($getScheduleMiddleware);  
    
     }
@@ -140,15 +133,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'enableExport' =>  $enableExport,
             'exportInterval' =>  $exportInterval        
           ]); 
-        
-        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
-
-        // if($contract == null)
-        //     throw new \Exception("Contract is empty");
-
-        //  $this->scheduleRepo->saveSchedule($contract->id,$requestData,$this->cronContainer);
-
-        //  $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
 
          return json_encode($saveScheduleMiddleware);        
     }
