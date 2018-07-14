@@ -71,13 +71,13 @@ class ScheduleRepository implements ScheduleRepositoryContract
      */
     public function getScheduleByContractId($contractId): Schedule
     {
-        // $databaseSchedule = pluginApp(DataBase::class);
-        // $scheduleOriginal = $databaseSchedule->query(Schedule::class)->where('contractId', '=', $contractId)->get();
+        $databaseSchedule = pluginApp(DataBase::class);
+        $scheduleOriginal = $databaseSchedule->query(Schedule::class)->where('contractId', '=', $contractId)->get();
 
-        // if($scheduleOriginal == null)
-        //   return pluginApp(Schedule::class);
+        if($scheduleOriginal == null)
+          return pluginApp(Schedule::class);
 
-        // return $scheduleOriginal[0];
+        return $scheduleOriginal[0];
     }
 
     public function getAllSchedule() 
