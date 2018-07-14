@@ -423,10 +423,10 @@
 
         if (masterData) {
             currentMasterId = masterId;
-            document.getElementById('pricemonitor-export-time').innerHTML = masterData.exportTime;
-            document.getElementById('pricemonitor-export-status').innerHTML = masterData.status;
-            document.getElementById('pricemonitor-export-note').innerHTML = masterData.note;
-        }
+        //     document.getElementById('pricemonitor-export-time').innerHTML = masterData.exportTime;
+        //     document.getElementById('pricemonitor-export-status').innerHTML = masterData.status;
+        //     document.getElementById('pricemonitor-export-note').innerHTML = masterData.note;
+         }
 
         var dataOption = {
             'pricemonitorId' : $("#contractId").val(),
