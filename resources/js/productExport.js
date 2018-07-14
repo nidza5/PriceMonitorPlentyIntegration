@@ -406,6 +406,8 @@
 
     function onDetailClick()
     {
+        console.log("u details click");
+
         var masterId = this.getAttribute('data-id');
 
         if (masterId) {
