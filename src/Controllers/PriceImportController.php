@@ -110,21 +110,28 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("PriceMonitorId is empty");
  
         $isEnabled = $requestData['enableImport'];
-         
-        $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        if($contract == null)
-            throw new \Exception("Contract is empty");
+        $savePriceSchedule =  $this->sdkService->call("saveSchedulePriceToMiddleware", [
+            'pricemonitorId' => $priceMonitorId,
+            'enableImport' => $isEnabled      
+        ]); 
 
-        if ($isEnabled && !$this->registerCallbacks($contract)) {
-            throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
-        }    
+        return json_encode($savePriceSchedule);
+
+        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
+
+        // if($contract == null)
+        //     throw new \Exception("Contract is empty");
+
+        // if ($isEnabled && !$this->registerCallbacks($contract)) {
+        //     throw new \Exception(ApiResponse::PRICE_IMPORT_UNABLE_TO_REGISTER_CALLBACKS);
+        // }    
         
-         $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
+        //  $this->scheduleRepo->saveImportSchedule($contract->id,$requestData);
 
-         $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
+        //  $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
 
-         return json_encode($scheduleSaved);        
+        //  return json_encode($scheduleSaved);        
     }
 
     public function runPriceImport(Request $request) 

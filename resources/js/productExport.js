@@ -455,9 +455,9 @@
         var wrapper = document.getElementById('transaction-history-export-detail');
            // modal = document.getElementById('pricemonitor-transaction-history-export-detail-modal');
 
-        populateTable(response, wrapper, limit, offset,
-            createTransactionHistoryDetailRow,
-            loadTransactionHistoryDetailData);
+        // populateTable(response, wrapper, limit, offset,
+        //     createTransactionHistoryDetailRow,
+        //     loadTransactionHistoryDetailData);
 
        //(new Pricemonitor['modal']['HtmlModalConstructor'](modal, 'xxl')).open();
     }
