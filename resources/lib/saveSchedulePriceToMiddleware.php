@@ -5,7 +5,7 @@ require_once __DIR__ . '/PriceMonitorHttpClient.php';
 $middlewareBaseUrl = SdkRestApi::getParam('gatewayBasePath');
 
 $pricemonitorId = SdkRestApi::getParam('pricemonitorId');
-$isEnabled = SdkRestApi::getParam('isEnabled');
+$isEnabled = SdkRestApi::getParam('enableImport');
 
 
 $client = new PriceMonitorHttpClient();
@@ -15,7 +15,7 @@ $res = $client->request(
     [],
     [
         'pricemonitorId' => $pricemonitorId,
-        'isEnabled' => $isEnabled
+        'enableImport' => $isEnabled
     ]
 );
  
