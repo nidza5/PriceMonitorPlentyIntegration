@@ -90,7 +90,7 @@ class PriceResource extends ApiResource
                             'productId' => $price['identifier'],
                             'name' => isset($price['name']) ? $price['name'] : '',
                             'errors' => array('Unable to update product price.'),
-                            'status' => TransactionHistoryStatus::FAILED
+                            'status' => TransactionStatus::FAILED
                         );
                     }                    
                     
@@ -103,7 +103,7 @@ class PriceResource extends ApiResource
                                 'productId' => $price['identifier'],
                                 'name' => isset($price['name']) ? $price['name'] : '',
                                 'errors' => array('Unable to insert product price.'),
-                                'status' => TransactionHistoryStatus::FAILED
+                                'status' => TransactionStatus::FAILED
                             );
                         }
                         

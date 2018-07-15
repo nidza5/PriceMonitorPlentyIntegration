@@ -31,7 +31,7 @@ class PriceService
         $this->contractRepo = $contractRepo;
 	}
   
-    private function insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$variationId,$recommendedPrice)
+    public function insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$variationId,$recommendedPrice)
     {
             foreach($salesPricesNotRelatedToVariation as $notRelatedPrice) {
                 $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
@@ -52,7 +52,7 @@ class PriceService
             }
     }
 
-    private function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)
+    public function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)
     {
         foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {
             
@@ -74,7 +74,7 @@ class PriceService
         }
     }
 
-    private function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
+    public function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
     {
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
@@ -85,7 +85,7 @@ class PriceService
         return $matchPrices;
     }
 
-    private function getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) {
+    public function getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) {
 
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
