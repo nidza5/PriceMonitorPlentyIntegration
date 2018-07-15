@@ -16,7 +16,7 @@ function initImportForm()
 {
     intervals = [];
     registerEventListenersPrices();
-    // loadTransactionHistoryMasterData(limit, currentOffset);
+    loadTransactionHistoryMasterDataImport(limit, currentOffset);
     // loadLastImportData();
      loadScheduledImport();
 }
@@ -109,6 +109,53 @@ function initImportForm()
         });
     }
 
+  
+    function loadTransactionHistoryMasterDataImport(limitPrices, offsetPrices)
+    {
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val(),
+            'type': 'import_prices',
+            'limit' : limitPrices,
+            'offset' : offsetPrices
+        };
+        
+        currentOffset = offsetPrices;
+        transactionHistoryMasterDataPrices = {};
+
+        $.ajax({
+            type: "GET",
+            url: "/getTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
+                populateTransactionHistoryMasterTablePrices(data, limitPrices, offsetPrices);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+    }
+
+    function populateTransactionHistoryMasterTablePrices(response, limit, offset)
+    {
+        var wrapper = document.getElementById('transaction-history-import-master');
+ 
+         if(response == null)
+             return;
+                      
+         var data = jQuery.parseJSON(response);
+
+         console.log("populateTransactionHistoryMasterTablePrices");
+         console.log(data);
+
+ 
+         populateTable(data, wrapper, limit, offset,
+             createTransactionHistoryMasterRow,
+             loadTransactionHistoryMasterDataImport);
+     
+    }
+
       /**
      * Loads schedule data
      */
@@ -144,6 +191,6 @@ function initImportForm()
           
       var response = jQuery.parseJSON(data);
 
-      document['pricemonitorPriceImport']['enableImport'].checked = response.enableExport == 1 ? true : false;
+      document['pricemonitorPriceImport']['enableImport'].checked = response.enableImport == 1 ? true : false;
         
     }
