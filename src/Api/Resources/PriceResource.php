@@ -15,6 +15,7 @@ use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
+use PriceMonitorPlentyIntegration\Services\PriceService;
 
 /**
  * Class PriceResource
@@ -28,15 +29,22 @@ class PriceResource extends ApiResource
      */
     private $contractRepo;
 
+     /**
+     *
+     * @var priceService
+     */
+    private $priceService;
+
     /**
      * PriceResource constructor.
      * @param Request $request
      * @param ApiResponse $response
      */
-	public function __construct(Request $request,ApiResponse $response,ContractRepositoryContract $contractRepo)
+	public function __construct(Request $request,ApiResponse $response,ContractRepositoryContract $contractRepo,PriceService $priceService)
 	{
         parent::__construct($request, $response);
         $this->contractRepo = $contractRepo;
+        $this->priceService = $priceService;
 	}
 
 	public function updatePrices():Response
@@ -64,18 +72,18 @@ class PriceResource extends ApiResource
                 if(!empty($originalVariation)) {
                     $variation = $originalVariation[0];
                     $variationSalesPrices = $variation["variationSalesPrices"];
-                    $contractInformation =  $this->contractRepo->getContractByPriceMonitorId($contractId);
+                    $contractInformation =  $this->contractRepo->getContractByPriceMonitorId($pricemonitorContractId);
                     $savedSalesPriceInContract = $contractInformation->salesPricesImport;
                    
                     //sales price which related to variation
-                    $salesPriceRelatedToVariation = $this->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
+                    $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
                 
                     //sales price which not related to variation
-                    $salesPricesNotRelatedToVariation = $this->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
+                    $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
 
                     try{
                         //update sales price that related to variation
-                        $this->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                        $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
                     } catch(\Exception $ex)
                     {
                         $failedItems[] = array(
@@ -89,7 +97,7 @@ class PriceResource extends ApiResource
                     if($contractInformation->isInsertSalesPrice && $salesPricesNotRelatedToVariation != null ) {
                         
                         try {
-                            insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                            $this->priceService->insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
                         } catch(\Exception $ex) {
                             $failedItems[] = array(
                                 'productId' => $price['identifier'],
@@ -122,70 +130,5 @@ class PriceResource extends ApiResource
         }
 
 		return $this->response->create($failedItems, ResponseCode::OK);
-    }
-    
-    private function insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$variationId,$recommendedPrice)
-    {
-            foreach($salesPricesNotRelatedToVariation as $notRelatedPrice) {
-                $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
-
-                $authHelper = pluginApp(AuthHelper::class);
-        
-                $insertedSalesPrice = null;
-    
-                $dataForInsert = ["variationId" => $variationId,
-                                  "salesPriceId" => $notRelatedPrice,
-                                  "recommendedPrice" => $recommendedPrice];
-        
-                $insertedSalesPrice = $authHelper->processUnguarded(
-                    function () use ($repositoryVariationSalesPrices, $insertedSalesPrice) {
-                        return $repositoryVariationSalesPrices->create($dataForInsert);
-                    }
-                );
-            }
-    }
-
-    private function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)
-    {
-        foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {
-            
-            $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
-
-            $authHelper = pluginApp(AuthHelper::class);
-    
-            $updatedSalesPrice = null;
-
-            $dataForUpdate = ["variationId" => $variationId,
-                              "salesPriceId" => $relatedSalesPrice,
-                              "recommendedPrice" => $recommendedPrice];
-    
-            $updatedSalesPrice = $authHelper->processUnguarded(
-                function () use ($repositoryVariationSalesPrices, $updatedSalesPrice) {
-                    return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
-                }
-            );
-        }
-    }
-
-    private function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
-    {
-        $matchPrices = [];
-        foreach($variationSalesPrices as $variationPrice) {
-            if( !in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
-                $matchPrices[] = $variationPrice["salesPriceId"];
-        }
-
-        return $matchPrices;
-    }
-
-    private function getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) {
-
-        $matchPrices = [];
-        foreach($variationSalesPrices as $variationPrice) {
-            if( in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
-                $matchPrices[] = $variationPrice["salesPriceId"];
-        }
-
-        return $matchPrices;
-    }
+    }   
 }
