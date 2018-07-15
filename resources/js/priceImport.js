@@ -65,17 +65,8 @@ function initImportForm()
                 console.log(data);
                 if(data == null) 
                     return;
-                
-                var dataJson = jQuery.parseJSON(data);
-                if(dataJson == null) {
-                    console.log("dataJSON is null");
-                    return;
-                }
-                
-                if(typeof dataJson.token != 'undefined'  &&  typeof dataJson.queueName != 'undefined' && dataJson.token && dataJson.queueName) {
-                    toastr["success"]("Product export has been started.");
-                    callAssyncSyncImport(dataJson);
-                }
+              
+              toastr["success"]("Price import has been started.");
                     
             },
             error: function(data)
@@ -83,50 +74,6 @@ function initImportForm()
                 console.log(data);
             }
         });
-    }
-
-    function callAssyncSyncImport(dataForSync)
-    {      
-           var transferObject = {
-               'queueName' : dataForSync.queueName,
-               'token' : dataForSync.token,
-               'pricemonitorId' : $("#contractId").val(),
-               'filterType' : 'import_prices'
-           };
-
-           console.log("data for sync transfer import");
-           console.log(transferObject);
-
-           $.ajax({
-               type: "POST",
-               url: "/run",
-               data: transferObject,
-               async: true,
-               success: function(data)
-               {
-                   console.log(data);
-                   
-                   if(data == null) 
-                       return;
-
-                   var dataSync = jQuery.parseJSON(data);
-
-               //     if(dataSync != null && dataSync == true) {
-               //         callAssyncSync(dataForSync);
-
-               //     if(dataForSync.queueName == "Default") {
-               //         dataForSync.queueName = "StatusChecking";
-               //         callAssyncSync(dataForSync);
-               //     }
-               // }
-                  
-                   
-               },
-               error: function(data)
-               {
-                   console.log(data);
-               }
-           });
     }
 
      /**
