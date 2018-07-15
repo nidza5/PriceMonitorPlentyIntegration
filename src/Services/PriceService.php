@@ -45,7 +45,7 @@ class PriceService
                                   "recommendedPrice" => $recommendedPrice];
         
                 $insertedSalesPrice = $authHelper->processUnguarded(
-                    function () use ($repositoryVariationSalesPrices, $insertedSalesPrice) {
+                    function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
                         return $repositoryVariationSalesPrices->create($dataForInsert);
                     }
                 );
@@ -67,7 +67,7 @@ class PriceService
                               "recommendedPrice" => $recommendedPrice];
     
             $updatedSalesPrice = $authHelper->processUnguarded(
-                function () use ($repositoryVariationSalesPrices, $updatedSalesPrice) {
+                function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
                     return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
                 }
             );
