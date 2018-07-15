@@ -152,12 +152,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
            // echo json_encode($reponseContracts);
 
-           /** @var CurrencyExchangeRepository $currencyService */
-            $currencyService = pluginApp(CurrencyExchangeRepositoryContract::class);
-            $defaultCurrency = $currencyService->getDefaultCurrency();
-
-            echo "default currency";
-            echo  $defaultCurrency;
             
             //Handling errors when ocuurs in getLoggingAndContracts
             if(($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message'])) || ($reponseContracts['error'] && $reponseContracts['error_msg']))
