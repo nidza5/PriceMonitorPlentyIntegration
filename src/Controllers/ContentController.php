@@ -127,7 +127,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo)  
+     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ContractRepositoryContract $contractRepo,ConfigRepositoryContract $configInfoRepo)  
      {
         $credentials = $request->all();
 
@@ -189,10 +189,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             echo "access tokkken";
             echo  $accessToken;
 
-            $this->configInfoRepo->saveConfig('access_token',$accessToken);
+            $configInfoRepo->saveConfig('access_token',$accessToken);
 
             echo "tokeeen";
-           $token =  $this->configInfoRepo->getConfig('access_token');
+           $token =  $configInfoRepo->getConfig('access_token');
            echo $token;
 
         } catch(\Exception $ex) {
