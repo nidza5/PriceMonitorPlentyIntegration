@@ -190,7 +190,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             echo "tokeeen";
            $token =  $configInfoRepo->getConfig('access_token');
-           echo $token;
+           echo $token->value;
 
         } catch(\Exception $ex) {
 
