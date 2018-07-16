@@ -182,8 +182,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             }
             
-            $contractsFromMiddleware =  $reponseContracts['contracts'];
-            $accessToken = $reponseContracts['access_token'];
+            $contractsFromMiddleware =  $resultLogin['contracts'];
+            $accessToken = $resultLogin['access_token'];
 
         } catch(\Exception $ex) {
 
