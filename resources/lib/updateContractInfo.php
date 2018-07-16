@@ -16,7 +16,7 @@ $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
     $middlewareBaseUrl.'/api/updateContractInfo',
-    [ 'Authorization' => $access_token ],
+    [ 'Authorization' => 'Bearer '.$access_token],
     [
         'id' => $idContract,
         'priceMonitorId' => $priceMonitorId,
