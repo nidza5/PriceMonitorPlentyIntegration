@@ -4,6 +4,7 @@ namespace PriceMonitorPlentyIntegration\Services;
 use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Application;
+use Plenty\Modules\Authorization\Services\AuthHelper;
 
 class PriceMonitorSdkService
 {
