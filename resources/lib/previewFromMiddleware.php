@@ -12,6 +12,10 @@ $allVariations = SdkRestApi::getParam('allVariations');
 
 $attributesFromPlenty = SdkRestApi::getParam('attributesFromPlenty');
 
+$tenantId = SdkRestApi::getParam('tenantId');
+
+$access_token = SdkRestApi::getParam('accessToken');
+
 $client = new PriceMonitorHttpClient();
 // $res = $client->request(
 //     'GET',
@@ -21,12 +25,13 @@ $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
     $middlewareBaseUrl.'/api/preview',
-    [],
+    ['Authorization' => 'Bearer '.$access_token],
     [
         'filterType' => $filterType,
         'priceMonitorId' => $priceMonitorId,
         'allVariations' => json_encode($allVariations),
-        'attributesFromPlenty' => json_encode($attributesFromPlenty)
+        'attributesFromPlenty' => json_encode($attributesFromPlenty),
+        'tenantId' => $tenantId
     ]
 );
  

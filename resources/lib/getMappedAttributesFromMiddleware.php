@@ -6,10 +6,15 @@ $middlewareBaseUrl = SdkRestApi::getParam('gatewayBasePath');
  
 $priceMonitorId = SdkRestApi::getParam('priceMonitorContractId');
 
+$tenantId = SdkRestApi::getParam('tenantId');
+
+$access_token = SdkRestApi::getParam('accessToken');
+
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
-    $middlewareBaseUrl.'/api/getMappedAttributes?priceMonitorContractId='.$priceMonitorId
+    $middlewareBaseUrl.'/api/getMappedAttributes?priceMonitorContractId='.$priceMonitorId.'&tenantId='.$tenantId,
+    ['Authorization' => 'Bearer '.$access_token]
 );
  
 /** @return array */

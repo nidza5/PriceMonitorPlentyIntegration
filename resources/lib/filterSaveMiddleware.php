@@ -8,14 +8,14 @@ $filters = SdkRestApi::getParam('filters');
 $type = SdkRestApi::getParam('type');
 $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 $tenantId = SdkRestApi::getParam('tenantId');
-$access_token = SdkRestApi::getParam('access_token');
+$access_token = SdkRestApi::getParam('accessToken');
 
 
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',
     $middlewareBaseUrl.'/api/saveFilter',
-    ['Authorization' => $access_token ],
+    ['Authorization' => 'Bearer '.$access_token],
     [
         'filters' => $filters,
         'type' => $type,
