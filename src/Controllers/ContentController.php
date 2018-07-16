@@ -263,12 +263,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
         $requestData = $request->all();
 
+        echo "updat e token";
+        echo $this->config->get('access_token') ;
+
         $updateContract = $this->sdkService->call("updateContractInfo", [
             'idContract' => $requestData['id'],
             'priceMonitorId' => $requestData['priceMonitorId'],
             'salesPriceImportIn' => $requestData['salesPricesImport'],
             'isInsertSalesPrice' => $requestData['isInsertSalesPrice'],
-             'access_token' => $this->config->get('access_token')         
+             'accessToken' => $this->config->get('access_token')         
         ]);
 
         return json_encode($updateContract);
