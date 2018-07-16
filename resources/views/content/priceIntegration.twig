@@ -71,6 +71,74 @@
     </div>
 </div>
 
+   <div id="pricemonitor-transaction-history-export-detail-modal" class="modal pricemonitor-modal pricemonitor-html-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content pricemonitor-modal-content html-modal">
+            <div class="modal-header pricemonitor-modal-header" id="myHeader">
+                <h4 class="modal-title" style="text-align:center;">Filtered variations</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+            <div class="modal-body grid pricemonitor-tg-responsive" id="transaction-history-export-detail">
+                <div class="grid pricemonitor-tg-responsive">
+                <fieldset>
+                    <h2>Transaction History Details</h2>
+                    <div class="col-sm-6">
+                        <div>Export Time:
+                            <span id="pricemonitor-export-time">N/A</span></div>
+                        <div> Status:
+                            <span id="pricemonitor-export-status">N/A</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-row">
+                            <label for="pricemonitor-export-note"> Note</label>
+                            <div class="input-wrapper">
+                                <textarea id="pricemonitor-export-note" readonly disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="col-sm-12 pricemonitor-pagination np">
+
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="pricemonitor-tg">
+                                <thead>
+                                <tr class="headings">
+                                    <th class="column-width-0">#</th>
+                                    <th class="column-width-1">Status</th>
+                                    <th class="column-width-1">GTIN</th>
+                                    <th class="column-width-2">Name</th>
+                                    <th class="column-width-1">Ref price</th>
+                                    <th class="column-width-1">Min price</th>
+                                    <th class="column-width-0">Max price</th>
+                                    <th>Note</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="pricemonitor-no-data">
+                                No data to display.
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                           Total: <span class="pricemonitor-total">0</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            </div>
+            <div class="modal-footer" id="footerExportDetails">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
    <div class="priceMonitorPrestaMain">
    <div class="tabprestaprice">
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard',this)" id="defaultOpen">Global Dashboard</button>

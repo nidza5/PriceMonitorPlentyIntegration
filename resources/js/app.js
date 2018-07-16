@@ -18,7 +18,6 @@ toastr.options = {
   "hideMethod": "fadeOut"
 }
 
-var urlMiddleware = "http://6ec15927.ngrok.io/api/";
 
 function showTabContentContent(evt, nameTab,el) {
     var i, tabcontent, tablinks;
@@ -62,7 +61,6 @@ function assignDataToContract(el) {
     setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue);
 }
 
-
 function setDataContractInfo(idContract,contractId,contractName,insertPricesValue,insertSalesPriceValue) {
 
     $("#idContract").val(idContract);    
@@ -96,7 +94,6 @@ function updateDataAttributeContractInfo(idContract,contractId,contractName,inse
     $el.attr("data-contractId",contractId);
     $el.attr("data-salesPrice",insertSalesPriceValue);
     $el.attr("data-insertPrices",insertPricesValue);
-
 }
 
 var allPossibileValuesSalesPrices = [];
@@ -314,8 +311,6 @@ function showTabContent(evt, tabName) {
         if(dataResponse != null)
              allGroups = dataResponse.filters;
 
-        // GetAttributes From ajax and in success call function fillFormwithData
-
         $.ajax({
             type: "GET",
             url: "/getAttributes",
@@ -337,14 +332,13 @@ function showTabContent(evt, tabName) {
         });     
     }
 
-        /**
-         * Sets all options in filterable drop-downs.
-         */
+    /**
+     * Sets all options in filterable drop-downs.
+     */
     function fillFormWithData(response) {
          dropdownInnerHtml = generateAllAttributesCacheAndDropdownInnerHtml(response);
          renderFiltersForm();
     }
-
 
     function generateAllAttributesCacheAndDropdownInnerHtml(allAttributes) {
         var dropdownInnerHtml = '<option disabled selected>Please choose values</option>';
