@@ -186,10 +186,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             
             $accessToken = $resultLogin['access_token'];
 
-            $this->config->set('access_token',  $accessToken);
+
+            $this->configInfoRepo->saveConfig('access_token',$access_token);
 
             echo "tokeeen";
-           echo  $this->config->get('access_token');
+           echo  $this->configInfoRepo->getConfig('access_token');
 
         } catch(\Exception $ex) {
 
