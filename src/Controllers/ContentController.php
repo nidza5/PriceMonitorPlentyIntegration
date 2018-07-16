@@ -37,6 +37,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
  use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;
+ use Plenty\Plugin\Http\Request as PluginRequest;
 
  /**
   * Class ContentController
@@ -239,6 +240,26 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $contractsIds = array();
 
         $itemService = pluginApp(ProductFilterService::class);
+
+
+
+        $hostRepo = pluginApp(PluginRequest::class);
+
+            $authHelper = pluginApp(AuthHelper::class);
+
+            $host = null;
+
+            $host = $authHelper->processUnguarded(
+                function () use ($hostRepo, $host) {
+                
+                    return $hostRepo->getHttpHost();
+                }
+            );
+
+
+            echo "http host";
+            echo $host;
+
 
         // $finalResult = $itemService->getAllVariations();
        // $finalResult = $itemService->getManufacturerById(2);
