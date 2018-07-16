@@ -336,8 +336,7 @@
 
         var linkText = document.createTextNode("details");
         div.appendChild(linkText);
-        div.classList.add('pricemonitor-transaction-history-details');
-        div.classList.add('btn btn-success');
+        div.classList.add('pricemonitor-transaction-history-details','btn', 'btn-success');
         div.setAttribute('data-id', data.id);
         div.addEventListener('click', onDetailClick);
 
