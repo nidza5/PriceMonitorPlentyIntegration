@@ -5,6 +5,8 @@ use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Application;
 use Plenty\Modules\Authorization\Services\AuthHelper;
+use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
+use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
 class PriceMonitorSdkService
 {
@@ -23,15 +25,22 @@ class PriceMonitorSdkService
      */
     private $config;
 
+      /**
+     *
+     * @var ConfigRepositoryContract
+     */
+    private $configInfoRepo;
+
     /**
      *
      * @param LibraryCallContract $libCall
      * @param ConfigRepository $config
      */
-    public function __construct(LibraryCallContract $libCall, ConfigRepository $config)
+    public function __construct(LibraryCallContract $libCall, ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->libCall = $libCall;
         $this->config = $config;
+        $this->configInfoRepo = $configInfoRepo;
     }
 
     /**
@@ -56,9 +65,12 @@ class PriceMonitorSdkService
             }
         );
 
+        
+        $token =  $this->configInfoRepo->getConfig('access_token');
+
         $parameters['gatewayBasePath'] = self::GATEWAY_BASE_PATH;
         $parameters['tenantId'] = "plenty_". $plentyId;
-       // $parameters['access_token'] = $this->config->get('access_token');
+        $parameters['access_token'] = $token !== null ? $token->value : "";
        
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }

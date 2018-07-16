@@ -183,14 +183,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             }            
             
             $contractsFromMiddleware =  $resultLogin['contracts'];
-            
+
             $accessToken = $resultLogin['access_token'];
 
+            //save token in database
             $configInfoRepo->saveConfig('access_token',$accessToken);
-
-            echo "tokeeen";
-           $token =  $configInfoRepo->getConfig('access_token');
-           echo $token->value;
 
         } catch(\Exception $ex) {
 
@@ -264,26 +261,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       {
         $requestData = $request->all();
 
-        echo "updat e token";
-        echo $this->config->get('access_token') ;
-
         $updateContract = $this->sdkService->call("updateContractInfo", [
             'idContract' => $requestData['id'],
             'priceMonitorId' => $requestData['priceMonitorId'],
             'salesPriceImportIn' => $requestData['salesPricesImport'],
-            'isInsertSalesPrice' => $requestData['isInsertSalesPrice'],
-             'accessToken' => $this->config->get('access_token')         
+            'isInsertSalesPrice' => $requestData['isInsertSalesPrice']      
         ]);
 
         return json_encode($updateContract);
-
-        //  $updateContractInfo = $contractRepo->updateContract($request->all());
         
-        //  $contractInfo = null;
-
-        //  if(($updateContractInfo != null) && ($updateContractInfo->id != 0) && ($updateContractInfo->id != null))
-        //     $contractInfo = $contractRepo->getContractById($updateContractInfo->id);
-
-        //  return json_encode($contractInfo); 
       }
  }
