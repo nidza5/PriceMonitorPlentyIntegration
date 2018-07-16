@@ -180,10 +180,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
-            }
+            }            
             
             $contractsFromMiddleware =  $resultLogin['contracts'];
+            
             $accessToken = $resultLogin['access_token'];
+
+            $this->config->set('access_token',  $accessToken);
+
+            $valueForConfig =  $this->config->get('access_token');
+
+            echo "value from config";
+            echo $valueForConfig;
 
         } catch(\Exception $ex) {
 
