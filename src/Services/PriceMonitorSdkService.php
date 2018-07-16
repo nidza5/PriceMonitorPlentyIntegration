@@ -70,7 +70,7 @@ class PriceMonitorSdkService
 
         $parameters['gatewayBasePath'] = self::GATEWAY_BASE_PATH;
         $parameters['tenantId'] = "plenty_". $plentyId;
-        $parameters['access_token'] = $token !== null ? $token->value : "";
+        $parameters['accessToken'] = $token !== null ? $token->value : "";
        
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }
