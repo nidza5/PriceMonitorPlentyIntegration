@@ -188,6 +188,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $this->config->set('access_token',  $accessToken);
 
+            echo "tokeeen";
+           echo  $this->config->get('access_token');
+
         } catch(\Exception $ex) {
 
             $errorReponse = [
