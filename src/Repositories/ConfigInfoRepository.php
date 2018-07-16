@@ -30,7 +30,8 @@ class ConfigInfoRepository implements ConfigRepositoryContract
 
         $configValues->value = $value;
 
-
+        echo "save c0nfig";
+        echo json_encode($configValues);
         $database->save($configValues);
     }
 
@@ -41,6 +42,8 @@ class ConfigInfoRepository implements ConfigRepositoryContract
 
         $database = pluginApp(DataBase::class);
         $config = $database->query(ConfigInfo::class)->where('key', '=', $key)->get();
+        echo "confiiiig";
+        echo json_enceode($config);
         return $config[0] === null ? pluginApp(ConfigInfo::class) : $config[0];
     }
 
