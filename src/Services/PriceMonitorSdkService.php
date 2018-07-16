@@ -9,7 +9,7 @@ use Plenty\Modules\Authorization\Services\AuthHelper;
 class PriceMonitorSdkService
 {
 
-    const GATEWAY_BASE_PATH = 'http://ced91e36.ngrok.io';
+    const GATEWAY_BASE_PATH = 'http://5824540b.ngrok.io';
 
     /**
      *
