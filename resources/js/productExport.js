@@ -363,6 +363,9 @@
 
         var masterId = this.getAttribute('data-id');
 
+        console.log("master id");
+        console.log(masterId);
+
         if (masterId) {
             loadTransactionHistoryDetailData(limit, 0, masterId);
         }
