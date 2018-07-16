@@ -409,7 +409,12 @@
         var wrapper = document.getElementById('transaction-history-export-detail'),
         modal = document.getElementById('pricemonitor-transaction-history-export-detail-modal');
 
-        populateTable(response, wrapper, limit, offset,
+        if(response == null)
+            return;
+                     
+        var data = jQuery.parseJSON(response);
+
+        populateTable(data, wrapper, limit, offset,
             createTransactionHistoryDetailRow,
             loadTransactionHistoryDetailData);
 
