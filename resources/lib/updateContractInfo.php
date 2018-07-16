@@ -22,7 +22,8 @@ $res = $client->request(
         'priceMonitorId' => $priceMonitorId,
         'salesPricesImport' => $salesPriceImportIn,
         'isInsertSalesPrice' => $isInsertSalesPrice,
-        'tenantId' => $tenantId
+        'tenantId' => $tenantId,
+        'access_token' => $access_token
     ]
 );
  
