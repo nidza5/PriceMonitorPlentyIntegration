@@ -332,7 +332,7 @@
      */
     function createTransactionHistoryMasterRow(data, index, table)
     {
-        var div = document.createElement('a'), row = table.insertRow();
+        var div = document.createElement('button'), row = table.insertRow();
 
         var linkText = document.createTextNode("details");
         div.appendChild(linkText);
