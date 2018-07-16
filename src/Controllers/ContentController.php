@@ -143,10 +143,23 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         try {
 
+            $hostRepo = pluginApp(PluginRequest::class);
+
+            $authHelper = pluginApp(AuthHelper::class);
+
+            $host = null;
+
+            $host = $authHelper->processUnguarded(
+                function () use ($hostRepo, $host) {
+                
+                    return $hostRepo->getHttpHost();
+                }
+            );
+
             $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
-                'password' => $credentials['password']
-                
+                'password' => $credentials['password'],
+                'host' =>  $host             
             ]);
 
             // echo "response contracts    ";
@@ -187,27 +200,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
         }
 
-        // set price monitor credentials
-
-        // $this->configInfoRepo->saveConfig('email',$credentials['email']);
-        // $this->configInfoRepo->saveConfig('password',$credentials['password']);
-
-        // $this->queueRepo->deleteAllQueue();
-
-        // $this
-        //      ->getLogger('ContentController_login')
-        //      ->info('PriceMonitorPlentyIntegration::migration.successMessage', ['email' => $credentials['email'], 'password' => $credentials['password'] ]);
-
-        // $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
-        // $tokenForSend = $webHookToken->value;
-
-        // $setUpCredential= $this->sdkService->call("setUpPriceMonitorCredentials", [
-        //     'email' => $credentials['email'],
-        //     'password' => $credentials['password'],
-        //    // 'configService' => 
-        //    // this->configService
-        // ]);
-
             $salesPricesRepo = pluginApp(SalesPriceRepositoryContract::class);
 
             $authHelper = pluginApp(AuthHelper::class);
@@ -240,44 +232,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $contractsIds = array();
 
         $itemService = pluginApp(ProductFilterService::class);
-
-
-
-        $hostRepo = pluginApp(PluginRequest::class);
-
-            $authHelper = pluginApp(AuthHelper::class);
-
-            $host = null;
-
-            $host = $authHelper->processUnguarded(
-                function () use ($hostRepo, $host) {
-                
-                    return $hostRepo->getHttpHost();
-                }
-            );
-
-
-            echo "http host";
-            echo $host;
-
-
-          
-        $application = pluginApp(Application::class);
-
-        $authHelper = pluginApp(AuthHelper::class);
-
-        $plentyId = null;
-
-        $plentyId = $authHelper->processUnguarded(
-            function () use ($application, $plentyId) {
-            
-                return $application->getPlentyId();
-            }
-        );
-
-
-        echo "plentyId";
-        echo $plentyId;  
 
 
         // $finalResult = $itemService->getAllVariations();

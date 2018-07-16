@@ -3,6 +3,7 @@ namespace PriceMonitorPlentyIntegration\Services;
 
 use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
 use Plenty\Plugin\ConfigRepository;
+use Plenty\Plugin\Application;
 
 class PriceMonitorSdkService
 {
@@ -40,7 +41,23 @@ class PriceMonitorSdkService
      */
     public function call(string $method, array $parameters)
     {
+
+        $application = pluginApp(Application::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $plentyId = null;
+
+        $plentyId = $authHelper->processUnguarded(
+            function () use ($application, $plentyId) {
+            
+                return $application->getPlentyId();
+            }
+        );
+
         $parameters['gatewayBasePath'] = self::GATEWAY_BASE_PATH;
+        $parameters['tenantId'] = "plenty_". $plentyId;
+
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }
 
