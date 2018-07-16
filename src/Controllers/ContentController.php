@@ -267,7 +267,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'idContract' => $requestData['id'],
             'priceMonitorId' => $requestData['priceMonitorId'],
             'salesPriceImportIn' => $requestData['salesPricesImport'],
-            'isInsertSalesPrice' => $requestData['isInsertSalesPrice']            
+            'isInsertSalesPrice' => $requestData['isInsertSalesPrice'],
+             'access_token' => $this->config->get('access_token')         
         ]);
 
         return json_encode($updateContract);

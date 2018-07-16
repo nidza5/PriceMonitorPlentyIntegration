@@ -58,7 +58,7 @@ class PriceMonitorSdkService
 
         $parameters['gatewayBasePath'] = self::GATEWAY_BASE_PATH;
         $parameters['tenantId'] = "plenty_". $plentyId;
-        $parameters['access_token'] = $this->config->get('access_token');
+       // $parameters['access_token'] = $this->config->get('access_token');
        
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }
