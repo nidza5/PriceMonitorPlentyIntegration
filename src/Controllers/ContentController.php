@@ -188,11 +188,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $this->config->set('access_token',  $accessToken);
 
-            $valueForConfig =  $this->config->get('access_token');
-
-            echo "value from config";
-            echo $valueForConfig;
-
         } catch(\Exception $ex) {
 
             $errorReponse = [
