@@ -156,7 +156,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 }
             );
 
-            $reponseContracts = $this->sdkService->call("getLoginAndContracts", [
+            $resultLogin = $this->sdkService->call("getLoginAndContracts", [
                 'email' => $credentials['email'],
                 'password' => $credentials['password'],
                 'host' =>  $host             
@@ -168,27 +168,22 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             
             //Handling errors when ocuurs in getLoggingAndContracts
-            if(($reponseContracts != null && is_array($reponseContracts) && isset($reponseContracts['Code']) && isset($reponseContracts['Message'])) || ($reponseContracts['error'] && $reponseContracts['error_msg']))
+            if(($resultLogin != null && is_array($resultLogin) && isset($resultLogin['Code']) && isset($resultLogin['Message'])) || ($resultLogin['error'] && $resultLogin['error_msg']))
             {
                 $errorReponse = null;
 
-                if($reponseContracts['Code'] == 401)
+                if($resultLogin['Code'] == 401)
                     $errorReponse = [
-                        'Code' => $reponseContracts['Code'],
+                        'Code' => $resultLogin['Code'],
                         'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
                     ];
 
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
 
-            }  
+            }
             
-          // if contracts get successfully save them to DB
-            // else if($reponseContracts != null) 
-            //   $contractRepo->saveContracts($reponseContracts);   
-            
-            // $originalContracts = $contractRepo->getContracts(); 
-
-            // echo json_encode($originalContracts);
+            $contractsFromMiddleware =  $reponseContracts['contracts'];
+            $accessToken = $reponseContracts['access_token'];
 
         } catch(\Exception $ex) {
 
@@ -247,7 +242,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
 
-        $templateData = array("contracts" => $reponseContracts,
+        $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
