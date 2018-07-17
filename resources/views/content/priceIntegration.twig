@@ -707,8 +707,28 @@
 
                                 <div class="col-md-6 first-row">
                                     <fieldset>
+                                     <h4>Last import</h4>
                                         <div id="pricemonitor-last-import">
-                                            <div class="pricemonitor-no-sync-data">
+                                             <div id="dataLastImport">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Started at: </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="lastImportStartedAt"></span>
+                                                    </div>                                         
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label>Successfully imported: </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <span id="successfullyLastImport"></span>
+                                                    </div>                                         
+                                                </div>                                        
+                                            </div>                                       
+                                            
+                                            <div class="pricemonitor-no-sync-data" id="productImportNoSync">
                                                 There are no price import
                                             </div>
                                         </div>

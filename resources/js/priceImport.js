@@ -17,7 +17,7 @@ function initImportForm()
     intervals = [];
     registerEventListenersPrices();
     loadTransactionHistoryMasterDataImport(limit, currentOffset);
-    // loadLastImportData();
+     loadLastImportData();
      loadScheduledImport();
 }
 
@@ -282,4 +282,55 @@ function initImportForm()
 
       document['pricemonitorPriceImport']['enableImport'].checked = response.enableImport == 1 ? true : false;
         
+    }
+
+    function loadLastExportData()
+    {
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val(),
+            'type': 'import_prices'
+        };
+        
+        $.ajax({
+            type: "GET",
+            url: "/getLastTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
+                console.log(data);
+
+                populateLastTransactionBoxImport(data);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+    }
+
+    function populateLastTransactionBoxImport(response)
+    {
+        var dataResponse = null;
+
+        console.log("populate last transaction box");
+        console.log(response);
+
+        if(response !== null)
+            dataResponse = jQuery.parseJSON(response);
+
+        var contract = dataResponse,
+            lastExportBox = document.getElementById('pricemonitor-last-import');
+        
+        if (contract['importStart']) {
+           // lastExportBox.innerHTML = '';
+            $('#lastImportStartedAt').html(contract.importStart);
+            $('#successfullyLastImport').html(contract.importSuccessCount);
+            $("#productImportNoSync").hide();
+            $("#dataLastImport").show();           
+        }
+        else
+        {
+            $("#dataLastImport").hide();
+            $("#productImportNoSync").show();
+        }
     }
