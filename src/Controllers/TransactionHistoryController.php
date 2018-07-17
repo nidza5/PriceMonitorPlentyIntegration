@@ -100,4 +100,22 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         return json_encode($transaction);   
     }
+
+    public function getLastTransactionHistory(Request $request)
+    {
+        $requestData = $request->all();
+
+        if($requestData == null)
+            throw new \Exception("Request data are empty!");
+
+        $pricemonitorId = $requestData['pricemonitorId'];
+        $type = $requestData['type'];
+
+        $transaction =  $this->sdkService->call("getLastTransactionHistoryFromMiddleware", [
+            'pricemonitorId' => $pricemonitorId,
+            'type' => $type         
+        ]);
+
+        return json_encode($transaction); 
+    }
  }

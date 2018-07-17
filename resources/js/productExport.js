@@ -30,6 +30,49 @@
          loadScheduledExport();
     }
 
+
+    function loadLastExportData()
+    {
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val()
+        };
+        
+        $.ajax({
+            type: "GET",
+            url: "/getLastTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
+                console.log(data);
+
+                populateLastTransactionBox(data);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        });
+    }
+
+    function populateLastTransactionBox(response)
+    {
+        var dataResponse = null;
+
+        console.log("populate last transaction box");
+        console.log(response);
+
+        if(response !== null)
+            dataResponse = jQuery.parseJSON(response);
+
+        var contract = dataResponse.data,
+            lastExportBox = document.getElementById('pricemonitor-last-export');
+
+        if (contract.exportStart && contract.exportStatus) {
+            lastExportBox.innerHTML = '';
+            lastExportBox.appendChild(Pricemonitor['transactionHistoryBox']['populateBox'](contract));
+        }
+    }
+
     /**
      * Loads scheduled export data
      */
