@@ -24,9 +24,9 @@
     {
         intervals = [];
         registerEventListenersExport();
-      //  toggleFieldSets(true);
+       // toggleFieldSets(true);
          loadTransactionHistoryMasterData(limit, currentOffset);
-       // loadLastExportData();
+         //loadLastExportData();
          loadScheduledExport();
     }
 
