@@ -151,10 +151,99 @@ function initImportForm()
 
  
          populateTable(data, wrapper, limit, offset,
-             createTransactionHistoryMasterRow,
+             createTransactionHistoryMasterRowImport,
              loadTransactionHistoryMasterDataImport);
      
     }
+
+    function createTransactionHistoryMasterRowImport(data, index, table) {
+        var div = document.createElement('button'), row = table.insertRow();
+
+        var linkText = document.createTextNode("details");
+        div.appendChild(linkText);
+        div.classList.add('pricemonitor-transaction-history-details','btn', 'btn-success');
+        div.setAttribute('data-id', data.id);
+        div.addEventListener('click', onDetailClickImport);
+
+        row.insertCell().innerHTML = index;
+        row.insertCell().innerHTML = data.exportTime;
+        row.insertCell().innerHTML = data.status;
+        row.insertCell().innerHTML = data.successCount;
+        row.insertCell().innerHTML = data.failedCount;
+        row.insertCell().innerHTML = data.note;
+
+        if (data.inProgress) {
+            row.insertCell();
+        } else {
+            row.insertCell().appendChild(div);
+        }
+
+        transactionHistoryMasterData[data.id] = data;
+    }
+
+    function onDetailClickImport() {
+        var masterId = this.getAttribute('data-id');
+
+        console.log("master id");
+        console.log(masterId);
+
+        if (masterId) {
+            loadTransactionHistoryDetailDataImport(limit, 0, masterId);
+        }
+    }
+
+    function loadTransactionHistoryDetailDataImport(limit, offset, masterId) {
+
+        var masterData = transactionHistoryMasterData[masterId];
+
+        if (masterData) {
+            currentMasterId = masterId;
+            document.getElementById('pricemonitor-export-time').innerHTML = masterData.exportTime;
+            document.getElementById('pricemonitor-export-status').innerHTML = masterData.status;
+            document.getElementById('pricemonitor-export-note').innerHTML = masterData.note;
+         }
+
+        var dataOption = {
+            'pricemonitorId' : $("#contractId").val(),
+            'type': 'import_prices',
+            'limit' : limit,
+            'offset' : offset,
+            'masterId': currentMasterId
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "/getTransactionHistory",
+            data: dataOption,
+            success: function(data)
+            {
+                populateTransactionHistoryDetailTableImport(data, limit, offset);
+            },
+            error: function(xhr)
+            {
+                console.log(xhr);
+            }
+        }); 
+
+    }
+
+    function populateTransactionHistoryDetailTableImport(response, limit, offset)
+    {
+        var wrapper = document.getElementById('transaction-history-import-detail'),
+        modal = document.getElementById('pricemonitor-transaction-history-import-detail-modal');
+
+        if(response == null)
+            return;
+                     
+        var data = jQuery.parseJSON(response);
+
+        populateTable(data, wrapper, limit, offset,
+            createTransactionHistoryDetailRow,
+            loadTransactionHistoryDetailData);
+
+         $('#pricemonitor-transaction-history-import-detail-modal').modal('show'); 
+    }
+
 
       /**
      * Loads schedule data

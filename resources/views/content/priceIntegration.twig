@@ -138,6 +138,72 @@
     </div>
 </div>
 
+
+  <div id="pricemonitor-transaction-history-import-detail-modal" class="modal pricemonitor-modal pricemonitor-html-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content pricemonitor-modal-content html-modal">
+            <div class="modal-header pricemonitor-modal-header" id="myHeader">
+                <h4 class="modal-title" style="text-align:center;">Transaction details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                 </button>
+            </div>
+            <div class="modal-body grid pricemonitor-tg-responsive" id="transaction-history-import-detail">
+                <div class="grid pricemonitor-tg-responsive">
+                <fieldset>
+                    <div class="col-sm-12">
+                        <div>Import Time:
+                            <span id="pricemonitor-import-time">N/A</span></div>
+                        <div> Status:
+                            <span id="pricemonitor-import-status">N/A</span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-row">
+                            <label for="pricemonitor-import-note"> Note: </label>
+                            <div class="input-wrapper">
+                                <span id="pricemonitor-import-note"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="col-sm-12 pricemonitor-pagination np">
+
+                        </div>
+                        <div class="col-sm-12">
+                            <table class="pricemonitor-tg table table-striped table-bordered">
+                                <thead>
+                                    <tr class="headings">
+                                        <th class="column-width-0">#</th>
+                                        <th class="column-width-1">Status</th>
+                                        <th class="column-width-1">GTIN</th>
+                                        <th class="column-width-2">Name</th>
+                                        <th class="column-width-1">Updated in shop</th>
+                                        <th>Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="pricemonitor-no-data">
+                                {# No data to display. #}
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                           Total: <span class="pricemonitor-total">0</span>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            </div>
+            <div class="modal-footer" id="footerImportDetails">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
    <div class="priceMonitorPrestaMain">
    <div class="tabprestaprice">
         <button class="tablinksprestaprice" onclick="showTabContentContent(event, 'Dashboard',this)" id="defaultOpen">Global Dashboard</button>
