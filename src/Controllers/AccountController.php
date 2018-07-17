@@ -112,29 +112,5 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         }
             
         return "Account information saved successfully!";
-
-        // $contracts = $this->sdkService->call("getLoginAndContracts", [
-        //     'email' => $email,
-        //     'password' => $password
-        // ]);
-
-        // if($contracts == null || $contracts['error']) 
-        //     throw new \Exception("Contracts doesn't exist or some error occurred!");
-            
-        // $emailFromConfig = $this->configInfoRepo->getConfig('email');
-        // $passwordFromConfig = $this->configInfoRepo->getConfig('password');
-        // $transactionsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
-        // $transactionDetailsRetentionIntervalFromConfig = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
-        
-        // if ($email !== $emailFromConfig) {
-        //     $this->contractRepo->saveContracts($contracts);
-        // }
-
-        // $this->configInfoRepo->saveConfig('email',$email);
-        // $this->configInfoRepo->saveConfig('password',$password);
-        // $this->configInfoRepo->saveConfig('transactionsRetentionInterval',$transactionsRetentionInterval);
-        // $this->configInfoRepo->saveConfig('transactionDetailsRetentionInterval',$transactionDetailsRetentionInterval);
-
-        // return "Account information saved successfully";
     }
  }
