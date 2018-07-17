@@ -67,6 +67,11 @@
         var contract = dataResponse,
             lastExportBox = document.getElementById('pricemonitor-last-export');
 
+        if(contract === null)
+        
+        $("#pricemonitor-last-export").html("");
+        $("#pricemonitor-last-export").html("There are no product export");
+        
         if (contract.exportStart && contract.exportStatus) {
            // lastExportBox.innerHTML = '';
             $('#lastExportStartedAt').html(contract.exportStart);
