@@ -134,7 +134,7 @@ function createAttributeOptionsBasedOnSource(sourceAttributes)
 function setSavedMappings() {
 
     var dataOption = {
-        'priceMonitorContractId' : $("#contractId").val()
+        'priceMonitorContractId' : $("#idContract").val()
     };
 
     $.ajax({
