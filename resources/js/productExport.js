@@ -68,7 +68,7 @@
             lastExportBox = document.getElementById('pricemonitor-last-export');
 
         if (contract.exportStart && contract.exportStatus) {
-            lastExportBox.innerHTML = '';
+           // lastExportBox.innerHTML = '';
             $('#lastExportStartedAt').html(contract.exportStart);
             $('#statusLastExport').html(contract.exportStatus);
             $('#successfullyLastExport').html(contract.exportSuccessCount);
