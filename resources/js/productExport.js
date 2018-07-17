@@ -72,13 +72,13 @@
             $('#lastExportStartedAt').html(contract.exportStart);
             $('#statusLastExport').html(contract.exportStatus);
             $('#successfullyLastExport').html(contract.exportSuccessCount);
-            $("#pricemonitor-no-sync-data").hide();
+            $(".pricemonitor-no-sync-data").hide();
             $("#dataLastExport").show();           
         }
         else
         {
             $("#dataLastExport").hide();
-            $("#pricemonitor-no-sync-data").show();
+            $(".pricemonitor-no-sync-data").show();
         }
     }
 
