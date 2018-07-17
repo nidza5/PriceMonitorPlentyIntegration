@@ -69,56 +69,14 @@
 
         if (contract.exportStart && contract.exportStatus) {
             lastExportBox.innerHTML = '';
-            lastExportBox.appendChild(populateBox(contract,lastExportBox));
+            $('#lastExportStartedAt').html(contract.exportStart);
+            $('#statusLastExport').html(contract.exportStatus);
+            $('#successfullyLastExport').html(contract.exportSuccessCount);
+           
         }
     }
 
-    function populateBox(contract,boxEl) 
-    {
-        var box = boxEl, element;
-
-        if (!box) {
-            console.warn("Transaction history box is not provided.");
-        }
-
-        box = box.children[0].cloneNode(true);
-        box.querySelector('.pricemonitor-contract-name').innerHTML = contract['contractName'];
-
-        if (contract['contractExpiryDate']) {
-            box.querySelector('.pricemonitor-contract-expires-on span').innerHTML = contract['contractExpiryDate'];
-
-            if (contract['contractIsExpired']) {
-                box.querySelector('.pricemonitor-contract-expired span').innerHTML = contract['contractExpiryDate'];
-                element = box.querySelector('.pricemonitor-contract-expires-on');
-            } else {
-                element = box.querySelector('.pricemonitor-contract-expired');
-            }
-
-            element.parentNode.removeChild(element);
-        } else {
-            element = box.querySelector('.pricemonitor-expiration');
-            element.parentNode.removeChild(element);
-        }
-
-        if (contract['exportStart']) {
-            box.querySelector('.pricemonitor-export-started-at span').innerHTML = contract['exportStart'];
-            box.querySelector('.pricemonitor-export-status span').innerHTML = contract['exportStatus'];
-            box.querySelector('.pricemonitor-exported span').innerHTML = contract['exportSuccessCount'];
-        } else{
-            element = box.querySelector('.pricemonitor-last-export');
-            element.parentNode.removeChild(element);
-        }
-
-        if (contract['importStart']) {
-            box.querySelector('.pricemonitor-import-started-at span').innerHTML = contract['importStart'];
-            box.querySelector('.pricemonitor-imported span').innerHTML = contract['importSuccessCount'];
-        } else {
-            element = box.querySelector('.pricemonitor-last-import');
-            element.parentNode.removeChild(element);
-        }
-
-        return box;
-    }
+   
 
     /**
      * Loads scheduled export data
