@@ -111,16 +111,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $pricemonitorId = $requestData['pricemonitorId'];
         $type = $requestData['type'];
 
-        echo "last transaction history";
-       
-
         $transaction =  $this->sdkService->call("getLastTransactionHistoryFromMiddleware", [
             'pricemonitorId' => $pricemonitorId,
             'type' => $type         
         ]);
-
-        echo "transaction";
-        echo json_encode($transaction );
 
         return json_encode($transaction); 
     }
