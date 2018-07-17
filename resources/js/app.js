@@ -263,7 +263,7 @@ function showTabContent(evt, tabName) {
     function getFilter() {
 
       var dataOption = {
-          'priceMonitorId' : $("#contractId").val(),
+          'priceMonitorId' : $("#idContract").val(),
           'filterType' :  filterQueryParams.filterType
       };
 
