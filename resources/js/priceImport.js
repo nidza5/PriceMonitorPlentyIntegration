@@ -284,7 +284,7 @@ function initImportForm()
         
     }
 
-    function loadLastExportData()
+    function loadLastImportData()
     {
         var dataOption = {
             'pricemonitorId' : $("#contractId").val(),
