@@ -26,7 +26,7 @@
         registerEventListenersExport();
        // toggleFieldSets(true);
          loadTransactionHistoryMasterData(limit, currentOffset);
-         //loadLastExportData();
+         loadLastExportData();
          loadScheduledExport();
     }
 
