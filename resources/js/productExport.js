@@ -69,13 +69,13 @@
 
         if (contract.exportStart && contract.exportStatus) {
             lastExportBox.innerHTML = '';
-            lastExportBox.appendChild(populateBox(contract));
+            lastExportBox.appendChild(populateBox(contract,lastExportBox));
         }
     }
 
-    function populateBox(contract) 
+    function populateBox(contract,boxEl) 
     {
-        var box = document.getElementById('pricemonitor-box'), element;
+        var box = boxEl, element;
 
         if (!box) {
             console.warn("Transaction history box is not provided.");
