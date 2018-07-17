@@ -161,7 +161,6 @@
      */
     function onClickExportNow()
     {
-        console.log("export now");
         var transferObject = {
             'pricemonitorId' : $("#contractId").val()
         };
@@ -172,7 +171,6 @@
             data: transferObject,
             success: function(data)
             {
-                console.log(data);
                 if(data == null) 
                     return;
                 
@@ -201,9 +199,6 @@
             'pricemonitorId' : $("#contractId").val()
 
         };
-
-        console.log("transfer object");
-        console.log(transferObject);
 
         $.ajax({
             type: "POST",
