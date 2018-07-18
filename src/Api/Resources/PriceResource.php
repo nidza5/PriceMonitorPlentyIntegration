@@ -51,9 +51,14 @@ class PriceResource extends ApiResource
 	{
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
+       $contract =  $this->request->get('contract', '');
+       $contractInformation = null;
 
         if($priceList !== null)
             $priceList = json_decode($priceList,true);
+
+         if($contract !== null)
+            $contractInformation = json_decode($contract,true);
 
        /** @var CurrencyExchangeRepository $currencyService */
        $currencyService = pluginApp(CurrencyExchangeRepositoryContract::class);
@@ -72,8 +77,7 @@ class PriceResource extends ApiResource
                 if(!empty($originalVariation)) {
                     $variation = $originalVariation[0];
                     $variationSalesPrices = $variation["variationSalesPrices"];
-                    $contractInformation =  $this->contractRepo->getContractByPriceMonitorId($pricemonitorContractId);
-                    $savedSalesPriceInContract = $contractInformation->salesPricesImport;
+                    $savedSalesPriceInContract = $contractInformation['salesPricesImport'];
                    
                     //sales price which related to variation
                     $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
@@ -94,7 +98,7 @@ class PriceResource extends ApiResource
                         );
                     }                    
                     
-                    if($contractInformation->isInsertSalesPrice && $salesPricesNotRelatedToVariation != null ) {
+                    if($contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null ) {
                         
                         try {
                             $this->priceService->insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
@@ -108,7 +112,7 @@ class PriceResource extends ApiResource
                         }
                         
                     }
-                    else if(!$contractInformation->isInsertSalesPrice && $salesPricesNotRelatedToVariation != null) {
+                    else if(!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null) {
                         // insert  to transaction history, transactionDetails
                         $failedItems [] = [
                             "productId" => $price['identifier'],   
