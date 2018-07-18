@@ -260,7 +260,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $credent = $authHelper->processUnguarded(
             function () use ($repoCredent, $credent) {
             
-                return $repoCredent->get();
+                return $repoCredent->get(110);
             }
         );
 
