@@ -263,7 +263,7 @@ function showTabContent(evt, tabName) {
     function getFilter() {
 
       var dataOption = {
-          'priceMonitorId' : $("#idContract").val(),
+          'priceMonitorId' : $("#contractId").val(),
           'filterType' :  filterQueryParams.filterType
       };
 
@@ -1327,7 +1327,7 @@ function showTabContent(evt, tabName) {
         console.log(filterQueryParams.filterType);
 
         var transferObject = {
-            'pricemonitorId': $("#idContract").val(),
+            'pricemonitorId': $("#contractId").val(),
             'type': filterQueryParams.filterType,
             'filters': filters
         };
