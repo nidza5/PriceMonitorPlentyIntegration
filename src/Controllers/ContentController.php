@@ -39,6 +39,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;
  use Plenty\Plugin\Http\Request as PluginRequest;
  use Plenty\Plugin\Application;
+
+
  /**
   * Class ContentController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -247,6 +249,24 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //  $categories =  $prodServ->getCategoryById(18);
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
+
+
+        $repoCredent = pluginApp(CredentialsRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $credent = null;
+
+        $credent = $authHelper->processUnguarded(
+            function () use ($repoCredent, $credent) {
+            
+                return $repoCredent->get();
+            }
+        );
+
+        echo "credent";
+        echo json_encode($credent);
+
 
         $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish,
