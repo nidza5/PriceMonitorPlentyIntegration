@@ -216,7 +216,7 @@
     function onClickExportNow()
     {
         var transferObject = {
-            'pricemonitorId' : $("#contractId").val()
+            'pricemonitorId' : $("#idContract").val()
         };
 
         $.ajax({
