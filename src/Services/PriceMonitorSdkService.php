@@ -11,7 +11,7 @@ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 class PriceMonitorSdkService
 {
 
-    const GATEWAY_BASE_PATH = 'http://13651f46.ngrok.io';
+    const GATEWAY_BASE_PATH = 'http://a49d0bda.ngrok.io';
 
     /**
      *
