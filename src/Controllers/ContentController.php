@@ -252,21 +252,21 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //  echo json_encode( $categories[0]["details"][0]["name"]);
 
 
-        $repoCredent = pluginApp(PropertyAvailabilityRepositoryContract::class);
+        // $repoCredent = pluginApp(PropertyAvailabilityRepositoryContract::class);
 
-        $authHelper = pluginApp(AuthHelper::class);
+        // $authHelper = pluginApp(AuthHelper::class);
 
-        $credent = null;
+        // $credent = null;
 
-        $credent = $authHelper->processUnguarded(
-            function () use ($repoCredent, $credent) {
+        // $credent = $authHelper->processUnguarded(
+        //     function () use ($repoCredent, $credent) {
             
-                return $repoCredent->listAvailabilities();
-            }
-        );
+        //         return $repoCredent->listAvailabilities();
+        //     }
+        // );
 
-        echo "credent";
-        echo json_encode($credent);
+        // echo "credent";
+        // echo json_encode($credent);
 
 
         $templateData = array("contracts" => $contractsFromMiddleware,
