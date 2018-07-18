@@ -241,7 +241,9 @@ function setSavedValuesOnView(response) {
                 if (savedPricemonitorAttributeCodes.indexOf(pricemonitorAttributes[i]) < 0) {
                     var dropdownName = 'attribute-' + pricemonitorAttributes[i];
 
-                    resetUnsavedFields(dropdownName);
+                   // resetUnsavedFields(dropdownName);
+
+                   $("#"+dropdownName).change();
 
                     // set dropdown
 
