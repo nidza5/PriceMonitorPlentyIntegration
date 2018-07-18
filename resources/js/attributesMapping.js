@@ -241,27 +241,10 @@ function setSavedValuesOnView(response) {
                 if (savedPricemonitorAttributeCodes.indexOf(pricemonitorAttributes[i]) < 0) {
                     var dropdownName = 'attribute-' + pricemonitorAttributes[i];
 
-                   // resetUnsavedFields(dropdownName);
-
-                   $("#"+dropdownName).change();
-
-                    // set dropdown
-
-                    // Pricemonitor['filterableDropDown']['initDropdown'](
-                    //     null,
-                    //     document['pricemonitorAttributesMapping'][dropdownName]
-                    // );
+                 $("[name="+dropdownName+"]").change();
+                  
                 }
             }
-        }
-
-        function resetUnsavedFields(dropdownName)
-        {
-            // document['pricemonitorAttributesMapping'][dropdownName].value = '';
-            // document['pricemonitorAttributesMapping'][dropdownName]
-            //     .parentNode
-            //     .querySelector('input[type=hidden]')
-            //     .value = '';
         }
 
         /**
