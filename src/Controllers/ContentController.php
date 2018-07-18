@@ -186,6 +186,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $accessToken = $resultLogin['access_token'];
 
+            $dashboardInfo = $resultLogin['dashboardInfo'];
+
             //save token in database
             $configInfoRepo->saveConfig('access_token',$accessToken);
 
@@ -247,7 +249,8 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         //  echo json_encode( $categories[0]["details"][0]["name"]);
 
         $templateData = array("contracts" => $contractsFromMiddleware,
-                            "salesPrices" => $salesPricesEnglish);
+                            "salesPrices" => $salesPricesEnglish,
+                            'dashboardInfo' => $dashboardInfo);
 
        return  $twig->render('PriceMonitorPlentyIntegration::content.priceIntegration', $templateData);     
      }
