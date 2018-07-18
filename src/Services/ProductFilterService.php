@@ -115,7 +115,7 @@ class ProductFilterService {
                 'variationCategories' => null,
                 'variationSuppliers'  => null,
                 'variationSalesPrices' => null,
-                'variationMarkets' => null
+                'variationMarkets' => 'name'
             ]
          ]);
 
