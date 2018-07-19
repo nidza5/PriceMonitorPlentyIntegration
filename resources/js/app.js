@@ -459,7 +459,9 @@ function showTabContent(evt, tabName) {
         {
 
             if(groupIndex === 0) {
-                return 
+                return '<div class="form-row">' +
+               
+                '</div>' +
                 '<div class="' + parentTemplateId + '-single-group" ' +
                 'id="' + parentTemplateId + 'Group_' + groupIndex + '">' +
                 '<h3>' + 'Group' + ' ' + (groupIndex + 1) +
