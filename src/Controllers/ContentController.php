@@ -268,8 +268,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         // echo "credent";
         // echo json_encode($credent);
 
-        $dashboardInfo = null;
-
         $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish,
                             'dashboardInfo' => $dashboardInfo);
