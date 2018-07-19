@@ -710,7 +710,7 @@ function showTabContent(evt, tabName) {
 
     function hasPredefinedValues(expression)
     {
-        return expression['type'].indexOf('dropdown') >= 0;
+        return expression['type'].indexOf('dropdown') >= 0 || expression['type'].indexOf('box') >= 0;
     }
 
     function getMappedDataTypes()
@@ -1252,7 +1252,7 @@ function showTabContent(evt, tabName) {
         
         var IdAttribute;
 
-        if(dataType != null && dataType != "" && dataType == "dropdown")
+        if(dataType != null && dataType != "" && dataType == "dropdown" || dataType == "box")
             IdAttribute = $("#" + id + " option:selected").attr("value");  
             
          var attrValue = $("#" + id + " option:selected").attr("value"); 
