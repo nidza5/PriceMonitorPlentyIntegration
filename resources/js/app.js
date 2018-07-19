@@ -721,7 +721,8 @@ function showTabContent(evt, tabName) {
             'text' : 'string',
             'int' : 'integer',
             'float': 'double',
-            'other': 'string'
+            'other': 'string',
+            'box' : 'string'
         };
     }
 
