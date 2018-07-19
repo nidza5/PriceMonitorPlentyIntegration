@@ -618,3 +618,20 @@
         pagination.setAttribute('data-current-page', page);
         loadRecords(limit, offset);
     }
+
+     /**
+     * Gets offset for page and limit
+     *
+     * @param page
+     * @param limit
+     * @return {number}
+     * @private
+     */
+    function getOffset(page, limit)
+    {
+        if (page > 1) {
+            return (page * limit) - limit;
+        }
+
+        return 0;
+    }
