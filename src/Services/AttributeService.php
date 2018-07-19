@@ -129,7 +129,7 @@ class AttributeService {
             $arrOthers = array(
                 "Id" => $other,
                 "Group" => "Other",
-                "Name" => $other.'-string'  
+                "Name" => $other.'-other'  
          );  
 
             $dataAttributes[] = $arrOthers;

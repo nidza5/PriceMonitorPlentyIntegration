@@ -646,7 +646,7 @@ function showTabContent(evt, tabName) {
         var options = ['equal', 'not_equal', 'contains', 'contains_not'];
 
         if ((expression['type'].indexOf('dropdown') >= 0) || (expression['type'].indexOf('box') >= 0) || (expression['type'].indexOf('Category') >= 0)
-        || (expression['type'].indexOf('Manufacturer') >= 0) || (expression['type'].indexOf('Supplier') >= 0) || (expression['type'].indexOf('Channel') >= 0) ) {
+        || (expression['type'].indexOf('Manufacturer') >= 0) || (expression['type'].indexOf('Supplier') >= 0) || (expression['type'].indexOf('Channel') >= 0) || (expression['type'].indexOf('other') >= 0) ) {
             options = ['equal', 'not_equal']; 
         } else if (isNumericOrPriceAttribute(expression)) {
             options = [
