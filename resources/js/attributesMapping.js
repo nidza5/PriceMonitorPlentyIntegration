@@ -120,7 +120,7 @@ function createAttributeOptionsBasedOnSource(sourceAttributes)
                     var splitedAttr = sourceAttributes[k][n].split('-');
                      
                     // if(splitedAttr[1] === "string" || splitedAttr[1] === "text")
-                    if(splitedAttr[1] === "image")
+                    if(splitedAttr[1] !== "image")
                         dropdownInnerHtml += " <option value="+n+" data-type="+splitedAttr[1]+" >"+ splitedAttr[0]  + "</option>";
                  }
              }
