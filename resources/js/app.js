@@ -720,7 +720,8 @@ function showTabContent(evt, tabName) {
             'dropdown': 'string',
             'text' : 'string',
             'int' : 'integer',
-            'float': 'double'
+            'float': 'double',
+            'other': 'string'
         };
     }
 

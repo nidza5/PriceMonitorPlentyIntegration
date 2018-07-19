@@ -1,13 +1,29 @@
 {
 	"name":"PriceMonitorPlentyIntegration",
+	"marketplaceName"   : {
+		"de":"Pricemonitor integration",
+		"en":"Pricemonitor integration"
+	},
 	"description":"Integration plugin plentymarkets with price monitor",
+	"shortDescription": {
+		"en" : "Integration with pricemonitor, send products and get prices back."
+	},
 	"namespace":"PriceMonitorPlentyIntegration",
 	"author":"Smartwave",
 	"type":"template",
+	"price": 0.00,
+	"version": "1.0.0",
 	"dependencies":{
 	  "patagona/pricemonitor-core":"dev-master",
 	  "guzzlehttp/guzzle": "5.3.*"
-    },
+	},
+	"keywords": [
+		"pricemonitor",
+		"plentymarkets",
+		"integration",
+		"prices",
+		"products"
+	],
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
 	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
 				  "PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTableAddNewProperty",
