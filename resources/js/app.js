@@ -457,7 +457,34 @@ function showTabContent(evt, tabName) {
 
      function generateGroupFormRowWithoutSavedValues(groupOperatorDisabled, groupIndex)
         {
-            return '<div class="form-row">' +
+
+            if(groupIndex === 0) {
+                return 
+                '<div class="' + parentTemplateId + '-single-group" ' +
+                'id="' + parentTemplateId + 'Group_' + groupIndex + '">' +
+                '<h3>' + 'Group' + ' ' + (groupIndex + 1) +
+                '<button class="' + parentTemplateId + 'remove-group" ' +
+                'id="' + parentTemplateId + 'RemoveGroup_' + groupIndex + '">X' +
+                '</button>' +
+                '</h3>' +
+                '<div class="form-row">' +
+                '<label style="padding-right:1.5%;" for="' + parentTemplateId + 'Operator_' + groupIndex + '">' +
+                'Group type ' + '</label> ' +
+                '<select class="pricemonitor-form-field form-control" ' +
+                'name="' + parentTemplateId + 'Operator_' + groupIndex + '" ' +
+                'id="' + parentTemplateId + 'Operator_' + groupIndex + '"' +
+                ' required>' +
+                '<option value="AND" ' + (allGroups[groupIndex].operator === "AND" ? " selected" : "") + '>' +
+                'AND' +
+                '</option>' +
+                '<option value="OR" ' + (allGroups[groupIndex].operator === "OR" ? " selected" : "") + '>' +
+                'OR' +
+                '</option>' +
+                '</select>' +
+                '</div>';
+            } else
+            {
+                return '<div class="form-row">' +
                 '<select style="margin-bottom:2%;" class="pricemonitor-form-field form-control col-sm-3" ' +
                 (groupOperatorDisabled ? 'disabled ' : '') +
                 'name="' + parentTemplateId + 'GroupOperator_' + groupIndex + '" ' +
@@ -494,6 +521,9 @@ function showTabContent(evt, tabName) {
                 '</option>' +
                 '</select>' +
                 '</div>';
+            }
+
+            
         }
 
     function generateSavedExpressionsRows(groupExpressions, groupIndex)
