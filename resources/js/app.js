@@ -460,7 +460,7 @@ function showTabContent(evt, tabName) {
 
             if(groupIndex === 0) {
                 return '<div class="form-row">' +
-                '<select style="display:none;" style="margin-bottom:2%;" class="pricemonitor-form-field form-control col-sm-3" ' +
+                '<select style="visibility:hidden;" style="margin-bottom:2%;" class="pricemonitor-form-field form-control col-sm-3" ' +
                 (groupOperatorDisabled ? 'disabled ' : '') +
                 'name="' + parentTemplateId + 'GroupOperator_' + groupIndex + '" ' +
                 ' required/>' +
