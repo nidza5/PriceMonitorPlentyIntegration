@@ -57,7 +57,9 @@ class PriceResource extends ApiResource
        $contract =  $this->request->get('contract', '');
        $contractInformation = null;
 
-       return array('priceList' => $priceList, "contract" => $contract, "pricemonitorContractId" =>  $pricemonitorContractId);
+       $returnTest = array('priceList' => $priceList, "contract" => $contract, "pricemonitorContractId" =>  $pricemonitorContractId);
+
+       return $this->response->create($returnTest, ResponseCode::OK);
 
         if($priceList !== null)
             $priceList = json_decode($priceList,true);
