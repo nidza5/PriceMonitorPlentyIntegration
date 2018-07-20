@@ -81,6 +81,8 @@ class PriceResource extends ApiResource
                 $itemService = pluginApp(ProductFilterService::class);
                 $originalVariation = $itemService->getVariationById($price['identifier']);
 
+                return $this->response->create($originalVariation, ResponseCode::OK);
+
                 $variation = null;
                 if(!empty($originalVariation)) {
                     $variation = $originalVariation[0];
