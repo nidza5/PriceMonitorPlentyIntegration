@@ -52,7 +52,7 @@ class PriceResource extends ApiResource
 
         $return = ['isenter' => 'true'];
 
-        $this->response->create($return, ResponseCode::OK);
+       return $this->response->create($return, ResponseCode::OK);
 
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
