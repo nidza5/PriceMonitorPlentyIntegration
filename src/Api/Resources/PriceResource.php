@@ -81,7 +81,7 @@ class PriceResource extends ApiResource
                 $itemService = pluginApp(ProductFilterService::class);
                 $originalVariation = $itemService->getVariationById($price['identifier']);
 
-                return $this->response->create($originalVariation, ResponseCode::OK);
+                
 
                 $variation = null;
                 if(!empty($originalVariation)) {
@@ -92,6 +92,8 @@ class PriceResource extends ApiResource
                     //sales price which related to variation
                     $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
                 
+                    return $this->response->create($salesPriceRelatedToVariation, ResponseCode::OK);
+
                     //sales price which not related to variation
                     $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
 
