@@ -111,6 +111,12 @@ class PriceResource extends ApiResource
                     
                     if($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                         
+                        $params = ['uslo' => 'true',
+                                  'related' => $salesPriceRelatedToVariation,
+                                   'variationId' => $variation['id']];
+
+                     return $this->response->create($params, ResponseCode::OK);
+
                         try {
                             $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
                         } catch(\Exception $ex) {
