@@ -21,7 +21,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
 		{
             $api->get('priceMonitor/variations', 'VariationResource@index');
             $api->get('priceMonitor/attributes', 'AttributeResource@index');
-            $api->get('priceMonitor/updatePrices', 'PriceResource@updatePrices');
+            $api->post('priceMonitor/updatePrices', 'PriceResource@updatePrices');
 		});
 
         $router->get('integrationhome', 'PriceMonitorPlentyIntegration\Controllers\ContentController@home');
