@@ -49,6 +49,9 @@ class PriceResource extends ApiResource
 
 	public function updatePrices():Response
 	{
+
+        echo "u update prices";
+
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
        $contract =  $this->request->get('contract', '');
@@ -59,6 +62,15 @@ class PriceResource extends ApiResource
 
          if($contract !== null)
             $contractInformation = json_decode($contract,true);
+
+        echo "priceList";
+        echo json_encode($priceList);
+        
+        echo "contractInformation";
+        echo json_encode($contractInformation);
+
+        echo "pricemonitorContractId";
+        echo $pricemonitorContractId;
 
        /** @var CurrencyExchangeRepository $currencyService */
        $currencyService = pluginApp(CurrencyExchangeRepositoryContract::class);
