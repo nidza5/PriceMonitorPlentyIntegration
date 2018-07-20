@@ -50,7 +50,9 @@ class PriceResource extends ApiResource
 	public function updatePrices():Response
 	{
 
-        echo "u update prices";
+        $return = ['isenter' => 'true'];
+
+        $this->response->create($return, ResponseCode::OK);
 
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
