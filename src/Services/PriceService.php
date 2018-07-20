@@ -44,8 +44,7 @@ class PriceService
                                   "salesPriceId" => $savedPrice,
                                   "price" => $recommendedPrice];
 
-                return  $dataForInsert;                  
-        
+               
                 $insertedSalesPrice = $authHelper->processUnguarded(
                     function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
                         return $repositoryVariationSalesPrices->create($dataForInsert);
