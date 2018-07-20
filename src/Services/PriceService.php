@@ -65,7 +65,7 @@ class PriceService
             $dataForUpdate = ["variationId" => $variationId,
                               "salesPriceId" => $relatedSalesPrice,
                               "recommendedPrice" => $recommendedPrice];
-            return $dataForUpdate;
+            
     
             $updatedSalesPrice = $authHelper->processUnguarded(
                 function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
