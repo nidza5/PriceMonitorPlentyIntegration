@@ -92,7 +92,6 @@ class PriceResource extends ApiResource
                     //sales price which related to variation
                     $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
                 
-                   return $this->response->create($salesPriceRelatedToVariation, ResponseCode::OK);
 
                     //sales price which not related to variation
                     $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
