@@ -64,7 +64,7 @@ class PriceService
 
             $dataForUpdate = ["variationId" => $variationId,
                               "salesPriceId" => $relatedSalesPrice,
-                              "recommendedPrice" => $recommendedPrice];
+                              "price" => $recommendedPrice];
             
     
             $updatedSalesPrice = $authHelper->processUnguarded(
