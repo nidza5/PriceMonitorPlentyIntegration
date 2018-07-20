@@ -42,7 +42,7 @@ class PriceService
     
                 $dataForInsert = ["variationId" => $variationId,
                                   "salesPriceId" => $notRelatedPrice,
-                                  "recommendedPrice" => $recommendedPrice];
+                                  "price" => $recommendedPrice];
         
                 $insertedSalesPrice = $authHelper->processUnguarded(
                     function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
@@ -79,7 +79,7 @@ class PriceService
     {
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
-            if( !in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
+            if( $variationPrice["salesPriceId"] != $savedSalesPriceInContract)
                 $matchPrices[] = $variationPrice["salesPriceId"];
         }
 
