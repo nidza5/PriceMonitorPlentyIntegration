@@ -109,10 +109,10 @@ class PriceResource extends ApiResource
                         );
                     }                    
                     
-                    if($contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null ) {
+                    if($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                         
                         try {
-                            $this->priceService->insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                            $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
                         } catch(\Exception $ex) {
                             $failedItems[] = array(
                                 'productId' => $price['identifier'],
