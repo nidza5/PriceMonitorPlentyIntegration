@@ -110,7 +110,7 @@ class PriceResource extends ApiResource
                             'errors' => array('Unable to update product price.'),
                             'status' => TransactionStatus::FAILED
                         );
-                    }                    
+                    }                   
                     
                     if($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                        

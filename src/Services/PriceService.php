@@ -33,8 +33,6 @@ class PriceService
   
     public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
     {
-            return $savedSalesPrices;
-
             foreach($savedSalesPrices as $savedPrice) {
                 $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
