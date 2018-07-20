@@ -90,7 +90,7 @@ class PriceService
 
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
-            if( in_array($variationPrice["salesPriceId"], $savedSalesPriceInContract))
+            if( $variationPrice["salesPriceId"] ==  $savedSalesPriceInContract)
                 $matchPrices[] = $variationPrice["salesPriceId"];
         }
 

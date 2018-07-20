@@ -88,15 +88,11 @@ class PriceResource extends ApiResource
                     $variation = $originalVariation[0];
                     $variationSalesPrices = $variation["variationSalesPrices"];
                     $savedSalesPriceInContract = $contractInformation['salesPricesImport'];
-                   
-                    $params = ["variationSalesPrices" => $variationSalesPrices, "savedSalesPriceInContract" => $savedSalesPriceInContract];
-
-                    return $this->response->create($params, ResponseCode::OK);
 
                     //sales price which related to variation
                     $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
                 
-                    
+                   return $this->response->create($salesPriceRelatedToVariation, ResponseCode::OK);
 
                     //sales price which not related to variation
                     $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
