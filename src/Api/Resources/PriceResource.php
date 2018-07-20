@@ -123,7 +123,7 @@ class PriceResource extends ApiResource
                         }
                         
                     }
-                    else if(!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null) {
+                    else if(!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null && $salesPriceRelatedToVariation == null) {
                         // insert  to transaction history, transactionDetails
                         $failedItems [] = [
                             "productId" => $price['identifier'],   
