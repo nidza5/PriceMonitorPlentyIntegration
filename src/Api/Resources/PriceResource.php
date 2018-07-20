@@ -95,18 +95,10 @@ class PriceResource extends ApiResource
                     //sales price which not related to variation
                     $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
 
-                    $params = ["salesPriceRelatedToVariation" => $salesPriceRelatedToVariation,
-                              "salesPricesNotRelatedToVariation" => $salesPricesNotRelatedToVariation,
-                              "variationSalesPrices" => $variationSalesPrices];
-
-                    return $this->response->create(  $params, ResponseCode::OK);
-
                     try{
                         //update sales price that related to variation
-                      $update =  $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
-                        
-                      return $this->response->create($update, ResponseCode::OK);
-                   
+                       $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                    
                     } catch(\Exception $ex)
                     {
                         $failedItems[] = array(
