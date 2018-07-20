@@ -95,7 +95,10 @@ class PriceResource extends ApiResource
 
                     try{
                         //update sales price that related to variation
-                        $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                      $update =   $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                        
+                      return $this->response->create($update, ResponseCode::OK);
+                   
                     } catch(\Exception $ex)
                     {
                         $failedItems[] = array(
@@ -135,7 +138,7 @@ class PriceResource extends ApiResource
                 $failedItems [] = [
                     "productId" => $price['identifier'],   
                     "name" => isset($price['name']) ? $price['name'] : '',
-                    "errors" => array("Sales prices which is selected to account info tab not related to variation and field is insert salesPrice selected as NO!"),
+                    "errors" => array("Price that returned don't have some currency as sales price!"),
                     "status" => TransactionStatus::FAILED
                 ];                
             }
