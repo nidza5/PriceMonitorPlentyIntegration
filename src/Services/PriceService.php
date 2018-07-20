@@ -31,9 +31,9 @@ class PriceService
         $this->contractRepo = $contractRepo;
 	}
   
-    public function insertSalesPricesNotRelatedToVariation($salesPricesNotRelatedToVariation,$variationId,$recommendedPrice)
+    public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
     {
-            foreach($salesPricesNotRelatedToVariation as $notRelatedPrice) {
+            foreach($savedSalesPrices as $savedPrice) {
                 $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
                 $authHelper = pluginApp(AuthHelper::class);
@@ -41,8 +41,10 @@ class PriceService
                 $insertedSalesPrice = null;
     
                 $dataForInsert = ["variationId" => $variationId,
-                                  "salesPriceId" => $notRelatedPrice,
+                                  "salesPriceId" => $savedPrice,
                                   "price" => $recommendedPrice];
+
+                return  $dataForInsert;                  
         
                 $insertedSalesPrice = $authHelper->processUnguarded(
                     function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
