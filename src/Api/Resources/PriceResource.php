@@ -150,6 +150,9 @@ class PriceResource extends ApiResource
             }
         }
 
+        if($failedItems == null)
+            $failedItems = [];
+
 		return $this->response->create($failedItems, ResponseCode::OK);
     }   
 }
