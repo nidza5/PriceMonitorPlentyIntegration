@@ -83,8 +83,10 @@ class PriceService
     {
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
-            if( $variationPrice["salesPriceId"] != $savedSalesPriceInContract)
+            foreach($savedSalesPriceInContract as $savedPrice) {
+                if( $variationPrice["salesPriceId"] != $savedPrice)
                 $matchPrices[] = $variationPrice["salesPriceId"];
+            }         
         }
 
         return $matchPrices;
@@ -94,8 +96,10 @@ class PriceService
 
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
-            if( $variationPrice["salesPriceId"] ==  $savedSalesPriceInContract)
-                $matchPrices[] = $variationPrice["salesPriceId"];
+            foreach($savedSalesPriceInContract as $savedPrice) {
+                if( $variationPrice["salesPriceId"] ==  $savedPrice)
+                    $matchPrices[] = $variationPrice["salesPriceId"];
+            }
         }
 
         return $matchPrices;
