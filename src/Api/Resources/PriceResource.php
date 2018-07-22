@@ -50,7 +50,7 @@ class PriceResource extends ApiResource
 	public function updatePrices():Response
 	{
 
-       $returnResult = ['errorMessages' => []];
+       $returnResult = ['productPrices' => null, 'errorMessages' => []];
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
        $contract =  $this->request->get('contract', '');
