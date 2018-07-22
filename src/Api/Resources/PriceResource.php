@@ -50,7 +50,7 @@ class PriceResource extends ApiResource
 	public function updatePrices():Response
 	{
 
-       $returnResult = ['productPrices' => null, 'errorMessages' => []];
+       $returnResult = ['productPrices' => [], 'errorMessages' => []];
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
        $contract =  $this->request->get('contract', '');
@@ -95,7 +95,7 @@ class PriceResource extends ApiResource
                         //update sales price that related to variation
                     $update =   $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
 
-                    $returnResult['productPrices'] = array_merge($returnResult['productPrices'],$update);
+                    $returnResult['productPrices'][] = $update;
                     return $this->response->create($returnResult, ResponseCode::OK);
                     } catch(\Exception $ex)
                     {
