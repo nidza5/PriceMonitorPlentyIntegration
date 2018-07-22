@@ -93,9 +93,10 @@ class PriceResource extends ApiResource
 
                     try{
                         //update sales price that related to variation
-                    $update =    $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                    $update =   $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
 
-                    return $this->response->create($update, ResponseCode::OK);
+                    $returnResult['productPrices'] = array_merge($returnResult['productPrices'],$update);
+                    return $this->response->create($returnResult, ResponseCode::OK);
                     } catch(\Exception $ex)
                     {
                         $failedItems[] = array(
