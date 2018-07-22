@@ -55,9 +55,13 @@ class PriceService
 
     public function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)
     {
-        foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {
+        $productPrices = [];
+
+        foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {          
             
-            $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+            try {
+              
+             $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
             $authHelper = pluginApp(AuthHelper::class);
     
@@ -67,13 +71,24 @@ class PriceService
                               "salesPriceId" => $relatedSalesPrice,
                               "price" => $recommendedPrice];
             
+                              
     
             $updatedSalesPrice = $authHelper->processUnguarded(
                 function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
                     return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
                 }
             );
+
+            $productPrices[$variationId][] = array (
+                'apiPrice' =>$recommendedPrice,
+                'price' => $relatedSalesPrice
+            );
+
+            } catch(\Exception $ex) {}
+            
         }
+
+        return $productPrices;
     }
 
     public function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
