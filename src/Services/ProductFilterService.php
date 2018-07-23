@@ -164,6 +164,17 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
 
+            foreach($p['variationMarkets'] as $channel) {
+                $channelOriginal = $this->getChannelById($channel['id']);
+                $channelName =  $channelOriginal != null ? $channelOriginal['name'] : "";
+
+                $channelElement = ["channel-".$channelName => $channelName];
+                $arrayForMerge = $tempArr == null ? $p : $tempArr;
+                $merge = array_merge($arrayForMerge,$channelElement);  
+                $tempArr = $merge;              
+                $itemsResults[$i] = $merge;
+            }
+
             foreach($p['variationSuppliers'] as $supplier) {
                 $supplierOriginal = $this->getSupplierById($supplier["supplierId"]);
                 
@@ -262,6 +273,24 @@ class ProductFilterService {
         $mappingCodes = array_unique(array_column($mappings, 'attribute_code'));
         $mappingCodes[] = 'tax_class_id';
         return $mappingCodes;
+    }
+
+    public function getChannelById($id)
+    {
+        $repoMarkets = pluginApp(OrderReferrerRepositoryContract::class);
+
+        $authHelper = pluginApp(AuthHelper::class);
+
+        $market = null;
+
+        $market = $authHelper->processUnguarded(
+            function () use ($repoMarkets, $market) {
+            
+                return $repoMarkets->getReferrerById(110);
+            }
+        );
+
+        return  $market;
     }
 
     public function getManufacturerById($id) 
