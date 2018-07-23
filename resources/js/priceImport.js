@@ -170,6 +170,7 @@ function initImportForm()
         row.insertCell().innerHTML = data.status;
         row.insertCell().innerHTML = data.importedPrices;
         row.insertCell().innerHTML = data.updatedPrices;
+        row.insertCell().innerHTML = data.failedCount;
         row.insertCell().innerHTML = data.note;
 
         if (data.inProgress) {
