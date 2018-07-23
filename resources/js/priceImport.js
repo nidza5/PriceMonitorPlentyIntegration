@@ -166,10 +166,10 @@ function initImportForm()
         div.addEventListener('click', onDetailClickImport);
 
         row.insertCell().innerHTML = index;
-        row.insertCell().innerHTML = data.time;
+        row.insertCell().innerHTML = data.importTime;
         row.insertCell().innerHTML = data.status;
-        row.insertCell().innerHTML = data.successCount;
-        row.insertCell().innerHTML = data.failedCount;
+        row.insertCell().innerHTML = data.importedPrices;
+        row.insertCell().innerHTML = data.updatePrices;
         row.insertCell().innerHTML = data.note;
 
         if (data.inProgress) {
