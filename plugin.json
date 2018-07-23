@@ -16,7 +16,7 @@
 	"pluginIcon" : "icon_plugin.png",
 	"categories"        : ["3521"],
 	"author": "logeecom",
-	"authorIcon": "icon_author_sm.png",
+	"authorIcon": "icon_author.png",
 	"dependencies":{
 	  "patagona/pricemonitor-core":"dev-master",
 	  "guzzlehttp/guzzle": "5.3.*"
