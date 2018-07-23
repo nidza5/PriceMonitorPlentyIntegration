@@ -166,7 +166,7 @@ function initImportForm()
         div.addEventListener('click', onDetailClickImport);
 
         row.insertCell().innerHTML = index;
-        row.insertCell().innerHTML = data.exportTime;
+        row.insertCell().innerHTML = data.time;
         row.insertCell().innerHTML = data.status;
         row.insertCell().innerHTML = data.successCount;
         row.insertCell().innerHTML = data.failedCount;
