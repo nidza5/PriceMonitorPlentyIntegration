@@ -40,8 +40,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Http\Request as PluginRequest;
  use Plenty\Plugin\Application;
  use Plenty\Modules\Property\Contracts\PropertyAvailabilityRepositoryContract;
- use Plenty\Modules\Order\Referrer\Contracts\OrderReferrerRepositoryContract;
-
 
  /**
   * Class ContentController
@@ -252,22 +250,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         //  echo json_encode( $categories[0]["details"][0]["name"]);
 
-
-        $repoMarkets = pluginApp(OrderReferrerRepositoryContract::class);
-
-        $authHelper = pluginApp(AuthHelper::class);
-
-        $market = null;
-
-        $market = $authHelper->processUnguarded(
-            function () use ($repoMarkets, $market) {
-            
-                return $repoMarkets->getReferrerById(110);
-            }
-        );
-
-        echo "market";
-        echo json_encode($market);
 
         $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish,
