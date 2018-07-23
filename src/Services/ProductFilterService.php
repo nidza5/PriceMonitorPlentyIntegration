@@ -30,6 +30,7 @@ use Plenty\Modules\Item\Manufacturer\Contracts\ManufacturerRepositoryContract;
 use Plenty\Modules\Item\VariationSupplier\Contracts\VariationSupplierRepositoryContract;
 use Plenty\Modules\Account\Contact\Contracts\ContactRepositoryContract;
 use Plenty\Modules\Account\Contact\Contracts\ContactAccountRepositoryContract;
+use Plenty\Modules\Order\Referrer\Contracts\OrderReferrerRepositoryContract;
 
 
 class ProductFilterService {
