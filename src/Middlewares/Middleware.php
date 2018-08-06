@@ -23,6 +23,9 @@ class Middleware extends \Plenty\Plugin\Middleware
 
     public function before(Request $request )
     {
+
+        return $this->response->make("Unauthorized request", 401);
+
         $jwt = $request->header('Authorization', null);
         $access_token = "";
 
