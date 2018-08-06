@@ -85,15 +85,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $requestData = $request->all();
             $priceMonitorId = 0;
 
-            if($requestData == null)
+            if($requestData == null) {
                 return;
-
+            }
             $priceMonitorId = $requestData['priceMonitorId'];
             $filterType = $requestData['filterType'];
 
-            if($priceMonitorId == null || $filterType == null)
+            if($priceMonitorId == null || $filterType == null) {
                 throw new \Exception("Price monitor id or filter type is null");
-            
+            }
+
             $filters =  $this->sdkService->call("getFilterFromMiddleware", [
                 'filterType' =>  $filterType,
                 'priceMonitorId' =>  $priceMonitorId
@@ -107,8 +108,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $requestData = $request->all();
         $priceMonitorId = 0;
 
-        if($requestData == null)
+        if ($requestData == null) {
             return;
+        }
 
         $priceMonitorId = $requestData['pricemonitorId'];
         $filterType = $requestData['type'];
@@ -116,37 +118,39 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $limit = $requestData['limit'];
         $offset = $requestData['offset'];
 
-        if($priceMonitorId == null || $filterType == null)
+        if ($priceMonitorId == null || $filterType == null) {
             throw new \Exception("Price monitor id or filter type is null");
+        }
 
-            $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
+        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
 
-            $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
-    
-            $itemService = pluginApp(ProductFilterService::class);
-    
-            $allVariations = $itemService->getAllVariations();
-    
-            $attributeService = pluginApp(AttributeService::class);
-    
-            $attributesFromPlenty = $attributeService->getAllTypeAttributes();
-    
-            $attributesIdName = array();
-    
-            foreach($attributesFromPlenty as $key => $value) {
-                foreach($value as $v => $l)
-                    $attributesIdName[$v] = explode("-",$l)[0];            
+        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
+
+        $itemService = pluginApp(ProductFilterService::class);
+
+        $allVariations = $itemService->getAllVariations();
+
+        $attributeService = pluginApp(AttributeService::class);
+
+        $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+
+        $attributesIdName = array();
+
+        foreach ($attributesFromPlenty as $key => $value) {
+            foreach ($value as $v => $l) {
+                $attributesIdName[$v] = explode("-",$l)[0];            
             }
-            
-            $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
-                'filterType' => $filterType,
-                'priceMonitorId' => $priceMonitorId,
-                'productFilterRepo' => $filter,
-                'attributeMapping' => $attributeMapping,
-                'allVariations' =>  $allVariations,
-                'attributesFromPlenty' => $attributesIdName            
-            ]);
+        }
+        
+        $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
+            'filterType' => $filterType,
+            'priceMonitorId' => $priceMonitorId,
+            'productFilterRepo' => $filter,
+            'attributeMapping' => $attributeMapping,
+            'allVariations' =>  $allVariations,
+            'attributesFromPlenty' => $attributesIdName            
+        ]);
 
-           return json_encode($filteredVariation);        
+        return json_encode($filteredVariation);        
       }      
  }

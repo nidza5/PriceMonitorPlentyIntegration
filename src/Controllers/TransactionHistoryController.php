@@ -80,15 +80,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }           
 
         $masterId = $requestData['masterId'];
         $pricemonitorId = $requestData['pricemonitorId'];
         $limit = $requestData['limit'];
         $offset = $requestData['offset'];
-        $type = $requestData['type'];
-        
+        $type = $requestData['type'];        
         
         $transaction =  $this->sdkService->call("getTransactionHistoryFromMiddleware", [
             'pricemonitorId' => $pricemonitorId,
@@ -105,13 +105,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }           
 
         $pricemonitorId = $requestData['pricemonitorId'];
         $type = $requestData['type'];
 
-        $transaction =  $this->sdkService->call("getLastTransactionHistoryFromMiddleware", [
+        $transaction = $this->sdkService->call("getLastTransactionHistoryFromMiddleware", [
             'pricemonitorId' => $pricemonitorId,
             'type' => $type         
         ]);

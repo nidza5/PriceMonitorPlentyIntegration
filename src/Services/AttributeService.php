@@ -73,8 +73,7 @@ class AttributeService {
             "IBBN" => "ISBN barcode"
        ];      
        
-        foreach($systemAttr as $key => $value)
-        {
+        foreach ($systemAttr as $key => $value) {
             $arrSystemAttributes = array(
                 "Id" => $key,
                 "Group" => "System attributes",
@@ -84,9 +83,7 @@ class AttributeService {
             $dataAttributes[] = $arrSystemAttributes;
         }
 
-
-        foreach($resultAttributes['entries'] as $att) 
-        {
+        foreach ($resultAttributes['entries'] as $att) {
             $arrNonSystemAttributes = array(
                  "Id" => $att['id'],
                  "Group" => "Non system attributes",
@@ -111,8 +108,7 @@ class AttributeService {
 
          $resultProperties = $properties->toArray();
 
-         foreach($resultProperties['entries'] as $prop) 
-         {
+         foreach ($resultProperties['entries'] as $prop) {
              $arrProperties = array(
                   "Id" => "prop-".$prop['id'],
                   "Group" => "Properties",
@@ -124,8 +120,7 @@ class AttributeService {
 
          $othersArr = array("Category","Manufacturer","Supplier","Channel");
 
-         foreach($othersArr as $other)
-         {
+         foreach ($othersArr as $other) {
             $arrOthers = array(
                 "Id" => $other,
                 "Group" => "Other",
@@ -135,7 +130,7 @@ class AttributeService {
             $dataAttributes[] = $arrOthers;
         }     
 
-        foreach($dataAttributes as $arr){
+        foreach ($dataAttributes as $arr) {
             $finalResult[$arr["Group"]][$arr["Id"]]=$arr["Name"];
         }
 

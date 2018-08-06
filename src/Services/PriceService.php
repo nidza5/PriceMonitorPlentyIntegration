@@ -33,7 +33,7 @@ class PriceService
   
     public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
     {
-            foreach($savedSalesPrices as $savedPrice) {
+            foreach ($savedSalesPrices as $savedPrice) {
                 $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
                 $authHelper = pluginApp(AuthHelper::class);
@@ -43,7 +43,6 @@ class PriceService
                 $dataForInsert = ["variationId" => $variationId,
                                   "salesPriceId" => $savedPrice,
                                   "price" => $recommendedPrice];
-
                
                 $insertedSalesPrice = $authHelper->processUnguarded(
                     function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
@@ -57,32 +56,28 @@ class PriceService
     {
         $productPrices = [];
 
-        foreach($salesPriceRelatedToVariation as $relatedSalesPrice) {          
-            
-            try {
-              
-             $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+        foreach ($salesPriceRelatedToVariation as $relatedSalesPrice) {         
+            try {              
+                $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
-            $authHelper = pluginApp(AuthHelper::class);
-    
-            $updatedSalesPrice = null;
+                $authHelper = pluginApp(AuthHelper::class);
+        
+                $updatedSalesPrice = null;
 
-            $dataForUpdate = ["variationId" => $variationId,
-                              "salesPriceId" => $relatedSalesPrice,
-                              "price" => $recommendedPrice];
-            
-                              
-    
-            $updatedSalesPrice = $authHelper->processUnguarded(
-                function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
-                    return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
-                }
-            );
+                $dataForUpdate = ["variationId" => $variationId,
+                                "salesPriceId" => $relatedSalesPrice,
+                                "price" => $recommendedPrice];              
+                                
+                $updatedSalesPrice = $authHelper->processUnguarded(
+                    function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
+                        return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
+                    }
+                );
 
-            $productPrices[$variationId][] = array (
-                'apiPrice' =>$recommendedPrice,
-                'price' => $relatedSalesPrice
-            );
+                $productPrices[$variationId][] = array (
+                    'apiPrice' =>$recommendedPrice,
+                    'price' => $relatedSalesPrice
+                );
 
             } catch(\Exception $ex) {}
             
@@ -94,10 +89,11 @@ class PriceService
     public function getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices) 
     {
         $matchPrices = [];
-        foreach($variationSalesPrices as $variationPrice) {
-            foreach($savedSalesPriceInContract as $savedPrice) {
-                if( $variationPrice["salesPriceId"] != $savedPrice)
-                $matchPrices[] = $variationPrice["salesPriceId"];
+        foreach ($variationSalesPrices as $variationPrice) {
+            foreach ($savedSalesPriceInContract as $savedPrice) {
+                if ($variationPrice["salesPriceId"] != $savedPrice) {
+                    $matchPrices[] = $variationPrice["salesPriceId"];
+                }               
             }         
         }
 
@@ -109,11 +105,12 @@ class PriceService
         $matchPrices = [];
         foreach($variationSalesPrices as $variationPrice) {
             foreach($savedSalesPriceInContract as $savedPrice) {
-                if( $variationPrice["salesPriceId"] ==  $savedPrice)
+                if($variationPrice["salesPriceId"] ==  $savedPrice) {
                     $matchPrices[] = $variationPrice["salesPriceId"];
+                }                    
             }
         }
-
+        
         return $matchPrices;
     }
 }

@@ -14,11 +14,8 @@
 	"price": 0.00,
 	"version": "1.0.0",
 	"pluginIcon" : "icon_plugin.png",
-	"categories"        : ["3521"],
-	"author": "logeecom",
-	"authorIcon": "icon_author.png",
-	"dependencies":{
-	  "patagona/pricemonitor-core":"dev-master",
+	"categories" : ["3521"],
+	"dependencies": {
 	  "guzzlehttp/guzzle": "5.3.*"
 	},
 	"keywords": [
@@ -28,17 +25,10 @@
 		"prices",
 		"products"
 	],
+	"author": "logeecom",
+	"authorIcon": "icon_author.png",
 	"serviceProvider":"PriceMonitorPlentyIntegration\\Providers\\PriceIntegrationServiceProvider",
-	"runOnBuild":["PriceMonitorPlentyIntegration\\Migrations\\CreateContractTable",
-				  "PriceMonitorPlentyIntegration\\Migrations\\UpdateContractTableAddNewProperty",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateProductFilterTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\UpdateProductFilterTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateAttributeMappingTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateScheduleTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateQueueTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateRunnerTokenTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateTransactionHistoryTable",
-				   "PriceMonitorPlentyIntegration\\Migrations\\CreateTransactionDetailsTable",
+	"runOnBuild":[
 				   "PriceMonitorPlentyIntegration\\Migrations\\CreateConfigInfoTable"
-				]
+				 ]
 }

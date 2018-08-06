@@ -99,10 +99,6 @@ class ProductFilterService {
 
     public function getAllVariations()
     {
-        // if(hasMandatoryMappings($mappedAttributes)) {
-        //     throw new \Exception("Mandatory fields must be mapped!");
-        // }
-
         $repository = pluginApp(VariationSearchRepositoryContract::class);
         $barCodeRepo = pluginApp(BarcodeRepositoryContract::class);
 
@@ -132,10 +128,8 @@ class ProductFilterService {
             $tempArr = null;            
             $itemsResults[$i] = $p;  
 
-            if(!empty($p['variationBarcodes'])) {
-
-                foreach($p['variationBarcodes'] as $bar) {                
-                
+            if (!empty($p['variationBarcodes'])) {
+                foreach($p['variationBarcodes'] as $bar) {               
                     $barCode = null;
 
                     $barCode = $authHelper->processUnguarded(
@@ -154,7 +148,7 @@ class ProductFilterService {
                 }
             }            
             
-            foreach($p['variationCategories'] as $category) {
+            foreach ($p['variationCategories'] as $category) {
                 $categoryOriginal = $this->getCategoryById($category["categoryId"]);
                 $categoryName =  $categoryOriginal != null ? $categoryOriginal[0]['details'][0]['name'] : "";
 
@@ -165,7 +159,7 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
 
-            foreach($p['variationMarkets'] as $channel) {
+            foreach ($p['variationMarkets'] as $channel) {
                 $channelOriginal = $this->getChannelById($channel['id']);
                 $channelName =  $channelOriginal != null ? $channelOriginal['name'] : "";
 
@@ -176,19 +170,22 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
 
-            foreach($p['variationSuppliers'] as $supplier) {
+            foreach ($p['variationSuppliers'] as $supplier) {
                 $supplierOriginal = $this->getSupplierById($supplier["supplierId"]);
                 
                 $supplierIdentifier = "";
                 $supplierCompany = $supplierOriginal != null ? $supplierOriginal['accounts'][0]['companyName'] : "";
 
-                if($supplierCompany !== null &&  $supplierCompany !== "")
+                if ($supplierCompany !== null &&  $supplierCompany !== "") {
                     $supplierIdentifier = $supplierCompany;
-                else 
+                }                   
+                else {
                     $supplierIdentifier = $supplierOriginal != null ? $supplierOriginal['fullName'] : "";
+                } 
 
-                 if($supplierIdentifier === null ||  $supplierIdentifier === "")   
+                if ($supplierIdentifier === null ||  $supplierIdentifier === "") {
                     continue;
+                }                       
 
                 $supplierElement = ["supplier-".$supplierIdentifier => $supplierIdentifier];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
@@ -197,7 +194,7 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
             
-            foreach($p['variationAttributeValues'] as $attrinute) {
+            foreach ($p['variationAttributeValues'] as $attrinute) {
                 $attributeName =  $attrinute["attribute"]["backendName"];
                 $attributeValue =  $attrinute["attributeValue"]["backendName"];
             
@@ -208,7 +205,7 @@ class ProductFilterService {
                 $itemsResults[$i] = $merge;
             }
 
-            foreach($p['variationSalesPrices'] as $salesPrice) 
+            foreach ($p['variationSalesPrices'] as $salesPrice) 
             {
                 $priceId = $salesPrice['salesPriceId'];
                 $priceValue = $salesPrice['price'];
@@ -233,10 +230,7 @@ class ProductFilterService {
             $tempArr = $merge;              
             $itemsResults[$i] = $merge;    
            
-            foreach($itemWithProperties["itemProperties"] as $properties) {
-            
-               // $propertyId = $properties["id"];
-              
+            foreach ($itemWithProperties["itemProperties"] as $properties) {             
                 $properyValue  = $properties["valueTexts"][0]["value"];
                 if($properyValue == null)   {
                     if($properties["valueInt"] != null) 

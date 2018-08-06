@@ -97,17 +97,19 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $requestData = $request->all();
         $priceMonitorId = 0;
 
-        if($requestData != null)
+        if ($requestData != null) {
             $priceMonitorId = $requestData['pricemonitorId'];
+        }            
 
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
+        }           
 
-        $getScheduleMiddleware =  $this->sdkService->call("getScheduleFromMiddleware", [
+        $getScheduleMiddleware = $this->sdkService->call("getScheduleFromMiddleware", [
             'pricemonitorId' => $priceMonitorId,     
         ]); 
 
-        return json_encode($getScheduleMiddleware);  
+        return json_encode($getScheduleMiddleware); 
    
     }
 
@@ -115,26 +117,28 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }
 
         $priceMonitorId = $requestData['pricemonitorId'];
        
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
+        }            
 
-          $startAt = $requestData['startAt'];
-          $enableExport = $requestData['enableExport'];
-          $exportInterval = $requestData['exportInterval'];
+        $startAt = $requestData['startAt'];
+        $enableExport = $requestData['enableExport'];
+        $exportInterval = $requestData['exportInterval'];
 
-          $saveScheduleMiddleware =  $this->sdkService->call("saveScheduleToMiddleware", [
-            'pricemonitorId' => $priceMonitorId,
-            'startAt' => $startAt,
-            'enableExport' =>  $enableExport,
-            'exportInterval' =>  $exportInterval        
-          ]); 
+        $saveScheduleMiddleware = $this->sdkService->call("saveScheduleToMiddleware", [
+        'pricemonitorId' => $priceMonitorId,
+        'startAt' => $startAt,
+        'enableExport' =>  $enableExport,
+        'exportInterval' =>  $exportInterval        
+        ]); 
 
-         return json_encode($saveScheduleMiddleware);        
+        return json_encode($saveScheduleMiddleware);        
     }
 
 
@@ -142,14 +146,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }            
 
         $priceMonitorId = $requestData['pricemonitorId'];
 
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
-
+        }            
 
         $runProductExport =  $this->sdkService->call("runProductExportMiddleware", [
             'pricemonitorId' => $priceMonitorId      

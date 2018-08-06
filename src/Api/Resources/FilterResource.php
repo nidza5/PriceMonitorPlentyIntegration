@@ -34,9 +34,6 @@ class FilterResource extends ApiResource
      */
 	public function index():Response
 	{
-		// $page  = (int)$this->request->get("page", 1);
-		// $items = (int)$this->request->get("items", 10);
-        // $data = pluginApp(CustomerService::class)->getOrders($page, $items);
         $data = [];
 		 return $this->response->create($data, ResponseCode::OK);
 	}
@@ -46,11 +43,6 @@ class FilterResource extends ApiResource
      */
 	public function store():Response
 	{
-        // $priceMonitorId = $this->request->get('ContractId', 0);
-        // $type = $this->request->get('type', '');
-        // $filter = $this->request->get('filter', '');
-
-
           $filterOriginals = pluginApp(ProductFilter::class);
           $filterOriginals->contractId = "1";
           $filterOriginals->type = "string";
@@ -59,6 +51,7 @@ class FilterResource extends ApiResource
           
           $database = pluginApp(DataBase::class);
           $database->save($filterOriginals); 
+          
 		return $this->response->create($filterOriginals, ResponseCode::OK);
 	}
 }

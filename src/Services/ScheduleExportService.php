@@ -37,8 +37,9 @@ class ScheduleExportService {
     {
         $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
 
-        if($contract == null)
+        if ($contract == null) {
             throw new \Exception("Contract is empty");
+        }   
 
         $scheduleSaved = $this->scheduleRepo->getScheduleByContractId($contract->id);
         

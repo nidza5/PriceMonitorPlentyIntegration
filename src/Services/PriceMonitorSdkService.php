@@ -11,7 +11,7 @@ use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 class PriceMonitorSdkService
 {
 
-    const GATEWAY_BASE_PATH = 'http://7e0d58b3.ngrok.io';
+    const GATEWAY_BASE_PATH = 'http://1be85778.ngrok.io';
 
     /**
      *
@@ -64,7 +64,6 @@ class PriceMonitorSdkService
                 return $application->getPlentyId();
             }
         );
-
         
         $token =  $this->configInfoRepo->getConfig('access_token');
 
@@ -74,9 +73,6 @@ class PriceMonitorSdkService
        
         return $this->libCall->call('PriceMonitorPlentyIntegration::' . $method, $parameters);
     }
-
-
 }
-
 
 ?>

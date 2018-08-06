@@ -107,12 +107,12 @@ class ApiResponse
 	 */
 	public function create($data, int $code = ResponseCode::OK, array $headers = []):Response
 	{
-		foreach($headers as $key => $value)
-		{
+		foreach ($headers as $key => $value) {
 			$this->header($key, $value);
 		}
-	
-		$responseData["data"]   = $data;
+		
+		$responseData["data"] = $data;
+
         return $this->response->make(json_encode($responseData), $code, $this->headers);
 	}
 }

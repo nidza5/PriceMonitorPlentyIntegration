@@ -49,35 +49,36 @@ class PriceResource extends ApiResource
 
 	public function updatePrices():Response
 	{
-
        $returnResult = ['productPrices' => [], 'errorMessages' => []];
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
        $contract =  $this->request->get('contract', '');
        $contractInformation = null;
 
-        if($priceList !== null)
-            $priceList = json_decode($priceList,true);
+       if ($priceList !== null) {
+          $priceList = json_decode($priceList,true);
+       }        
 
-         if($contract !== null)
+       if($contract !== null) {
             $contractInformation = json_decode($contract,true);
-
+        }
 
        /** @var CurrencyExchangeRepository $currencyService */
        $currencyService = pluginApp(CurrencyExchangeRepositoryContract::class);
        $systemCurrency = $currencyService->getDefaultCurrency();
 
-       foreach($priceList as $price) {
-            if($price['currency'] ==  $systemCurrency) {
+       foreach ($priceList as $price) {
+            if ($price['currency'] ==  $systemCurrency) {
                
-                if(empty($price['identifier']))
+                if (empty($price['identifier'])) {
                     continue;
+                }
 
                 $itemService = pluginApp(ProductFilterService::class);
                 $originalVariation = $itemService->getVariationById($price['identifier']);
 
                 $variation = null;
-                if(!empty($originalVariation)) {
+                if (!empty($originalVariation)) {
                     $variation = $originalVariation[0];
                     $variationSalesPrices = $variation["variationSalesPrices"];
                     $savedSalesPriceInContract = $contractInformation['salesPricesImport'];
@@ -91,11 +92,11 @@ class PriceResource extends ApiResource
                     //sales price which not related to variation
                     $salesPricesNotRelatedToVariation = $this->priceService->getSalesPricesNotRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
 
-                    try{
+                    try {
                         //update sales price that related to variation
-                    $update =   $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
+                        $update = $this->priceService->updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$price['identifier'],$price['recommendedPrice']);
 
-                    $returnResult['productPrices'][] = $update;
+                        $returnResult['productPrices'][] = $update;
 
                 } catch(\Exception $ex)
                     {
@@ -113,17 +114,13 @@ class PriceResource extends ApiResource
                         ];
 
                         $returnResult['errorMessages'][] = $responseError;
-
                     }                   
                     
-                    if($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
-                       
+                    if ($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                         try {
-                           $insert =  $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
-                       
+                            $insert =  $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
                             return $this->response->create($insert, ResponseCode::OK);
-
-                        } catch(\Exception $ex) {
+                        } catch (\Exception $ex) {
                             $failedItems[] = array(
                                 'productId' => $price['identifier'],
                                 'name' => isset($price['name']) ? $price['name'] : '',
@@ -141,7 +138,7 @@ class PriceResource extends ApiResource
                         }
                         
                     }
-                    else if(!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null && $salesPriceRelatedToVariation == null) {
+                    else if (!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null && $salesPriceRelatedToVariation == null) {
                         // insert  to transaction history, transactionDetails
                         $failedItems [] = [
                             "productId" => $price['identifier'],   
@@ -178,7 +175,6 @@ class PriceResource extends ApiResource
                 
             }
         }
-
 		return $this->response->create($returnResult, ResponseCode::OK);
     }   
 }

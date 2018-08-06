@@ -61,23 +61,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
     public function getAccountInfo()
     {
-        // $emailObject = $this->configInfoRepo->getConfig('email');
-        // $passwordObject = $this->configInfoRepo->getConfig('password');
-        // $transactionsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionsRetentionInterval');
-        // $transactionDetailsRetentionIntervalObject = $this->configInfoRepo->getConfig('transactionDetailsRetentionInterval');
-    
-        // $email = $emailObject->value;
-        // $password = $passwordObject->value;
-        // $transactionsRetentionInterval = $transactionsRetentionIntervalObject->value;
-        // $transactionDetailsRetentionInterval = $transactionDetailsRetentionIntervalObject->value;
-
-        // $data = array(
-        //     'userEmail' =>   $email,
-        //     'userPassword' => $password,
-        //     'transactionsRetentionInterval' => $transactionsRetentionInterval,
-        //     'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval
-        // );
-
         $accountInfo = $this->sdkService->call("getAccountInfoFromMiddleware", []);
 
         return json_encode($accountInfo);
@@ -87,9 +70,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
-        
+        }
+
         $email = $requestData['email'];
         $password = $requestData['password'];
         $transactionsRetentionInterval = $requestData['transactionsRetentionInterval'];
@@ -102,11 +86,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             'transactionDetailsRetentionInterval' => $transactionDetailsRetentionInterval 
         ]);
 
-        if( $saveAccountInfoToMiddleware != null &&  isset($saveAccountInfoToMiddleware['error']))
-        {
-              $errorReponse = [
+        if ($saveAccountInfoToMiddleware != null && isset($saveAccountInfoToMiddleware['error'])) {
+            $errorReponse = [
                 'Message' => $saveAccountInfoToMiddleware['error']
-             ];
+            ];
 
             return  $errorReponse;
         }

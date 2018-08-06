@@ -101,14 +101,16 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }         
 
         $priceMonitorId = $requestData['pricemonitorId'];
        
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
- 
+        }           
+
         $isEnabled = $requestData['enableImport'];
 
         $savePriceSchedule =  $this->sdkService->call("saveSchedulePriceToMiddleware", [
@@ -123,89 +125,18 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             throw new \Exception("Request data are empty!");
+        }           
 
         $priceMonitorId = $requestData['pricemonitorId'];
 
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
+        }            
 
         $runProductImport =  $this->sdkService->call("runPriceImportMiddleware", [
             'pricemonitorId' => $priceMonitorId      
         ]); 
-
-        // $queue = $this->queueRepo->getQueueByName(QueueType::DEFAULT_QUEUE_NAME);
-
-        // $emailObject = $this->configInfoRepo->getConfig('email');
-        // $passwordObject = $this->configInfoRepo->getConfig('password');
-
-        // $emailForConfig = $emailObject->value;
-        // $passwordForConfig = $passwordObject->value;
-
-       
-        // $enqueAndRun =  $this->sdkService->call("enqueuePriceImport", [
-        //     'priceMonitorId' => $priceMonitorId,
-        //     'queueModel' => $queue,
-        //     'emailForConfig' =>  $emailForConfig,
-        //     'passwordForConfig' =>  $passwordForConfig        
-        // ]); 
-
-        // if($enqueAndRun != null && $enqueAndRun['Message'])
-        // {
-        //     return [
-        //         'Message' => $enqueAndRun['Message']
-        //     ];
-        // }
-
-        // if($enqueAndRun != null)
-        //     $this->queueRepo->savePriceMonitorQueue($enqueAndRun['queueName'],$enqueAndRun['storageModel']);
-
-        // $createToken =  $this->sdkService->call("runAsyncWithToken", ['queueModel' => $queue]);   
-      
-        // if($createToken != null && $createToken['error'])
-        //    throw new \Exception($createToken['error_msg']);
-        
-        // if($createToken != null &&  $createToken['isCreateRunnerToken'] == true)
-        // {
-        //    $hashUniqueToken =  StringUtils::getUniqueString(20);    
-
-        //    $savedToken = $this->tokenRepo->saveRunnerToken($hashUniqueToken);
- 
-        //    $returnValues = [
-        //        "token" => $savedToken,
-        //        "queueName" => $enqueAndRun['queueName']
-        //    ];
-        //     // call async
-        //     return json_encode($returnValues);
-        // }
-
-        // return json_encode("OK");
-
     }
-
-    public function registerCallbacks($contract)
-    {
-        $webHookToken = $this->configInfoRepo->getConfig('webhook_token');
-        $tokenForSend = $webHookToken->value;
-
-        $webstoreHelper = pluginApp(\Plenty\Modules\Helper\Services\WebstoreHelper::class);
-        /** @var \Plenty\Modules\System\Models\WebstoreConfiguration $webstoreConfig */
-        $webstoreConfig = $webstoreHelper->getCurrentWebstoreConfiguration();
-        $callBackPrices =  $this->sdkService->call('registerCallBackForPrices', [
-            'token' => $tokenForSend,
-            'url' => $webstoreConfig->domainSsl . '/refreshPrices',
-            'contract_Id' => $contract->id
-        ]);
-        
-        return $callBackPrices;
-    }
-
-    public function refreshPrices() {
-
-        echo "Uslo u refresh Prices";
-
-        throw new \Exception("Nikola Vasiljevic - izvestaj da je uslo u metodu!");
-    }
-
  }

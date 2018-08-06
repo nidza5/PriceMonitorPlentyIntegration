@@ -39,10 +39,11 @@ class AttributeResource extends ApiResource
 
         $attributesIdName = array();
     
-            foreach($attributes as $key => $value) {
-                foreach($value as $v => $l)
-                    $attributesIdName[$v] = explode("-",$l)[0];            
-            }
+        foreach ($attributes as $key => $value) {
+            foreach ($value as $v => $l) {
+                $attributesIdName[$v] = explode("-",$l)[0]; 
+            }                               
+        }
 
 		return $this->response->create($attributesIdName, ResponseCode::OK);
 	}

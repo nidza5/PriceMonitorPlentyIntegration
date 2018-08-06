@@ -50,8 +50,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $this->contractRepo = $contractRepo;
     }
 
-
-
     public function getMappedAttributes(Request $request) :string 
     {
         $requestData = $request->all();
@@ -59,8 +57,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         if($requestData != null)
             $priceMonitorId = $requestData['priceMonitorContractId'];
-
-     //   $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
 
         $getMappedAttributesFromMiddleware = $this->sdkService->call("getMappedAttributesFromMiddleware", [
             'priceMonitorContractId' => $priceMonitorId        
@@ -73,31 +69,25 @@ namespace PriceMonitorPlentyIntegration\Controllers;
     {
         $requestData = $request->all();
 
-        if($requestData == null)
+        if ($requestData == null) {
             return;
+        }           
 
         $priceMonitorId = $requestData['pricemonitorId'];
         $mappings = $requestData['mappings'];
-
        
-        if($priceMonitorId === 0 || $priceMonitorId === null)
+        if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
+        }            
 
-        if($mappings == null)
+        if ($mappings == null) {
             throw new \Exception("Mappings is empty");
-        
-        // $contract = $this->contractRepo->getContractByPriceMonitorId($priceMonitorId);
-
-        // if($contract == null)
-        //     throw new \Exception("Contract is empty");
-
-         
+        }            
+           
         $saveAttributesMappingToMiddleware =  $this->sdkService->call("saveAttributesMappingToMiddleware", [
             'priceMonitorId' => $priceMonitorId,
             'mappings' => $mappings         
         ]);    
-
-       //  $this->attributesMappingRepo->saveAttributeMapping($contract->id,$contract->priceMonitorId,$mappings);
 
          return "OK";        
     }

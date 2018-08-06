@@ -163,12 +163,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password'],
                 'host' =>  $host             
             ]);
-
-            // echo "response contracts    ";
-
-           // echo json_encode($reponseContracts);
-
-            
+ 
             //Handling errors when ocuurs in getLoggingAndContracts
             if(($resultLogin != null && is_array($resultLogin) && isset($resultLogin['Code']) && isset($resultLogin['Message'])) || ($resultLogin['error'] && $resultLogin['error_msg']))
             {
@@ -190,7 +185,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
             $dashboardInfo = $resultLogin['dashboardInfo'];
 
-            //save token in database
             $configInfoRepo->saveConfig('access_token',$accessToken);
 
         } catch(\Exception $ex) {
@@ -235,21 +229,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $contractsIds = array();
 
         $itemService = pluginApp(ProductFilterService::class);
-
-
-        // $finalResult = $itemService->getAllVariations();
-       // $finalResult = $itemService->getManufacturerById(2);
-       //  $finalResult = $itemService->getItemWithPropertiesById(135);
-     
-        // echo "products";
-        // echo json_encode($finalResult);
-              
-        // $prodServ = pluginApp(ProductFilterService::class);
-
-        //  $categories =  $prodServ->getCategoryById(18);
-
-        //  echo json_encode( $categories[0]["details"][0]["name"]);
-
 
         $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish,
