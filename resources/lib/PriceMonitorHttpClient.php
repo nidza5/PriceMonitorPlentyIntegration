@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/HttpResponsePlenty.php';
+
 use GuzzleHttp\ClientInterface;
 
 class PriceMonitorHttpClient
