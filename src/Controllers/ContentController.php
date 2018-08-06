@@ -131,7 +131,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'host' =>  $host             
             ]);
 
+                echo "email";
+                echo $credentials['email'];
+
+                echo "password";
+                echo  $credentials['password'];
+
             echo "result login";
+            
             echo json_encode($resultLogin);
  
             //Handling errors when ocuurs in getLoggingAndContracts
