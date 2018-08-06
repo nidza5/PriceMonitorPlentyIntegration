@@ -12,6 +12,7 @@ use Plenty\Modules\Cron\Services\CronContainer;
 use PriceMonitorPlentyIntegration\Services\CronScheduleUpdate;
 use PriceMonitorPlentyIntegration\Services\CronSyncRun;
 use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
+use PriceMonitorPlentyIntegration\Middlewares\Middleware;
 
 /**
  * Class PriceIntegrationServiceProvider
@@ -25,6 +26,7 @@ use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
       */
      public function register()
      {
+         $this->addGlobalMiddleware(Middleware::class);
          $this->getApplication()->register(PriceIntegrationRouteServiceProvider::class);
          $this->getApplication()->bind(ConfigRepositoryContract::class, ConfigInfoRepository::class);
      }

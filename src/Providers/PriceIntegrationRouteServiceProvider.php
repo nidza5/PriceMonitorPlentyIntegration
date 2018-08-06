@@ -5,6 +5,7 @@ namespace PriceMonitorPlentyIntegration\Providers;
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\Router;
 use Plenty\Plugin\Routing\ApiRouter;
+use PriceMonitorPlentyIntegration\Middlewares\Middleware;
 /**
  * Class ToDoRouteServiceProvider
  * @package PriceMonitorPlentyIntegration\Providers
@@ -16,8 +17,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
      */
     public function map(Router $router,ApiRouter $api)
     {
-
-        $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources'], function ($api)
+        $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources'],['middleware' => ['Middleware']], function ($api)
 		{
             $api->get('priceMonitor/variations', 'VariationResource@index');
             $api->get('priceMonitor/attributes', 'AttributeResource@index');
