@@ -13,16 +13,11 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
- use PriceMonitorPlentyIntegration\Contracts\ProductFilterRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ProductFilterRepository;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
- use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
- 
 
  /**
   * Class FilterController
@@ -44,29 +39,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
-         /**
-         *
-         * @var ProductFilterRepository
-         */
-        private $productFilterRepo;
-
-        /**
-         *
-         * @var AttributesMappingRepositoryContract
-         */
-        private $attributesMappingRepo;
-
-
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,ProductFilterRepositoryContract $productFilterRepo,AttributesMappingRepositoryContract $attributesMappingRepo)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService)
     {
         $this->config = $config;
-        $this->sdkService = $sdkService;       
-        $this->productFilterRepo = $productFilterRepo;   
-        $this->attributesMappingRepo = $attributesMappingRepo;    
-    }
-    
+        $this->sdkService = $sdkService;      
+    }    
 
-      public function saveFilter(Request $request,ProductFilterRepositoryContract $productFilterRepo) : string
+      public function saveFilter(Request $request) : string
       {
           $requestData = $request->all();
 
@@ -122,10 +101,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Price monitor id or filter type is null");
         }
 
-        $filter = $this->productFilterRepo->getFilterByContractIdAndType($priceMonitorId,$filterType);
-
-        $attributeMapping = $this->attributesMappingRepo->getAttributeMappingCollectionByPriceMonitorId($priceMonitorId);    
-
         $itemService = pluginApp(ProductFilterService::class);
 
         $allVariations = $itemService->getAllVariations();
@@ -145,8 +120,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
             'filterType' => $filterType,
             'priceMonitorId' => $priceMonitorId,
-            'productFilterRepo' => $filter,
-            'attributeMapping' => $attributeMapping,
             'allVariations' =>  $allVariations,
             'attributesFromPlenty' => $attributesIdName            
         ]);

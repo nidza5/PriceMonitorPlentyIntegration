@@ -17,10 +17,6 @@ $tenantId = SdkRestApi::getParam('tenantId');
 $access_token = SdkRestApi::getParam('accessToken');
 
 $client = new PriceMonitorHttpClient();
-// $res = $client->request(
-//     'GET',
-//     $middlewareBaseUrl.'/api/preview?filterType='.$filterType.'&priceMonitorId='.$priceMonitorId.'&allVariations[]='.$allVariations.'&attributesFromPlenty[]='.$attributesFromPlenty
-// );
 
 $res = $client->request(
     'POST',

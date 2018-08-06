@@ -5,8 +5,6 @@ use Plenty\Modules\Authorization\Services\AuthHelper;
 use Plenty\Repositories\Models;
 use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
-use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
-use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 use Plenty\Plugin\Http\Request;
 use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
 use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
@@ -14,23 +12,7 @@ use PriceMonitorPlentyIntegration\Services\AttributeService;
 
 
 class PriceService 
-{
-    /**
-     *
-     * @var ContractRepositoryContract
-     */
-    private $contractRepo;
-
-    /**
-     * PriceResource constructor.
-     * @param Request $request
-     * @param ApiResponse $response
-     */
-	public function __construct(ContractRepositoryContract $contractRepo)
-	{
-        $this->contractRepo = $contractRepo;
-	}
-  
+{  
     public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
     {
             foreach ($savedSalesPrices as $savedPrice) {
@@ -110,7 +92,7 @@ class PriceService
                 }                    
             }
         }
-        
+
         return $matchPrices;
     }
 }

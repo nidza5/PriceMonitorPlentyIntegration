@@ -12,8 +12,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
@@ -40,22 +38,15 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         /**
          *
-         * @var ContractRepositoryContract
-         */
-        private $contractRepo;
-
-          /**
-         *
          * @var ConfigRepositoryContract
          */
         private $configInfoRepo;
 
 
-    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ContractRepositoryContract $contractRepo,ConfigRepositoryContract $configInfoRepo)
+    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;
         $this->config = $config;
-        $this->contractRepo = $contractRepo;
         $this->configInfoRepo = $configInfoRepo;      
     }
 

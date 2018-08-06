@@ -10,8 +10,6 @@ use PriceMonitorPlentyIntegration\Api\ResponseCode;
 use PriceMonitorPlentyIntegration\Services\AttributeService;
 use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;   
 use PriceMonitorPlentyIntegration\Services\ProductFilterService;
-use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
-use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
@@ -23,12 +21,6 @@ use PriceMonitorPlentyIntegration\Services\PriceService;
  */
 class PriceResource extends ApiResource
 {
-    /**
-     *
-     * @var ContractRepositoryContract
-     */
-    private $contractRepo;
-
      /**
      *
      * @var priceService
@@ -40,10 +32,9 @@ class PriceResource extends ApiResource
      * @param Request $request
      * @param ApiResponse $response
      */
-	public function __construct(Request $request,ApiResponse $response,ContractRepositoryContract $contractRepo,PriceService $priceService)
+	public function __construct(Request $request,ApiResponse $response,PriceService $priceService)
 	{
         parent::__construct($request, $response);
-        $this->contractRepo = $contractRepo;
         $this->priceService = $priceService;
 	}
 
@@ -175,6 +166,7 @@ class PriceResource extends ApiResource
                 
             }
         }
+        
 		return $this->response->create($returnResult, ResponseCode::OK);
     }   
 }

@@ -12,10 +12,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Contracts\AttributesMappingRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\AttributesMappingRepository;
- use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
 
  /**
   * Class AttributesMappingController
@@ -31,23 +27,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $sdkService;
 
-         /**
-         *
-         * @var AttributesMappingRepositoryContract
-         */
-        private $attributesMappingRepo;
-
-        /**
-         *
-         * @var ContractRepositoryContract
-         */
-        private $contractRepo;
-
-    public function __construct(PriceMonitorSdkService $sdkService,AttributesMappingRepositoryContract $attributesMappingRepo,ContractRepositoryContract $contractRepo)
+    public function __construct(PriceMonitorSdkService $sdkService)
     {
         $this->sdkService = $sdkService;       
-        $this->attributesMappingRepo = $attributesMappingRepo;      
-        $this->contractRepo = $contractRepo;
     }
 
     public function getMappedAttributes(Request $request) :string 

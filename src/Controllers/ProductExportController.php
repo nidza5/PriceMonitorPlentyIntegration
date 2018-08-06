@@ -12,16 +12,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
- use PriceMonitorPlentyIntegration\Contracts\ContractRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ContractRepository;
- use PriceMonitorPlentyIntegration\Services\ScheduleExportService;
- use PriceMonitorPlentyIntegration\Contracts\PriceMonitorQueueRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\PriceMonitorQueueRepository;
  use PriceMonitorPlentyIntegration\Constants\QueueType;
- use PriceMonitorPlentyIntegration\Contracts\RunnerTokenRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\RunnerTokenRepository;
  use PriceMonitorPlentyIntegration\Helper\StringUtils;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
@@ -36,37 +27,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  {
      use Loggable;
    
-    /**
+       /**
          *
          * @var PriceMonitorSdkService
          */
         private $sdkService;
 
-         /**
-         *
-         * @var ScheduleRepositoryContract
-         */
-        private $scheduleRepo;
-
         /**
-         *
-         * @var ContractRepositoryContract
-         */
-        private $contractRepo;
-
-         /**
-         *
-         * @var PriceMonitorQueueRepositoryContract
-         */
-        private $queueRepo;
-
-          /**
-         *
-         * @var RunnerTokenRepositoryContract
-         */
-        private $tokenRepo;
-
-       /**
          *
          * @var ConfigRepository
          */
@@ -80,13 +47,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         private $cronContainer;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ScheduleRepositoryContract $scheduleRepo,ContractRepositoryContract $contractRepo,PriceMonitorQueueRepositoryContract $queueRepo,RunnerTokenRepositoryContract $tokenRepo,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,CronContainer $cronContainer)
+    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,CronContainer $cronContainer)
     {
-        $this->sdkService = $sdkService;       
-        $this->scheduleRepo = $scheduleRepo;      
-        $this->contractRepo = $contractRepo;
-        $this->queueRepo = $queueRepo;
-        $this->tokenRepo = $tokenRepo; 
+        $this->sdkService = $sdkService;           
         $this->config = $config;
         $this->configInfoRepo = $configInfoRepo;   
         $this->cronContainer= $cronContainer;
@@ -103,14 +66,13 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         if ($priceMonitorId === 0 || $priceMonitorId === null) {
             throw new \Exception("PriceMonitorId is empty");
-        }           
+        }       
 
         $getScheduleMiddleware = $this->sdkService->call("getScheduleFromMiddleware", [
             'pricemonitorId' => $priceMonitorId,     
         ]); 
 
-        return json_encode($getScheduleMiddleware); 
-   
+        return json_encode($getScheduleMiddleware);    
     }
 
     public function saveSchedule(Request $request)
