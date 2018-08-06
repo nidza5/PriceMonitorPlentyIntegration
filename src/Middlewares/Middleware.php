@@ -39,4 +39,9 @@ class Middleware extends \Plenty\Plugin\Middleware
         // }
     }
 
+    public function after(Request $request, Response $response):Response
+    {
+        return $response;
+    }
+
 }

@@ -5,15 +5,10 @@ use Plenty\Plugin\Controller;
 use Plenty\Plugin\Http\Request;
 use PriceMonitorPlentyIntegration\Api\ApiResponse;
 use PriceMonitorPlentyIntegration\Api\ResponseCode;
-/**
- * Class ApiResource
- * @package IO\Api
- */
+
 class ApiResource extends Controller
 {
-    /**
-     * @var \IO\Api\ApiResponse
-     */
+    
 	protected $response;
     /**
      * @var Request
@@ -23,15 +18,12 @@ class ApiResource extends Controller
 	 * @var ResponseCode
 	 */
 	private $defaultCode = ResponseCode::NOT_IMPLEMENTED;
-    /**
-     * ApiResource constructor.
-     * @param Request $request
-     * @param \IO\Api\ApiResponse $response
-     */
+   
 	public function __construct(Request $request, ApiResponse $response)
 	{
 		$this->response = $response;
 		$this->request  = $request;
+
 	}
 	// Get all
     /**

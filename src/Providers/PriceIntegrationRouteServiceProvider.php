@@ -17,7 +17,7 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
      */
     public function map(Router $router,ApiRouter $api)
     {
-        $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources','middleware' => ['Middleware']], function ($api)
+        $api->version(['v1'], ['namespace' => 'PriceMonitorPlentyIntegration\Api\Resources'], function ($api)
 		{
             $api->get('priceMonitor/variations', 'VariationResource@index');
             $api->get('priceMonitor/attributes', 'AttributeResource@index');
