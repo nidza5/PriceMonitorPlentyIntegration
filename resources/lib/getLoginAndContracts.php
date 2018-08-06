@@ -12,6 +12,8 @@ $host = SdkRestApi::getParam('host');
 
 $tenantId = SdkRestApi::getParam('tenantId');
 
+return $email;
+
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'GET',
