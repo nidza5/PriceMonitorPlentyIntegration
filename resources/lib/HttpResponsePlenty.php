@@ -1,9 +1,6 @@
 <?php
 
-use Patagona\Pricemonitor\Core\Interfaces\HttpResponse as HttpResponseInterface;
-
-
-class HttpResponsePlenty implements HttpResponseInterface
+class HttpResponsePlenty
 {
     /** @var int */
     protected $status;
