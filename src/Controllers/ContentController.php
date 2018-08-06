@@ -130,6 +130,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'password' => $credentials['password'],
                 'host' =>  $host             
             ]);
+
+            echo "result login";
+            echo json_encode($resultLogin);
  
             //Handling errors when ocuurs in getLoggingAndContracts
             if (($resultLogin != null && is_array($resultLogin) && isset($resultLogin['Code']) && isset($resultLogin['Message'])) || ($resultLogin['error'] && $resultLogin['error_msg']))
@@ -142,7 +145,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                         'Message' => 'Invalid credentials. Failed to login to Pricemonitor account.'
                     ];
                 }              
-                
+
                 return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', ['errorReponse' => $errorReponse ]);
             }            
             
