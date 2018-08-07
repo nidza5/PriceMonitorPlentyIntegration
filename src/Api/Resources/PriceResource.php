@@ -14,6 +14,7 @@ use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceReposit
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
 use PriceMonitorPlentyIntegration\Services\PriceService;
+use PriceMonitorPlentyIntegration\Api\AuthorizationApi;
 
 /**
  * Class PriceResource
@@ -40,6 +41,14 @@ class PriceResource extends ApiResource
 
 	public function updatePrices():Response
 	{
+        $authorizeApi = pluginApp(AuthorizationApi::class);
+
+        $isValid = $authorizeApi->checkToken($this->request);
+
+        if ($isValid == false) {
+            return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
+        }
+
        $returnResult = ['productPrices' => [], 'errorMessages' => []];
        $priceList =  $this->request->get('priceList', '');
        $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
