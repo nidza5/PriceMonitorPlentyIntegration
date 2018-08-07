@@ -33,9 +33,9 @@ use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
      {
         try {
             $referenceContainer->add([ 'ContractId' => 'ContractId' ]);
-            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronScheduleUpdate::class);
-            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronSyncRun::class);
-            $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronRefreshStatus::class);
+            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronScheduleUpdate::class);
+            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronSyncRun::class);
+            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronRefreshStatus::class);
         }
         catch(ReferenceTypeException $ex) {
         
