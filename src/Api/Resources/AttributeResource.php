@@ -8,6 +8,7 @@ use PriceMonitorPlentyIntegration\Api\ApiResource;
 use PriceMonitorPlentyIntegration\Api\ApiResponse;
 use PriceMonitorPlentyIntegration\Api\ResponseCode;
 use PriceMonitorPlentyIntegration\Services\AttributeService;
+use PriceMonitorPlentyIntegration\Api\AuthorizationApi;
 
 /**
  * Class VariationResource
@@ -33,6 +34,14 @@ class AttributeResource extends ApiResource
      */
 	public function index():Response
 	{
+        $authorizeApi = pluginApp(AuthorizationApi::class);
+
+        $isValid = $authorizeApi->checkToken($this->request);
+
+        if ($isValid == false) {
+            return $this->response->error(401, 'Unauthorized request');
+        }
+
         $attributeService = pluginApp(AttributeService::class);
     
         $attributes = $attributeService->getAllTypeAttributes();

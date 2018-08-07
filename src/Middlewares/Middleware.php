@@ -23,26 +23,7 @@ class Middleware extends \Plenty\Plugin\Middleware
 
     public function before(Request $request )
     {
-        $checkToken = $request->get('isCheck', null);
-
-        return $checkToken;
-
-        if ($checkToken != null && $checkToken == true)
-        {
-            $jwt = $request->header('Authorization', null);
-            $access_token = "";
-
-            if ($jwt != null ) {
-                $access_token = explode(" ",$jwt)[1];
-            }
-
-            $savedToken =  $this->configInfoRepo->getConfig('access_token');
-            $token = $savedToken !== null ? $savedToken->value : "";
-
-            if ($access_token === null || $access_token != $token) {
-                return $this->response->make("Unauthorized request", 401);
-            }
-        }        
+                
     }
 
     public function after(Request $request, Response $response):Response

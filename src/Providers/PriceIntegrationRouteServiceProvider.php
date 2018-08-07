@@ -5,7 +5,6 @@ namespace PriceMonitorPlentyIntegration\Providers;
 use Plenty\Plugin\RouteServiceProvider;
 use Plenty\Plugin\Routing\Router;
 use Plenty\Plugin\Routing\ApiRouter;
-use PriceMonitorPlentyIntegration\Middlewares\Middleware;
 /**
  * Class ToDoRouteServiceProvider
  * @package PriceMonitorPlentyIntegration\Providers

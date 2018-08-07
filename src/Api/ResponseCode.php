@@ -1,10 +1,6 @@
 <?php
 namespace PriceMonitorPlentyIntegration\Api;
-/**
- * Created by ptopczewski, 15.09.16 15:32
- * Class ResponseCode
- * @package IO\Api
- */
+
 class ResponseCode
 {
 	const SWITCHING_PROTOCOLS = 101;
