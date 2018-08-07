@@ -38,6 +38,8 @@ class VariationResource extends ApiResource
 
         $isValid = $authorizeApi->checkToken($this->request);
 
+        return $isValid;
+
         if ($isValid == false) {
             return $this->response->error(401, 'Unauthorized request');
         }
