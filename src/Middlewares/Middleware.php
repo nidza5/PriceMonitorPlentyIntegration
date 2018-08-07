@@ -25,6 +25,8 @@ class Middleware extends \Plenty\Plugin\Middleware
     {
         $checkToken = $request->get('isCheck', null);
 
+        return $checkToken;
+
         if ($checkToken != null && $checkToken == true)
         {
             $jwt = $request->header('Authorization', null);
