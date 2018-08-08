@@ -46,6 +46,10 @@ class ProductResource extends ApiResource
 
         $groupOperator =  $this->request->get('groupOperator', '');
 
+        $limit = $this->request->get('limit');
+
+        $offset = $this->request->get('offset');
+
         if ($parentGroup !== null) {
             $parentGroup = json_decode($parentGroup,true);
         }
