@@ -636,20 +636,20 @@ class ProductFilterService {
                                     if($variationCondition["operator"] == "AND")
                                     {   
                                         if(isset($value[$variationCondition["filterByColumn"]])) 
-                                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                                            $condition =  $condition && (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                         else 
                                             $condition = $condition &&  false;
                                     }
                                     else if($variationCondition["operator"] == "OR")
                                     {
                                         if(isset($value[$variationCondition["filterByColumn"]])) 
-                                            $condition =  $condition || (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                                            $condition =  $condition || (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                         else 
                                             $condition = $condition ||  false;
                                     }
                                 } else {
                                     if(isset($value[$variationCondition["filterByColumn"]])) 
-                                        $condition = (stripos($value[$variationCondition["filterByColumn"]]) !== false);
+                                        $condition = (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                     else 
                                         $condition = false;  
                                 }
@@ -660,20 +660,20 @@ class ProductFilterService {
                                     if($variationCondition["operator"] === "AND")
                                     {
                                         if(isset($value[$variationCondition["filterByColumn"]])) 
-                                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                         else 
                                             $condition = $condition &&  false;
                                     }
                                      else if($variationCondition["operator"] === "OR")
                                      {
                                         if(isset($value[$variationCondition["filterByColumn"]])) 
-                                            $condition =  $condition || (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                                            $condition =  $condition || (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                         else 
                                             $condition = $condition ||  false;
                                      }
                                 } else {
                                     if(isset($value[$variationCondition["filterByColumn"]])) 
-                                        $condition =  (stripos($value[$variationCondition["filterByColumn"]]) === false);
+                                        $condition =  (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                                     else 
                                         $condition = false; 
                                 }
