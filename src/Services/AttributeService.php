@@ -136,6 +136,21 @@ class AttributeService {
 
         return $finalResult;
     }
+
+    public function getAttributeForFilter()
+    {
+        $attributes = $this->getAllTypeAttributes();
+
+        $attributesIdName = array();
+    
+        foreach ($attributes as $key => $value) {
+            foreach ($value as $v => $l) {
+                $attributesIdName[$v] = explode("-",$l)[0]; 
+            }                               
+        }
+
+        return $attributesIdName;
+    }
 }
 
 ?>

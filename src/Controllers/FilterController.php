@@ -101,27 +101,27 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Price monitor id or filter type is null");
         }
 
-        $itemService = pluginApp(ProductFilterService::class);
+        // $itemService = pluginApp(ProductFilterService::class);
 
-        $allVariations = $itemService->getAllVariations();
+        // $allVariations = $itemService->getAllVariations();
 
-        $attributeService = pluginApp(AttributeService::class);
+        // $attributeService = pluginApp(AttributeService::class);
 
-        $attributesFromPlenty = $attributeService->getAllTypeAttributes();
+        // $attributesFromPlenty = $attributeService->getAllTypeAttributes();
 
-        $attributesIdName = array();
+        // $attributesIdName = array();
 
-        foreach ($attributesFromPlenty as $key => $value) {
-            foreach ($value as $v => $l) {
-                $attributesIdName[$v] = explode("-",$l)[0];            
-            }
-        }
+        // foreach ($attributesFromPlenty as $key => $value) {
+        //     foreach ($value as $v => $l) {
+        //         $attributesIdName[$v] = explode("-",$l)[0];            
+        //     }
+        // }
         
         $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
             'filterType' => $filterType,
-            'priceMonitorId' => $priceMonitorId,
-            'allVariations' =>  $allVariations,
-            'attributesFromPlenty' => $attributesIdName            
+            'priceMonitorId' => $priceMonitorId
+            // 'allVariations' =>  $allVariations,
+            // 'attributesFromPlenty' => $attributesIdName            
         ]);
 
         return json_encode($filteredVariation);        
