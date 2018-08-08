@@ -48,7 +48,7 @@ class ProductResource extends ApiResource
 
         $limit = $this->request->get('limit',null);
 
-        return  $limit;
+        return  $this->response->create($limit, ResponseCode::OK);
 
         $offset = $this->request->get('offset',null);
 
