@@ -90,7 +90,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if ($requestData == null) {
             return;
         }
-
+        
         $priceMonitorId = $requestData['pricemonitorId'];
         $filterType = $requestData['type'];
         $filterData = $requestData['filters'];
@@ -101,27 +101,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Price monitor id or filter type is null");
         }
 
-        // $itemService = pluginApp(ProductFilterService::class);
-
-        // $allVariations = $itemService->getAllVariations();
-
-        // $attributeService = pluginApp(AttributeService::class);
-
-        // $attributesFromPlenty = $attributeService->getAllTypeAttributes();
-
-        // $attributesIdName = array();
-
-        // foreach ($attributesFromPlenty as $key => $value) {
-        //     foreach ($value as $v => $l) {
-        //         $attributesIdName[$v] = explode("-",$l)[0];            
-        //     }
-        // }
-        
         $filteredVariation =  $this->sdkService->call("previewFromMiddleware", [
             'filterType' => $filterType,
-            'priceMonitorId' => $priceMonitorId
-            // 'allVariations' =>  $allVariations,
-            // 'attributesFromPlenty' => $attributesIdName            
+            'priceMonitorId' => $priceMonitorId           
         ]);
 
         return json_encode($filteredVariation);        
