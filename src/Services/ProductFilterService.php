@@ -118,6 +118,10 @@ class ProductFilterService {
 
         $products = $repository->search();
 
+        $total = $products->getTotalCount();
+
+        return $total;
+
         $originalProducts = $products->getResult();
 
         $itemsResults = [];
