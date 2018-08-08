@@ -58,6 +58,10 @@ class ProductResource extends ApiResource
     
         $filteredProducts = $itemService->addFilterByOperator($parentGroup,$groupOperator); 
 
+        if ($limit !== null && $offset !== null) {
+            $filteredProducts = array_slice($filteredProducts, (int)$limit, (int)$offset);
+        }
+
 		return $this->response->create($filteredProducts, ResponseCode::OK);
 	}
 }
