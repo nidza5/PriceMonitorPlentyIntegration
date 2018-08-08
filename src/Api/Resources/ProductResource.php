@@ -53,7 +53,7 @@ class ProductResource extends ApiResource
         if ($parentGroup !== null) {
             $parentGroup = json_decode($parentGroup,true);
         }
-        
+                        
         $itemService = pluginApp(ProductFilterService::class);
     
         $filteredProducts = $itemService->addFilterByOperator($parentGroup,$groupOperator); 
@@ -61,7 +61,7 @@ class ProductResource extends ApiResource
         if ($limit !== null && $offset !== null) {
             $filteredProducts = array_slice($filteredProducts, (int)$limit, (int)$offset);
         }
-
+        
 		return $this->response->create($filteredProducts, ResponseCode::OK);
 	}
 }
