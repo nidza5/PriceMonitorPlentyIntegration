@@ -48,6 +48,8 @@ class ProductResource extends ApiResource
 
         $limit = $this->request->get('limit',null);
 
+        return  $limit;
+
         $offset = $this->request->get('offset',null);
 
         if ($parentGroup !== null) {
