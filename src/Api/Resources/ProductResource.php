@@ -46,9 +46,9 @@ class ProductResource extends ApiResource
 
         $groupOperator =  $this->request->get('groupOperator', '');
 
-        $limit = $this->request->get('limit');
+        $limit = $this->request->get('limit',null);
 
-        $offset = $this->request->get('offset');
+        $offset = $this->request->get('offset',null);
 
         if ($parentGroup !== null) {
             $parentGroup = json_decode($parentGroup,true);
@@ -61,7 +61,7 @@ class ProductResource extends ApiResource
         if ($limit !== null && $offset !== null) {
             $filteredProducts = array_slice($filteredProducts, (int)$limit, (int)$offset);
         }
-        
+
 		return $this->response->create($filteredProducts, ResponseCode::OK);
 	}
 }
