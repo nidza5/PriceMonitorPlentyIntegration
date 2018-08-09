@@ -77,8 +77,7 @@ class ProductFilterService
      *
      * @var BarcodeRepositoryContract
      */
-    private $barCodeRepository;
-      
+    private $barCodeRepository;     
 
      /**
      * Constructor.
@@ -131,14 +130,12 @@ class ProductFilterService
                 foreach($p['variationBarcodes'] as $bar) {               
                     $barCode = null;
                     $barCode = $authHelper->processUnguarded(
-                        function () use ($barCodeRepo, $barCode,$bar) {
-                        
+                        function () use ($barCodeRepo, $barCode,$bar) {                        
                             return $barCodeRepo->findBarcodeById($bar['barcodeId']);
                         }
                     );
 
-                    $barElement = [$barCode->name => $bar['code']];
-    
+                    $barElement = [$barCode->name => $bar['code']];    
                     $arrayForMerge = $tempArr == null ? $p : $tempArr;
                     $merge = array_merge($arrayForMerge,$barElement);  
                     $tempArr = $merge;              
@@ -160,7 +157,6 @@ class ProductFilterService
             foreach ($p['variationMarkets'] as $channel) {
                 $channelOriginal = $this->getChannelById($channel['id']);
                 $channelName =  $channelOriginal != null ? $channelOriginal['name'] : "";
-
                 $channelElement = ["channel-".$channelName => $channelName];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$channelElement);  
@@ -183,7 +179,7 @@ class ProductFilterService
 
                 if ($supplierIdentifier === null ||  $supplierIdentifier === "") {
                     continue;
-                }                       
+                }                      
 
                 $supplierElement = ["supplier-".$supplierIdentifier => $supplierIdentifier];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
@@ -249,7 +245,7 @@ class ProductFilterService
             $manufacturerId = $p["item"]["manufacturerId"];
             $originalManufacturer = $this->getManufacturerById($manufacturerId);
 
-            if($originalManufacturer != null) {
+            if ($originalManufacturer != null) {
                 $manufacturerElement = [ "manufacturer-".$originalManufacturer->name => $originalManufacturer->name];
                 $arrayForMerge = $tempArr == null ? $p : $tempArr;
                 $merge = array_merge($arrayForMerge,$manufacturerElement);  
@@ -258,7 +254,7 @@ class ProductFilterService
             }        
         }
 
-           return $itemsResults;
+         return $itemsResults;
     }
 
     public function getMappedAttributesCode($mappedAttribute) {
@@ -293,7 +289,7 @@ class ProductFilterService
 
         $manufactures = null;
 
-       $manufactures = $manufacturerRepo->findById($id);
+        $manufactures = $manufacturerRepo->findById($id);
 
         return $manufactures;
     }
@@ -324,7 +320,7 @@ class ProductFilterService
 
         $item = null;
 
-       $item = $itemRepo->show($id,["id","position"],"en",['itemProperties']);
+        $item = $itemRepo->show($id,["id","position"],"en",['itemProperties']);
        
         return $item;
     }
@@ -337,9 +333,9 @@ class ProductFilterService
 
         $categories = null;
 
-       $category = $categoriesRepo->search($id,1,50,["details" => null]);
+        $category = $categoriesRepo->search($id,1,50,["details" => null]);
        
-       $finalCategory = $category->getResult();
+        $finalCategory = $category->getResult();
 
         return $finalCategory;
 
@@ -363,6 +359,7 @@ class ProductFilterService
         $variation = $repository->search();
 
         $originalVariation = $variation->getResult();
+
         return $originalVariation;
     }
 
@@ -381,8 +378,7 @@ class ProductFilterService
 
             $filteredGroup = [];
 
-            foreach($parentGroup as $group)
-            {
+            foreach ($parentGroup as $group) {
                $filterVAriationByConditions = [];
 
                 foreach($group["expressions"] as $exp) {
@@ -414,8 +410,7 @@ class ProductFilterService
         
                     $nameColumnInVariation = null;
     
-                    switch($condition) {
-    
+                    switch ($condition) {    
                         case "equal" :
                             $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
                                                                 "value" => $values[0],
@@ -474,82 +469,88 @@ class ProductFilterService
 
             $filteredProducts = array_filter($variationArray, function($value) use ($filterVAriationByConditions, $parentFilteredGroup) {
                 $groupCondition = null;
-                foreach($parentFilteredGroup as $filterGroup) 
+                foreach ($parentFilteredGroup as $filterGroup) 
                 {
                     $condition = null;
-                    foreach($filterGroup["expressionFilter"] as $variationCondition) {
+                    foreach ($filterGroup["expressionFilter"] as $variationCondition) {
 
                         $filterByCondition = $variationCondition["condition"];
                         
-                        switch($filterByCondition) {    
+                        switch ($filterByCondition) {    
                             case "=" :                               
-                                    if($condition !== null) {
-                                        if($variationCondition["operator"] === "AND")
-                                        {
-                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                    if ($condition !== null) {
+                                        if ($variationCondition["operator"] === "AND") {
+                                            if (isset($value[$variationCondition["filterByColumn"]])) {
                                                 $condition = $condition && ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
-                                            else 
-                                                $condition = $condition &&  false;
+                                            }
+                                            else {
+                                                $condition = $condition && false;
+                                            }                                                
                                         }
-                                        else if($variationCondition["operator"] === "OR")
-                                        {
-                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                        else if ($variationCondition["operator"] === "OR") {
+                                            if(isset($value[$variationCondition["filterByColumn"]])) {
                                                 $condition = $condition || $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
-                                            else 
-                                                $condition = $condition ||  false;
-
+                                            }
+                                            else {
+                                                $condition = $condition || false;
+                                            }                                            
                                         }
-                                    } else {                                      
-
-                                        if(isset($value[$variationCondition["filterByColumn"]])) 
+                                    } else {                                     
+                                        if (isset($value[$variationCondition["filterByColumn"]])) {
                                             $condition = ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
-                                        else 
-                                            $condition = false;   
-                                    }
-                                 
+                                        } 
+                                        else {
+                                            $condition = false;
+                                        }                                               
+                                    }                                 
                                break;
                             case "!=" :                             
-                                    if($condition !== null) {
-                                        if($variationCondition["operator"] === "AND")
-                                        {
-                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                    if ($condition !== null) {
+                                        if ($variationCondition["operator"] === "AND") {
+                                            if (isset($value[$variationCondition["filterByColumn"]])) {
                                                 $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                            else 
+                                            }
+                                            else {
                                                 $condition = $condition && false;
+                                            }                                                
                                         }
-                                        else if($variationCondition["operator"] == "OR")
-                                        {
-                                            if(isset($value[$variationCondition["filterByColumn"]])) 
+                                        else if ($variationCondition["operator"] == "OR") {
+                                            if (isset($value[$variationCondition["filterByColumn"]])) {
                                                 $condition = $condition || $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                            else 
-                                                $condition = $condition ||  false;
+                                            }
+                                            else {
+                                                $condition = $condition || false;
+                                            }                                                
                                         }
                                     } else {
-                                        if(isset($value[$variationCondition["filterByColumn"]])) 
+                                        if (isset($value[$variationCondition["filterByColumn"]])) {
                                             $condition = $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                        else 
-                                            $condition = false;  
-                                    }
-                                
+                                        }
+                                        else {
+                                            $condition = false; 
+                                        }                                             
+                                    }                                
                             break;
                             case ">" :                           
-                               if($condition !== null) {
-                                 if($variationCondition["operator"] == "AND")
-                                 {
-                                    if(isset($value[$variationCondition["filterByColumn"]])) 
+                               if ($condition !== null) {
+                                 if ($variationCondition["operator"] == "AND") {                                 
+                                    if (isset($value[$variationCondition["filterByColumn"]])) {
                                         $condition = $condition && $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
-                                    else 
+                                    }
+                                    else {
                                         $condition = $condition &&  false;
+                                    }                                        
                                  }
-                                 else if($variationCondition["operator"] == "OR")
-                                 {
-                                    if(isset($value[$variationCondition["filterByColumn"]])) 
+                                 else if ($variationCondition["operator"] == "OR") {
+                                    if (isset($value[$variationCondition["filterByColumn"]])) {
                                         $condition = $condition || $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
-                                    else 
+                                    }
+                                    else {
                                         $condition = $condition || false;
+                                    }
                                  }
                                 } else {
-                                    if(isset($value[$variationCondition["filterByColumn"]]))
+                                    if (isset($value[$variationCondition["filterByColumn"]]))
                                          $condition =  $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
                                     else 
                                          $condition = false; 
@@ -692,7 +693,7 @@ class ProductFilterService
                 return $groupCondition;                    
             });
     
-             return  array_values($filteredProducts);
+             return array_values($filteredProducts);
 
         } catch (\Exception $ex)
         {
@@ -703,7 +704,6 @@ class ProductFilterService
              ];
 
              return $response;
-
         }      
     }
 }
