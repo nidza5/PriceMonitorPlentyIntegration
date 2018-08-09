@@ -9,9 +9,6 @@ use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 use PriceMonitorPlentyIntegration\Helper\StringUtils;
 use Plenty\Modules\Cron\Services\CronContainer;
-use PriceMonitorPlentyIntegration\Services\CronScheduleUpdate;
-use PriceMonitorPlentyIntegration\Services\CronSyncRun;
-use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
 
 /**
  * Class PriceIntegrationServiceProvider
@@ -33,9 +30,6 @@ use PriceMonitorPlentyIntegration\Services\CronRefreshStatus;
      {
         try {
             $referenceContainer->add([ 'ContractId' => 'ContractId' ]);
-            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronScheduleUpdate::class);
-            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronSyncRun::class);
-            // $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, CronRefreshStatus::class);
         }
         catch(ReferenceTypeException $ex) {
         
