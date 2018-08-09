@@ -37,8 +37,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $requestData = $request->all();
         $priceMonitorId = 0;
 
-        if($requestData != null)
+        if ($requestData != null) {
             $priceMonitorId = $requestData['priceMonitorContractId'];
+        }            
 
         $getMappedAttributesFromMiddleware = $this->sdkService->call("getMappedAttributesFromMiddleware", [
             'priceMonitorContractId' => $priceMonitorId        

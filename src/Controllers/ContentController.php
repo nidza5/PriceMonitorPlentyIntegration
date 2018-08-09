@@ -22,8 +22,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
-
- //todo delete
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
  use PriceMonitorPlentyIntegration\Services\ConfigService;

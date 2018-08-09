@@ -36,15 +36,15 @@ class PluginResource extends ApiResource
      */
 	public function index():Response
 	{
-        // $authorizeApi = pluginApp(AuthorizationApi::class);
+        $authorizeApi = pluginApp(AuthorizationApi::class);
 
-        // $isValid = $authorizeApi->checkToken($this->request);
+        $isValid = $authorizeApi->checkToken($this->request);
 
-        // if ($isValid == false) {
-        //     return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
-        // }
-
-        $pluginsRepo = pluginApp(PluginRepositoryContract::class);
+        if ($isValid == false) {
+            return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
+        }
+        
+        $pluginsRepo =  pluginApp(PluginRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 

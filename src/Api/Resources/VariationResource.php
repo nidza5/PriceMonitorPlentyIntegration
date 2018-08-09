@@ -34,13 +34,13 @@ class VariationResource extends ApiResource
      */
 	public function index():Response
 	{
-        // $authorizeApi = pluginApp(AuthorizationApi::class);
+        $authorizeApi = pluginApp(AuthorizationApi::class);
 
-        // $isValid = $authorizeApi->checkToken($this->request);
+        $isValid = $authorizeApi->checkToken($this->request);
 
-        // if ($isValid == false) {
-        //     return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
-        // }
+        if ($isValid == false) {
+            return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
+        }
 
         $itemService = pluginApp(ProductFilterService::class);
     

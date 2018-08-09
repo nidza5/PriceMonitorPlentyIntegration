@@ -9,7 +9,6 @@ $isEnabled = SdkRestApi::getParam('enableImport');
 $tenantId = SdkRestApi::getParam('tenantId');
 $access_token = SdkRestApi::getParam('accessToken');
 
-
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',

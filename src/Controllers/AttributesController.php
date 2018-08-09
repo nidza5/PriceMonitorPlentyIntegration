@@ -65,7 +65,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $finalResult = $attributeService->getAllTypeAttributes();
 
-         return json_encode($finalResult);   
+        return json_encode($finalResult);   
 
     }
 
@@ -75,8 +75,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         $attributeId = 0;
 
-        if($requestData != null)
+        if ($requestData != null) {
             $attributeId = $requestData['attributeId'];
+        }           
 
         $attributesRepo = pluginApp(AttributeValueRepositoryContract::class);
 

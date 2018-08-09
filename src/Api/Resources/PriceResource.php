@@ -83,8 +83,9 @@ class PriceResource extends ApiResource
                     $variationSalesPrices = $variation["variationSalesPrices"];
                     $savedSalesPriceInContract = $contractInformation['salesPricesImport'];
                     
-                    if( $savedSalesPriceInContract != null || $savedSalesPriceInContract != "")
-                    $savedSalesPriceInContract = explode(",",$savedSalesPriceInContract);
+                    if ($savedSalesPriceInContract != null || $savedSalesPriceInContract != "") {
+                        $savedSalesPriceInContract = explode(",",$savedSalesPriceInContract);
+                    }                       
 
                     //sales price which related to variation
                     $salesPriceRelatedToVariation = $this->priceService->getSalesPricesRelatedForVariation($savedSalesPriceInContract, $variationSalesPrices);
@@ -171,8 +172,7 @@ class PriceResource extends ApiResource
                     'status' => TransactionStatus::FAILED
                 ];
 
-                $returnResult['errorMessages'][] = $responseError;
-                
+                $returnResult['errorMessages'][] = $responseError;                
             }
         }
         

@@ -15,23 +15,23 @@ class PriceService
 {  
     public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
     {
-            foreach ($savedSalesPrices as $savedPrice) {
-                $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+        foreach ($savedSalesPrices as $savedPrice) {
+            $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
-                $authHelper = pluginApp(AuthHelper::class);
-        
-                $insertedSalesPrice = null;
+            $authHelper = pluginApp(AuthHelper::class);
     
-                $dataForInsert = ["variationId" => $variationId,
-                                  "salesPriceId" => $savedPrice,
-                                  "price" => $recommendedPrice];
-               
-                $insertedSalesPrice = $authHelper->processUnguarded(
-                    function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
-                        return $repositoryVariationSalesPrices->create($dataForInsert);
-                    }
-                );
-            }
+            $insertedSalesPrice = null;
+
+            $dataForInsert = ["variationId" => $variationId,
+                                "salesPriceId" => $savedPrice,
+                                "price" => $recommendedPrice];
+            
+            $insertedSalesPrice = $authHelper->processUnguarded(
+                function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
+                    return $repositoryVariationSalesPrices->create($dataForInsert);
+                }
+            );
+        }
     }
 
     public function updateSalesPricesRelatedToVariation($salesPriceRelatedToVariation,$variationId,$recommendedPrice)

@@ -8,9 +8,8 @@ use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
 use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
 use Plenty\Plugin\Http\Request;
 
-class AttributeService {
-
-
+class AttributeService 
+{
      /**
      *
      * @var PropertyRepository
@@ -43,8 +42,7 @@ class AttributeService {
     }
 
     public function getAllTypeAttributes()
-    {
-        
+    {        
         $attributesRepo = pluginApp(AttributeRepositoryContract::class);
 
         $authHelperAttr = pluginApp(AuthHelper::class);

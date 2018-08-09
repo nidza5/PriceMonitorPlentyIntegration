@@ -10,7 +10,6 @@ $priceMonitorId = SdkRestApi::getParam('priceMonitorId');
 $tenantId = SdkRestApi::getParam('tenantId');
 $access_token = SdkRestApi::getParam('accessToken');
 
-
 $client = new PriceMonitorHttpClient();
 $res = $client->request(
     'POST',

@@ -18,9 +18,7 @@ class CreateConfigInfoTable
      */
     public function run(Migrate $migrate)
     {
-        $migrate->createTable(ConfigInfo::class);
- 
+        $migrate->createTable(ConfigInfo::class); 
         $this->getLogger("CreateConfigInfoTable_run")->debug('PriceMonitorPlentyIntegration::migration.successMessage', ['tableName' => 'ConfigInfo']);
- 
     }
 }

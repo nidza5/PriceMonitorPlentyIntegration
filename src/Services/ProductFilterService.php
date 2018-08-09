@@ -1,4 +1,5 @@
 <?php
+
 namespace PriceMonitorPlentyIntegration\Services;
 
 use Plenty\Modules\Authorization\Services\AuthHelper;
@@ -33,8 +34,8 @@ use Plenty\Modules\Account\Contact\Contracts\ContactAccountRepositoryContract;
 use Plenty\Modules\Order\Referrer\Contracts\OrderReferrerRepositoryContract;
 use PriceMonitorPlentyIntegration\Services\AttributeService;
 
-class ProductFilterService {
-
+class ProductFilterService 
+{
       /**
      * Mandatory attributes
      *
@@ -66,8 +67,7 @@ class ProductFilterService {
      */
     private $attributeValueRepository;
 
-
-       /**
+   /**
      *
      * @var ItemDataLayerRepositoryContract
      */
@@ -78,8 +78,7 @@ class ProductFilterService {
      * @var BarcodeRepositoryContract
      */
     private $barCodeRepository;
-    
-    
+      
 
      /**
      * Constructor.
@@ -123,7 +122,7 @@ class ProductFilterService {
         $itemsResults = [];
         $i = 0;       
 
-        foreach($originalProducts as $p) {
+        foreach ($originalProducts as $p) {
             $i++;
             $tempArr = null;            
             $itemsResults[$i] = $p;  
@@ -131,7 +130,6 @@ class ProductFilterService {
             if (!empty($p['variationBarcodes'])) {
                 foreach($p['variationBarcodes'] as $bar) {               
                     $barCode = null;
-
                     $barCode = $authHelper->processUnguarded(
                         function () use ($barCodeRepo, $barCode,$bar) {
                         
@@ -279,13 +277,12 @@ class ProductFilterService {
         $market = null;
 
         $market = $authHelper->processUnguarded(
-            function () use ($repoMarkets, $market) {
-            
-                return $repoMarkets->getReferrerById(110);
+            function () use ($repoMarkets, $market) {            
+                return $repoMarkets->getReferrerById($id);
             }
         );
 
-        return  $market;
+        return $market;
     }
 
     public function getManufacturerById($id) 

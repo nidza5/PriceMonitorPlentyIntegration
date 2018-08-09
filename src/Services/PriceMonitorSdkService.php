@@ -1,4 +1,5 @@
 <?php
+
 namespace PriceMonitorPlentyIntegration\Services;
 
 use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;

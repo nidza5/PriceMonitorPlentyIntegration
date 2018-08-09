@@ -15,16 +15,17 @@ class ConfigInfoRepository implements ConfigRepositoryContract
          * @var DataBase $database
          */
 
-        if($key == null || $value == null)
+        if($key == null || $value == null) {
             return;
+        }           
         
         $database = pluginApp(DataBase::class);
 
-        $configValues = pluginApp(ConfigInfo::class);
-    
+        $configValues = pluginApp(ConfigInfo::class);    
 
-        if($key!= null)
+        if ($key!= null) {
             $configValues = $this->getConfig($key);
+        }           
 
         $configValues->key = $key;
 
@@ -35,13 +36,13 @@ class ConfigInfoRepository implements ConfigRepositoryContract
 
     public function getConfig($key)
     {
-        if($key == null)
+        if ($key == null) {
             return pluginApp(ConfigInfo::class);
+        }           
 
         $database = pluginApp(DataBase::class);
         $config = $database->query(ConfigInfo::class)->where('key', '=', $key)->get();
        
         return $config[0] === null ? pluginApp(ConfigInfo::class) : $config[0];
     }
-
 }
