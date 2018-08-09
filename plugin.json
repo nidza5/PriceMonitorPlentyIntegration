@@ -9,7 +9,7 @@
 		"en" : "Integration with pricemonitor, send products and get prices back."
 	},
 	"namespace":"PriceMonitorPlentyIntegration",
-	"type":"template",
+	"type":"backend",
 	"license": " Apache License Version 2",
 	"price": 0.00,
 	"version": "1.0.0",
