@@ -277,7 +277,7 @@ class ProductFilterService
         $market = null;
 
         $market = $authHelper->processUnguarded(
-            function () use ($repoMarkets, $market) {            
+            function () use ($repoMarkets, $market,$id) {            
                 return $repoMarkets->getReferrerById($id);
             }
         );
@@ -681,12 +681,13 @@ class ProductFilterService
                    
                     $operatorGroup = $filterGroup["operator"];
  
-                    if($operatorGroup == "AND")
+                    if ($operatorGroup == "AND") {
                         $groupCondition = $groupCondition === null ? ($condition) : $groupCondition && ($condition);
-                    else if($operatorGroup == "OR")
+                    }
+                    else if ($operatorGroup == "OR") {
                         $groupCondition = $groupCondition === null ? ($condition) : $groupCondition || ($condition);
-
-                }                
+                    }
+                }               
 
                 return $groupCondition;                    
             });
