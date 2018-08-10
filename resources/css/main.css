@@ -527,6 +527,6 @@ legend.scheduler-border {
     border-style: solid;
 }
 
-#priceImportTransactionTable td {
+#priceImportTransactionTable td,#transaction-history-export-master td {
     text-align:center;
 }
