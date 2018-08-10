@@ -526,3 +526,7 @@ legend.scheduler-border {
     border-width: 1px;
     border-style: solid;
 }
+
+#priceImportTransactionTable td {
+    text-align:center;
+}
