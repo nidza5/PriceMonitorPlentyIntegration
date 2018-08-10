@@ -43,7 +43,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         private $configInfoRepo;
 
 
-    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo)
+    public function __construct(PriceMonitorSdkService $sdkService, ConfigRepository $config, ConfigRepositoryContract $configInfoRepo)
     {
         $this->sdkService = $sdkService;
         $this->config = $config;
@@ -82,7 +82,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 'Message' => $saveAccountInfoToMiddleware['error']
             ];
 
-            return  $errorReponse;
+            return $errorReponse;
         }
             
         return "Account information saved successfully!";

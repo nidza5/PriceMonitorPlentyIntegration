@@ -67,7 +67,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Mappings is empty");
         }            
            
-        $saveAttributesMappingToMiddleware =  $this->sdkService->call("saveAttributesMappingToMiddleware", [
+        $saveAttributesMappingToMiddleware = $this->sdkService->call("saveAttributesMappingToMiddleware", [
             'priceMonitorId' => $priceMonitorId,
             'mappings' => $mappings         
         ]);    

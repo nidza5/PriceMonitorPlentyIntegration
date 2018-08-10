@@ -46,17 +46,17 @@ class ProductResource extends ApiResource
 
         $groupOperator =  $this->request->get('groupOperator', '');
 
-        $limit = $this->request->get('limit',null);
+        $limit = $this->request->get('limit', null);
 
-        $offset = $this->request->get('offset',null);
+        $offset = $this->request->get('offset', null);
 
         if ($parentGroup !== null) {
-            $parentGroup = json_decode($parentGroup,true);
+            $parentGroup = json_decode($parentGroup, true);
         }
                         
         $itemService = pluginApp(ProductFilterService::class);
     
-        $filteredProducts = $itemService->addFilterByOperator($parentGroup,$groupOperator); 
+        $filteredProducts = $itemService->addFilterByOperator($parentGroup, $groupOperator); 
 
         if ($limit !== null && $offset !== null && $limit !== '' && $offset !== '') {
             $filteredProducts = array_slice($filteredProducts, (int)$limit, (int)$offset);

@@ -13,7 +13,7 @@ use PriceMonitorPlentyIntegration\Services\AttributeService;
 
 class PriceService 
 {  
-    public function insertSalesPricesNotRelatedToVariation($savedSalesPrices,$variationId,$recommendedPrice)
+    public function insertSalesPricesNotRelatedToVariation($savedSalesPrices, $variationId, $recommendedPrice)
     {
         foreach ($savedSalesPrices as $savedPrice) {
             $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
@@ -92,7 +92,7 @@ class PriceService
                 }                    
             }
         }
-                
+
         return $matchPrices;
     }
 }

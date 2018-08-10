@@ -86,7 +86,7 @@ class ProductFilterService
      * @param PropertyRepositoryContract $propRepo
      * @param AttributeRepositoryContract $attributeRepo
      */
-    public function __construct(PropertyRepositoryContract $propertyRepository,AttributeRepositoryContract $attributeRepository,AttributeValueRepositoryContract $attributeValueRepository,ItemDataLayerRepositoryContract $itemDataLayerRepo,BarcodeRepositoryContract $barCodeRepository)
+    public function __construct(PropertyRepositoryContract $propertyRepository, AttributeRepositoryContract $attributeRepository, AttributeValueRepositoryContract $attributeValueRepository, ItemDataLayerRepositoryContract $itemDataLayerRepo, BarcodeRepositoryContract $barCodeRepository)
     {
         $this->propertyRepository = $propertyRepository;
         $this->attributeRepository = $attributeRepository;
@@ -303,8 +303,7 @@ class ProductFilterService
         $suppliers = null;
 
         $suppliers = $authHelper->processUnguarded(
-            function () use ($suppliersRepo, $suppliers,$id) {
-            
+            function () use ($suppliersRepo, $suppliers, $id) {            
                 return $suppliersRepo->findContactById($id);
             }
         );
@@ -320,7 +319,7 @@ class ProductFilterService
 
         $item = null;
 
-        $item = $itemRepo->show($id,["id","position"],"en",['itemProperties']);
+        $item = $itemRepo->show($id, ["id", "position"], "en", ['itemProperties']);
        
         return $item;
     }
@@ -333,7 +332,7 @@ class ProductFilterService
 
         $categories = null;
 
-        $category = $categoriesRepo->search($id,1,50,["details" => null]);
+        $category = $categoriesRepo->search($id, 1, 50, ["details" => null]);
        
         $finalCategory = $category->getResult();
 
@@ -500,7 +499,7 @@ class ProductFilterService
                                             $condition = false;
                                         }                                               
                                     }                                 
-                               break;
+                                    break;
                             case "!=" :                             
                                     if ($condition !== null) {
                                         if ($variationCondition["operator"] === "AND") {
@@ -527,7 +526,7 @@ class ProductFilterService
                                             $condition = false; 
                                         }                                             
                                     }                                
-                            break;
+                                    break;
                             case ">" :                           
                                if ($condition !== null) {
                                  if ($variationCondition["operator"] == "AND") {                                 
@@ -554,7 +553,7 @@ class ProductFilterService
                                         $condition = false; 
                                     }                                         
                                 }                            
-                            break;
+                                break;
                             case "<" :                           
                               if ($condition !== null) {
                                   if ($variationCondition["operator"] == "AND") {                                  
@@ -608,7 +607,7 @@ class ProductFilterService
                                         $condition = false; 
                                     }                                         
                                 }                            
-                            break;
+                                break;
                             case "<=" :                           
                                 if ($condition !== null) {
                                     if ($variationCondition["operator"] == "AND") {                                    
@@ -634,9 +633,8 @@ class ProductFilterService
                                     else {
                                         $condition = false;
                                     }                                        
-                                }
-                            
-                             break;
+                                }                            
+                                break;
                             case "stripos!=" :                           
                                 if ($condition !== null) {                                
                                     if ($variationCondition["operator"] == "AND") {                                       
@@ -663,7 +661,7 @@ class ProductFilterService
                                         $condition = false;
                                     }                                           
                                 }                             
-                              break;
+                                break;
                             case "stripos==" :                           
                                 if ($condition !== null) {
                                     if($variationCondition["operator"] === "AND") {                                    

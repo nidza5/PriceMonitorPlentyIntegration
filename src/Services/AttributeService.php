@@ -1,4 +1,5 @@
 <?php
+
 namespace PriceMonitorPlentyIntegration\Services;
 
 use Plenty\Modules\Authorization\Services\AuthHelper;
@@ -59,7 +60,7 @@ class AttributeService
         
        $dataAttributes = array();
 
-       $systemAttr = array("Variation name","Variation No","GTIN 13 barcode","GTIN 128 barcode","UPC barcode","ISBN barcode");
+       $systemAttr = array("Variation name", "Variation No", "GTIN 13 barcode", "GTIN 128 barcode", "UPC barcode", "ISBN barcode");
 
        $systemAttr = [
             "VariationN" => "name",

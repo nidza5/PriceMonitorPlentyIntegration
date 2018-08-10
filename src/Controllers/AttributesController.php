@@ -49,7 +49,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,AttributeRepositoryContract $attributeRepository)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService, AttributeRepositoryContract $attributeRepository)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
@@ -86,7 +86,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $attributesValues = null;
 
         $attributesValues = $authHelperAttr->processUnguarded(
-            function () use ($attributesRepo, $attributesValues,$attributeId) {                   
+            function () use ($attributesRepo, $attributesValues, $attributeId) {                   
                 
                 return $attributesRepo->findByAttributeId($attributeId);
             }

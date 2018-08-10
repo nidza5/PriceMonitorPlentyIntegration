@@ -175,9 +175,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                 }
             );
 
-             $resultSalesPrices = $salesPrices->getResult();
+            $resultSalesPrices = $salesPrices->getResult();
 
-             $salesPricesEnglish = array();
+            $salesPricesEnglish = array();
              
              foreach ($resultSalesPrices as $prices) {  
                  foreach ($prices['names'] as $key => $namePrice) {

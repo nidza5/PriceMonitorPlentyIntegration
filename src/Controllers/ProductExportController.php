@@ -46,7 +46,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
 
         private $cronContainer;
 
-    public function __construct(PriceMonitorSdkService $sdkService,ConfigRepository $config,ConfigRepositoryContract $configInfoRepo,CronContainer $cronContainer)
+    public function __construct(PriceMonitorSdkService $sdkService, ConfigRepository $config, ConfigRepositoryContract $configInfoRepo, CronContainer $cronContainer)
     {
         $this->sdkService = $sdkService;           
         $this->config = $config;
