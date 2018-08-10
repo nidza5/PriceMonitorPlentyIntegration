@@ -15,7 +15,7 @@ class ConfigInfoRepository implements ConfigRepositoryContract
          * @var DataBase $database
          */
 
-        if($key == null || $value == null) {
+        if ($key == null || $value == null) {
             return;
         }           
         

@@ -48,6 +48,5 @@ class PriceIntegrationRouteServiceProvider extends RouteServiceProvider
         $router->post('runPriceImport', 'PriceMonitorPlentyIntegration\Controllers\PriceImportController@runPriceImport');
         $router->post('refreshPrices', 'PriceMonitorPlentyIntegration\Controllers\PriceImportController@refreshPrices');
         $router->get('getLastTransactionHistory', 'PriceMonitorPlentyIntegration\Controllers\TransactionHistoryController@getLastTransactionHistory');
-
     } 
 }

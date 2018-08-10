@@ -50,11 +50,10 @@ class AttributeService
         $attributes = null;
 
         $attributes = $authHelperAttr->processUnguarded(
-          function () use ($attributesRepo, $attributes) {
-          
+          function () use ($attributesRepo, $attributes) {          
               return $attributesRepo->all();
           }
-      );
+        );
 
        $resultAttributes = $attributes->toArray();
         

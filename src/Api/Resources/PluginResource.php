@@ -44,7 +44,7 @@ class PluginResource extends ApiResource
             return $this->response->create("Unauthorized request", ResponseCode::UNAUTHORIZED);
         }
         
-        $pluginsRepo =  pluginApp(PluginRepositoryContract::class);
+        $pluginsRepo = pluginApp(PluginRepositoryContract::class);
 
         $authHelper = pluginApp(AuthHelper::class);
 

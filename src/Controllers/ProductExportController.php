@@ -17,7 +17,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
  use Plenty\Modules\Cron\Services\CronContainer;
- 
 
  /**
   * Class ProductExportController
@@ -27,7 +26,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  {
      use Loggable;
    
-       /**
+        /**
          *
          * @var PriceMonitorSdkService
          */
@@ -94,10 +93,10 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $exportInterval = $requestData['exportInterval'];
 
         $saveScheduleMiddleware = $this->sdkService->call("saveScheduleToMiddleware", [
-        'pricemonitorId' => $priceMonitorId,
-        'startAt' => $startAt,
-        'enableExport' =>  $enableExport,
-        'exportInterval' =>  $exportInterval        
+            'pricemonitorId' => $priceMonitorId,
+            'startAt' => $startAt,
+            'enableExport' =>  $enableExport,
+            'exportInterval' =>  $exportInterval        
         ]); 
 
         return json_encode($saveScheduleMiddleware);        

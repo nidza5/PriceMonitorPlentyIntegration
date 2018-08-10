@@ -56,11 +56,11 @@ class PriceResource extends ApiResource
        $contractInformation = null;
 
        if ($priceList !== null) {
-          $priceList = json_decode($priceList,true);
+           $priceList = json_decode($priceList,true);
        }        
 
-       if($contract !== null) {
-            $contractInformation = json_decode($contract,true);
+       if ($contract !== null) {
+           $contractInformation = json_decode($contract,true);
         }
 
        /** @var CurrencyExchangeRepository $currencyService */
@@ -68,12 +68,11 @@ class PriceResource extends ApiResource
        $systemCurrency = $currencyService->getDefaultCurrency();
 
        foreach ($priceList as $price) {
-            if ($price['currency'] ==  $systemCurrency) {
-               
+            if ($price['currency'] ==  $systemCurrency) {               
                 if (empty($price['identifier'])) {
                     continue;
                 }
-
+                
                 $itemService = pluginApp(ProductFilterService::class);
                 $originalVariation = $itemService->getVariationById($price['identifier']);
 

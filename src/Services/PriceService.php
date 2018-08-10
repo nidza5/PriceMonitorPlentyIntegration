@@ -40,26 +40,26 @@ class PriceService
 
         foreach ($salesPriceRelatedToVariation as $relatedSalesPrice) {         
             try {              
-                $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
+                    $repositoryVariationSalesPrices = pluginApp(VariationSalesPriceRepositoryContract::class);       
 
-                $authHelper = pluginApp(AuthHelper::class);
-        
-                $updatedSalesPrice = null;
+                    $authHelper = pluginApp(AuthHelper::class);
+            
+                    $updatedSalesPrice = null;
 
-                $dataForUpdate = ["variationId" => $variationId,
-                                "salesPriceId" => $relatedSalesPrice,
-                                "price" => $recommendedPrice];              
-                                
-                $updatedSalesPrice = $authHelper->processUnguarded(
-                    function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
-                        return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
-                    }
-                );
+                    $dataForUpdate = ["variationId" => $variationId,
+                                    "salesPriceId" => $relatedSalesPrice,
+                                    "price" => $recommendedPrice];              
+                                    
+                    $updatedSalesPrice = $authHelper->processUnguarded(
+                        function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
+                            return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
+                        }
+                    );
 
-                $productPrices[$variationId][] = array (
-                    'apiPrice' =>$recommendedPrice,
-                    'price' => $relatedSalesPrice
-                );
+                    $productPrices[$variationId][] = array (
+                        'apiPrice' =>$recommendedPrice,
+                        'price' => $relatedSalesPrice
+                    );
 
             } catch(\Exception $ex) {}
             
@@ -92,7 +92,7 @@ class PriceService
                 }                    
             }
         }
-
+                
         return $matchPrices;
     }
 }

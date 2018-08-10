@@ -27,7 +27,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  {
      use Loggable;
    
-    /**
+       /**
          *
          * @var PriceMonitorSdkService
          */

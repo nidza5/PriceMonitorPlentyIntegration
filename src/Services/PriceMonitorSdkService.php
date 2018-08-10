@@ -52,7 +52,6 @@ class PriceMonitorSdkService
      */
     public function call(string $method, array $parameters)
     {
-
         $application = pluginApp(Application::class);
 
         $authHelper = pluginApp(AuthHelper::class);

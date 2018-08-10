@@ -693,7 +693,7 @@ class ProductFilterService
                             break;
                         }
                     }
-                   
+                                       
                     $operatorGroup = $filterGroup["operator"];
  
                     if ($operatorGroup == "AND") {

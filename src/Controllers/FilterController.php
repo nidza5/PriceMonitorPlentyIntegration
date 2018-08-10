@@ -65,8 +65,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             $priceMonitorId = 0;
 
             if ($requestData == null) {
-                return;
+                throw new \Exception("Request data are null!");
             }
+            
             $priceMonitorId = $requestData['priceMonitorId'];
             $filterType = $requestData['filterType'];
 
