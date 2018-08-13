@@ -1,8 +1,5 @@
 # Stellen Sie über PriceMonitorPlentyIntegrationPlugin eine Verbindung zu priceMonitor her
  
-
-381/5000
-Преведи са језика: енглески
 Mit dem PriceMonitorPlentyIntegrationPlugin können Sie sich mit einem priceMonitor-System verbinden. durch eine standardisierte Schnittstelle. Mit anderen Worten, dieses Plugin wird Export-Produkte zu Pricemonitor lösen und die Preise zurück in viele Plugins importieren
 Sobald das Plugin installiert ist, können Sie einfach einen Filter für Produkte auswählen, die exportiert und gefiltert werden.
 
