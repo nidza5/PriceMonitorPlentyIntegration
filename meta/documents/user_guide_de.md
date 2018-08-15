@@ -13,6 +13,7 @@ Wenn Sie das Plugin verwenden möchten, müssen Sie sicherstellen, dass Sie die 
 * Sie haben ein Pricemonitor-Konto. Wenn nicht, kannst du <a href="https://patagona.de/pricemonitor/shop-preise-optimieren/repricing-tool-app-shopware/registrierung/'" target="_blank">Anmeldung</a> für einen Testaccount.
 * Sie müssen das Plugin über den Marktplatz oder über github installieren.
  
+
 ## License
  
-The plugin ist distributed under the Apache License Version 2.
+Das Plugin wird unter der Apache License Version 2 vertrieben.
