@@ -43,13 +43,10 @@
             data: dataOption,
             success: function(data)
             {
-                console.log(data);
-
                 populateLastTransactionBox(data);
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         });
     }
@@ -58,9 +55,6 @@
     {
         var dataResponse = null;
 
-        console.log("populate last transaction box");
-        console.log(response);
-
         if(response !== null)
             dataResponse = jQuery.parseJSON(response);
 
@@ -68,7 +62,6 @@
             lastExportBox = document.getElementById('pricemonitor-last-export');
         
         if (contract.exportStart && contract.exportStatus) {
-           // lastExportBox.innerHTML = '';
             $('#lastExportStartedAt').html(contract.exportStart);
             $('#statusLastExport').html(contract.exportStatus);
             $('#successfullyLastExport').html(contract.exportSuccessCount);
@@ -99,13 +92,10 @@
             data: dataOption,
             success: function(data)
             {
-                console.log(data);
-
                 populateScheduleData(data);
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         }); 
     }
@@ -152,10 +142,6 @@
      */
     function loadTransactionHistoryMasterData(limit, offset)
     {
-
-        console.log("limiiit je ");
-        console.log(limit);
-
         var dataOption = {
             'pricemonitorId' : $("#contractId").val(),
             'limit' : limit,
@@ -175,7 +161,6 @@
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         }); 
     }
@@ -233,7 +218,6 @@
             },
             error: function(data)
             {
-                console.log(data);
             }
         });
      }
@@ -269,7 +253,6 @@
             },
             error: function(data)
             {
-                console.log(data);
             }
         });
     }
@@ -408,12 +391,7 @@
 
     function onDetailClick()
     {
-        console.log("u details click");
-
         var masterId = this.getAttribute('data-id');
-
-        console.log("master id");
-        console.log(masterId);
 
         if (masterId) {
             loadTransactionHistoryDetailData(limit, 0, masterId);
@@ -448,7 +426,6 @@
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         }); 
     }

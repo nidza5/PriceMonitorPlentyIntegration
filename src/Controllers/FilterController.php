@@ -9,16 +9,12 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
- use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Constants\FilterType;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
- use PriceMonitorPlentyIntegration\Services\ProductFilterService;
- use PriceMonitorPlentyIntegration\Services\AttributeService;
-
+ 
  /**
   * Class FilterController
   * @package PriceMonitorPlentyIntegration\Controllers
@@ -91,7 +87,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if ($requestData == null) {
             return;
         }
-                
+
         $priceMonitorId = $requestData['pricemonitorId'];
         $filterType = $requestData['type'];
 

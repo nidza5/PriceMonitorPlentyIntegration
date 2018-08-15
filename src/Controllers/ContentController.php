@@ -23,7 +23,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use PriceMonitorPlentyIntegration\Services\AttributeService;
  use PriceMonitorPlentyIntegration\Services\ProductFilterService;
  use PriceMonitorPlentyIntegration\Services\PaymentService;
- use PriceMonitorPlentyIntegration\Services\ConfigService;
  use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;
  use Plenty\Plugin\Http\Request as PluginRequest;
  use Plenty\Plugin\Application;
@@ -61,20 +60,17 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          */
         private $configInfoRepo;
 
-        private $configService;
-
     /**
      * PaymentController constructor.
      * @param ConfigRepository $config
      * @param PriceMonitorSdkService $sdkService
      */
-    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ConfigRepositoryContract $configInfoRepo,ConfigService $configService)
+    public function __construct(ConfigRepository $config, PriceMonitorSdkService $sdkService,SalesPriceRepositoryContract $salesPriceRepository,ConfigRepositoryContract $configInfoRepo)
     {
         $this->config = $config;
         $this->sdkService = $sdkService;
         $this->salesPriceRepository = $salesPriceRepository;     
         $this->configInfoRepo = $configInfoRepo;
-        $this->configService = $configService;
     }
     
      public function home(Twig $twig) : string

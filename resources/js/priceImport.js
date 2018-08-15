@@ -26,24 +26,11 @@ function initImportForm()
      */
     function registerEventListenersPrices()
     {
-        console.log("register event handlers prices");
-
         var importNow = document.getElementById('import-now'),
             saveActionPrices = document.getElementById('pricemonitor-product-import-submit');
 
         importNow.addEventListener('click', onClickImportNow);
         saveActionPrices.addEventListener('click', onClickSavePrices);
-
-        // refresh transaction history table view and
-        // last export box on every 10s
-        // var intervalId = setInterval(
-        //     function () {
-        //         loadTransactionHistoryMasterData(limit, currentOffset);
-        //         loadLastImportData();
-        //     }, 10000
-        // );
-
-        // intervals.push(intervalId);
     }
 
     /**
@@ -51,7 +38,6 @@ function initImportForm()
      */
     function onClickImportNow()
     {
-        console.log("import now");
         var transferObject = {
             'pricemonitorId' : $("#contractId").val()
         };
@@ -62,16 +48,14 @@ function initImportForm()
             data: transferObject,
             success: function(data)
             {
-                console.log(data);
                 if(data == null) 
-                    return;
+                   return;
               
               toastr["success"]("Price import has been started.");
                     
             },
             error: function(data)
             {
-                console.log(data);
             }
         });
     }
@@ -85,9 +69,6 @@ function initImportForm()
             'enableImport': document['pricemonitorPriceImport']['enableImport'].checked,
             'pricemonitorId' : $("#contractId").val()
         };
-
-        console.log("transfer object");
-        console.log(transferObject);
 
         $.ajax({
             type: "POST",
@@ -104,7 +85,6 @@ function initImportForm()
             },
             error: function(data)
             {
-                console.log(data);
             }
         });
     }
@@ -132,7 +112,6 @@ function initImportForm()
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         });
     }
@@ -146,10 +125,6 @@ function initImportForm()
                       
          var data = jQuery.parseJSON(response);
 
-         console.log("populateTransactionHistoryMasterTablePrices");
-         console.log(data);
-
- 
          populateTable(data, wrapper, limit, offset,
              createTransactionHistoryMasterRowImport,
              loadTransactionHistoryMasterDataImport);
@@ -185,9 +160,6 @@ function initImportForm()
     function onDetailClickImport() {
         var masterId = this.getAttribute('data-id');
 
-        console.log("master id");
-        console.log(masterId);
-
         if (masterId) {
             loadTransactionHistoryDetailDataImport(limit, 0, masterId);
         }
@@ -222,7 +194,6 @@ function initImportForm()
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         }); 
 
@@ -262,22 +233,17 @@ function initImportForm()
             data: dataOption,
             success: function(data)
             {
-                console.log(data);
-
                 populateScheduleDataPrices(data);
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         }); 
     }
 
    function populateScheduleDataPrices(data) {
-        console.log(data);
-
-        if(data == null)
-            return;
+      if(data == null)
+         return;
           
       var response = jQuery.parseJSON(data);
 
@@ -298,13 +264,10 @@ function initImportForm()
             data: dataOption,
             success: function(data)
             {
-                console.log(data);
-
                 populateLastTransactionBoxImport(data);
             },
             error: function(xhr)
             {
-                console.log(xhr);
             }
         });
     }
@@ -312,10 +275,6 @@ function initImportForm()
     function populateLastTransactionBoxImport(response)
     {
         var dataResponse = null;
-
-        console.log("populate last transaction box");
-        console.log(response);
-
         if(response !== null)
             dataResponse = jQuery.parseJSON(response);
 
@@ -323,7 +282,6 @@ function initImportForm()
             lastExportBox = document.getElementById('pricemonitor-last-import');
         
         if (contract['importStart']) {
-           // lastExportBox.innerHTML = '';
             $('#lastImportStartedAt').html(contract.importStart);
             $('#successfullyLastImport').html(contract.importSuccessCount);
             $("#productImportNoSync").hide();

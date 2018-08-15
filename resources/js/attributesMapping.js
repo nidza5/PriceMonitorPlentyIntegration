@@ -25,7 +25,6 @@ function fetchDataAndSetPage()
         },
         error: function(xhr)
         {
-            console.log(xhr);
         }
     });  
 }
@@ -34,9 +33,6 @@ function setAttributesMappingForm(response)
 {
     if(response == null)
         return;
-
-    console.log("mapping response");
-    console.log(response);
 
     allMappingsAtttribute = response;   
 
@@ -87,9 +83,6 @@ function deleteEmptyOptGroup() {
  */
 function appendListOptionsOnSelectBoxes(optionsWrapperClassName, optionsHTML)
 {
-    console.log("options html");
-    console.log(optionsHTML);
-
     var optionsWrappers = document.getElementsByClassName(optionsWrapperClassName);
     for (var i = 0; i < optionsWrappers.length; i++) {
         optionsWrappers[i].innerHTML = optionsHTML;
@@ -148,15 +141,12 @@ function setSavedMappings() {
         },
         error: function(xhr)
         {
-            console.log(xhr);
         }
     });
 }
 
 function setSavedValuesOnView(response) {
 
-    console.log("logovanje mapiranja");
-    console.log(response);
     // Custom tags container should be emptied each time the page is loaded, so there aren't
     // duplicated rows.
     cleanUpCustomTags();
@@ -201,8 +191,6 @@ function setSavedValuesOnView(response) {
      */
      function setMandatoryAttributesValues(attributeMapping)
      {
-            console.log("setMandatoryAttributesValues");
-
         attributeMapping = attributeMapping || attributeMappings[i];
         savedPricemonitorAttributeCodes.push(attributeMapping['priceMonitorCode']);
 
@@ -218,11 +206,6 @@ function setSavedValuesOnView(response) {
 
             $('select[name='+dropdownName+']').val(attributeMapping['attributeCode']);
             $('#' + dropdownName + "-code").val(attributeMapping['attributeCode']);
-
-        // Pricemonitor['filterableDropDown']['initDropdown'](
-        //     attributeMapping['attributeCode'],
-        //     document['pricemonitorAttributesMapping'][dropdownName]
-        // );
 
         if (operandField) {
             operandField.value = attributeMapping['operand'];
@@ -280,11 +263,6 @@ function setSavedValuesOnView(response) {
 
             document.getElementById('attributes-mapping-custom-tags').appendChild(formRow);
 
-            // Pricemonitor['filterableDropDown']['initDropdown'](
-            //     null,
-            //     document['pricemonitorAttributesMapping']['customTagAttributeValue']
-            // );
-
             // Appends handler when add new tag is clicked. Displaying and validation is handled here.
             document.getElementById('add-custom-tag').addEventListener('click', addTag);
             deleteEmptyOptGroup();
@@ -292,8 +270,6 @@ function setSavedValuesOnView(response) {
 
         function addTag(event)
         {
-           // unsetValidationErrors();
-
             var newMapping =
             {
                 'id': null,
@@ -302,22 +278,6 @@ function setSavedValuesOnView(response) {
                 'attributeCode': document['pricemonitorAttributesMapping']
                     ['customTagAttributeCode'].value
             };
-
-            // if (!isValidMappingAttributeCode(newMapping['pricemonitorCode']) ||
-            //     pricemonitorAttributes.indexOf(newMapping['pricemonitorCode'].toLowerCase()) >= 0
-            // ) {
-            //     document['pricemonitorAttributesMapping']
-            //         ['customTagPricemonitorCode'].classList.add('pricemonitor-invalid');
-
-            //     return;
-            // }
-
-            // if (!isValidMappingAttributeCode(newMapping['attributeCode'])) {
-            //     document['pricemonitorAttributesMapping']
-            //         ['customTagAttributeValue'].classList.add('pricemonitor-invalid');
-
-            //     return;
-            // }
 
             var customTagsWrapper = document.getElementById('attributes-mapping-custom-tags'),
                 allCustomTagsRows = customTagsWrapper.getElementsByClassName('form-row'),
@@ -387,11 +347,6 @@ function setSavedValuesOnView(response) {
             var attributeCode =
                 mappedAttribute.hasOwnProperty('attributeCode') ? mappedAttribute['attributeCode'] : null;
 
-            // Pricemonitor['filterableDropDown']['initDropdown'](
-            //     attributeCode,
-            //     document['pricemonitorAttributesMapping']['customTagAttributeValue-' + index]
-            // );
-
             appendEventHandlersOnRemoveButtons();
         }
 
@@ -403,7 +358,6 @@ function setSavedValuesOnView(response) {
             var tagsRemoveButtons = document.getElementsByClassName('remove-custom-tag');
 
             for (var i = 0; i < tagsRemoveButtons.length; i++) {
-               // var removeButton = Pricemonitor['utility']['destroyEventHandlers'](tagsRemoveButtons[i]);
                 tagsRemoveButtons[i].addEventListener('mouseup', removeTag);
             }
 
@@ -438,8 +392,6 @@ function saveAttributesMapping()
 {
     var requestMapping = createAttributesMappingForRequest();
 
-    console.log(requestMapping);
-
     var transferObject = {
         'pricemonitorId': $("#contractId").val(),
         'mappings': requestMapping
@@ -451,9 +403,6 @@ function saveAttributesMapping()
         data: transferObject,
         success: function(data)
         {
-            console.log("data");
-            console.log(data);
-
             toastr["success"]("Data are successfully saved!", "Successfully saved!");
 
             if(data == null) 
@@ -461,7 +410,6 @@ function saveAttributesMapping()
         },
         error: function(data)
         {
-            console.log(data);
         }
     });
 }
@@ -536,4 +484,4 @@ function saveAttributesMapping()
             );
         }
     }
-    }
+}

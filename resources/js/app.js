@@ -1,7 +1,5 @@
 
-(function () {
-
-    var Pricemonitor = Pricemonitor || {};
+   var Pricemonitor = Pricemonitor || {};
     toastr.options = {
       "closeButton": true,
       "debug": false,
@@ -74,9 +72,6 @@
         
         $("#salesPrice").val(insertSalesPriceValue).change();
     
-        console.log("insert sales price value");
-        console.log(insertSalesPriceValue);
-    
         //set sales price value on attribute mapping tab
         adjustOptionPrices(insertSalesPriceValue,"attribute-ref-price");
         addOptionToSelectIfNotExist(insertSalesPriceValue,"attribute-ref-price");
@@ -141,8 +136,7 @@
       }
     
     $(document).ready(function() {
-         
-        console.log("document ready");
+       
          $('.js-example-basic-multiple').select2({
             placeholder: "Select sales prices",
             allowClear: true,
@@ -229,9 +223,6 @@
                 data: data,
                 success: function(data)
                 {
-                    console.log("data");
-                    console.log(data);
-    
                     if(data == null) 
                        return;
                     
@@ -255,7 +246,7 @@
                 },
                 error: function(data)
                 {
-                    console.log(data);
+                    
                 }
             });
         }
@@ -274,15 +265,11 @@
                 data: dataOption,
                 success: function(data)
                 {
-                    console.log("data");
-                    console.log(data);
-    
-                    createFiltersForm(data);
-    
+                    createFiltersForm(data);    
                 },
                 error: function(xhr)
                 {
-                    console.log(xhr);
+                    
                 }
             });
         }
@@ -317,9 +304,6 @@
                 url: "/getAttributes",
                 success: function(data)
                 {
-                    console.log("attributeeees");
-                    console.log(data);
-    
                     var dataResult = null;
                     if(data != null)
                         dataResult = jQuery.parseJSON(data);
@@ -328,7 +312,7 @@
                 },
                 error: function(xhr)
                 {
-                    console.log(xhr);
+                
                 }
             });     
         }
@@ -588,10 +572,7 @@
                 expressionFormFieldValue =
                     parentTemplateId + 'ExpressionAttrValue_' + groupIndex + '-' + expressionIndex,
                 savedAttribute = attributesCache["Code-" + expression['code']];
-                        
-                console.log("expression code");
-                console.log(expression['code']);
-    
+               
                 if(expression['code'] != null && expression['code'] != "")
                     addedAttributeDropdownsFieldNameValues.push(
                     {
@@ -599,17 +580,6 @@
                         'value': expression['code'] ? expression['code'] : ""
                     }
                 );         
-    
-            // if (!savedAttribute) {
-            //     saved attribute will not exist when adding new row for adding expressions. It is
-            //     important to add them in array for initialization drop-downs.
-            //     addedAttributeDropdownsFieldNameValues.push(
-            //         {
-            //             'name': expressionFormFieldValue,
-            //             'value': ''
-            //         }
-            //     );
-            // }
     
             return '<div class="filterable-dropdown-wrapper input-wrapper col-sm-3 ">' +
                         '<select ' +
@@ -769,29 +739,20 @@
             var valueFieldName =
                     parentTemplateId + 'ExpressionValue_' + groupIndex + '-' + expressionIndex
                 
-            if (!hasPredefinedValues(expression)) {
-    
-                console.log("has predefined value");
-               
+            if (!hasPredefinedValues(expression)) { 
                 var fieldValue =  createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName);
                 setWrapperNodeForFieldIfChangesExist(inputWrapperNode, fieldValue, valueFieldName);
     
                 return;
             }
     
-             getPossibleFieldValues(expression,function (possibleFieldValues) {
-                console.log("create value field");
-                console.log(possibleFieldValues);
-    
+             getPossibleFieldValues(expression,function (possibleFieldValues) {                    
                 var posibleValueField = null;
     
                 if(possibleFieldValues != null)
                     posibleValueField = jQuery.parseJSON(possibleFieldValues);
     
                 var inputWrapperValuesInnerHtml = createValueFieldForFieldWITHPredefinedValues(valueFieldName, expression, posibleValueField);
-    
-                console.log("inputWrapperValuesInnerHtml");
-                console.log(inputWrapperValuesInnerHtml);
     
                 setWrapperNodeForFieldIfChangesExist(inputWrapperNode, inputWrapperValuesInnerHtml, valueFieldName);
                
@@ -813,25 +774,18 @@
                       data: dataOption,
                      // async : false,
                       success: function(data)
-                      {
-                          console.log("attributesValues");
-                          console.log(data);    
-                          
+                      {  
                           fCallBack(data);
                       },
                       error: function(xhr)
                       {
-                          console.log(xhr);
+                         
                       }
                   });
         }
     
         function createValueFieldForFieldWithoutPredefinedValues(expression, valueFieldName)
         {
-    
-            console.log("DEBUG 1 expression");
-            console.log(expression);
-    
             var type = 'text';
     
             if (expression['type'] === 'int' || expression['type'] === 'float' || expression['type'] === 'price' ) {
@@ -949,85 +903,39 @@
             initializeNewlyCreatedAttrDropdown(groupIndex, expressionIndex);
             document.getElementById(removeButtonId).addEventListener('click', removeExpression);
     
-            // function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
-            // {
-    
-            //     try {
-    
-            //        removeValidationErrors();
-        
-            //         if (expressionAttrCode === '') {
-            //             document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
-            //            $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
-            //            $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').show();
-                       
-            //            return false;
-            //         }
-        
-            //         if (!expressionCondition || expressionCondition === '') {
-            //             document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
-            //             return false;
-            //         }
-            
-            //         if (expressionValue.length === 0 || expressionValue[0] === "") {
-            //             document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
-            //             $("#" + expressionValueFieldName).next('span').show();
-                        
-            //             return false;
-            //         }
-        
-            //         return true;
-    
-            //     } catch(err) {
-            //         console.log("error");
-            //         console.log(err.message);
-            //     }          
-            // }
-    
-            // function removeValidationErrors()
-            // {
-            //     document[formName][expressionAttrValueFieldName].classList.remove('pricemonitor-invalid');
-            //     $('#'+expressionAttrValueFieldName).next('span').removeClass("pricemonitor-invalid");
-            //     $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').hide();
-            //     document[formName][expressionConditionFieldName].classList.remove('pricemonitor-invalid');
-            //     document[formName][expressionValueFieldName].classList.remove('pricemonitor-invalid');
-            // }
         }
     
         function isValidForm(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
-            {
+        {    
+            try {
+
+                removeValidationErrors(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName);
     
-                try {
+                if (expressionAttrCode === '') {
+                    document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
+                    $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
+                    $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').show();
+                    
+                    return false;
+                }
     
-                   removeValidationErrors(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName);
+                if (!expressionCondition || expressionCondition === '') {
+                    document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
+                    return false;
+                }
         
-                    if (expressionAttrCode === '') {
-                        document[formName][expressionAttrValueFieldName].classList.add('pricemonitor-invalid');
-                       $('#'+expressionAttrValueFieldName).next('span').addClass("pricemonitor-invalid");
-                       $('#'+expressionAttrValueFieldName).parent().find('.invalid-feedback').show();
-                       
-                       return false;
-                    }
-        
-                    if (!expressionCondition || expressionCondition === '') {
-                        document[formName][expressionConditionFieldName].classList.add('pricemonitor-invalid');
-                        return false;
-                    }
-            
-                    if (expressionValue.length === 0 || expressionValue[0] === "") {
-                        document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
-                        $("#" + expressionValueFieldName).next('span').show();
-                        
-                        return false;
-                    }
-        
-                    return true;
+                if (expressionValue.length === 0 || expressionValue[0] === "") {
+                    document[formName][expressionValueFieldName].classList.add('pricemonitor-invalid');
+                    $("#" + expressionValueFieldName).next('span').show();
+                    
+                    return false;
+                }
     
-                } catch(err) {
-                    console.log("error");
-                    console.log(err.message);
-                }          
-            }
+                return true;
+
+            } catch(err) {
+            }          
+        }
     
             function removeValidationErrors(expressionAttrCode, expressionValue, expressionCondition,expressionAttrValueFieldName,expressionConditionFieldName,expressionValueFieldName)
             {
@@ -1051,8 +959,6 @@
     
         function createSavedExpressionRowHTML(expression, groupIndex, expressionIndex, removeButtonId)
         {
-            console.log("create savedExpression row htmls");
-    
             return createFilterRow(expression, groupIndex, expressionIndex) +
                 '<button style="height:33px;" class="' + parentTemplateId + '-remove-expression  btn btn-danger " ' +
                 'id="' + removeButtonId + '">' +
@@ -1259,9 +1165,6 @@
                 
              var attrValue = $("#" + id + " option:selected").attr("value"); 
     
-             console.log("attr value");
-             console.log(attrValue);
-    
             var nameFieldIdentifier = $(sender).attr("name");
     
               /**
@@ -1329,16 +1232,6 @@
                var expression = groupsForSave[i]['expressions'];
     
                 for(j = 0; j < expression.length; j++) {
-    
-                    console.log("save code");
-                    console.log(expression[j]['code']);
-                    console.log("save condition");
-                    console.log(expression[j]['condition']);
-                    console.log("save type");
-                    console.log(expression[j]['type']);
-                    console.log("save value");
-                    console.log(expression[j]['value']);
-    
                     if(expression[j]['code'] == null || expression[j]['code'] == "")                  
                         return false;               
                         
@@ -1358,20 +1251,9 @@
     
             var filters = createFiltersForRequest();
     
-            // if(!checkFormIsValid(filters)) {
-            //     alert("All fields are mandatory");
-            //     return false;
-            // }
-    
-    
             if(!validateWholeFormOnSave()) {
-                console.log("Forma nije validna");
                 return false;
-            }
-           
-    
-            console.log("filters type");
-            console.log(filterQueryParams.filterType);
+            }          
     
             var transferObject = {
                 'pricemonitorId': $("#contractId").val(),
@@ -1385,9 +1267,6 @@
                 data: transferObject,
                 success: function(data)
                 {
-                    console.log("data");
-                    console.log(data);
-    
                     toastr["success"]("Data are successfully saved!", "Successfully saved!");
     
                     if(data == null) 
@@ -1395,7 +1274,7 @@
                 },
                 error: function(data)
                 {
-                    console.log(data);
+                    
                 }
             });
         }
@@ -1529,24 +1408,16 @@
                 data: data,
                 success: function(data)
                 {
-                    console.log("data filter preview");
-                    console.log(data);
-    
                     var result = null;
     
                     if(data != null) {
-                        result = jQuery.parseJSON(data);
-                        console.log("result parse result");
-                        console.log(result);
-    
+                        result = jQuery.parseJSON(data);    
                         populateProductPreviewTable(result);
                     }
                         
                 },
                 error: function(data)
                 {
-                    console.log("u error");
-                    console.log(data);
                 }
             });
         }
@@ -1556,7 +1427,6 @@
             if(data == null)
               return;
     
-           // $('#bodyPreviewData').html("");
            $("#tableModal").DataTable().clear().draw();
     
             for(i = 0; i < data.length; i++) {
@@ -1566,11 +1436,9 @@
                 $("#tableModal").DataTable().row.add([
                     data[i].id, data[i].name, data[i].number, data[i].itemText
                 ]).draw();
-               
-               // $('#bodyPreviewData').append(tableData);
-            }
-    
             
+            }
+
             $('#previewModal').modal('show');  
         }
     
@@ -1589,19 +1457,17 @@
                 },
                 error: function(xhr)
                 {
-                    console.log(xhr);
+                   
                 }
             });
        }
     
           function populateAccountFormWithSavedValues(response) {
-                console.log("populate for fields");
-                console.log(response);
+               
+            if (response == null)
+                 return;
     
-                if(response == null)
-                    return;
-    
-               var data = jQuery.parseJSON(response);     
+            var data = jQuery.parseJSON(response);     
     
             var transactionsRetention = data['transactionsRetentionInterval'],
             transactionDetailsRetention = data['transactionDetailsRetentionInterval'],
@@ -1633,19 +1499,14 @@
                 data: data,
                 success: function(data)
                 {
-                    console.log("data");
-                    console.log(data);
-    
                     toastr["success"]("Account info is successfully saved!", "Successfully saved!"); 
                    
                 },
                 error: function(data)
                 {
-                    console.log("u error");
-                    console.log(data);
                 }
             });
     
         }
-});
+
 
