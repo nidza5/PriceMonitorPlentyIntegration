@@ -13,7 +13,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use Plenty\Modules\System\Contracts\WebstoreRepositoryContract;
  use Plenty\Modules\Market\Credentials\Contracts\CredentialsRepositoryContract;
  use PriceMonitorPlentyIntegration\Constants\FilterType;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
@@ -55,13 +54,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
          * @var SalesPriceRepository
          */
         private $salesPriceRepository;
-
-        /**
-         *
-         * @var WebstoreRepositoryContract
-         */
-         private $webStoreRepositoryContract;
-        
+       
         /**
          *
          * @var ConfigRepositoryContract

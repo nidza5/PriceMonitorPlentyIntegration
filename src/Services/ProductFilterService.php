@@ -362,7 +362,7 @@ class ProductFilterService
         return $originalVariation;
     }
 
-    public function addFilterByOperator($parentGroup,$groupOperator) 
+    public function addFilterByOperator($parentGroup) 
     {
         try {
             $variationArray = $this->getAllVariations();

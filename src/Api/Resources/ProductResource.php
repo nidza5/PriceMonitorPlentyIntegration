@@ -44,8 +44,6 @@ class ProductResource extends ApiResource
 
         $parentGroup =  $this->request->get('parentGroup', '');
 
-        $groupOperator =  $this->request->get('groupOperator', '');
-
         $limit = $this->request->get('limit', null);
 
         $offset = $this->request->get('offset', null);
@@ -56,7 +54,7 @@ class ProductResource extends ApiResource
                         
         $itemService = pluginApp(ProductFilterService::class);
     
-        $filteredProducts = $itemService->addFilterByOperator($parentGroup, $groupOperator); 
+        $filteredProducts = $itemService->addFilterByOperator($parentGroup); 
 
         if ($limit !== null && $offset !== null && $limit !== '' && $offset !== '') {
             $filteredProducts = array_slice($filteredProducts, (int)$limit, (int)$offset);

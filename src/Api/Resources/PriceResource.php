@@ -51,7 +51,6 @@ class PriceResource extends ApiResource
 
        $returnResult = ['productPrices' => [], 'errorMessages' => []];
        $priceList =  $this->request->get('priceList', '');
-       $pricemonitorContractId =  $this->request->get('pricemonitorContractId', '');
        $contract =  $this->request->get('contract', '');
        $contractInformation = null;
 
@@ -72,7 +71,7 @@ class PriceResource extends ApiResource
                 if (empty($price['identifier'])) {
                     continue;
                 }
-
+                                                
                 $itemService = pluginApp(ProductFilterService::class);
                 $originalVariation = $itemService->getVariationById($price['identifier']);
 
@@ -100,13 +99,6 @@ class PriceResource extends ApiResource
 
                 } catch(\Exception $ex)
                     {
-                        $failedItems[] = array(
-                            'productId' => $price['identifier'],
-                            'name' => isset($price['name']) ? $price['name'] : '',
-                            'errors' => array('Unable to update product price.'),
-                            'status' => TransactionStatus::FAILED
-                        );
-
                         $responseError = [
                             'productId' => $price['identifier'],
                             'errors' => array('Unable to update product price.'),
@@ -119,15 +111,7 @@ class PriceResource extends ApiResource
                     if ($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                         try {
                             $insert =  $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
-                            return $this->response->create($insert, ResponseCode::OK);
                         } catch (\Exception $ex) {
-                            $failedItems[] = array(
-                                'productId' => $price['identifier'],
-                                'name' => isset($price['name']) ? $price['name'] : '',
-                                'errors' => array('Unable to insert product price.'),
-                                'status' => TransactionStatus::FAILED
-                            );
-
                             $responseError = [
                                 'productId' => $price['identifier'],
                                 'errors' => array('Unable to insert product price.'),
@@ -135,18 +119,9 @@ class PriceResource extends ApiResource
                             ];
     
                             $returnResult['errorMessages'][] = $responseError;
-                        }
-                        
+                        }                        
                     }
-                    else if (!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null && $salesPriceRelatedToVariation == null) {
-                        // insert  to transaction history, transactionDetails
-                        $failedItems [] = [
-                            "productId" => $price['identifier'],   
-                            "name" => isset($price['name']) ? $price['name'] : '',
-                            "errors" => array("Sales prices which is selected to account info tab not related to variation and field is insert salesPrice selected as NO!"),
-                            "status" => TransactionStatus::FAILED
-                        ];        
-                        
+                    else if (!$contractInformation['isInsertSalesPrice'] && $salesPricesNotRelatedToVariation != null && $salesPriceRelatedToVariation == null) {        
                         $responseError = [
                             'productId' => $price['identifier'],
                             'errors' => array('Sales prices which is selected to account info tab not related to variation and field is insert salesPrice selected as NO!'),
@@ -157,14 +132,6 @@ class PriceResource extends ApiResource
                     }
                 }        
             } else {
-                // enter to transactionHistory prices that don't have same currency 
-                $failedItems [] = [
-                    "productId" => $price['identifier'],   
-                    "name" => isset($price['name']) ? $price['name'] : '',
-                    "errors" => array("Price that returned don't have some currency as sales price!"),
-                    "status" => TransactionStatus::FAILED
-                ];                
-
                 $responseError = [
                     'productId' => $price['identifier'],
                     'errors' => array('Price that returned dont have some currency as sales price!'),

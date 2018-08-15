@@ -26,14 +26,6 @@ use Plenty\Modules\Basket\Events\Basket\AfterBasketCreate;
 class ApiResponse
 {
 	/**
-	 * @var Dispatcher
-	 */
-	private $dispatcher;
-	/**
-	 * @var array
-	 */
-	private $eventData = [];
-	/**
 	 * @var mixed
 	 */
 	private $data = null;
@@ -49,7 +41,6 @@ class ApiResponse
     
     /**
      * ApiResponse constructor.
-     * @param Dispatcher $dispatcher
      * @param Response $response
      */
 	public function __construct(Response $response)

@@ -91,12 +91,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         if ($requestData == null) {
             return;
         }
-        
+                
         $priceMonitorId = $requestData['pricemonitorId'];
         $filterType = $requestData['type'];
-        $filterData = $requestData['filters'];
-        $limit = $requestData['limit'];
-        $offset = $requestData['offset'];
 
         if ($priceMonitorId == null || $filterType == null) {
             throw new \Exception("Price monitor id or filter type is null");

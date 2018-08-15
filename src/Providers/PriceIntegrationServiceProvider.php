@@ -7,7 +7,6 @@ use Plenty\Log\Services\ReferenceContainer;
 use Plenty\Log\Exceptions\ReferenceTypeException;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
-use PriceMonitorPlentyIntegration\Helper\StringUtils;
 use Plenty\Modules\Cron\Services\CronContainer;
 
 /**

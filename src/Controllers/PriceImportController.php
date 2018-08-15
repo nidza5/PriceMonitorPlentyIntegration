@@ -12,12 +12,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Constants\QueueType;
- use PriceMonitorPlentyIntegration\Helper\StringUtils;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
  use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
  use Plenty\Modules\Helper\Services\WebstoreHelper;
- use PriceMonitorPlentyIntegration\Constants\ApiResponse;
 
  /**
   * Class PriceImportController
