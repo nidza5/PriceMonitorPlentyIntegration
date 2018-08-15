@@ -7,9 +7,6 @@ use PriceMonitorPlentyIntegration\Contracts\ScheduleRepositoryContract;
 use PriceMonitorPlentyIntegration\Repositories\ScheduleRepository;
 use Plenty\Plugin\Http\Request;
 use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
-use PriceMonitorPlentyIntegration\Constants\TransactionStatus;
-use PriceMonitorPlentyIntegration\Services\AttributeService;
-
 
 class PriceService 
 {  

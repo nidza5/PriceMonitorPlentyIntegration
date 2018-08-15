@@ -7,7 +7,6 @@ use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Application;
 use Plenty\Modules\Authorization\Services\AuthHelper;
 use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
-use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
 class PriceMonitorSdkService
 {

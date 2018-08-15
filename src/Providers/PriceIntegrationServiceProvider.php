@@ -25,7 +25,7 @@ use Plenty\Modules\Cron\Services\CronContainer;
          $this->getApplication()->bind(ConfigRepositoryContract::class, ConfigInfoRepository::class);
      }
 
-     public function boot(ReferenceContainer $referenceContainer, CronContainer $cronContainer)
+     public function boot(ReferenceContainer $referenceContainer)
      {
         try {
             $referenceContainer->add([ 'ContractId' => 'ContractId' ]);

@@ -7,7 +7,6 @@ use Plenty\Plugin\Http\Response;
 use PriceMonitorPlentyIntegration\Api\ApiResource;
 use PriceMonitorPlentyIntegration\Api\ApiResponse;
 use PriceMonitorPlentyIntegration\Api\ResponseCode;
-use PriceMonitorPlentyIntegration\Services\AttributeService;
 use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;   
 use PriceMonitorPlentyIntegration\Services\ProductFilterService;
 use Plenty\Modules\Item\VariationSalesPrice\Contracts\VariationSalesPriceRepositoryContract;
@@ -110,7 +109,7 @@ class PriceResource extends ApiResource
                     
                     if ($contractInformation['isInsertSalesPrice'] && $salesPriceRelatedToVariation == null) {
                         try {
-                            $insert =  $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
+                            $this->priceService->insertSalesPricesNotRelatedToVariation($savedSalesPriceInContract,$price['identifier'],$price['recommendedPrice']);
                         } catch (\Exception $ex) {
                             $responseError = [
                                 'productId' => $price['identifier'],

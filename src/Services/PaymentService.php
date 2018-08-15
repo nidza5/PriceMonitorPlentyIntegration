@@ -9,8 +9,6 @@ use Plenty\Modules\Payment\Contracts\PaymentRepositoryContract;
 
 class PaymentService {
 
-    private $paymentRepository;
-
     public function getAllPayment()
     {
         $repository = pluginApp(PaymentRepositoryContract::class);       

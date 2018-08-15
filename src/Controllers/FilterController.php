@@ -58,7 +58,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function getFilters(Request $request) :string 
       {    
             $requestData = $request->all();
-            $priceMonitorId = 0;
 
             if ($requestData == null) {
                 throw new \Exception("Request data are null!");
@@ -82,10 +81,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       public function filterPreview(Request $request) {
 
         $requestData = $request->all();
-        $priceMonitorId = 0;
 
         if ($requestData == null) {
-            return;
+            throw new \Exception("RequestData is null");
         }
 
         $priceMonitorId = $requestData['pricemonitorId'];

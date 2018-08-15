@@ -7,7 +7,6 @@ use Plenty\Plugin\Http\Response;
 use PriceMonitorPlentyIntegration\Api\ApiResource;
 use PriceMonitorPlentyIntegration\Api\ApiResponse;
 use PriceMonitorPlentyIntegration\Api\ResponseCode;
-use PriceMonitorPlentyIntegration\Services\AttributeService;
 use PriceMonitorPlentyIntegration\Api\AuthorizationApi;
 use Plenty\Modules\Plugin\Contracts\PluginRepositoryContract;
 use Plenty\Modules\Authorization\Services\AuthHelper;

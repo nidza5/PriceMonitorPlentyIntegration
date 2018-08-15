@@ -9,7 +9,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
- use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
 
@@ -53,7 +52,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         $requestData = $request->all();
 
         if ($requestData == null) {
-            return;
+            throw new \Exception("Request data is empty");
         }           
 
         $priceMonitorId = $requestData['pricemonitorId'];
@@ -67,7 +66,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
             throw new \Exception("Mappings is empty");
         }            
            
-        $saveAttributesMappingToMiddleware = $this->sdkService->call("saveAttributesMappingToMiddleware", [
+        $this->sdkService->call("saveAttributesMappingToMiddleware", [
             'priceMonitorId' => $priceMonitorId,
             'mappings' => $mappings         
         ]);    

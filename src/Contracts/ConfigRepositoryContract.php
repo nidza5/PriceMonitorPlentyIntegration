@@ -1,9 +1,7 @@
 <?php
  
 namespace PriceMonitorPlentyIntegration\Contracts;
- 
-use PriceMonitorPlentyIntegration\Models\ConfigInfo;
- 
+
 /**
  * Class ConfigRepositoryContract
  * @package PriceMonitorPlentyIntegration\Contracts

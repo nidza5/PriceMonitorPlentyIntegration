@@ -285,8 +285,6 @@ class ProductFilterService
     {
         $manufacturerRepo = pluginApp(ManufacturerRepositoryContract::class);
 
-        $authHelper = pluginApp(AuthHelper::class);
-
         $manufactures = null;
 
         $manufactures = $manufacturerRepo->findById($id);
@@ -315,8 +313,6 @@ class ProductFilterService
     {        
         $itemRepo = pluginApp(ItemRepositoryContract::class);
 
-        $authHelper = pluginApp(AuthHelper::class);
-
         $item = null;
 
         $item = $itemRepo->show($id, ["id", "position"], "en", ['itemProperties']);
@@ -327,8 +323,6 @@ class ProductFilterService
     public function getCategoryById($id) 
     {
         $categoriesRepo = pluginApp(CategoryRepositoryContract::class);
-
-        $authHelper = pluginApp(AuthHelper::class);
 
         $categories = null;
 
@@ -346,8 +340,6 @@ class ProductFilterService
         $repository->setFilters([
             'id' => $id
         ]);
-
-        $authHelper = pluginApp(AuthHelper::class);
 
         $repository->setSearchParams([
             'with' => [
@@ -371,8 +363,6 @@ class ProductFilterService
             
             $attributesFromPlenty = $attributeService->getAttributeForFilter();
 
-            $finalFilteredProduct = array();
-          
             $parentFilteredGroup = [];
 
             $filteredGroup = [];

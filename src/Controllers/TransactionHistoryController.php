@@ -9,12 +9,9 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
- use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
- use PriceMonitorPlentyIntegration\Constants\FilterType;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
 
  /**
   * Class TransactionHistoryController

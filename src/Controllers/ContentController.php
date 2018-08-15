@@ -180,10 +180,6 @@ namespace PriceMonitorPlentyIntegration\Controllers;
                  }                  
               }
 
-        $contractsIds = array();
-
-        $itemService = pluginApp(ProductFilterService::class);
-
         $templateData = array("contracts" => $contractsFromMiddleware,
                             "salesPrices" => $salesPricesEnglish,
                             'dashboardInfo' => $dashboardInfo);
@@ -195,7 +191,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
       * @param Request $request
       * @return string
       */
-      public function updateContractInfo(Request $request, Twig $twig): string
+      public function updateContractInfo(Request $request): string
       {
         $requestData = $request->all();
 
