@@ -364,7 +364,7 @@ class ProductFilterService
         return $generatedFilter;                   
     }
 
-    public function getCondition($condition, $value, $variationCondition, $operator, $logicalOperator)
+    public function getCondition(&$condition, $value, $variationCondition, $operator, $logicalOperator)
     {
         switch($operator) {
             case "=" :
@@ -450,7 +450,7 @@ class ProductFilterService
         }       
     }
 
-    public function resolveCondition($condition, $value, $variationCondition, $operator)
+    public function resolveCondition(&$condition, $value, $variationCondition, $operator)
     {        
         if ($condition !== null) {
             if ($variationCondition["operator"] === "AND") {
