@@ -17,14 +17,12 @@ class PriceService
 
             $authHelper = pluginApp(AuthHelper::class);
     
-            $insertedSalesPrice = null;
-
             $dataForInsert = ["variationId" => $variationId,
                                 "salesPriceId" => $savedPrice,
                                 "price" => $recommendedPrice];
             
-            $insertedSalesPrice = $authHelper->processUnguarded(
-                function () use ($repositoryVariationSalesPrices, $insertedSalesPrice,$dataForInsert) {
+             $authHelper->processUnguarded(
+                function () use ($repositoryVariationSalesPrices,$dataForInsert) {
                     return $repositoryVariationSalesPrices->create($dataForInsert);
                 }
             );
@@ -41,14 +39,12 @@ class PriceService
 
                     $authHelper = pluginApp(AuthHelper::class);
             
-                    $updatedSalesPrice = null;
-
                     $dataForUpdate = ["variationId" => $variationId,
                                     "salesPriceId" => $relatedSalesPrice,
                                     "price" => $recommendedPrice];              
                                     
-                    $updatedSalesPrice = $authHelper->processUnguarded(
-                        function () use ($repositoryVariationSalesPrices, $updatedSalesPrice,$dataForUpdate,$relatedSalesPrice,$variationId) {
+                     $authHelper->processUnguarded(
+                        function () use ($repositoryVariationSalesPrices,$dataForUpdate,$relatedSalesPrice,$variationId) {
                             return $repositoryVariationSalesPrices->update($dataForUpdate, $relatedSalesPrice, $variationId);
                         }
                     );

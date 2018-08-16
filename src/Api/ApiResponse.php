@@ -26,10 +26,6 @@ use Plenty\Modules\Basket\Events\Basket\AfterBasketCreate;
 class ApiResponse
 {
 	/**
-	 * @var mixed
-	 */
-	private $data = null;
-	/**
 	 * @var array
 	 */
 	private $headers = [];

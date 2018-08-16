@@ -9,20 +9,14 @@ namespace PriceMonitorPlentyIntegration\Controllers;
  use Plenty\Plugin\Log\Loggable;
  use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
  use PriceMonitorPlentyIntegration\Services\PriceMonitorSdkService;
- use Patagona\Pricemonitor\Core\Infrastructure\ServiceRegister;
  use Plenty\Modules\Item\SalesPrice\Contracts\SalesPriceRepositoryContract;
  use Plenty\Modules\Authorization\Services\AuthHelper;
  use Plenty\Repositories\Models;
  use Plenty\Modules\Market\Credentials\Contracts\CredentialsRepositoryContract;
- use PriceMonitorPlentyIntegration\Constants\FilterType;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeRepositoryContract;
  use Plenty\Modules\Item\Property\Contracts\PropertyRepositoryContract;
  use Plenty\Modules\Item\Attribute\Contracts\AttributeValueRepositoryContract;
  use PriceMonitorPlentyIntegration\Contracts\ConfigRepositoryContract;
- use PriceMonitorPlentyIntegration\Repositories\ConfigInfoRepository;
- use PriceMonitorPlentyIntegration\Services\AttributeService;
- use PriceMonitorPlentyIntegration\Services\ProductFilterService;
- use PriceMonitorPlentyIntegration\Services\PaymentService;
  use Plenty\Modules\Frontend\Contracts\CurrencyExchangeRepositoryContract;
  use Plenty\Plugin\Http\Request as PluginRequest;
  use Plenty\Plugin\Application;
@@ -83,7 +77,7 @@ namespace PriceMonitorPlentyIntegration\Controllers;
         return $twig->render('PriceMonitorPlentyIntegration::content.loginpricemonitor', null);
      }
 
-     public function login(Request $request,Twig $twig,LibraryCallContract $libCall,ConfigRepositoryContract $configInfoRepo)  
+     public function login(Request $request,Twig $twig,ConfigRepositoryContract $configInfoRepo)  
      {
         $credentials = $request->all();
 
