@@ -1114,7 +1114,7 @@
                 if (allGroupWrappers.length === 1) { 
                     event.preventDefault();                     
                     toastr["warning"]("Filter must have at least one group.!", "Just one group exist on page.");
-                    return false;
+                   
                 } else {
                     var groupForRemove = event.target.parentNode.parentNode.parentNode;
                     groupForRemove.parentNode.removeChild(groupForRemove);
