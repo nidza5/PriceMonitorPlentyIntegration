@@ -1094,13 +1094,9 @@
         {
             var allGroupWrappers =
                 document[formName].getElementsByClassName(parentTemplateId + '-single-group-wrapper');
+
     
-            if (allGroupWrappers.length === 1) {                      
-                toastr["warning"]("Filter must have at least one group.!", "Just one group exist on page.");
-                return false;
-            }
-    
-            doGroupRemoval();
+            doGroupRemoval(allGroupWrappers);
     
             function isGroupEmpty()
             {
@@ -1113,10 +1109,14 @@
                 return formRowsInTargetGroup.length < 3;
             }
     
-            function doGroupRemoval()
+            function doGroupRemoval(allGroupWrappers)
             {
-                var groupForRemove = event.target.parentNode.parentNode.parentNode;
-                groupForRemove.parentNode.removeChild(groupForRemove);
+                if (allGroupWrappers.length === 1) {                      
+                    toastr["warning"]("Filter must have at least one group.!", "Just one group exist on page.");
+                } else {
+                    var groupForRemove = event.target.parentNode.parentNode.parentNode;
+                    groupForRemove.parentNode.removeChild(groupForRemove);
+                }                
             }
         }
     
