@@ -222,7 +222,7 @@
 
    {# <h1 class="title">Welcome to the Pricemonitor</h1><br> #}
 
-     {% if dashboardInfo is not null %}
+     {% if dashboardInfo|length > 0 %}
             {% for info in dashboardInfo %}
 
                 <div class="card" style="width: 18rem;">

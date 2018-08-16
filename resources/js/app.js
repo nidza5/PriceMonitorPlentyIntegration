@@ -1095,35 +1095,10 @@
             var allGroupWrappers =
                 document[formName].getElementsByClassName(parentTemplateId + '-single-group-wrapper');
     
-            if (allGroupWrappers.length === 1) {
-                // var messageModal = new Pricemonitor['modal']['MessageModalConstructor'](
-                //     Pricemonitor['utility']['translate'](
-                //         'Filter must have at least one group.'
-                //     )
-                // );
-    
-                var messageModal = 'Filter must have at least one group.';
-    
-                alert(messageModal);
-               // messageModal.open();
+            if (allGroupWrappers.length === 1) {                      
+                toastr["warning"]("Filter must have at least one group.!", "Just one group exist on page.");
                 return;
             }
-    
-            // if (!isGroupEmpty()) {
-            //     var confirmationModal = new Pricemonitor['modal']['ConfirmationModalConstructor'](
-            //         Pricemonitor['utility']['translate'](
-            //             'There are expressions in this group. ' +
-            //             'Are you sure that you want to delete this group?'
-            //         ),
-            //         doGroupRemoval,
-            //         function() {
-            //             return false;
-            //         }
-            //     );
-    
-            //     confirmationModal.open();
-            //     return;
-            // }
     
             doGroupRemoval();
     
