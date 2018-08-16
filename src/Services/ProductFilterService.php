@@ -415,10 +415,10 @@ class ProductFilterService
                 } else if ($logicalOperator === "||") { 
                     $condition =  $condition || (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                 }
-                break;
-
-            return $condition;
+                break;            
         }
+
+        return $condition;
     }
 
     public function getConditionWithoutLogicalOperator($value, $variationCondition,$operator)
@@ -444,10 +444,10 @@ class ProductFilterService
                 break;
             case "stripos==":
                 $condition =  (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                break;
-
-            return $condition;
+                break;            
         }       
+
+        return $condition;
     }
 
     public function resolveCondition(&$condition, $value, $variationCondition, $operator)
@@ -455,7 +455,7 @@ class ProductFilterService
         if ($condition !== null) {
             if ($variationCondition["operator"] === "AND") {
                 if (isset($value[$variationCondition["filterByColumn"]])) {
-                    $condition = $condition && ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
+                    $condition = $this->getCondition($condition, $value, $variationCondition, $operator, "&&");
                 }
                 else {
                     $condition = $condition && false;
@@ -463,7 +463,7 @@ class ProductFilterService
             }
             else if ($variationCondition["operator"] === "OR") {
                 if(isset($value[$variationCondition["filterByColumn"]])) {
-                    $condition = $condition || $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
+                    $condition = $this->getCondition($condition, $value, $variationCondition, $operator, "||");
                 }
                 else {
                     $condition = $condition || false;
@@ -471,12 +471,12 @@ class ProductFilterService
             }
         } else {                                     
             if (isset($value[$variationCondition["filterByColumn"]])) {
-                $condition = ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
+                $condition = $this->getConditionWithoutLogicalOperator($value, $variationCondition,$operator);
             } 
             else {
                 $condition = false;
             }                                               
-        }      
+        }
         
         return $condition;
     }
