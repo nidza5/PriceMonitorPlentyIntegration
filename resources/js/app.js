@@ -1097,7 +1097,7 @@
     
             if (allGroupWrappers.length === 1) {                      
                 toastr["warning"]("Filter must have at least one group.!", "Just one group exist on page.");
-                return;
+                return false;
             }
     
             doGroupRemoval();
