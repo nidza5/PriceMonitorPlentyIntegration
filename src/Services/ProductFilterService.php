@@ -455,7 +455,7 @@ class ProductFilterService
         if ($condition !== null) {
             if ($variationCondition["operator"] === "AND") {
                 if (isset($value[$variationCondition["filterByColumn"]])) {
-                    $condition = $this->getCondition($condition, $value, $variationCondition, $operator, "&&");
+                    $condition = $condition && ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
                 }
                 else {
                     $condition = $condition && false;
@@ -463,7 +463,7 @@ class ProductFilterService
             }
             else if ($variationCondition["operator"] === "OR") {
                 if(isset($value[$variationCondition["filterByColumn"]])) {
-                    $condition = $this->getCondition($condition, $value, $variationCondition, $operator, "||");
+                    $condition = $condition || $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
                 }
                 else {
                     $condition = $condition || false;
@@ -471,12 +471,12 @@ class ProductFilterService
             }
         } else {                                     
             if (isset($value[$variationCondition["filterByColumn"]])) {
-                $condition = $this->getConditionWithoutLogicalOperator($value, $variationCondition,$operator);
+                $condition = ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
             } 
             else {
                 $condition = false;
             }                                               
-        }
+        }      
         
         return $condition;
     }
