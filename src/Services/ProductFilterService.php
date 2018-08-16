@@ -423,8 +423,6 @@ class ProductFilterService
 
     public function getConditionWithoutLogicalOperator($value, $variationCondition,$operator)
     {
-        $condition = null;
-
         switch($operator) {
             case "=" :                
                 $condition = ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
@@ -447,9 +445,9 @@ class ProductFilterService
             case "stripos==":
                 $condition =  (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
                 break;
-        }
 
-        return $condition;
+            return $condition;
+        }       
     }
 
     public function resolveCondition($condition, $value, $variationCondition, $operator)
@@ -487,20 +485,24 @@ class ProductFilterService
     {
         try {
             $variationArray = $this->getAllVariations();
+
             $attributeService = pluginApp(AttributeService::class);
             
             $attributesFromPlenty = $attributeService->getAttributeForFilter();
-            $finalFilteredProduct = array();
-          
+
             $parentFilteredGroup = [];
+
             $filteredGroup = [];
+
             foreach ($parentGroup as $group) {
                $filterVAriationByConditions = [];
+
                 foreach($group["expressions"] as $exp) {
                     $operator = $exp['operator'];
                     $values = $exp['values'];
                     $attribute = $exp['attribute'];
                     $condition = $exp['condition'];
+
                     switch($attribute) {
                         case "Category" :
                             $filterByColumn = "category-".$values[0];
@@ -525,55 +527,32 @@ class ProductFilterService
     
                     switch ($condition) {    
                         case "equal" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => "=",
-                                                                "operator" =>  $operator];
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "=", $operator);
                         break;
                         case "not_equal" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => "!=",
-                                                                "operator" =>  $operator];
-                        break;
+                           $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "!=", $operator);
+                            break;
                         case "greater_than" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => ">",
-                                                                "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], ">", $operator);
+                            break;
                         case "less_than" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => "<",
-                                                                "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "<", $operator);
+                            break;
                         case "greater_or_equal" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => ">=",
-                                                                "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], ">=", $operator);
+                            break;
                         case "less_or_equal" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => "<=",
-                                                                "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "<=", $operator);
+                            break;
                         case "contains" :
-                            $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                                "value" => $values[0],
-                                                                "condition" => "stripos!=",
-                                                                "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "stripos!=", $operator);
+                            break;
                         case "contains_not" :
-                        $filterVAriationByConditions [] =  ["filterByColumn" => $filterByColumn,
-                                                            "value" => $values[0],
-                                                            "condition" => "stripos==",
-                                                            "operator" =>  $operator];
-                        break;
+                            $filterVAriationByConditions[] = $this->getFilterVariationByConditions($filterByColumn, $values[0], "stripos==", $operator);                                
+                            break;
                     }
                 }
+
                 $filteredGroup['expressionFilter'] =  $filterVAriationByConditions;
                 $filteredGroup['operator'] = $group["operator"];
                 array_push($parentFilteredGroup,$filteredGroup);   
@@ -583,227 +562,10 @@ class ProductFilterService
                 foreach ($parentFilteredGroup as $filterGroup) {                
                     $condition = null;
                     foreach ($filterGroup["expressionFilter"] as $variationCondition) {
-                        $filterByCondition = $variationCondition["condition"];                        
-                        switch ($filterByCondition) {    
-                            case "=" :                               
-                                    if ($condition !== null) {
-                                        if ($variationCondition["operator"] === "AND") {
-                                            if (isset($value[$variationCondition["filterByColumn"]])) {
-                                                $condition = $condition && ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
-                                            }
-                                            else {
-                                                $condition = $condition && false;
-                                            }                                                
-                                        }
-                                        else if ($variationCondition["operator"] === "OR") {
-                                            if(isset($value[$variationCondition["filterByColumn"]])) {
-                                                $condition = $condition || $value[$variationCondition["filterByColumn"]] == $variationCondition["value"];
-                                            }
-                                            else {
-                                                $condition = $condition || false;
-                                            }                                            
-                                        }
-                                    } else {                                     
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition = ($value[$variationCondition["filterByColumn"]] == $variationCondition["value"]);
-                                        } 
-                                        else {
-                                            $condition = false;
-                                        }                                               
-                                    }                                 
-                                    break;
-                            case "!=" :                             
-                                    if ($condition !== null) {
-                                        if ($variationCondition["operator"] === "AND") {
-                                            if (isset($value[$variationCondition["filterByColumn"]])) {
-                                                $condition = $condition && $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                            }
-                                            else {
-                                                $condition = $condition && false;
-                                            }                                                
-                                        }
-                                        else if ($variationCondition["operator"] == "OR") {
-                                            if (isset($value[$variationCondition["filterByColumn"]])) {
-                                                $condition = $condition || $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                            }
-                                            else {
-                                                $condition = $condition || false;
-                                            }                                                
-                                        }
-                                    } else {
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition = $value[$variationCondition["filterByColumn"]] != $variationCondition["value"];
-                                        }
-                                        else {
-                                            $condition = false; 
-                                        }                                             
-                                    }                                
-                                    break;
-                            case ">" :                           
-                               if ($condition !== null) {
-                                 if ($variationCondition["operator"] == "AND") {                                 
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $condition && $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = $condition &&  false;
-                                    }                                        
-                                 }
-                                 else if ($variationCondition["operator"] == "OR") {
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $condition || $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = $condition || false;
-                                    }
-                                 }
-                                } else {
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition =  $value[$variationCondition["filterByColumn"]] > $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = false; 
-                                    }                                         
-                                }                            
-                                break;
-                            case "<" :                           
-                              if ($condition !== null) {
-                                  if ($variationCondition["operator"] == "AND") {                                  
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $condition && $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
-                                    } 
-                                    else {
-                                        $condition = $condition && false;
-                                    }                                      
-                                  }
-                                  else if ($variationCondition["operator"] == "OR") {                                  
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $condition || $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = $condition ||  false;
-                                    }                                         
-                                  }
-                               } else {
-                                if (isset($value[$variationCondition["filterByColumn"]])) {
-                                    $condition = $value[$variationCondition["filterByColumn"]] < $variationCondition["value"];
-                                }
-                                else {
-                                    $condition = false; 
-                                }                                   
-                            }                             
-                              break;
-                            case ">=" :                            
-                                if ($condition !== null) {
-                                    if ($variationCondition["operator"] == "AND") {                                    
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition = $condition && $value[$variationCondition["filterByColumn"]] >= $variationCondition["value"];
-                                        } 
-                                        else {
-                                            $condition = $condition &&  false;
-                                        }                                            
-                                    }
-                                   else if ($variationCondition["operator"] == "OR") {                                   
-                                      if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $condition || $value[$variationCondition["filterByColumn"]] >= $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = $condition ||  false;
-                                    }                                         
-                                  }
-                                } else {
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $value[$variationCondition["filterByColumn"]] >= $variationCondition["value"];
-                                    } 
-                                    else {
-                                        $condition = false; 
-                                    }                                         
-                                }                            
-                                break;
-                            case "<=" :                           
-                                if ($condition !== null) {
-                                    if ($variationCondition["operator"] == "AND") {                                    
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition = $condition && $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
-                                        }
-                                        else {
-                                            $condition = $condition && false;
-                                        }                                            
-                                    }
-                                    else if ($variationCondition["operator"] == "OR")  {                                   
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition = $condition || $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
-                                        } 
-                                        else {
-                                            $condition = $condition || false;
-                                        }                                            
-                                    }
-                                  } else {
-                                    if(isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = $value[$variationCondition["filterByColumn"]] <= $variationCondition["value"];
-                                    }
-                                    else {
-                                        $condition = false;
-                                    }                                        
-                                }                            
-                                break;
-                            case "stripos!=" :                           
-                                if ($condition !== null) {                                
-                                    if ($variationCondition["operator"] == "AND") {                                       
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition =  $condition && (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                        } 
-                                        else {
-                                            $condition = $condition && false;
-                                        }                                            
-                                    }
-                                    else if ($variationCondition["operator"] == "OR") {                                    
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition =  $condition || (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                        } 
-                                        else {
-                                            $condition = $condition || false;
-                                        }                                            
-                                    }
-                                } else {
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition = (!stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                    } 
-                                    else {
-                                        $condition = false;
-                                    }                                           
-                                }                             
-                                break;
-                            case "stripos==" :                           
-                                if ($condition !== null) {
-                                    if($variationCondition["operator"] === "AND") {                                    
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition =  $condition && (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                        }
-                                        else {
-                                            $condition = $condition &&  false;
-                                        }                                            
-                                    }
-                                     else if ($variationCondition["operator"] === "OR") {                                     
-                                        if (isset($value[$variationCondition["filterByColumn"]])) {
-                                            $condition =  $condition || (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                        } 
-                                        else {
-                                            $condition = $condition || false;
-                                        }                                            
-                                     }
-                                } else {
-                                    if (isset($value[$variationCondition["filterByColumn"]])) {
-                                        $condition =  (stripos($value[$variationCondition["filterByColumn"]],$variationCondition["value"]));
-                                    } 
-                                    else {
-                                        $condition = false;
-                                    }                                         
-                                }                            
-                            break;
-                        }
+                        $filterByCondition = $variationCondition["condition"];   
+                        $condition = $this->resolveCondition($condition, $value, $variationCondition, $filterByCondition);                                                              
                     }
-                                       
+
                     $operatorGroup = $filterGroup["operator"];
  
                     if ($operatorGroup == "AND") {
@@ -812,11 +574,13 @@ class ProductFilterService
                     else if ($operatorGroup == "OR") {
                         $groupCondition = $groupCondition === null ? ($condition) : $groupCondition || ($condition);
                     }
-                }               
+                }            
+
                 return $groupCondition;                    
             });
     
              return array_values($filteredProducts);
+
         } catch (\Exception $ex)
         {
             $response = [
@@ -824,6 +588,7 @@ class ProductFilterService
                 'Message' => $ex->getMessage(),
                 'Line' => $ex->getLine()
              ];
+
              return $response;
         }      
     }
