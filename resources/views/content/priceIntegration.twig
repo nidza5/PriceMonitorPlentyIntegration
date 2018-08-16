@@ -222,9 +222,12 @@
 
    {# <h1 class="title">Welcome to the Pricemonitor</h1><br> #}
 
-     {% if dashboardInfo|length > 0 %}
-     <span>TESTY</span>
-            {% for info in dashboardInfo %}
+     {% if dashboardInfo is empty %}
+            <div id="dashboardWithImage">
+            <img class="pricemonitor-dashboardimg" src="{{ plugin_path("PriceMonitorPlentyIntegration") }}/images/dashboard.png"><br><br>        
+        </div>
+     {% else %}
+        {% for info in dashboardInfo %}
 
                 <div class="card" style="width: 18rem;">
                     <div class="card-header">
@@ -279,23 +282,8 @@
                         </li>
                     </ul>
                   </div>
-            {% endfor %}
-     {% else %}
-        <div id="dashboardWithImage">
-            {# <span class="text">The Pricemonitor helps you to increase sales by <b>optimizing your selling prices</b> and by providing important market insights</span><br><br> #}
-            <img class="pricemonitor-dashboardimg" src="{{ plugin_path("PriceMonitorPlentyIntegration") }}/images/dashboard.png"><br><br>        
-
-            {# <span class="text">To transfer your products and receive optimized selling prices it is necessary to connect your Shopware shop with the Pricemonitor by using the configuration under <a href="#" class="contracts">contracts</a>.</span><br><br>
-            <span class="text">If you need help or would like to have a personal and individual advisory, please do not hesitate to contact our support team:</span><br><br>
-            <ul class="text">
-                <li> <a href="http://www.patagona.de" target="_blank">www.patagona.de</a></li>
-                <li> +49 (0)6151 8008320</li>
-                <li> <a href="mailto:support@patagona.de">support@patagona.de</a></li>
-            </ul> #}
-        </div>
-     {% endif %}
-
-   
+            {% endfor %}        
+     {% endif %}   
  </div>
 
     <div id="Contracts" class="tabcontentprestaprice">
